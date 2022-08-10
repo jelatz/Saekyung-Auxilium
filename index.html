@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="styles.css">
     <style>
-        img{
+        /* img{
             height: 10rem;
             width: 25rem;
-        }
+        } */
         h1{
             width: 100%;
             height: 25rem;
@@ -21,18 +21,18 @@
 <body style="background-image:url(images/indexbackgroundblur.png)">
     <div class="container-flex mx-auto">
         <div class="navbar">
-        <img src="images/FINAL LOGO.png" class="mx-auto d-block">
+        <img src="images/FINAL LOGO.png" alt="logo" width="450" class="mx-auto d-block mt-2">
         </div>
-    <h1 class="text-center h-25">Welcome to Saekyung Auxilium <br>Management Information System</h1>
+    <h1 class="text-center h-25 mt-3">Welcome to Saekyung Auxilium <br>Management Information System</h1>
     </div>
     <!-- form -->
-    <div class="form-box">
+    <div class="form-box was-validated mt-5" action="action.php" method="post">
         <div class="button-box">
             <div id="btn"></div>
             <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
             <button type="button" class="toggle-btn" onclick="adminlogin()">Admin Login</button>
         </div>
-    <form id="login-resident" class="input_group login-resident" >
+    <form id="login-resident" class="input_group login-resident" action="resServicePage.html">
         <input type="text" class="input-field" placeholder="Enter Unit #" required>
         <input type="password" class="input-field" placeholder="Password" required>
         <input type="checkbox" class="checkbox"><span>Remember Password</span>
@@ -42,7 +42,7 @@
         <input type="text" class="input-field" placeholder="Username" required>
         <input type="password" class="input-field" placeholder="Password" required>
         <input type="checkbox" class="checkbox"><span>Remember Password</span>
-        <button type="submit" class="submit-btn">Login</button>
+        <button type="submit" class="submit-btn">Login</a></button>
     </form>
     </div>
     <script>

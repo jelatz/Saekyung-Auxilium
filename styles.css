@@ -92,3 +92,22 @@ span{
 .login-admin{
     left: 450px;
 }
+
+/* img{
+    height: 10rem;
+    width: 25rem;
+} */
+@media only screen and (max-width: 768px){
+    img{
+        width: 15rem;
+        height: 5rem;
+    }
+}
+    
+body{
+    background-color: rgb(255, 248,243);
+}
+
+.btn-primary{
+    background-color: rgb(249,225,199) !important;
+}
