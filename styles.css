@@ -1,3 +1,4 @@
+/* Login */
 .form-box{
     width: 28rem;
     height: 480px;
@@ -92,18 +93,14 @@ span{
 .login-admin{
     left: 450px;
 }
-
-/* img{
-    height: 10rem;
-    width: 25rem;
-} */
+/* Breakpoints */
 @media only screen and (max-width: 768px){
-    img{
+    .mainLogo{
         width: 15rem;
-        height: 5rem;
+        height: 9rem;
+        margin-top: 1.5rem;
     }
-}
-    
+}    
 body{
     background-color: rgb(255, 248,243);
 }
@@ -111,3 +108,6 @@ body{
 .btn-primary{
     background-color: rgb(249,225,199) !important;
 }
+
+/* resLanding */
+
