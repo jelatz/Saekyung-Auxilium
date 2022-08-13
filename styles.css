@@ -93,7 +93,7 @@ span{
 .login-admin{
     left: 450px;
 }
-/* Breakpoints */
+/* index Breakpoints */
 @media only screen and (max-width: 768px){
     .mainLogo{
         width: 15rem;
@@ -109,5 +109,23 @@ body{
     background-color: rgb(249,225,199) !important;
 }
 
-/* resLanding */
+/* resLanding breakpoints*/
+@media screen and (min-width: 768px){
+.navbar-brand{
+    margin-left:50% !important;
+    transform: translate(-50%) !important;
+}
+.collapse .navbar-nav{
+    display: none !important;
+}
+
+}
+@media screen and (max-width: 768px){
+    .mobileBreakpoints{
+    display: none !important;
+}
+
+}
+
+
 

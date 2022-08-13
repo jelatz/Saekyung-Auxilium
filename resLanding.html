@@ -12,43 +12,48 @@
 <body>
   <!-- NAVBAR -->
   <!-- LOGO -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-md navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" style="margin-left:50%; transform: translate(-50%);" href="resLanding.html">
-        <img src="images/FINAL LOGO.png" alt="LOGO" width="250" height="130">
+      <a class="navbar-brand" href="resLanding.html">
+        <img src="images/FINAL LOGO.png"  class="img-fluid" alt="LOGO" width="250" height="130">
       </a>
       <!-- hamburger -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Notification bell -->
-      <div class="d-grid d-flex justify-content-lg-end">
+      
+      <div class="mobileBreakpoints d-grid d-flex justify-content-lg-end">
         <button class="btn" type="button" aria-expanded="false"><img src="images/bell-fill.svg" width="50" height="20">
           <!-- Accounts dropdown -->
         <div class="dropdown-center">
           <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">Account</button>
-          <ul class="dropdown-menu dropdown-menu-center">
-            <li><button class="btn dropdown-item">Notifications</button></li>
-            <li><button class="btn dropdown-item">Change Passowrd</button></li>
-            <li><button class="btn dropdown-item">Logout</button></li>
+          <ul class="dropdown-menu dropdown-menu-end mx-2" style="top:65%">
+            <li><button class="btn dropdown-item" type="button">Change Passowrd</button></li>
+            <li><button class="btn dropdown-item" type="button">Logout</button></li>
           </ul>
         </div>
       </div>
-      
-      <!-- <div class="collapse navbar-collapse" id="navbarCollapse">
+     <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">Notifications</a>
+              <a href="#" class="nav-link mx-2 active" aria-current="page">Notifications</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Change Password</a>
+              <a href="#" class="nav-link mx-2">Change Password</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Logout</a>
+              <a href="#" class="nav-link mx-2">Logout</a>
             </li>
           </ul>
-      </div> -->
+      </div>
   </nav>
+<!-- services -->
+<div class="container">
+  <div class="row">hey</div>
+  
+
+</div>
 <script src="js/bootstrap.js"></script>
 </body>
 </html>
