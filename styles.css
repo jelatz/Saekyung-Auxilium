@@ -1,3 +1,31 @@
+/* global CSS */
+.btn:hover{
+    opacity: 0.6; !important;
+}
+.bg-primary{
+    background-color: rgb(255, 184, 105) !important;
+}
+
+.bg-secondary{
+    background-color: rgb(249, 225, 199) !important;
+}
+
+.bg-tertiary{
+    background-color: rgb(225, 180, 147) !important;
+}
+
+.btn-primary{
+    background-color: rgb(255, 184, 105) !important;
+    border: none !important;
+}
+
+.btn-secondary{
+    background-color: rgb(249, 225, 199) !important;
+}
+
+body{
+    background-color: rgb(255, 248, 243) !important;
+}
 /* Login */
 .form-box{
     width: 28rem;
@@ -94,20 +122,8 @@ span{
     left: 450px;
 }
 /* index Breakpoints */
-@media only screen and (max-width: 768px){
-    .mainLogo{
-        width: 15rem;
-        height: 9rem;
-        margin-top: 1.5rem;
-    }
-}    
-body{
-    background-color: rgb(255, 248,243);
-}
+  
 
-.btn-primary{
-    background-color: rgb(249,225,199) !important;
-}
 
 /* resLanding breakpoints*/
 @media screen and (min-width: 768px){
@@ -124,8 +140,9 @@ body{
     .mobileBreakpoints{
     display: none !important;
 }
-
 }
+
+/* services */
 
 
 

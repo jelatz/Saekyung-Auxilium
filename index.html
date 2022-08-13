@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* img{
-            height: 10rem;
-            width: 25rem;
-        } */
         h1{
             width: 100%;
             height: 25rem;
@@ -18,14 +14,16 @@
     </style>
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
-<body style="background-image:url(images/indexbackgroundblur.png)">
-    <div class="container-flex mx-auto">
+<body style="background-image:url(images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover;">
+    <div class="container-sm mx-auto">
         <div class="navbar mx-auto justify-content-center">
-        <img class="mainLogo" src="images/FINAL LOGO.png" alt="logo" width="450" class="mx-auto d-block mt-2">
+        <img class="mx-auto d-block" src="images/FINAL LOGO.png" alt="logo" width="450" class="mx-auto d-block">
         </div>
+    </div>
     <h1 class="text-center h-25 mt-3">Welcome to Saekyung Auxilium <br>Management Information System</h1>
     </div>
     <!-- form -->
+    <div class="container-fluid">
     <div class="form-box was-validated mt-5" action="action.php" method="post">
         <div class="button-box">
             <div id="btn"></div>
@@ -44,6 +42,7 @@
         <input type="checkbox" class="checkbox"><span>Remember Password</span>
         <button type="submit" class="submit-btn">Login</a></button>
     </form>
+    </div>
     </div>
     <script>
         var x = document.getElementById("login-resident");
