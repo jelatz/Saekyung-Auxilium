@@ -5,26 +5,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        h1{
-            width: 100%;
-            height: 25rem;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
-<body style="background-image:url(images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center;">
-    <div class="container-sm">
-        <div class="container-sm justify-content-center">
-        <img src="images/FINAL LOGO.png" alt="logo" class="mx-auto d-block w-50">
-        </div>
+<body class="bg-image" style="background-image:url(images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
+    <!-- navbar -->
+<nav class="navbar navbar-expand-md justify-content-center">
+    <div class="container-sm p-0">
+        <a href="index.html" class="navbar-brand mx-auto d-block"><img src="images/FINAL LOGO.png" alt="logo" width="250"></a>
     </div>
-    <h1 class="text-center h-25 p-0 mt-3 mb-5">Welcome to Saekyung Auxilium <br>Management Information System</h1>
+</nav>
+<!-- welcome text -->
+<h2 class="text-center justify-content-center mx-auto fw-bold">Welcome to Saekyung Auxilium <br>Management Information System</h2>
+<!-- form box -->
+
+<div class="form-box">
+    <div class="button-box">
+        <div id="btn"></div>
+        <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
+        <button type="button" class="toggle-btn" onclick="adminlogin()">Admin Login</button>
     </div>
+<form id="login-resident" class="input_group login-resident" >
+    <input type="text" class="input-field" placeholder="Enter Unit #" required>
+    <input type="password" class="input-field" placeholder="Password" required>
+    <input type="checkbox" class="checkbox"><span>Remember Password</span>
+    <button type="submit" class="submit-btn">Login</button>
+</form>
+<form id="login-admin" class="input_group login-admin">
+    <input type="text" class="input-field" placeholder="Username" required>
+    <input type="password" class="input-field" placeholder="Password" required>
+    <input type="checkbox" class="checkbox"><span>Remember Password</span>
+    <button type="submit" class="submit-btn">Login</button>
+</form>
+</div>
+
+<script>
+    var x = document.getElementById("login-resident");
+    var y = document.getElementById("login-admin");
+    var z = document.getElementById("btn");
+    var xxx = window.matchMedia('(max-width: 576px)')
+   
+
+    function adminlogin(){
+        x.style.left="-25rem";
+        y.style.left="3.125rem";
+        z.style.left="12rem";
+    }
+
+    function residentlogin(){
+        x.style.left="3.125rem";
+        y.style.left="28.125rem";
+        z.style.left="0rem";
+    }
+        if(xxx.matches) {
+            function adminlogin(){
+                x.style.left="-80rem";
+                y.style.left="0rem";
+                z.style.left="50%";
+            }
+            function residentlogin(){
+            x.style.left="0rem";
+            y.style.left="40rem";
+            z.style.left="0rem";
+            }
+        }
+    
+    
+    
+</script> 
+  
     <!-- form -->
     <!-- <div class="container-fluid p-0"> -->
-    <div class="form-box mt-5">
+    <!-- <div class="form-box mt-5">
         <div class="button-box">
             <div id="btn"></div>
             <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
@@ -42,9 +95,9 @@
         <input type="checkbox" class="checkbox"><span>Remember Password</span>
         <button type="submit" class="submit-btn">Login</a></button>
     </form>
-    </div>
+    </div> -->
     <!-- </div> -->
-    <script>
+    <!-- <script>
         var x = document.getElementById("login-resident");
         var y = document.getElementById("login-admin");
         var z = document.getElementById("btn");
@@ -60,8 +113,8 @@
             y.style.left="28.125rem";
             z.style.left="0rem";
         }
-    </script>    
-    <script src="js/bootstrap.js"></script>
+    </script>     -->
+    <script src="js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

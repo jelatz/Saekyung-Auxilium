@@ -2,6 +2,9 @@
 .btn:hover{
     opacity: 0.6 !important;
 }
+ul>li>.active{
+    background-color: rgb(255, 184, 105) !important;
+}
 .bg-primary{
     background-color: rgb(255, 184, 105) !important;
 }
@@ -12,6 +15,10 @@
 
 .bg-tertiary{
     background-color: rgb(225, 180, 147) !important;
+}
+
+.bg-quaternary{
+    background-color: rgb(242, 201, 160);
 }
 
 .btn-primary{
@@ -27,12 +34,62 @@ body{
     background-color: rgb(255, 248, 243) !important;
 }
 
-/* Login */
+/* custom css breakpoints */
+
+
+@media screen and (max-width: 576px){
+    .form-box{
+        width: 100% !important;
+}
+
+.button-box{
+    width: 100% !important;
+}
+.toggle-btn{
+    width: 49.4% !important;
+}
+
+#btn{
+    width: 50% !important;
+}
+
+.input_group{
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 0 5rem;
+}
+}
+
+@media screen and (max-width: 370px){
+    .form-box{
+        width: 100% !important;
+    }
+    .button-box{
+        width: 100% !important;
+    }
+    .toggle-btn{
+        width: 49.3% !important;
+    }
+    .input_group{
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 1rem !important;
+    }
+    .input-field{
+        width: 100% !important;
+    }   
+    .submit-btn{
+        width: 100% !important;
+    }
+    
+}
+
+/* custom css*/
 .form-box{
     width: 28rem;
     height: 480px;
     position: relative;
-    margin: 3% auto;
+    margin: auto !important;
     background-color: antiquewhite;
     padding: 5px;
     overflow: hidden;
@@ -98,8 +155,6 @@ body{
     border-radius: 30px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-    
-
 }
 
 .checkbox{
@@ -131,7 +186,7 @@ span{
 
 
 /* resLanding breakpoints*/
-@media screen and (min-width: 768px){
+/* @media screen and (min-width: 768px){
 .navbar-brand{
     margin-left:50% !important;
     transform: translate(-50%) !important;
@@ -145,7 +200,7 @@ span{
     .mobileBreakpoints{
     display: none !important;
 }
-}
+} */
 
 /* services */
 
