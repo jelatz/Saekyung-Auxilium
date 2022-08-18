@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="css/custom.css">
 
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
@@ -20,7 +20,7 @@
 <h2 class="text-center justify-content-center mx-auto fw-bold">Welcome to Saekyung Auxilium <br>Management Information System</h2>
 <!-- form box -->
 
-<div class="form-box">
+<div class="form-box my-5">
     <div class="button-box">
         <div id="btn"></div>
         <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
@@ -30,13 +30,17 @@
     <input type="text" class="input-field" placeholder="Enter Unit #" required>
     <input type="password" class="input-field" placeholder="Password" required>
     <input type="checkbox" class="checkbox"><span>Remember Password</span>
-    <button type="submit" class="submit-btn">Login</button>
+    <div class="mb-2">
+        <a href="#" class="text-dark" id="forgetPassword">Forgot Password?</a>
+    </div>
+        <a href="residentServices.html" class="btn submit-btn">Login</a>
+        <!-- <button type="submit" class="submit-btn" data-bs-target="residentServices.html">Login</button> -->
 </form>
 <form id="login-admin" class="input_group login-admin">
     <input type="text" class="input-field" placeholder="Username" required>
     <input type="password" class="input-field" placeholder="Password" required>
     <input type="checkbox" class="checkbox"><span>Remember Password</span>
-    <button type="submit" class="submit-btn">Login</button>
+    <a href="#" class="btn submit-btn">Login</a>
 </form>
 </div>
 
@@ -45,7 +49,8 @@
     var y = document.getElementById("login-admin");
     var z = document.getElementById("btn");
     var xxx = window.matchMedia('(max-width: 576px)')
-   
+    var xx = window.matchMedia('(max-width: 407px)')
+    
 
     function adminlogin(){
         x.style.left="-25rem";
@@ -58,21 +63,30 @@
         y.style.left="28.125rem";
         z.style.left="0rem";
     }
-        if(xxx.matches) {
-            function adminlogin(){
-                x.style.left="-80rem";
-                y.style.left="0rem";
-                z.style.left="50%";
-            }
-            function residentlogin(){
-            x.style.left="0rem";
-            y.style.left="40rem";
-            z.style.left="0rem";
-            }
+    if(xxx.matches) {
+        function adminlogin(){
+            x.style.left="-80rem";
+            y.style.left="3rem";
+            z.style.left="50%";
         }
-    
-    
-    
+        function residentlogin(){
+        x.style.left="3rem";
+        y.style.left="40rem";
+        z.style.left="0rem";
+        }
+    }
+    if(xx.matches) {
+        function adminlogin(){
+            x.style.left="-80rem";
+            y.style.left="0rem";
+            z.style.left="50%";
+        }
+        function residentlogin(){
+        x.style.left="0rem";
+        y.style.left="40rem";
+        z.style.left="0rem";
+        }
+    }
 </script> 
   
     <!-- form -->
