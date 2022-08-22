@@ -163,6 +163,9 @@ span{
 }
 
 /* button colors */
+.btn-adminNav{
+    background-color: rgb(231, 228, 221);
+}
 .btn-selected{
     background-color: rgb(241,181,115);
 }
@@ -172,4 +175,12 @@ span{
 .btn:hover, .btn:focus, .btn:active{
     background-color: rgb(241, 181, 115);
 }
-
+.active{
+    background-color: rgb(241, 181, 115) !important;
+}
+.a:hover, .a:focus, a.active{
+    background-color: gray;
+}
+.bg-dark{
+    background-color: gray !important;
+}
