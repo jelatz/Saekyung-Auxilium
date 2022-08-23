@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
 <!-- LOGO -->
-    <a class="navbar-brand" href="services.html"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
+    <a class="navbar-brand" href="dashboard.html"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
 <!-- COLLAPSE BUTTON -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"                data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -88,82 +88,88 @@
   <div class="navbar-md-nav bg-inner">
     <ul class="navbar-nav bg-transparent text-center">
       <li class="nav-item">
-        <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
+        <button type="button" class="btn btn-unselected rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+        <button type="button" class="btn btn-unselected rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
       </li>
       <li class="nav-item">
-        <a class="nav-link btn" href="#">Logout</a>
+        <a class="nav-link btn btn-unselected rounded-0" href="#">Logout</a>
       </li>
     </ul>
   </div> 
 </div>
-<!-- Services and History -->
-<div class="container">
-  <div class="row my-3 gap-3 mx-auto">
-    <div class="col-sm-5 col-lg-3 mx-auto">
-      <a href="services.html" class="btn btn-unselected w-100">Services</a>
-    </div>
-    <div class="col-sm-5 col-lg-3 mx-auto">
-      <a href="history.html" class="btn btn-unselected w-100 active" aria-current="page">History</a>
-    </div>
-  </div>
+<!-- tab nav -->
+<div class="container-fluid mt-2">
+  <ul class="nav nav-pills nav-justified justify-content-center gap-sm-3">
+    <li class="nav-item">
+      <a class="nav-link px-0 bg-adminBackground text-dark fw-bold active" data-bs-toggle="pill" href="#dashboard">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link px-0 bg-adminBackground text-dark fw-bold" data-bs-toggle="pill" href="#accounts">Accounts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link px-0 bg-adminBackground text-dark fw-bold" data-bs-toggle="pill" href="#reports">Reports</a>
+    </li>
+  </ul>
 </div>
-<!-- LIST OF SERVICES -->
-<div class="container">
-  <div class="col-11 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 justify-content-center mx-auto">
-    <div class="table-responsive-sm">
-        <table class="table table-sm table-bordered text-center">
-            <thead>
-                <tr>
-                    <th class="text-nowrap">Request #</th>
-                    <th class="text-nowrap">Date Filed</th>
-                    <th class="text-nowrap">Services</th>
-                    <th class="text-nowrap">Status</th>
-                    <th class="text-nowrap">Date Completed</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-            </tbody>
-        </table>
+<!-- tab contents -->
+<div class="tab-content active text-center mt-3">
+  <!-- dashboard contents -->
+  <div class="tab-pane container active" id="dashboard">
+    <div class="col-11 p-3 bg-inner mx-auto">
+      <div class="dropdown-center bg-transparent">
+        <a href="#pending" class="btn btn-unselected dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pending</a>
+        <ul class="dropdown-menu bg-inner p-2">
+          <li><a class="dropdown-item btn btn-unselected my-2" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#ongoing">On-going</a></li>
+
+          <li><a class="dropdown-item btn btn-unselected" href="#">Completed</a></li>
+        </ul>
+      </div>
+      <!-- pending contents -->
+      <!-- search button -->
+      <div class="col-11 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 justify-content-center mx-auto" id="pending">
+        <div class="row justify-content-center text-center mb-3">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-unselected" type="submit" id="searchBtn">Search</button>
+          </form>
+        </div>
+      <!-- pending table -->
+        <div class="table-responsive-sm">
+            <table class="table table-sm table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-nowrap">Request #</th>
+                        <th class="text-nowrap">User</th>
+                        <th class="text-nowrap">Date Files</th>
+                        <th class="text-nowrap">Service</th>
+                        <th class="text-nowrap">Status</th>
+                        <th class="text-nowrap"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td><button type="button" class="btn btn-primary btn-sm">ACCEPT</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+      </div>
+      <!-- ongoing contents -->
+      
     </div>
   </div>
+  <!-- Accounts contetnt -->
+  <div class="tab-pane container fade" id="accounts">hello</div>
+  <!-- Reports content -->
+  <div class="tab-pane container fade" id="reports"></div>
 </div>
 <script src="../_assets/js/bootstrap.bundle.js"></script>
 </body>
