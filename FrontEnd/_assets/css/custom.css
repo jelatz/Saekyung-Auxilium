@@ -169,9 +169,6 @@ span{
     background-color: gray !important;
     transition: .1s;
 }
-.nav-item .nav-link .active{
-    background-color: gray !important;
-}
 
 
 /* button colors */
@@ -188,8 +185,10 @@ span{
 .btn-unselected.active{
     background-color: rgb(241, 181, 115);
 }
-/* anchortag colors */
-
+/* nav-link colors */
+.nav-link.active{
+    background-color: gray !important;
+}
 /* customize css for admin dashboard */
 @media screen and (max-width: 768px){
 
