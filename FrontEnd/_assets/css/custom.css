@@ -163,27 +163,33 @@ span{
     background-color: rgb(225,180,147);
 }
 .bg-adminBackground{
-    background-color: rgb(231, 228, 221) ;
+    background-color: rgb(231, 228, 221) !important;
+}
+.bg-adminBackground:hover, .bg-adminBackground:focus {
+    background-color: gray !important;
+    transition: .1s;
+}
+.nav-item .nav-link .active{
+    background-color: gray !important;
 }
 
 
 /* button colors */
-.btn-selected{
-    background-color: rgb(241,181,115);
-}
 .btn-unselected{
     background-color: rgb(249, 225, 199);
 }
-.btn-unselected:hover{
+.btn-unselected:link{
+    background-color: rgb(249, 225, 199);
+}
+.btn-unselected:hover,       
+.btn-unselected:active{
+    background-color: rgb(241, 181, 115) !important;
+}
+.btn-unselected.active{
     background-color: rgb(241, 181, 115);
 }
-.btn:hover, .btn:focus,  .btn:active{
-    background-color: rgb(241, 181, 115) ;
-}
 /* anchortag colors */
-.nav-item{
-    background-color: red !important;
-}
+
 /* customize css for admin dashboard */
 @media screen and (max-width: 768px){
 
