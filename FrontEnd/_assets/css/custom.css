@@ -190,6 +190,6 @@ span{
     background-color: gray !important;
 }
 /* customize css for admin dashboard */
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
 
 }
