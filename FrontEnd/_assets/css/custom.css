@@ -203,3 +203,10 @@ span{
         display: none;
     }
 }
+@media screen and (max-width: 576px){
+    .list-inline{
+        display: flex;
+        flex-wrap: wrap;
+     }
+     
+}
