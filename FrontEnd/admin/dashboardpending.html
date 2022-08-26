@@ -331,24 +331,234 @@
 <div class="large">
   <div class="container my-3 mx-auto">
     <div class="row justify-content-center my-3">
-      <div class="col-2 col-xl-2">
+      <div class="col-2">
         <ul class="nav nav-pills flex-xl-column nav-justified justify-content-center gap-2">
           <li class="nav-item">
-            <a class="nav-link px-0 bg-adminBackground text-dark fw-bold active" data-bs-toggle="pill" href="#dashboard">Dashboard</a>
+            <a class="nav-link w-100 px-0 bg-adminBackground text-dark fw-bold active" data-bs-toggle="pill" href="#dashboardB">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-0 bg-adminBackground text-dark fw-bold" data-bs-toggle="pill" href="#accounts">Accounts</a>
+            <a class="nav-link w-100 px-0 bg-adminBackground text-dark fw-bold" data-bs-toggle="pill" href="#accountsB">Accounts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-0 bg-adminBackground text-dark fw-bold" data-bs-toggle="pill" href="#reports">Reports</a>
+            <a class="nav-link w-100 px-0 bg-adminBackground text-dark fw-bold" data-bs-toggle="pill" href="#reportsB">Reports</a>
           </li>
         </ul>
       </div>
+<!-- Dashboard status -->
+        <div class="col-10 bg-inner">
+          <div class="tab-content text-center mt-3">
+            <!-- dashboard contents -->
+            <div class="tab-pane container-fluid active" id="dashboardB">
+              <div class="col-12 p-3 bg-inner">  
+                <!-- dashboard status nav -->
+                <div class="container-fluid mt-2">
+                  <ul class="nav nav-pills nav-justified justify-content-center gap-2">
+                    <li class="nav-item">
+                      <a class="btn  px-0 btn-unselected w-100 text-dark fw-bold active" data-bs-toggle="pill" href="#pendingB">Pending</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="btn btn-unselected w-100 px-0 text-dark fw-bold" data-bs-toggle="pill" href="#ongoingB">On-going</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="btn btn-unselected w-100 px-0 text-dark fw-bold" data-bs-toggle="pill" href="#completedB">Completed</a>
+                    </li>
+                  </ul>
+                </div> 
+              <!-- content for Pending -->
+              <div class="tab-content text-center mt-3">
+                <div class="input-group rounded my-4 w-75 mx-auto">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="bi bi-search"></i>
+                  </span>
+                </div>
+                <!-- pending tab panes -->
+                <div class="tab-pane container-fluid active" id="pendingB">
+                  <div class="table-responsive-sm mt-3">
+                    <table class="table table-sm table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th class="text-nowrap">Request #</th>
+                          <th class="text-nowrap">User</th>
+                          <th class="text-nowrap">Date Filed</th>
+                          <th class="text-nowrap">Service</th>
+                          <th class="text-nowrap">Status</th>
+                          <th class="text-nowrap"></th>                
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td><button type="button" id="acceptBtn" class="btn btn-primary btn-sm">Accept</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- ongoing tab panes -->
+                <div class="tab-pane container-fluid fade mx-0 p-0" id="ongoingB">
+                  <div class="table-responsive-lg mt-3">
+                    <table class="table table-sm table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th>Request #</th>
+                          <th>User</th>
+                          <th>Date Filed</th>
+                          <th>Service</th>
+                          <th>Status</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>
+                            <select class="form-select form-select-sm border-0 bg-transparent mx-auto" style="width: 6.5rem;" aria-label="Small select">
+                              <option selected="">On-going</option>
+                              <option value="1">Completed</option>
+                            </select>
+                          </td>
+                          <td><button type="button" id="updateBtn" class="btn btn-primary btn-sm">Update</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- completed tab panes -->
+                <div class="tab-pane container-fluid fade" id="completedB">
+                  <div class="table-responsive-lg mt-3">
+                    <table class="table table-sm table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th>Request #</th>
+                          <th>User</th>
+                          <th>Date Filed</th>
+                          <th>Service</th>
+                          <th>Date Compeleted</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                          <td>sample</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          <!-- Accounts contetnt -->
+          <div class="tab-pane container-fluid fade" id="accountsB">
+            <div class="col-12 p-3 bg-inner">
+              <div class="container-fluid mt-2">
+                <ul class="nav nav-pills flex-column nav-justified justify-content-center gap-2">
+                  <li class="nav-item">
+                    <a class="btn  px-0 btn-unselected w-100 text-dark fw-bold active" data-bs-toggle="pill" href="#b1B">Building 1</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-unselected w-100 px-0 text-dark fw-bold" data-bs-toggle="pill" href="#b2B">Building 2</a>
+                  </li>
+                </ul>
+                <!-- Building 1 content -->
+                <div class="tab-content text-center mt-3">
+                  <div class="input-group rounded my-4 w-75 mx-auto">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <span class="input-group-text border-0" id="search-addon">
+                      <i class="bi bi-search"></i>
+                    </span>
+                  </div>  
+              
+              <!-- Building 1 tab pane -->
+              <div class="tab-pane container active" id="b1B">
+                <div class="table-responsive-sm mt-3">
+                  <table class="table table-sm table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th>Unit #</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>sample</td>
+                          <td>
+                            <button type="button" id="resetPass" class="btn btn-primary btn-sm ">Reset Password</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Building 2 tab pane -->
+              <div class="tab-pane container fade" id="b2B">
+                <div class="table-responsive-sm mt-3">
+                  <table class="table table-sm table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th>Unit #</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>sample</td>
+                          <td>
+                            <button type="button" id="resetPass" class="btn btn-primary btn-sm ">Reset Password</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+          <!-- Reports content -->
+              <div class="tab-pane container-fluid fade" id="reportsB">
+                <div class="col-12 p-3 bg-inner">
+                  <p class="fw-bold text-start">Reports</p>
+                    <div class="row my-5">
+                      <div class="col-6 fw-bold">Montly</div>
+                      <div class="col-6 fw-bold">Yearly</div>
+                    </div>
+                    <div class="row text-center">
+                      <ul class="list-inline">
+                        <span><i class="bi bi-person-bounding-box" style="background-color:blue; color:blue;"></i></span>
+                        <li class="list-inline-item">Electrical</li>
+                        <span><i class="bi bi-person-bounding-box" style="background-color:orangered; color:orangered;"></i></span>
+                        <li class="list-inline-item">Furniture</li>
+                        <span><i class="bi bi-person-bounding-box" style="background-color:gray; color:gray;"></i></span>
+                        <li class="list-inline-item">Painting</li>
+                        <span><i class="bi bi-person-bounding-box" style="background-color:yellow; color:yellow;"></i></span>
+                        <li class="list-inline-item">Plumbing</li>
+                        <span><i class="bi bi-person-bounding-box" style="background-color:darkblue; color:darkblue;"></i></span>
+                        <li class="list-inline-item">Security</li>
+                        <span><i class="bi bi-person-bounding-box" style="background-color:green; color:green;"></i></span>
+                        <li class="list-inline-item">Tile</li>
+                        <span><i class="bi bi-person-bounding-box" style="background-color:red; color:red;"></i></span>
+                        <li class="list-inline-item">Others</li>
+                      </ul>
+                    </div>
+                </div>
+              </div>
+          </div>
 
-      <div class="col-10 col-xl-10 bg-inner">
-        
       </div>
     </div>
+
   </div>
 </div>
 

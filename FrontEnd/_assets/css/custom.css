@@ -179,7 +179,7 @@ span{
     background-color: rgb(249, 225, 199);
 }
 .btn-unselected:hover,       
-.btn-unselected:active{
+.btn-unselected.active{
     background-color: rgb(241, 181, 115) !important;
 }
 .btn-unselected.active{
