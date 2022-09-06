@@ -1,3 +1,7 @@
+<?php
+    include '/xampp/htdocs/SaekyungAuxilium/BackEnd/database/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +17,12 @@
     <!-- navbar -->
 <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">
-        <a href="index.html" class="navbar-brand mx-auto d-block"><img src="_assets/images/FINAL LOGO.png" alt="logo" width="250"></a>
+        <a href="index.php" class="navbar-brand mx-auto d-block"><img src="_assets/images/FINAL LOGO.png" alt="logo" width="250"></a>
     </div>
 </nav>
 <!-- welcome text -->
 <!-- <h2 class="text-center justify-content-center mx-auto fw-bold">Welcome to Saekyung Auxilium <br>Management Information System</h2> -->
+
 <!-- form box -->
 <div class="form-box my-5">
     <div class="button-box">
@@ -25,20 +30,20 @@
         <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
         <button type="button" class="toggle-btn" onclick="adminlogin()">Admin Login</button>
     </div>
-<form id="login-resident" class="input_group login-resident" >
-    <input type="text" class="input-field" placeholder="Enter Building & Unit #" required>
-    <input type="password" class="input-field" placeholder="Password" required>
+<form action="#" method="POST" id="login-resident" class="input_group login-resident">
+    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required>
+    <input type="password" name="password" class="input-field" placeholder="Password" required>
     <input type="checkbox" class="checkbox"><span>Remember Password</span>
     <div class="mb-2">
         <a href="#" class="text-dark" id="forgetPassword">Forgot Password?</a>
     </div>
-        <a href="./residents/services.html" class="btn submit-btn">Login</a>
+        <a href="./residents/services.php" class="btn submit-btn">Login</a>
 </form>
 <form id="login-admin" class="input_group login-admin">
     <input type="text" class="input-field" placeholder="Username" required>
     <input type="password" class="input-field" placeholder="Password" required>
     <input type="checkbox" class="checkbox"><span>Remember Password</span>
-    <a href="./admin/dashboardpending.html" class="btn submit-btn">Login</a>
+    <a href="./admin/dashboardpending.php" class="btn submit-btn">Login</a>
 </form>
 </div>
 
@@ -87,47 +92,7 @@
     }
 </script> 
   
-    <!-- form -->
-    <!-- <div class="container-fluid p-0"> -->
-    <!-- <div class="form-box mt-5">
-        <div class="button-box">
-            <div id="btn"></div>
-            <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
-            <button type="button" class="toggle-btn" onclick="adminlogin()">Admin Login</button>
-        </div>
-    <form id="login-resident" class="input_group login-resident" action="resServicePage.html">
-        <input type="text" class="input-field" placeholder="Enter Unit #" required>
-        <input type="password" class="input-field" placeholder="Password" required>
-        <input type="checkbox" class="checkbox"><span>Remember Password</span>
-        <button type="submit" class="submit-btn">Login</button>
-    </form>
-    <form id="login-admin" class="input_group login-admin">
-        <input type="text" class="input-field" placeholder="Username" required>
-        <input type="password" class="input-field" placeholder="Password" required>
-        <input type="checkbox" class="checkbox"><span>Remember Password</span>
-        <button type="submit" class="submit-btn">Login</a></button>
-    </form>
-    </div> -->
-    <!-- </div> -->
-    <!-- <script>
-        var x = document.getElementById("login-resident");
-        var y = document.getElementById("login-admin");
-        var z = document.getElementById("btn");
-
-        function adminlogin(){
-            x.style.left="-25rem";
-            y.style.left="3.125rem";
-            z.style.left="12rem";
-        }
-
-        function residentlogin(){
-            x.style.left="3.125rem";
-            y.style.left="28.125rem";
-            z.style.left="0rem";
-        }
-    </script>     -->
-    <script src="_assets/js/bootstrap.bundle.js"></script>
-    
+    <script src="../BackEnd/database/display.php"></script>
 </body>
 
 </html>

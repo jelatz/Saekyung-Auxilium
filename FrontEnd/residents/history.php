@@ -103,10 +103,10 @@
 <div class="container">
   <div class="row my-3 gap-3 mx-auto">
     <div class="col-sm-5 col-lg-3 mx-auto">
-      <a href="services.html" class="btn btn-unselected w-100">Services</a>
+      <a href="services.php" class="btn btn-unselected w-100">Services</a>
     </div>
     <div class="col-sm-5 col-lg-3 mx-auto">
-      <a href="history.html" class="btn btn-unselected w-100 active" aria-current="page">History</a>
+      <a href="history.php" class="btn btn-unselected w-100 active" aria-current="page">History</a>
     </div>
   </div>
 </div>

@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
 <!-- LOGO -->
-    <a class="navbar-brand" href="services.html"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
+    <a class="navbar-brand" href="services.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
 <!-- COLLAPSE BUTTON -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"                data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -103,10 +103,10 @@
 <div class="container">
   <div class="row my-3 gap-3 mx-auto">
     <div class="col-sm-5 col-lg-3 mx-auto">
-      <a href="./services.html" class="btn btn-unselected w-100 active" aria-current="page">Services</a>
+      <a href="services.php" class="btn btn-unselected w-100 active" aria-current="page">Services</a>
     </div>
     <div class="col-sm-5 col-lg-3 mx-auto">
-      <a href="history.html" class="btn btn-unselected w-100">History</a>
+      <a href="history.php" class="btn btn-unselected w-100">History</a>
     </div>
   </div>
 </div>
@@ -411,7 +411,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="#"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">

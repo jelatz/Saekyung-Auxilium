@@ -1,3 +1,6 @@
+<?php
+   include '/xampp/htdocs/SaekyungAuxilium/BackEnd/database/config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,15 +198,15 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
               </button>
             </div>
-            <div class="modal-body">    
-              <form>
+            <div class="modal-body">     
+              <form action="/BackEnd/database/insert.php" method="POST">
                 <div class="mb-3">
                   <div class="row g-0">
                     <div class="col-12 col-sm-3">
                       <label for="userName" class="col-form-label fw-bold">Username </label>
                     </div>
                     <div class="col-12 col-sm-6">
-                      <input type="text"  class="form-control" id="userName" value="2621"> <!--  get input value from db -->
+                      <input type="text"  class="form-control" id="userName" placeholder="Enter Username" autocomplete="off"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0 my-3">
@@ -211,10 +214,10 @@
                       <label for="password" class="col-form-label fw-bold">Password</label>
                     </div>
                     <div class="col-12 col-sm-6">
-                      <input type="text"  class="form-control" id="password" placeholder="Create Password"> 
+                      <input type="text"  class="form-control" id="password" placeholder="Enter Password" autocomplete="off"> 
                     </div>  
                   </div>
-                <button type="submit" class="btn btn-unselected my-3 w-75" id="updateBtn">Save</button>
+                <button type="submit" name="submit" class="btn btn-unselected my-3 w-75" id="updateBtn">Create</button>
               </form>
             </div>
           </div>
