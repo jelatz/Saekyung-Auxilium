@@ -14,7 +14,7 @@
       }
     }
   </style>
-  <title>Residents Page</title>
+  <title>System Administrator</title>
 </head>
 <body style="background-color: rgba(255,248,243);">
 <!--header-->
@@ -121,7 +121,7 @@
   <div class="tab-pane container-md active" id="home">
     <div class="col-md-12 mx-auto p-3 bg-inner">
       <div class="table-responsive-sm mt-3">
-        <table class="table table-sm table-hover table-bordered text-center">
+        <table class="table table-sm table-hover table-bordered text-center" style="border-color:black;">
           <thead>
             <tr>
               <th>Request #</th>
@@ -160,7 +160,7 @@
       <!-- SEARCH BAR END -->
       <!-- TABLE START -->
       <div class="table-responsive-sm mt-3">
-        <table class="table table-sm table-hover table-bordered text-center">
+        <table class="table table-sm table-hover table-bordered text-center" style="border-color: black;">
           <thead>
             <tr>
               <th>Building #</th>
@@ -291,6 +291,7 @@
         <div class="row justify-content-center">
           <div class="col-7 my-3 fw-bold">Date</div>
         </div>
+        <div class="row justify-content-center">
         <form action="/action_page.php">
           <div class="mb-3 mt-3">
             <label for="from" class="form-label">From:</label>
@@ -301,6 +302,7 @@
             <input type="date" class="form-control mx-auto w-auto" id="to">
           </div>
         </form>
+        </div>
         <div class="row justify-content-center my-2">
           <div class="col-sm-6">
             <button type="submit" class="btn btn-unselected  text-nowrap">Download Report</button>
@@ -309,8 +311,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <script src="../_assets/js/bootstrap.bundle.js"></script>
