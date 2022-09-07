@@ -234,14 +234,14 @@
   <div class="tab-pane container-fluid fade" id="accounts">
     <div class="col-12 p-3 bg-inner">
       <div class="container-fluid mt-2">
-        <ul class="nav nav-pills flex-column nav-justified justify-content-center gap-2">
+        <!-- <ul class="nav nav-pills flex-column nav-justified justify-content-center gap-2">
           <li class="nav-item">
             <a class="btn  px-0 btn-unselected w-100 text-dark fw-bold active" data-bs-toggle="pill" href="#b1">Building 1</a>
           </li>
           <li class="nav-item">
             <a class="btn btn-unselected w-100 px-0 text-dark fw-bold" data-bs-toggle="pill" href="#b2">Building 2</a>
           </li>
-        </ul>
+        </ul> -->
         <!-- Building 1 content -->
         <div class="tab-content text-center mt-3">
           <div class="input-group rounded my-4 w-75 mx-auto">
@@ -463,14 +463,14 @@
           <div class="tab-pane container-fluid fade" id="accountsB">
             <div class="col-12 p-3 bg-inner">
               <div class="container-fluid mt-2">
-                <ul class="nav nav-pills nav-justified justify-content-center gap-2">
+                <!-- <ul class="nav nav-pills nav-justified justify-content-center gap-2">
                   <li class="nav-item">
                     <a class="btn  px-0 btn-unselected w-100 text-dark fw-bold active" data-bs-toggle="pill" href="#b1B">Building 1</a>
                   </li>
                   <li class="nav-item">
                     <a class="btn btn-unselected w-100 px-0 text-dark fw-bold" data-bs-toggle="pill" href="#b2B">Building 2</a>
                   </li>
-                </ul>
+                </ul> -->
                 <!-- Building 1 content -->
                 <div class="tab-content text-center mt-3">
                   <div class="input-group rounded my-4 w-75 mx-auto">
@@ -486,7 +486,7 @@
                   <table class="table table-sm table-hover table-bordered text-center" style="border-color: black;">
                       <thead>
                         <tr>
-                          <th>Unit #</th>
+                          <th>Building & Unit #</th>
                           <th>Action</th>
                         </tr>
                       </thead>

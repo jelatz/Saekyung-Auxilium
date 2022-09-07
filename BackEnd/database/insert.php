@@ -11,7 +11,7 @@ include 'config.php';
 
         $result=mysqli_query($conn,$sql);
         if($result){
-            Echo "New Account Added!";
+            // Echo "New Account Added!";
             header('location: /SaekyungAuxilium/FrontEnd/systemadmin/home.php');
         }else{
             die(mysqli_error($conn));
