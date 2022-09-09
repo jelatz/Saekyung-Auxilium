@@ -1,11 +1,11 @@
 <?php
 include 'config.php';
     if (isset($_POST['submit'])){
-        $uname = $_POST['username'];
-        $Pass = $_POST['password'];
-        $uid = 'renter_ID';
+        $Username = $_POST['Username'];
+        $Passwoord = $_POST['Password'];
+        $uid = 'saekyungDB';
 
-    $select = mysqli_query($conn," SELECT * FROM authentication WHERE User = '$uname' AND Password = '$Pass' ");
+    $select = mysqli_query($conn," SELECT * FROM residents WHERE Username = '$uname' AND Password = '$Pass' ");
     $row  = mysqli_fetch_array($select);
 
     // $row = mysqli_fetch_array($select,MYSQLI_ASSOC);

@@ -30,7 +30,7 @@
         <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
         <button type="button" class="toggle-btn" onclick="adminlogin()">Admin Login</button>
     </div>
-<form action="#" method="POST" id="login-resident" class="input_group login-resident">
+<form action="/BackEnd/database/auth.php" method="POST" id="login-resident" class="input_group login-resident">
     <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required>
     <input type="password" name="password" class="input-field" placeholder="Password" required>
     <input type="checkbox" class="checkbox"><span>Remember Password</span>
