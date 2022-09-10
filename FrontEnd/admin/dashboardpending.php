@@ -150,7 +150,7 @@
               <thead>
                 <tr>
                   <th class="text-nowrap">Request #</th>
-                  <th class="text-nowrap">User</th>
+                  <th class="text-nowrap">Building & Unit #</th>
                   <th class="text-nowrap">Date Filed</th>
                   <th class="text-nowrap">Service</th>
                   <th class="text-nowrap">Status</th>
@@ -177,7 +177,7 @@
               <thead>
                 <tr>
                   <th>Request #</th>
-                  <th>User</th>
+                  <th>Building & Unit #</th>
                   <th>Date Filed</th>
                   <th>Service</th>
                   <th>Status</th>
@@ -209,7 +209,7 @@
               <thead>
                 <tr>
                   <th>Request #</th>
-                  <th>User</th>
+                  <th>Building & Unit #</th>
                   <th>Date Filed</th>
                   <th>Service</th>
                   <th>Date Compeleted</th>
@@ -379,7 +379,7 @@
                       <thead>
                         <tr>
                           <th class="text-nowrap">Request #</th>
-                          <th class="text-nowrap">User</th>
+                          <th class="text-nowrap">Building & Unit #</th>
                           <th class="text-nowrap">Date Filed</th>
                           <th class="text-nowrap">Service</th>
                           <th class="text-nowrap">Status</th>
@@ -406,7 +406,7 @@
                       <thead>
                         <tr>
                           <th>Request #</th>
-                          <th>User</th>
+                          <th>Building & Unit #</th>
                           <th>Date Filed</th>
                           <th>Service</th>
                           <th>Status</th>
@@ -438,7 +438,7 @@
                       <thead>
                         <tr>
                           <th>Request #</th>
-                          <th>User</th>
+                          <th>Building & Unit #</th>
                           <th>Date Filed</th>
                           <th>Service</th>
                           <th>Date Compeleted</th>
