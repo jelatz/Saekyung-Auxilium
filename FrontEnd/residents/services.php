@@ -1,3 +1,7 @@
+<?php
+  include '../../BackEnd/database/config.php';
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +41,7 @@
         <ul class="dropdown-menu bg-inner p-2" style="left: -4rem;">
           <li class="nav-item my-2">
             <button type="button" class="btn btn-unselected w-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
-          <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="#">Logout</a></li>
+          <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a></li>
         </ul>
       </div> 
       </div>
@@ -94,7 +98,7 @@
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
       </li>
       <li class="nav-item">
-        <a class="nav-link btn" href="#">Logout</a>
+        <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>
       </li>
     </ul>
   </div> 
