@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
   <style>
+    .required::after{
+      content: "*" !important;
+      color: red !important;
+    }
     @media screen and (min-width: 768px) {
       .navbar-nav{
         display: none;
@@ -27,7 +31,7 @@
 <!-- LOGO -->
     <a class="navbar-brand" href="services.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
 <!-- COLLAPSE BUTTON -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"                data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"    data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 <!-- NAVBAR CONTENT -->
@@ -58,16 +62,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">    
-        <form>
+        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation" novalidate="">
           <div class="mb-3">
-            <label for="oldPassword" class="form-label">Current Password</label>
-            <input type="password" class="form-control" id="oldPassword">
-            <label for="newPassword" class="form-label">Set New Password</label>
-            <input type="password" class="form-control" id="newPassword">
-            <label for="newConfirmPassword" class="form-label">Confirm New Password</label>
-            <input type="password" class="form-control" id="newConfirmPassword">
+            <label for="oldPassword" class="form-label required" >Current Password</label>
+            <input type="password" class="form-control" id="oldPassword" required>
+            <div class="invalid-feedback">Enter the correct current password</div>
+            <label for="newPassword" class="form-label required" >Set New Password</label>
+            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+            <div class="invalid-feedback">Enter a new password</div>
+            <label for="newConfirmPassword" class="form-label required" >Confirm New Password</label>
+            <input type="password" class="form-control" id="newConfirmPassword" name="confirmPassword" required>
+            <div class="invalid-feedback">Confirm your password</div>
           </div>
-          <button type="submit" class="btn btn-unselected">Submit</button>
+          <button type="submit" name="submit" class="btn btn-unselected">Change Password</button>
         </form>
       </div>
     </div>
@@ -440,5 +447,19 @@
 </div>
 
 <script src="../_assets/js/bootstrap.bundle.js"></script>
+<script>
+  var forms = document.querySelectorAll('.needs-validation')
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+</script>
 </body>
 </html>

@@ -19,6 +19,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="_assets/css/bootstrap.css">
     <link rel="stylesheet" href="_assets/css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
 <body class="bg-image" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
