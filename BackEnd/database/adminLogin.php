@@ -43,6 +43,7 @@ if($row["usertype"]=="admin"){
     header('Location:../../FrontEnd/index.php?error');
     exit();
 }
+
 $username_cookie = '';
 $password_cookie = '';
 if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){

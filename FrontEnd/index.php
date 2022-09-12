@@ -1,6 +1,8 @@
 <?php
 include '../BackEnd/database/config.php';
-session_start();
+// session_start(); 
+// $username_cookie = '';
+$password_cookie = '';
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +16,9 @@ session_start();
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
 <body class="bg-image" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
-
+<?php 
+    print_r($_COOKIE);
+?>
     <!-- navbar -->
 <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">
@@ -37,9 +41,12 @@ session_start();
 <?php  
 }?>
 <form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident">
-    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #"  value="<?php echo $username_cookie?>"">
-    <input type="password" name="password" class="input-field" placeholder="Password"  value="<?php echo $password_cookie?>"">
-    <input type="checkbox" name="remember" class="checkbox"><span>Remember me</span>
+    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required value="<?php echo $username_cookie; ?>">
+    <input type="password" name="password" class="input-field" placeholder="Password" required value="<?php echo $username_cookie; ?>">
+    <input type="checkbox" name="remember" class="checkbox value="<?php 
+    if(isset($_COOKIE['username'])){
+        echo $_COOKIE['username'];};
+        ?>""><span>Remember me</span>
     <div class="mb-2">
         <a href="#" class="text-dark" id="forgetPassword">Forgot Password?</a>
     </div>
@@ -48,8 +55,8 @@ session_start();
 
 <!-- ADMIN LOGIN -->
 <form action="../BackEnd/database/adminLogin.php" id="login-admin" class="input_group login-admin" method="POST">
-    <input type="text" class="input-field" name="username" placeholder="Username" required value="<?php echo $username_cookie?>">
-    <input type="password" class="input-field" name="password" placeholder="Password" required value="<?php echo $password_cookie?>">
+    <input type="text" class="input-field" name="username" placeholder="Username" required>
+    <input type="password" class="input-field" name="password" placeholder="Password" required>
     <input type="checkbox" class="checkbox" name="remember"><span>Remember me</span>
     <button class="btn submit-btn" type="submit" name="adminLogin">Login</button>
 </form>
