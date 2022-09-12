@@ -1,8 +1,14 @@
 <?php
 include '../BackEnd/database/config.php';
-// session_start(); 
-// $username_cookie = '';
+session_start();
+$username_cookie = '';
 $password_cookie = '';
+if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
+    $username_cookie = $_COOKIE['resuname'];
+    $password_cookie = $_COOKIE['respass'];
+}elseif(isset($_COOKIE['adminuser'])){
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +22,6 @@ $password_cookie = '';
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
 <body class="bg-image" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
-<?php 
-    print_r($_COOKIE);
-?>
     <!-- navbar -->
 <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">
@@ -41,12 +44,9 @@ $password_cookie = '';
 <?php  
 }?>
 <form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident">
-    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required value="<?php echo $username_cookie; ?>">
-    <input type="password" name="password" class="input-field" placeholder="Password" required value="<?php echo $username_cookie; ?>">
-    <input type="checkbox" name="remember" class="checkbox value="<?php 
-    if(isset($_COOKIE['username'])){
-        echo $_COOKIE['username'];};
-        ?>""><span>Remember me</span>
+    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required value="<?php echo $username_cookie;?>">
+    <input type="password" name="password" class="input-field" placeholder="Password" required value="<?php echo $password_cookie;?>">
+    <input type="checkbox" name="remember" class="checkbox"><span>Remember me</span>
     <div class="mb-2">
         <a href="#" class="text-dark" id="forgetPassword">Forgot Password?</a>
     </div>

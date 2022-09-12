@@ -24,12 +24,12 @@ if($row["usertype"]=="admin"){
    
     if (isset($_POST['remember'])){
 
-        setcookie('username', $username, time()+10);
-        setcookie('password', $password, time()+10);
+        setcookie('adminuser', $username, time()+30,"/");
+        setcookie('adminpass', $password, time()+30,"/");
 
     }else{
-        setcookie('username', $username, 30);
-        setcookie('password', $password, 30);
+        setcookie('adminuser', $username, 30,"/");
+        setcookie('adminpass', $password, 30,"/");
     }
 
     header('Location:../../FrontEnd/admin/dashboardpending.php');
@@ -42,13 +42,6 @@ if($row["usertype"]=="admin"){
 }else{
     header('Location:../../FrontEnd/index.php?error');
     exit();
-}
-
-$username_cookie = '';
-$password_cookie = '';
-if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){
-    $username_cookie = $_COOKIE['username'];
-    $password_cookie = $_COOKIE['password'];
 }
 }
 ?>

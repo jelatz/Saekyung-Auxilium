@@ -11,9 +11,7 @@ if (isset($_POST['resLogin'])){
             }
 
     $username = validate ($_POST['username']);
-    $password = validate ($_POST['password']);
-    $pass = md5($password);
-   
+    $password = validate ($_POST['password']); 
 
 $result=mysqli_query($conn,"select * from accounts where Username='".$username."' AND Password = '".$password."' limit 1");
 
@@ -25,31 +23,24 @@ if($row["usertype"]=="user"){
     $_SESSION["password"] = $row['Password'];
 // check remember me checkbox
     if (isset($_POST['remember'])){
-        $remember_checkbox = $_POST['remember'];
 // set cookie
-        setcookie('username',$username,time()+86400*24*7);
-        setcookie('uassword',$password,time()+86400*24*7);
-        setcookie('userlogin',$remember_checkbox,time()+3600*24*7);
+        setcookie('resuname',$username,time()+10,"/");
+        setcookie('respass',$password,time()+10,"/");
     }
 // cookie expire
-    else{
-        setcookie('username',$username,30);
-        setcookie('password',$password,30);
+    else
+    {
+        setcookie('resuname',$username,10,"/");
+        setcookie('respass',$password,10,"/");
     }
 // redirect to index.php
     header('Location:../../FrontEnd/residents/services.php');
     exit();
-}else{
+}
+// error for invalid username or password
+else{
     header('Location:../../FrontEnd/index.php?error');
     exit();
 }
-$username_cookie = '';
-$password_cookie = '';
-$set_remember = '';
-if(isset($_COOKIE['username']) && isset($_COOKIE['password'])){
-    $username_cookie = $_COOKIE['username'];
-    $password_cookie = $_COOKIE['password'];
-    $set_remember = "checked='checked'";
-    } 
 }
 ?>

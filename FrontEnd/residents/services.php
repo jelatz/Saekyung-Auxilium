@@ -1,7 +1,6 @@
 <?php
   session_start();
   include '../../BackEnd/database/config.php';
-  // include '../../BackEnd/database/login.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
