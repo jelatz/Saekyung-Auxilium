@@ -54,7 +54,7 @@
   </div>
 </nav>
 <!--Modal for change password -->
-<div class="modal fade" id="chngePassModal" tabindex="-1" aria-labelledby="chngePassModal" aria-hidden="true">
+<div class="modal fade" id="chngePassModal" tabindex="-1" aria-labelledby="chngePassModal" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -64,17 +64,17 @@
       <div class="modal-body">    
         <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation" novalidate="">
           <div class="mb-3">
-            <label for="oldPassword" class="form-label required" >Current Password</label>
-            <input type="password" class="form-control" id="oldPassword" required>
-            <div class="invalid-feedback">Enter the correct current password</div>
+            <label  for="oldPassword" class="form-label required" >Current Password</label>
+            <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+            <div class="invalid-feedback">Enter current password</div>
             <label for="newPassword" class="form-label required" >Set New Password</label>
             <input type="password" class="form-control" id="newPassword" name="newPassword" required>
             <div class="invalid-feedback">Enter a new password</div>
             <label for="newConfirmPassword" class="form-label required" >Confirm New Password</label>
-            <input type="password" class="form-control" id="newConfirmPassword" name="confirmPassword" required>
+            <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" required>
             <div class="invalid-feedback">Confirm your password</div>
           </div>
-          <button type="submit" name="submit" class="btn btn-unselected">Change Password</button>
+          <button type="submit" name="submit" class="btn btn-unselected" onclick="chngePassSuccess();">Change Password</button>
         </form>
       </div>
     </div>
@@ -145,7 +145,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -153,7 +153,7 @@
                       <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="Type" value="Electrical"> 
+                      <input type="text" readonly class="form-control-plaintext" value="Electrical"> 
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -161,7 +161,7 @@
                       <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -191,7 +191,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -199,7 +199,8 @@
                       <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="Type" value="Furniture">
+                      <input type="text" readonly class="form-control-plaintext"
+                      value="Furniture">
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -207,7 +208,7 @@
                       <label for="concern" class="col-form-label fw-bold">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -237,7 +238,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext"  value="2621"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -245,7 +246,7 @@
                       <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="Type" value="Painting">
+                      <input type="text" readonly class="form-control-plaintext" value="Painting">
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -253,7 +254,7 @@
                       <label for="concern" class="col-form-label fw-bold">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -284,7 +285,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext"  value="2621"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -292,7 +293,7 @@
                       <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="Type" value="Plumbing">
+                      <input type="text" readonly class="form-control-plaintext"  value="Plumbing">
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -300,7 +301,7 @@
                       <label for="concern" class="col-form-label fw-bold">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -330,7 +331,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext"  value="2621"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -338,7 +339,7 @@
                       <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="Type" value="Security">
+                      <input type="text" readonly class="form-control-plaintext"  value="Security">
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -346,7 +347,7 @@
                       <label for="concern" class="col-form-label fw-bold">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -376,7 +377,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="2621"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext"  value="2621"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -384,7 +385,7 @@
                       <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="Type" value="Tile"> 
+                      <input type="text" readonly class="form-control-plaintext" value="Tile"> 
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -392,7 +393,7 @@
                       <label for="concern" class="col-form-label fw-bold">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -423,7 +424,7 @@
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" id="bldgNum" value="#"> <!--  get input value from db -->
+                      <input type="text" readonly class="form-control-plaintext"  value="#"> <!--  get input value from db -->
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -431,7 +432,7 @@
                       <label for="concern" class="col-form-label fw-bold">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" id="concern" rows="5"></textarea>
+                      <textarea name="#" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
@@ -460,6 +461,19 @@ Array.prototype.slice.call(forms)
       form.classList.add('was-validated')
     }, false)
   })
+</script>
+<script>
+  function checkPassword(){
+    var newPassword = document.getElementbyID("newPassword"). value;
+    var newConfirmPassword = document.getElementbyID("newConfirmPassword"). value;
+    console.log (newPassword,newConfirmPassword);
+  }
+</script>
+
+<script>
+  function chngePassSuccess(){
+    alert("Password changed successfully!");
+  }
 </script>
 </body>
 </html>

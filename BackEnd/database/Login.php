@@ -13,14 +13,14 @@ if (isset($_POST['resLogin'])){
     $username = validate ($_POST['username']);
     $password = validate ($_POST['password']); 
 
-$result=mysqli_query($conn,"select * from accounts where Username='".$username."' AND Password = '".$password."' limit 1");
+$result=mysqli_query($conn,"select * from accounts where userName='".$username."' AND password = '$password' limit 1");
 
 $row=mysqli_fetch_array($result);
 
 if($row["usertype"]=="user"){
 
-    $_SESSION["username"] = $row['Username'];
-    $_SESSION["password"] = $row['Password'];
+    $_SESSION["username"] = $row['userName'];
+    $_SESSION["password"] = $row['password'];
 // check remember me checkbox
     if (isset($_POST['remember'])){
 // set cookie
