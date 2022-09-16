@@ -45,7 +45,7 @@
         echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
-            <button type="button" class="btn btn-unselected w-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+            <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
           <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a></li>
         </ul>
       </div> 
@@ -53,33 +53,6 @@
     </div>
   </div>
 </nav>
-<!--Modal for change password -->
-<div class="modal fade" id="chngePassModal" tabindex="-1" aria-labelledby="chngePassModal" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="chngePassModalTitle">Change Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">    
-        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation" novalidate="">
-          <div class="mb-3">
-            <label  for="oldPassword" class="form-label required" >Current Password</label>
-            <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
-            <div class="invalid-feedback">Enter current password</div>
-            <label for="newPassword" class="form-label required" >Set New Password</label>
-            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-            <div class="invalid-feedback">Enter a new password</div>
-            <label for="newConfirmPassword" class="form-label required" >Confirm New Password</label>
-            <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" required>
-            <div class="invalid-feedback">Confirm your password</div>
-          </div>
-          <button type="submit" name="submit" class="btn btn-unselected" onclick="chngePassSuccess();">Change Password</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Modal for Notifications -->
 <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -448,6 +421,7 @@
 </div>
 
 <script src="../_assets/js/bootstrap.bundle.js"></script>
+<!-- form validation -->
 <script>
   var forms = document.querySelectorAll('.needs-validation')
 Array.prototype.slice.call(forms)
@@ -461,19 +435,6 @@ Array.prototype.slice.call(forms)
       form.classList.add('was-validated')
     }, false)
   })
-</script>
-<script>
-  function checkPassword(){
-    var newPassword = document.getElementbyID("newPassword"). value;
-    var newConfirmPassword = document.getElementbyID("newConfirmPassword"). value;
-    console.log (newPassword,newConfirmPassword);
-  }
-</script>
-
-<script>
-  function chngePassSuccess(){
-    alert("Password changed successfully!");
-  }
 </script>
 </body>
 </html>
