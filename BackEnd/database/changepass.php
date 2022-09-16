@@ -1,44 +1,35 @@
 <?php
 session_start();
+include 'config.php';
 
 if (isset($_POST['submit'])){
-    include 'config.php';
-    function validate($data){
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    $userName = validate ($_POST['userName']);
-    $oldPassword = validate ($_POST['oldPassword']);
-    $newPassword = validate ($_POST['newPassword']);
-    $newConfirmPassword = validate ($_POST['newConfirmPassword']);
-// hashing the password
-    $oldPassword = md5($oldPassword);
-    $newPassword = md5($newPassword);
+  function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+  $userName = validate($_POST['userName']);
+  $oldPassword =validate ($_POST['oldPassword']);
+  $newPassword = validate($_POST['newPassword']);
+  $newConfirmPassword = validate($_POST['newConfirmPassword']);
 
-    $result = mysqli_query($conn, "select userName,password from accounts where username = '$userName' and password = '$oldPassword'");
+  
 
-    $row = mysqli_fetch_array($result);
-    $oldPasswordDB = $row['password'];
+  $result = mysqli_query($conn,"select userName,password from accounts where userName = '$userName' and password = '$oldPassword'");
 
-    if($oldPassword == $oldPasswordDB){
-        if($newPassword == $newConfirmPassword){  
-            $query = mysqli_query($conn,"update accounts set password = '$newPassword' where userName = '$userName'");
-            echo '<div class="alert alert_success">Password changed successfully!</div>';
-            header('Location:../../FrontEnd/residents/services.php');
-        }else{
-            echo "enter correct password!";
-            header('Location:changepass.php?error');
-        }
-        }else{
-            header('Location:changepass.php?error');
-        }
-    }else{
-        header('Location:changepass.php');
-    }
+  $row = mysqli_fetch_array($result);
 
+  if ($row > 0){
+      $sql = mysqli_query($conn,"update accounts set password = '$newPassword' where userName = '$userName'");
+      header('Location:changepass.php?success=Password Updated!');
+  }else{
+    header('Location:changepass.php?error=Incorrect Password!');
+  }
+
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +73,7 @@ if (isset($_POST['submit'])){
         echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
-            <a type="button" href="../../FrontEnd/residents/services.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+            <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
           <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a></li>
         </ul>
       </div> 
@@ -113,7 +104,7 @@ if (isset($_POST['submit'])){
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+        <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>
@@ -124,24 +115,21 @@ if (isset($_POST['submit'])){
 <!-- Change Password -->
 <div class="container mt-5">
     <div class="col col-md-8 mx-auto p-5">
-        <form action="#" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="">
-        <?php 
-        if (isset($_GET['error'])){?>
-        <p class="alert alert-danger text-center mx-auto fw-bold" id="residentError" style="width:90%;"><?php echo $_GET['error'];?>Incorrect password</p>  
-        <?php  
-        }?>
+        <form action="#" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="" onSubmit="return valid();">
+        <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
+        <?php if (isset($_GET['success'])){?><p class="error alert alert-danger"><?php echo $_GET['success'];?></p> <?php } ?>
             <div class="mb-3">
                 <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
-                <input type="hidden" class="form-control" name="userName" value = <?php echo $_SESSION['username'] ?>>
+                <input type="hidden" class="form-control" name="userName" value = <?php echo $userID ?>>
                 <label  for="oldPassword" class="form-label" >Current Password</label>
                 <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
-                <div class="invalid-feedback">Enter current password</div>
+                <div class="invalid-feedback">Current password required</div>
                 <label for="newPassword" class="form-label" >Set New Password</label>
                 <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                 <div class="invalid-feedback">Enter a new password</div>
                 <label for="newConfirmPassword" class="form-label" >Confirm New Password</label>
                 <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" required>
-                <div class="invalid-feedback">Confirm your password</div>
+                <div class="invalid-feedback">Confirm password</div>
                 <p class="mt-2 alert alert-info mt-3" role="alert"><strong>Password must only contain Alphanumeric characters</strong></p>
             </div>
                 <button type="submit" name="submit" class="btn btn-unselected">Change Password</button>

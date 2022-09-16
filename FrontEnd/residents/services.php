@@ -76,7 +76,7 @@
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+        <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>
