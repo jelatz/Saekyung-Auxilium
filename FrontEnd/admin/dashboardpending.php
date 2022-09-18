@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../../BackEnd/database/config.php';
 ?>
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ include '../../BackEnd/database/config.php';
 <!-- LOGO -->
     <a class="navbar-brand" href="dashboardpending.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
 <!-- COLLAPSE BUTTON -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"                data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 <!-- NAVBAR CONTENT -->
@@ -35,11 +36,11 @@ include '../../BackEnd/database/config.php';
         <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
         </a>
       <div class="dropdown">
-        <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">Accounts
-        </button>
-        <ul class="dropdown-menu bg-inner p-2" style="left: -4rem;">
-          <li class="nav-item my-2">
-            <button type="button" class="btn btn-unselected w-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+        <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php
+        if(isset($_SESSION['username'])){
+        echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
+        <ul class="dropdown-menu bg-inner p-2">
+          <li class="nav-item my-2"><a type="button" href="../../BackEnd/database/adminchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a></li>
           <li class="nav-item"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php">Logout</a></li>
         </ul>
       </div> 
@@ -47,30 +48,6 @@ include '../../BackEnd/database/config.php';
     </div>
   </div>
 </nav>
-<!--Modal for change password -->
-<div class="modal fade" id="chngePassModal" tabindex="-1" aria-labelledby="chngePassModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="chngePassModalTitle">Change Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">    
-        <form>
-          <div class="mb-3">
-            <label for="oldPassword" class="form-label">Current Password</label>
-            <input type="password" class="form-control" id="oldPassword">
-            <label for="newPassword" class="form-label">Set New Password</label>
-            <input type="password" class="form-control" id="newPassword">
-            <label for="newConfirmPassword" class="form-label">Confirm New Password</label>
-            <input type="password" class="form-control" id="newConfirmPassword">
-          </div>
-          <button type="submit" class="btn btn-unselected">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Modal for Notifications -->
 <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -94,7 +71,7 @@ include '../../BackEnd/database/config.php';
         <button type="button" class="btn btn-unselected rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-unselected rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+        <a type="button" href="../../BackEnd/database/adminchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn btn-unselected rounded-0" href="../../BackEnd/database/logout.php">Logout</a>

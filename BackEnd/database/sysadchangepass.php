@@ -22,12 +22,12 @@ if (isset($_POST['submit'])){
     if($newPassword == $newConfirmPassword){
       if ($row > 0){
           $sql = mysqli_query($conn,"update accounts set password = '$newPassword' where userName = '$userName'");
-          header('Location:changepass.php?success=Password Updated!');
+          header('Location:adminchangepass.php?success=Password Updated!');
       }else{
-        header('Location:changepass.php?error=Incorrect Password!');
+        header('Location:adminchangepass.php?error=Incorrect Password!');
       }
     }else{
-      header('Location:changepass.php?error=Password does not match!');
+      header('Location:adminchangepass.php?error=Password does not match!');
     }
 }
 ?>
@@ -59,9 +59,9 @@ if (isset($_POST['submit'])){
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
 <!-- LOGO -->
-    <a class="navbar-brand" href="../../FrontEnd/residents/services.php"><img src="../../FrontEnd/_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
+    <a class="navbar-brand" href="../../FrontEnd/systemadmin/home.php"><img src="../../FrontEnd/_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
 <!-- COLLAPSE BUTTON -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"    data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 <!-- NAVBAR CONTENT -->
@@ -75,7 +75,7 @@ if (isset($_POST['submit'])){
         echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
-            <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+            <a type="button" href="sysadchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
           <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a></li>
         </ul>
       </div> 
@@ -106,7 +106,7 @@ if (isset($_POST['submit'])){
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
       <li class="nav-item">
-        <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+        <a type="button" href="sysadchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>

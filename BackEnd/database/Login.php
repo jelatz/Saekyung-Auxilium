@@ -11,7 +11,8 @@ if (isset($_POST['resLogin'])){
             }
 
     $username = validate ($_POST['username']);
-    $password = validate ($_POST['password']); 
+    $password = validate (md5($_POST['password'])); 
+    // $password = md5($password);
 
 $result=mysqli_query($conn,"select * from accounts where userName='".$username."' AND password = '$password' limit 1");
 
