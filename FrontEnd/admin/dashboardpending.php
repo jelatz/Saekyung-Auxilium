@@ -40,7 +40,7 @@ include '../../BackEnd/database/config.php';
         if(isset($_SESSION['username'])){
         echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
-          <li class="nav-item my-2"><a type="button" href="../../BackEnd/database/adminchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a></li>
+          <li class="nav-item my-2"><a type="button" href="chngepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a></li>
           <li class="nav-item"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php">Logout</a></li>
         </ul>
       </div> 
@@ -71,7 +71,7 @@ include '../../BackEnd/database/config.php';
         <button type="button" class="btn btn-unselected rounded-0 w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
       <li class="nav-item">
-        <a type="button" href="../../BackEnd/database/adminchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+        <a type="button" href="chngepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn btn-unselected rounded-0" href="../../BackEnd/database/logout.php">Logout</a>

@@ -49,10 +49,38 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <input type="password" name="password" class="input-field" placeholder="Password" required value="<?php echo $password_cookie;?>">
     <input type="checkbox" name="remember" class="checkbox"><span>Remember me</span>
     <div class="mb-2">
-        <a href="#" class="text-dark" id="forgetPassword">Forgot Password?</a>
+    <a href="#" class="nav-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#resetPass">Forgot Password</a>
     </div>
         <button class="btn submit-btn" type="submit" name="resLogin">Login</button>
 </form>
+<!-- MODAL FOR FORGOT PASSWORD -->
+<div class="modal fade" id="resetPass" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" style="background-color: rgba(255,248,243);">
+            <div class="modal-header">Reset Password</div>
+                <h5 class="modal-title" id="norifTitle">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+                <div class="container-sm">
+                    <div class="col col-sm-8 col-lg-5 mx-auto my-5">
+                        <div class="card">
+                            <div class="card-header"> Reset Password</div>
+                            <div class="card-body">
+                                <form action="#">
+                                    <label for="uniquePass" class="form-label fw-bold">Enter your default password</label>
+                                    <input type="text" class="form-control" name="defPass">
+                                    <a href="#" class="btn btn-secondary mt-3">Submit</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ADMIN LOGIN -->
 <form action="../BackEnd/database/adminLogin.php" id="login-admin" class="input_group login-admin" method="POST">
