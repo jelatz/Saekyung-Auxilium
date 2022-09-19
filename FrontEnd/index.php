@@ -83,7 +83,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 </div>
 
 <!-- ADMIN LOGIN -->
-<form action="../BackEnd/database/adminLogin.php" id="login-admin" class="input_group login-admin" method="POST">
+<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin" method="POST">
     <input type="text" class="input-field" name="username" placeholder="Username" required>
     <input type="password" class="input-field" name="password" placeholder="Password" required>
     <input type="checkbox" class="checkbox" name="remember"><span>Remember me</span>

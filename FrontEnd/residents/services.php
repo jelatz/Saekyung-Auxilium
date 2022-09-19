@@ -54,7 +54,7 @@
   </div>
 </nav>
 <!-- Modal for Notifications -->
-<div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
+<div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content" style="background-color: rgba(255,248,243);">
       <div class="modal-header">
@@ -102,7 +102,7 @@
       <div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#elecReq">Electrical</button>
 <!-- Modal for electrical -->
-          <div class="modal fade" id="elecReq" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true">
+          <div class="modal fade" id="elecReq" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">
@@ -148,7 +148,7 @@
       <div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#furnitureReq">Furniture</button>
 <!-- Modal for Furniture -->
-          <div class="modal fade" id="furnitureReq" tabindex="-1" aria-labelledby="furnitureReq" aria-hidden="true">
+          <div class="modal fade" id="furnitureReq" tabindex="-1" aria-labelledby="furnitureReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">
@@ -195,7 +195,7 @@
       <div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#paintReq">Painting</button>
 <!-- Modal for Painting -->
-          <div class="modal fade" id="paintReq" tabindex="-1" aria-labelledby="paintReq" aria-hidden="true">
+          <div class="modal fade" id="paintReq" tabindex="-1" aria-labelledby="paintReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">
@@ -242,7 +242,7 @@
       <div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#plumbingReq">Plumbing</button>
 <!-- Modal for Plumbing -->
-          <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true">
+          <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">
@@ -288,7 +288,7 @@
       <div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#securityReq">Security</button>
 <!-- Modal for Security -->
-          <div class="modal fade" id="securityReq" tabindex="-1" aria-labelledby="securityReq" aria-hidden="true">
+          <div class="modal fade" id="securityReq" tabindex="-1" aria-labelledby="securityReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">
@@ -334,7 +334,7 @@
       <div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#tileReq">Tile</button>
 <!-- Modal for Tile -->
-          <div class="modal fade" id="tileReq" tabindex="-1" aria-labelledby="tileReq" aria-hidden="true">
+          <div class="modal fade" id="tileReq" tabindex="-1" aria-labelledby="tileReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">
@@ -381,7 +381,7 @@
       <div class="col-lg-10 mt-2 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal"  data-bs-target="#otherReq">Other</button>
 <!-- Modal for Others -->
-          <div class="modal fade" id="otherReq" tabindex="-1" aria-labelledby="otherReq" aria-hidden="true">
+          <div class="modal fade" id="otherReq" tabindex="-1" aria-labelledby="otherReq" aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content" style="background-color: rgb(255, 248,243)">
                   <div class="modal-header">

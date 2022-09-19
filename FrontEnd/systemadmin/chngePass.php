@@ -1,6 +1,6 @@
 <?php
 // session_start();
-include '../../BackEnd/database/sysadchangepass.php';
+include '../../BackEnd/database/changepass.php';
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ include '../../BackEnd/database/sysadchangepass.php';
 <!-- Change Password -->
 <div class="container-fluid mt-5">
     <div class="col col-md-8 mx-auto p-5">
-        <form action="../../BackEnd/database/sysadchangepass.php" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="" onSubmit="return valid();">
+        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="" onSubmit="return valid();">
         <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
         <?php if (isset($_GET['success'])){?><p class="error alert alert-danger"><?php echo $_GET['success'];?></p> <?php } ?>
             <div class="mb-3">
@@ -105,7 +105,7 @@ include '../../BackEnd/database/sysadchangepass.php';
                 <div class="invalid-feedback">Confirm password</div>
                 <p class="mt-2 alert alert-info mt-3" role="alert"><strong>Password must only contain Alphanumeric characters</strong></p>
             </div>
-                <button type="submit" name="submit" class="btn btn-unselected">Change Password</button>
+                <button type="submit" name="sysAdSubmit" class="btn btn-unselected">Change Password</button>
         </form>    
     </div>
 </div>

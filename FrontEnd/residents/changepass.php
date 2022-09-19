@@ -108,7 +108,7 @@ include '../../BackEnd/database/config.php';
                 <div class="invalid-feedback">Confirm password</div>
                 <p class="mt-2 alert alert-info mt-3" role="alert"><strong>Password must only contain Alphanumeric characters</strong></p>
             </div>
-                <button type="submit" name="submit" class="btn btn-unselected">Change Password</button>
+                <button type="submit" name="resSubmit" class="btn btn-unselected">Change Password</button>
         </form>    
     </div>
 </div>
