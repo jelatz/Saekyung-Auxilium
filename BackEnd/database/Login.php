@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'config.php';
+// RESIDENT LOGIN
 if (isset($_POST['resLogin'])){
 
     function validate($data){
@@ -43,7 +44,8 @@ else{
     header('Location:../../FrontEnd/index.php?error');
     exit();
 }
-} elseif (isset($_POST['adminLogin'])){
+}//ADMIN LOGIN
+ elseif (isset($_POST['adminLogin'])){
 
     function validate($data){
         $data = trim($data);

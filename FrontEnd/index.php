@@ -44,12 +44,13 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <p class="alert alert-danger text-center mx-auto fw-bold" id="residentError" style="width:90%;"><?php echo $_GET['error'];?>Invalid Username or Password</p>  
 <?php  
 }?>
+    <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
 <form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident">
     <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required value="<?php echo $username_cookie;?>">
     <input type="password" name="password" class="input-field" placeholder="Password" required value="<?php echo $password_cookie;?>">
     <input type="checkbox" name="remember" class="checkbox"><span>Remember me</span>
     <div class="mb-2">
-    <a href="#" class="nav-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#resetPass">Forgot Password</a>
+    <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
     </div>
         <button class="btn submit-btn" type="submit" name="resLogin">Login</button>
 </form>
@@ -87,6 +88,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <input type="text" class="input-field" name="username" placeholder="Username" required>
     <input type="password" class="input-field" name="password" placeholder="Password" required>
     <input type="checkbox" class="checkbox" name="remember"><span>Remember me</span>
+    <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
     <button class="btn submit-btn" type="submit" name="adminLogin">Login</button>
 </form>
 </div>

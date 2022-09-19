@@ -91,7 +91,7 @@ include '../../BackEnd/database/config.php';
 <!-- Change Password -->
 <div class="container-fluid mt-5">
     <div class="col col-md-8 mx-auto p-5">
-        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="" onSubmit="return valid();">
+        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="">
         <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
         <?php if (isset($_GET['success'])){?><p class="error alert alert-danger"><?php echo $_GET['success'];?></p> <?php } ?>
             <div class="mb-3">

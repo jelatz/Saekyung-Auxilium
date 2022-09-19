@@ -1,5 +1,6 @@
 <?php
 include '../BackEnd/database/config.php';
+include '../BackEnd/database/changepass.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,13 +29,15 @@ include '../BackEnd/database/config.php';
             <div class="card-body">
                 <form action="../BackEnd/database/changepass.php" method="POST" class="needs-validation text-dark p-4" novalidate="">
                   <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
-                  <label for="userName" class="form-label fw-bold">Enter Username</label>
-                  <input type="text" class="form-control" name="userName">
-                  <label  for="defPass" class="form-label fw-bold" >Enter Unique Code</label>
-                  <span class="p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Enter the code provided to you by the Admin" data-bs-original-title="Tooltip on top"><i class="bi bi-question-circle"></i></span>
-                  <input type="password" class="form-control" id="defPass" name="defPass" required>
+                  <?php if(isset($_SESSION['userName'])){ $userID = $_SESSION['userName'];}?>
+                  <input type="hidden" class="form-control" name="userName" value = <?php echo $userID ?>>
+                  <label  for="newPass" class="form-label fw-bold" >Enter New Password</label>
+                  <input type="password" class="form-control" id="newPass" name="newPass" required>
                   <div class="invalid-feedback">Current password required</div>
-                  <button type="submit" name="confirmSubmit" class="btn btn-unselected mt-3">Submit</button>
+                  <label  for="cnfrmNewPass" class="form-label fw-bold" >Confirm New Password</label>
+                  <input type="password" class="form-control" id="cnfrmNewPass" name="cnfrmNewPass" required>
+                  <div class="invalid-feedback">Current password required</div>
+                  <button type="submit" name="resetSubmit" class="btn btn-unselected mt-3">Submit</button>
                 </form>
             </div>
         </div>
