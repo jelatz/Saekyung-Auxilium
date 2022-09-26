@@ -49,8 +49,14 @@ include '../../BackEnd/database/config.php';
         </button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
+            <a class="btn btn-unselected w-100" href="accounts.php" name="accounts">Accounts</a>
+          </li>
+          <li class="nav-item my-2">
             <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
-          <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a></li>
+          </li>
+          <li class="nav-item my-2">
+            <a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a>
+          </li>
         </ul>
       </div> 
       </div>
