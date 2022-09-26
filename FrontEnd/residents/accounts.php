@@ -22,7 +22,7 @@
       }
     }
 
-    /*Profile Pic Start*/
+ /*Profile Pic Start*/
 .picture-container{
     position: relative;
     cursor: pointer;
@@ -72,7 +72,7 @@
 }
 /*Profile Pic End*/
   </style>
-  <title>Residents Service Page</title>
+  <title>Residents Accounts Page</title>
 </head>
 <body style="background-color: rgba(255,248,243);">
 <!--header-->
@@ -143,30 +143,45 @@
 </div>
 <!-- USER DETAILS -->
 <div class="container-md my-5">
-    <div class="row">
-        <div class="col col-md-6 bg-secondary mx-auto text-center">
-            <form action="../../BackEnd/database/user.php" method="POST" class="p-3">
-                <div class="picture-container my-3">
-                    <div class="picture">
-                        <img src="https://lh3.googleusercontent.com/LfmMVU71g-HKXTCP_QWlDOemmWg4Dn1rJjxeEsZKMNaQprgunDTtEuzmcwUBgupKQVTuP0vczT9bH32ywaF7h68mF-osUSBAeM6MxyhvJhG6HKZMTYjgEv3WkWCfLB7czfODidNQPdja99HMb4qhCY1uFS8X0OQOVGeuhdHy8ln7eyr-6MnkCcy64wl6S_S6ep9j7aJIIopZ9wxk7Iqm-gFjmBtg6KJVkBD0IA6BnS-XlIVpbqL5LYi62elCrbDgiaD6Oe8uluucbYeL1i9kgr4c1b_NBSNe6zFwj7vrju4Zdbax-GPHmiuirf2h86eKdRl7A5h8PXGrCDNIYMID-J7_KuHKqaM-I7W5yI00QDpG9x5q5xOQMgCy1bbu3St1paqt9KHrvNS_SCx-QJgBTOIWW6T0DHVlvV_9YF5UZpN7aV5a79xvN1Gdrc7spvSs82v6gta8AJHCgzNSWQw5QUR8EN_-cTPF6S-vifLa2KtRdRAV7q-CQvhMrbBCaEYY73bQcPZFd9XE7HIbHXwXYA=s200-no" class="picture-src" id="wizardPicturePreview" title="">
-                        <input type="file" id="wizard-picture" class="">
-                    </div>
-                        <h6 class=" mt-3">Upload Photo</h6>
+    <div class="row text-center justify-content-center">
+        <div class="col-lg-3 my-2">
+          <div class="card h-100 my-2">
+            <div class="card-header">Profile Picture</div>
+            <div class="card-body">
+              <div class="container">
+                <div class="picture-container">
+                  <div class="picture">
+                    <img src="../_assets/images/profile.png" class="picture-src" id="frame" title="">
+                    <input type="file" id="wizard-picture" class=" h-50" onchange="preview()" >
+                  </div>
+                    <h6 class="">Choose Picture</h6>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 my-2">
+          <div class="card h-100 my-2">
+            <div class="card-header">User Details</div>
+            <div class="card-body">
+              <form action="#" method="POST">
                 <label for="fName" class="form-label">Enter First Name: </label>
-                <input type="text" class="form-control w-75 mx-auto">
-                <label for="fName" class="form-label">Enter Last Name: </label>
-                <input type="text" class="form-control w-75 mx-auto">
-                <input type="submit" name="imgSubmit" value="Submit" class="btn btn-primary mt-3">
-            </form>
+                <input type="text" class="form-control w-75 mx-auto" name="fName">
+                <label for="lName" class="form-label">Enter Last Name: </label>
+                <input type="text" class="form-control w-75 mx-auto" name="lName">
+              </form>
+            </div>
+          </div>
         </div>
     </div>
 </div>
 
-
-
 <script src="../_assets/js/bootstrap.bundle.js"></script>
 
-
+<script type="text/javascript">
+    function preview(){
+        frame.src=URL.createObjectURL(event.target.files[0]);
+    }
+</script>
 </body>
 </html>
