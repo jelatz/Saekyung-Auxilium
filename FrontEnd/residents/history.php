@@ -1,3 +1,9 @@
+<?php
+session_start();
+include '../../BackEnd/database/config.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,12 +38,14 @@
         <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
         </a>
       <div class="dropdown">
-        <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">Accounts
-        </button>
-        <ul class="dropdown-menu bg-inner p-2" style="left: -4rem;">
+        <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <?php if(isset($_SESSION['username'])){
+        echo "Welcome! " . $_SESSION['username'];}?>
+        <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
+        <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
             <button type="button" class="btn btn-unselected w-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
-          <li class="nav-item"><a class="btn btn-unselected w-100" href="#">Logout</a></li>
+          <li class="nav-item"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php">Logout</a></li>
         </ul>
       </div> 
       </div>
@@ -94,7 +102,7 @@
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
       </li>
       <li class="nav-item">
-        <a class="nav-link btn" href="#">Logout</a>
+        <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>
       </li>
     </ul>
   </div> 

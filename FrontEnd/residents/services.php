@@ -42,7 +42,8 @@
       <div class="dropdown">
       <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php
         if(isset($_SESSION['username'])){
-        echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
+        echo "Welcome! " . $_SESSION['username'];}?>
+        <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
             <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>

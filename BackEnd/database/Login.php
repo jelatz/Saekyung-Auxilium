@@ -15,13 +15,13 @@ if (isset($_POST['resLogin'])){
     $password = validate (md5($_POST['password'])); 
     // $password = md5($password);
 
-$result=mysqli_query($conn,"select * from accounts where userName='".$username."' AND password = '$password' limit 1");
+$result=mysqli_query($conn,"select * from accounts where accountID='".$username."' AND password = '$password' limit 1");
 
 $row=mysqli_fetch_array($result);
 
 if($row["usertype"]=="user"){
 
-    $_SESSION["username"] = $row['userName'];
+    $_SESSION["username"] = $row['accountID'];
     $_SESSION["password"] = $row['password'];
 // check remember me checkbox
     if (isset($_POST['remember'])){
@@ -58,12 +58,12 @@ $username = validate ($_POST['username']);
 $password = validate ($_POST['password']);
 $password = md5($password);
 
-$result=mysqli_query($conn,"select * from accounts where userName='".$username."' AND password = '".$password."' limit 1");
+$result=mysqli_query($conn,"select * from accounts where accountID='".$username."' AND password = '".$password."' limit 1");
 
 $row=mysqli_fetch_array($result);
 if($row["usertype"]=="admin"){
 
-$_SESSION["username"] = $row['userName'];
+$_SESSION["username"] = $row['accountID'];
 $_SESSION["password"] = $row['password'];
 
 if (isset($_POST['remember'])){
@@ -79,7 +79,7 @@ setcookie('adminpass', $password, 30,"/");
 header('Location:../../FrontEnd/admin/dashboardpending.php');
 exit();
 }elseif($row["usertype"]=="systemadmin"){
-$_SESSION["username"] = $row['userName'];
+$_SESSION["username"] = $row['accountID'];
 $_SESSION["password"] = $row['password'];
 header('Location:../../FrontEnd/systemadmin/home.php');
 exit();
