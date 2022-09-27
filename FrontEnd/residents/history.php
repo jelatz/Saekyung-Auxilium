@@ -44,7 +44,7 @@ include '../../BackEnd/database/config.php';
         <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
          <li class="nav-item my-2">
-            <a class="btn btn-unselected w-100" href="accounts.php" name="accounts">Accounts</a>
+            <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
           </li>
           <li class="nav-item my-2">
             <button type="button" class="btn btn-unselected w-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
@@ -101,6 +101,9 @@ include '../../BackEnd/database/config.php';
       <li class="nav-item">
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
+      <li class="nav-item my-2">
+            <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
+          </li>
       <li class="nav-item">
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
       </li>

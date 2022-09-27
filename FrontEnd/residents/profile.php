@@ -1,6 +1,7 @@
 <?php
   session_start();
   include '../../BackEnd/database/config.php';
+  // include '../../BackEnd/database/user.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,11 +69,11 @@
 
 .picture-src{
     width: 100%;
-    
+    height: 100%;
 }
 /*Profile Pic End*/
   </style>
-  <title>Residents Accounts Page</title>
+  <title>Profile Page</title>
 </head>
 <body style="background-color: rgba(255,248,243);">
 <!--header-->
@@ -96,7 +97,7 @@
         <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
-            <a class="btn btn-unselected w-100" href="accounts.php" name="accounts">Accounts</a>
+            <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
           </li>
           <li class="nav-item my-2">
             <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
@@ -132,6 +133,9 @@
       <li class="nav-item">
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
+      <li class="nav-item my-2">
+            <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
+          </li>
       <li class="nav-item">
         <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
@@ -144,32 +148,41 @@
 <!-- USER DETAILS -->
 <div class="container-md my-5">
     <div class="row text-center justify-content-center">
+      <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
+      <?php if (isset($_GET['success'])){?><p class="error alert alert-danger"><?php echo $_GET['success'];?></p> <?php } ?>
         <div class="col-lg-3 my-2">
-          <div class="card h-100 my-2">
-            <div class="card-header">Profile Picture</div>
-            <div class="card-body">
-              <div class="container">
-                <div class="picture-container">
-                  <div class="picture">
-                    <img src="../_assets/images/profile.png" class="picture-src" id="frame" title="">
-                    <input type="file" id="wizard-picture" class=" h-50" onchange="preview()" >
+          <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" no-validate="">
+            <div class="card h-100 my-2">
+              <div class="card-header">Profile Picture</div>
+              <div class="card-body">
+                <div class="container">
+                  <div class="picture-container">
+                    <div class="picture mt-4">
+                      <img src="../_assets/images/profile.png" class="picture-src" id="frame" title="">
+                      <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
+                    </div>
+                      <h6 class="">Choose Picture(Optional)</h6>
                   </div>
-                    <h6 class="">Choose Picture</h6>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         <div class="col-lg-6 my-2">
           <div class="card h-100 my-2">
             <div class="card-header">User Details</div>
             <div class="card-body">
-              <form action="#" method="POST">
                 <label for="fName" class="form-label">Enter First Name: </label>
-                <input type="text" class="form-control w-75 mx-auto" name="fName">
+                <input type="text" class="form-control w-75 mx-auto" name="fName" required="">
+                <div class="invalid-feedback">
+                  Please enter your first name:
+                </div>
                 <label for="lName" class="form-label">Enter Last Name: </label>
-                <input type="text" class="form-control w-75 mx-auto" name="lName">
-              </form>
+                <input type="text" class="form-control w-75 mx-auto" name="lName" required="">
+                <div class="invalid-feedback">
+                  Please enter your last name:
+                </div>
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary mt-3 w-75">
+          </form>
             </div>
           </div>
         </div>
@@ -182,6 +195,21 @@
     function preview(){
         frame.src=URL.createObjectURL(event.target.files[0]);
     }
+</script>
+
+<script type="text/javascript">
+var forms = document.querySelectorAll('.needs-validation')
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
 </script>
 </body>
 </html>
