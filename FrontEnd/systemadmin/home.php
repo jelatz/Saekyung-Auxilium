@@ -41,8 +41,14 @@ session_start();
         echo "Welcome! " . $_SESSION['username'];}?><i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2" style="left: -4rem;">
           <li class="nav-item my-2">
-          <a type="button" href="chngePass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
-          <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php">Logout</a></li>
+            <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
+          </li>
+          <li class="nav-item my-2">
+            <a type="button" href="chngePass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+          </li>
+          <li class="nav-item my-2">
+            <a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php">Logout</a>
+          </li>
         </ul>
       </div> 
       </div>
@@ -95,8 +101,11 @@ session_start();
       <li class="nav-item">
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
+      <li class="nav-item my-2">
+        <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
+      </li>
       <li class="nav-item">
-      <a type="button" href="chngePass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+        <a type="button" href="chngePass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>

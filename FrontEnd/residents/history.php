@@ -47,7 +47,8 @@ include '../../BackEnd/database/config.php';
             <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
           </li>
           <li class="nav-item my-2">
-            <button type="button" class="btn btn-unselected w-100 text-nowrap" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+          <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+          </li>
           <li class="nav-item"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php">Logout</a></li>
         </ul>
       </div> 
@@ -55,30 +56,6 @@ include '../../BackEnd/database/config.php';
     </div>
   </div>
 </nav>
-<!--Modal for change password -->
-<div class="modal fade" id="chngePassModal" tabindex="-1" aria-labelledby="chngePassModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="chngePassModalTitle">Change Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">    
-        <form>
-          <div class="mb-3">
-            <label for="oldPassword" class="form-label">Current Password</label>
-            <input type="password" class="form-control" id="oldPassword">
-            <label for="newPassword" class="form-label">Set New Password</label>
-            <input type="password" class="form-control" id="newPassword">
-            <label for="newConfirmPassword" class="form-label">Confirm New Password</label>
-            <input type="password" class="form-control" id="newConfirmPassword">
-          </div>
-          <button type="submit" class="btn btn-unselected">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Modal for Notifications -->
 <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -105,7 +82,7 @@ include '../../BackEnd/database/config.php';
             <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
           </li>
       <li class="nav-item">
-        <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#chngePassModal">Change Password</button>
+        <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>

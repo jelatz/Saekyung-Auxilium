@@ -45,9 +45,15 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 <?php  
 }?>
     <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
-<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident">
-    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required value="<?php echo $username_cookie;?>">
-    <input type="password" name="password" class="input-field" placeholder="Password" required value="<?php echo $password_cookie;?>">
+<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation" novalidate="">
+    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required="" value="<?php echo $username_cookie;?>">
+    <div class="invalid-feedback">
+        Please enter username
+    </div>
+    <input type="password" name="password" class="input-field" placeholder="Password" required="" value="<?php echo $password_cookie;?>">
+    <div class="invalid-feedback">
+        Please enter password
+    </div>
     <input type="checkbox" name="remember" class="checkbox"><span>Remember me</span>
     <div class="mb-2">
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
@@ -84,9 +90,15 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 </div>
 
 <!-- ADMIN LOGIN -->
-<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin" method="POST">
-    <input type="text" class="input-field" name="username" placeholder="Username" required>
-    <input type="password" class="input-field" name="password" placeholder="Password" required>
+<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation" method="POST" novalidate="">
+    <input type="text" class="input-field" name="username" placeholder="Username" required="">
+    <div class="invalid-feedback">
+        Please enter username
+    </div>
+    <input type="password" class="input-field" name="password" placeholder="Password" required="">
+    <div class="invalid-feedback">
+        Please enter password
+    </div>
     <input type="checkbox" class="checkbox" name="remember"><span>Remember me</span>
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
     <button class="btn submit-btn" type="submit" name="adminLogin">Login</button>
@@ -144,7 +156,20 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
         }
     }
 </script> 
+<script>
+    var forms = document.querySelectorAll('.needs-validation')
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
 
+      form.classList.add('was-validated')
+    }, false)
+  })
+</script>
 </body>
 
 </html>

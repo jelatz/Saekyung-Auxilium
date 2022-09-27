@@ -87,7 +87,7 @@
             <a class="btn btn-unselected w-100" href="profile.php" name="accounts">Profile</a>
           </li>
       <li class="nav-item">
-        <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+        <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" href="../../BackEnd/database/logout.php">Logout</a>

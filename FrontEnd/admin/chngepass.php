@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include '../../BackEnd/database/changepass.php';
 ?>
 
@@ -48,9 +48,14 @@ include '../../BackEnd/database/changepass.php';
         <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i>
         </button>
         <ul class="dropdown-menu bg-inner p-2">
-          <li class="nav-item my-2">
-            <a type="button" href="../../BackEnd/database/adminchangepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
-          <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a></li>
+        <li class="nav-item my-2">
+          <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
+        </li>
+        <li class="nav-item my-2">
+          <a type="button" href="chngepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+        </li>
+        <li class="nav-item my-2"><a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a>
+        </li>
         </ul>
       </div> 
       </div>

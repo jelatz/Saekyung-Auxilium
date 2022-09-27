@@ -49,10 +49,10 @@ include '../../BackEnd/database/config.php';
         </button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
-            <a class="btn btn-unselected w-100" href="accounts.php" name="accounts">Accounts</a>
+            <a class="btn btn-unselected w-100" href="profile.php" name="accounts">Profile</a>
           </li>
           <li class="nav-item my-2">
-            <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
+            <a type="button" href="changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
           </li>
           <li class="nav-item my-2">
             <a class="btn btn-unselected w-100" href="../../BackEnd/database/logout.php" name="logout">Logout</a>
@@ -85,6 +85,9 @@ include '../../BackEnd/database/config.php';
       <li class="nav-item">
         <button type="button" class="btn w-100" data-bs-toggle="modal" data-bs-target="#notif">Notification</button>
       </li>
+      <li class="nav-item my-2">
+            <a class="btn btn-unselected w-100" href="profile.php" name="accounts">Profile</a>
+          </li>
       <li class="nav-item">
         <a type="button" href="../../BackEnd/database/changepass.php" class="btn btn-unselected w-100 text-nowrap">Change Password</a>
       </li>
