@@ -1,7 +1,7 @@
 <?php
   session_start();
   include '../../BackEnd/database/config.php';
-  // include '../../BackEnd/database/user.php';
+  include '../../BackEnd/database/user.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
