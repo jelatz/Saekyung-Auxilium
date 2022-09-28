@@ -205,5 +205,11 @@ Array.prototype.slice.call(forms)
     }, false)
   })
 </script>
+
+<script type="text/javascript">
+    function preview(){
+        frame.src=URL.createObjectURL(event.target.files[0]);
+    }
+</script>
 </body>
 </html>

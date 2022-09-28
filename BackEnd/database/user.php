@@ -16,10 +16,11 @@ if(isset($_POST['submit'])){
   //VARIABLE FOR THE UPLOADED IMAGE
   $upload = time() . '_' . $_FILES['upload']['name'];
   $target = '../../FrontEnd/_assets/images/uploads/' . $upload;
+  
 // move uploaded img to img folder and db
   if(move_uploaded_file($_FILES['upload']['tmp_name'], $target) || $fName && $lName){
     $sql = mysqli_query($conn,"insert into users (img) values ('$target')");
-  }     if ($sql){
+  }if ($sql){
      header('Location:../../FrontEnd/residents/profile.php?error=Profile Successfully Updated!');
   }
 }else{
