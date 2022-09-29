@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
     return $data;
   }
 // VARIABLES FOR USER DETAILS
+  $userID = validate ($_POST['userID']);
   $fName = validate ($_POST['fName']);
   $lName = validate ($_POST['lName']);
   //VARIABLE FOR THE UPLOADED IMAGE

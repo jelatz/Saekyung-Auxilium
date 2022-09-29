@@ -148,6 +148,7 @@
 <!-- USER DETAILS -->
 <div class="container-md my-5">
   <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" novalidate="">
+    <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
     <div class="row text-center justify-content-center">
       <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
       <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
@@ -171,6 +172,7 @@
           <div class="card h-100 my-2">
             <div class="card-header">User Details</div>
             <div class="card-body">
+                <input type="text" class="form-control" name="userID" value = <?php echo $userID ?>>
                 <label for="fName" class="form-label">Enter First Name: </label>
                 <input type="text" class="form-control w-75 mx-auto" name="fName" required="">
                 <div class="invalid-feedback">
