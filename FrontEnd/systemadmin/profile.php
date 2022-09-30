@@ -80,7 +80,7 @@
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
 <!-- LOGO -->
-    <a class="navbar-brand" href="home.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
+    <a class="navbar-brand" href="home.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
 <!-- COLLAPSE BUTTON -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

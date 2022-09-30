@@ -29,7 +29,7 @@
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
 <!-- LOGO -->
-    <a class="navbar-brand" href="services.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
+    <a class="navbar-brand" href="services.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
 <!-- COLLAPSE BUTTON -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"    data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -122,14 +122,15 @@
                     </button>
                   </div>
                   <div class="modal-body">    
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                  <div class="mb-3">
                   <div class="row g-0">
                     <div class="col-12 col-sm-4">
                       <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                     </div>
                     <div class="col-12 col-sm-2">
-                      <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
+                    <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
+                      <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>>
                     </div>  
                   </div>
                   <div class="row g-0">
@@ -145,11 +146,11 @@
                       <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
                     </div>
                     <div class="col-12">
-                      <textarea name="#" class="form-control" rows="5"></textarea>
+                      <textarea name="elecConcern" class="form-control" rows="5"></textarea>
                     </div>  
                   </div>                 
                  </div>
-               <button type="submit" class="btn btn-unselected">Submit</button>
+               <button type="submit" name="elecSubmit" class="btn btn-unselected">Submit</button>
                </form>
               </div>
               </div>

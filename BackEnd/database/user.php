@@ -20,9 +20,9 @@ if(isset($_POST['submit'])){
   
 // move uploaded img to img folder and db
   if(move_uploaded_file($_FILES['upload']['tmp_name'], $target) || $fName && $lName){
-    $sql = mysqli_query($conn,"insert into users (img) values ('$target')");
+    $sql = mysqli_query($conn,"insert into users (userID,firstName,lastName,img) values ('$userID','$fName','$lName','$target')");
   }if ($sql){
-     header('Location:../../FrontEnd/residents/profile.php?error=Profile Successfully Updated!');
+     header('Location:../../FrontEnd/residents/profile.php?success=Profile Successfully Updated!');
   }
 }else{
       header('Location:../../FrontEnd/residents/profile.php?error=Profile unsuccessfully updated!');

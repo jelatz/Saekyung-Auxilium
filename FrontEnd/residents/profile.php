@@ -80,7 +80,7 @@
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
 <!-- LOGO -->
-    <a class="navbar-brand" href="services.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="150"></a>
+    <a class="navbar-brand" href="services.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
 <!-- COLLAPSE BUTTON -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -172,7 +172,7 @@
           <div class="card h-100 my-2">
             <div class="card-header">User Details</div>
             <div class="card-body">
-                <input type="text" class="form-control" name="userID" value = <?php echo $userID ?>>
+                <input type="hidden" class="form-control" name="userID" value = <?php echo $userID ?>>
                 <label for="fName" class="form-label">Enter First Name: </label>
                 <input type="text" class="form-control w-75 mx-auto" name="fName" required="">
                 <div class="invalid-feedback">
