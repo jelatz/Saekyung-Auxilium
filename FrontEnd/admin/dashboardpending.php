@@ -6,6 +6,7 @@ include '../../BackEnd/database/config.php';
 <html lang="en">
 
 <head>
+  <meta http-equiv="refresh" content="10">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,68 +89,60 @@ include '../../BackEnd/database/config.php';
     </div>
   </div>
 <!-- ADMIN HOME PAGE CONTAINER -->
-  <div class="container-md mt-5 text-center">
-<!-- NAVIGATION PILLS -->
-    <div class="d-flex align-items-start mx-auto">
-      <div class="nav flex-column nav-pills me-3" id="nav" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active text-white bg-secondary my-1" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true">
-          Dashboard
-        </a>
-        <a class="nav-link text-white bg-secondary my-1" id="accounts-tab" data-bs-toggle="pill" href="#accounts" role="tab" aria-controls="accounts" aria-selected="false">
-          Accounts
-        </a>
-        <a class="nav-link text-white bg-secondary my-1" id="services-tab" data-bs-toggle="pill" href="#services" role="tab" aria-controls="services" aria-selected="false">
-          Services
-        </a>
-        <a class="nav-link text-white bg-secondary my-1" id="reports-tab" data-bs-toggle="pill" href="#reports" role="tab" aria-controls="reports" aria-selected="false">
-          Reports
-        </a>
+  <div class="container-fluid mt-5 text-center">
+    <div class="row justify-content-center gap-4">
+      <!-- HOME PAGE NAVIGATION -->
+      <div class="col-md-2">
+        <nav class="nav nav-column gap-2">
+          <a href="#dashboard" class="nav-link active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+            Dashboard
+          </a>
+          <a href="#accounts" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+            Accounts
+          </a>
+          <a href="#services" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+            Services
+          </a>
+          <a href="#reports" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+            Reports
+          </a>
+        </nav>
       </div>
-<!-- NAVIGATION CONTENTS -->
-      <div class="tab-content w-100 justify-content-around mt-1 bg-inner p-5" id="nav">
-<!-- DASHBOARD CONTENTS -->
-  <!-- DASHBOARD NAV -->
-        <div class="tab-pane container-fluid fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-          <ul class="nav nav-pills justify-content-between" id="dashboardPills" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="btn btn-secondary active w-100 text-nowrap" id="ongoingTab" data-bs-toggle="pill" data-bs-target="ongoing" type="button" role="tab" aria-controls="ongoing">
-                On-going
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="btn btn-secondary active w-100 text-nowrap" id="pendingTab" data-bs-toggle="pill" data-bs-target="ongoing" type="button" role="tab" aria-controls="pending">
-                Pending
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="btn btn-secondary active w-100 text-nowrap" id="completedTab" data-bs-toggle="pill" data-bs-target="ongoing" type="button" role="tab" aria-controls="completed">
-                Completed
-              </button>
-            </li>
-          </ul>
-<!-- DASHBOARD NAV CONTENTS -->
-            <div class="tab-content container-fluid fade show active" id="onGoing" role="tabpanel">
-              <h1>hey</h1>
-            </div>    
+      <!-- HOME PAGE NAVIGATION CONTENTS -->
+      <div class="col-md-9 bg-primary">
+        <div class="tab-pane fade show active" id="dashboard">
+          <div class="row row-cols-3 row-cols-sm-1 p-2 justify-content-center">
+            <nav class="nav nav-pills mt-5 gap-5 d-flex">
+              <div class="col">
+                <a href="#" class="nav-link active w-100 gap-2">
+                  On-Going
+                </a>
+              </div>
+              <div class="col">
+                <a href="#" class="nav-link active w-100 gap-2">
+                  Pending
+                </a>
+              </div>
+              <div class="col">
+                <a href="#" class="nav-link active w-100 gap-2">
+                  Completed
+                </a>
+              </div>
+            </nav>
+          </div>
+          <!-- SEARCH BAR -->
+          <div class="input-group rounded my-4 w-50 mx-auto">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
         </div>
 
 
-
-
-        
-        <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accounts-tab">
-          Accounts
-        </div>
-        <div class="tab-pane fade" id="services" role="tabpanel" aria-labelledby="services-tab">
-          Services
-        </div>
-        <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
-          Reports
         </div>
       </div>
-    </div> 
   </div>
-
 
 
 <script src="../_assets/js/bootstrap.bundle.js"></script>
