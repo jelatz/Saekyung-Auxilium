@@ -24,10 +24,10 @@ include '../../BackEnd/database/config.php';
 </head>
 
 <body style="background-color: rgba(255,248,243);">
-<!--header-->
+  <!--header-->
   <nav class="navbar navbar-expand-md px-2">
     <div class="container-fluid">
-<!-- LOGO -->
+      <!-- LOGO -->
       <a class="navbar-brand" href="dashboardpending.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
       <!-- COLLAPSE BUTTON -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,8 @@ include '../../BackEnd/database/config.php';
           </a>
           <div class="dropdown">
             <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) {
-              echo "Welcome! " . $_SESSION['username'];}?>
+                                                                                                                    echo "Welcome! " . $_SESSION['username'];
+                                                                                                                  } ?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item">
@@ -54,7 +55,7 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </nav>
-<!--NAVBAR COLLAPSE CONTENT-->
+  <!--NAVBAR COLLAPSE CONTENT-->
   <div class="collapse navbar-collapse" id="navbarMenu">
     <div class="navbar-md-nav bg-inner">
       <ul class="navbar-nav bg-transparent text-center">
@@ -73,7 +74,7 @@ include '../../BackEnd/database/config.php';
       </ul>
     </div>
   </div>
-<!-- NOTIFICATION MODAL -->
+  <!-- NOTIFICATION MODAL -->
   <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content" style="background-color: rgba(255,248,243);">
@@ -88,64 +89,190 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </div>
-<!-- ADMIN HOME PAGE CONTAINER -->
+  <!-- ADMIN HOME PAGE CONTAINER -->
   <div class="container-fluid mt-5 text-center">
     <div class="row justify-content-center gap-4">
       <!-- HOME PAGE NAVIGATION -->
       <div class="col-md-2">
-        <nav class="nav nav-column gap-2">
-          <a href="#dashboard" class="nav-link active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+        <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical">
+          <a href="#dashboard" class="nav-link active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true">
             Dashboard
           </a>
-          <a href="#accounts" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+          <a href="#accounts" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false">
             Accounts
           </a>
-          <a href="#services" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+          <a href="#services" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="servicesTab" aria-controls="services" role="tab" aria-selected="false">
             Services
           </a>
-          <a href="#reports" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill">
+          <a href="#reports" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="reportsTab" aria-controls="reports" role="tab" aria-selected="false">
             Reports
           </a>
         </nav>
       </div>
-      <!-- HOME PAGE NAVIGATION CONTENTS -->
-      <div class="col-md-9 bg-primary">
-        <div class="tab-pane fade show active" id="dashboard">
-          <div class="row row-cols-3 row-cols-sm-1 p-2 justify-content-center">
-            <nav class="nav nav-pills mt-5 gap-5 d-flex">
-              <div class="col">
-                <a href="#" class="nav-link active w-100 gap-2">
-                  On-Going
-                </a>
+<!-- HOME PAGE NAVIGATION CONTENTS -->
+      <div class="col-md-9 bg-secondary p-3">
+        <div class="tab-content" id="homeNavContent">
+<!--DASHBOARD CONTENTS -->
+<!-- DASHBOARD TABS -->
+          <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
+            <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
+              <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist">
+                <div class="col">
+                  <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-primary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending">
+                    Pending
+                  </button>
+                </div>
+                <div class="col">
+                  <button type="button" class="nav-link w-100 text-nowrap text-dark bg-primary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing">
+                    On-Going
+                  </button>
+                </div>
+                <div class="col">
+                  <button type="button" class="nav-link w-100 text-nowrap text-dark bg-primary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab">
+                    Completed
+                  </button>
+                </div>
               </div>
-              <div class="col">
-                <a href="#" class="nav-link active w-100 gap-2">
-                  Pending
-                </a>
+<!-- DASHBOARD TAB CONTENTS -->
+            <div class="tab-content" id="dashboardContent">
+<!-- PENDING CONTENTS -->
+              <div class="tab-pane show active" id="pending" role="tabpanel">
+                <!-- SEARCH BAR -->
+                <div class="input-group rounded my-4 w-50 mx-auto">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="bi bi-search"></i>
+                  </span>
+                </div>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Request #</th>
+                      <th>User</th>
+                      <th>Date Filed</th>
+                      <th>Service Type</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-block">Accept</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
               </div>
-              <div class="col">
-                <a href="#" class="nav-link active w-100 gap-2">
-                  Completed
-                </a>
+<!-- ON-GOING CONTENTS -->
+              <div class="tab-pane fade" id="onGoing" role="tabpanel">
+                <!-- SEARCH BAR -->
+                <div class="input-group rounded my-4 w-50 mx-auto">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="bi bi-search"></i>
+                  </span>
+                </div>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Request #</th>
+                      <th>User</th>
+                      <th>Date Filed</th>
+                      <th>Service Type</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-block">Complete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
               </div>
-            </nav>
+<!-- COMPLETED CONTENTS -->
+              <div class="tab-pane fade" id="completed" role="tabpanel">
+                <!-- SEARCH BAR -->
+                <div class="input-group rounded my-4 w-50 mx-auto">
+                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  <span class="input-group-text border-0" id="search-addon">
+                    <i class="bi bi-search"></i>
+                  </span>
+                </div>
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Request #</th>
+                      <th>User</th>
+                      <th>Date Filed</th>
+                      <th>Service Type</th>
+                      <th>Date Completed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                      <td>sample</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- SEARCH BAR -->
-          <div class="input-group rounded my-4 w-50 mx-auto">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="bi bi-search"></i>
-            </span>
+<!-- ACCOUNTS CONTENTS -->
+          <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accountsTab" tabindex="0">
+            <div class="row justify-content-center">
+              <div class="input-group rounded my-4 w-50">
+                <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <span class="input-group-text border-0" id="search-addon">
+                <i class="bi bi-search"></i>
+                </span>
+              </div>
+            </div>
+            <table class="table table-sm table-bordered table-responsive">
+              <thead>
+                <tr>
+                  <th>AccountsID</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>sample</td>
+                  <td>
+                    <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-
-
         </div>
       </div>
+
+
+    </div>
   </div>
 
 
-<script src="../_assets/js/bootstrap.bundle.js"></script>
+  <script src="../_assets/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
