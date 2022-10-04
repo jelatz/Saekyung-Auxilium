@@ -6,7 +6,6 @@ include '../../BackEnd/database/config.php';
 <html lang="en">
 
 <head>
-  <meta http-equiv="refresh" content="10">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +23,7 @@ include '../../BackEnd/database/config.php';
 </head>
 
 <body style="background-color: rgba(255,248,243);">
-  <!--header-->
+<!--header-->
   <nav class="navbar navbar-expand-md px-2">
     <div class="container-fluid">
       <!-- LOGO -->
@@ -40,8 +39,8 @@ include '../../BackEnd/database/config.php';
           </a>
           <div class="dropdown">
             <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) {
-                                                                                                                    echo "Welcome! " . $_SESSION['username'];
-                                                                                                                  } ?>
+            echo "Welcome! " . $_SESSION['username'];
+            } ?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item">
@@ -55,7 +54,7 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </nav>
-  <!--NAVBAR COLLAPSE CONTENT-->
+<!--NAVBAR COLLAPSE CONTENT-->
   <div class="collapse navbar-collapse" id="navbarMenu">
     <div class="navbar-md-nav bg-inner">
       <ul class="navbar-nav bg-transparent text-center">
@@ -89,7 +88,7 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </div>
-  <!-- ADMIN HOME PAGE CONTAINER -->
+<!-- ADMIN HOME PAGE CONTAINER -->
   <div class="container-fluid mt-5 text-center">
     <div class="row justify-content-center gap-4">
       <!-- HOME PAGE NAVIGATION -->
@@ -241,13 +240,14 @@ include '../../BackEnd/database/config.php';
           <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accountsTab" tabindex="0">
             <div class="row justify-content-center">
               <div class="input-group rounded my-4 w-50">
-                <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon" >
                 <span class="input-group-text border-0" id="search-addon">
                 <i class="bi bi-search"></i>
                 </span>
               </div>
             </div>
-            <table class="table table-sm table-bordered table-responsive">
+            <div class="table-responsive">
+            <table class="table table-sm table-bordered">
               <thead>
                 <tr>
                   <th>AccountsID</th>
@@ -263,7 +263,112 @@ include '../../BackEnd/database/config.php';
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
+<!-- SERVICES CONTENTS -->
+      <div class="tab-pane fade p-5" id="services" role="tabpanel" name="services" aria-labelledby="servicesTab" tabindex="0">
+        <div class="row justify-content-center">
+          <div class="input-group rounded my-4 w-50">
+            <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
+        </div>
+        <div class="table-responsive">
+        <table class="table table-bordered table">
+          <thead>
+            <tr>
+              <th>Service Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>sample</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
+        </div>
+      </div>
+      <!-- MODAL FOR ADDING OF SERVICE -->
+      <div class="modal fade" data-bs-backdrop="static" id="addService">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Add Services</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form action="../../BackEnd/database/services.php" method="POST" class="needs-validation" novalidate="">
+              <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
+              <?php if (isset($_GET['success'])){?>
+                <script> $(function(){
+                  'dashboardpending.php/${addService}';
+                })</script>
+                <?php } ?>
+                  <label for="service" form-label text-nowrap">Enter Service Type: </label>
+                    <input type="text" class="form-control w-75 mx-auto mt-3" name="serviceType" id="serviceType" required>
+                    <div class="invalid-feedback">
+                      Please enter a service type
+                    </div>
+                <button type="submit" name="addServSubmit" class="btn btn-primary mt-3">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- REPORTS CONTENTS -->
+        <div class="tab-pane container-md fade" id="reports">
+            <div class="col-12 p-3">
+              <p class="fw-bold text-start">Reports</p>
+                <div class="row my-5">
+                  <div class="col-6 fw-bold">Montly</div>
+                  <div class="col-6 fw-bold">Yearly</div>
+                </div>
+                <div class="row text-center">
+                  <ul class="list-inline p-0 p-md-2">
+                    <span>
+                    <i class="bi bi-person-bounding-box" style="background-color:blue; color:blue;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Electrical</li></span>
+                    <span><i class="bi bi-person-bounding-box" style="background-color:orangered; color:orangered;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Furniture</li></span>
+                    <span><i class="bi bi-person-bounding-box" style="background-color:gray; color:gray;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Painting</li></span>
+                    <span><i class="bi bi-person-bounding-box" style="background-color:yellow; color:yellow;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Plumbing</li></span>
+                    <span><i class="bi bi-person-bounding-box" style="background-color:darkblue; color:darkblue;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Security</li></span>
+                    <span><i class="bi bi-person-bounding-box" style="background-color:green; color:green;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Tile</li></span>
+                    <span><i class="bi bi-person-bounding-box" style="background-color:red; color:red;"></i>
+                    <li class="list-inline-item fw-bold text-dark">Others</li></span>
+                  </ul>
+                </div>
+                <!-- DOWNLOADING REPORTS -->
+                <div class="row justify-content-center">
+                  <div class="col-7 my-3 fw-bold">Date</div>
+                </div>
+                <div class="row justify-content-center">
+                <form action="/action_page.php">
+                  <div class="mb-3 mt-3">
+                    <label for="from" class="form-label">From:</label>
+                    <input type="date" class="form-control mx-auto w-auto" id="from">
+                  </div>
+                  <div class="mb-3">
+                    <label for="to" class="form-label">To:</label>
+                    <input type="date" class="form-control mx-auto w-auto" id="to">
+                  </div>
+                </form>
+                </div>
+                <div class="row justify-content-center my-2">
+                  <div class="col-sm-6">
+                    <button type="submit" class="btn btn-unselected  text-nowrap">View Report</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -272,7 +377,24 @@ include '../../BackEnd/database/config.php';
   </div>
 
 
-  <script src="../_assets/js/bootstrap.bundle.js"></script>
+<script src="../_assets/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  var forms = document.querySelectorAll('.needs-validation')
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+
+</script>
+
 </body>
 
 </html>
