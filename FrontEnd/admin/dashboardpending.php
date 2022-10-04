@@ -113,7 +113,7 @@ include '../../BackEnd/database/config.php';
         <div class="tab-content" id="homeNavContent">
 <!--DASHBOARD CONTENTS -->
 <!-- DASHBOARD TABS -->
-          <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
+          <div class="tab-pane show active" id="dashboard" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
             <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
               <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist">
                 <div class="col">
@@ -300,19 +300,14 @@ include '../../BackEnd/database/config.php';
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-              <form action="../../BackEnd/database/services.php" method="POST" class="needs-validation" novalidate="">
+              <form id="serviceForm" class="needs-validation" novalidate="">
               <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
-              <?php if (isset($_GET['success'])){?>
-                <script> $(function(){
-                  'dashboardpending.php/${addService}';
-                })</script>
-                <?php } ?>
                   <label for="service" form-label text-nowrap">Enter Service Type: </label>
                     <input type="text" class="form-control w-75 mx-auto mt-3" name="serviceType" id="serviceType" required>
                     <div class="invalid-feedback">
                       Please enter a service type
                     </div>
-                <button type="submit" name="addServSubmit" class="btn btn-primary mt-3">Add</button>
+                <button type="submit" name="addServSubmit" id="addServSubmit" class="btn btn-primary mt-3">Add</button>
               </form>
             </div>
           </div>
@@ -377,9 +372,9 @@ include '../../BackEnd/database/config.php';
   </div>
 
 
-<script src="../_assets/js/bootstrap.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
+<script src="../_assets/js/bootstrap.bundle.js"></script>
+<script type="text/javascript">
   var forms = document.querySelectorAll('.needs-validation')
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
@@ -392,9 +387,24 @@ include '../../BackEnd/database/config.php';
         form.classList.add('was-validated')
       }, false)
     })
-
 </script>
 
+<script>
+  $(document).ready(function(){
+    console.log('work na tawn');
+    $("#serviceForm").submit(function(event){
+      console.log('test');
+      $.ajax({
+        type : "POST",
+        url : "../../BackEnd/database/services.php",
+        data : {serviceType:$("#serviceType").val()},
+        success : function(res){
+          $('#addService').modal('show');
+        }
+      });
+    });
+  });
+</script>image.png
 </body>
 
 </html>
