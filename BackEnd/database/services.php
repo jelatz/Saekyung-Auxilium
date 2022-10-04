@@ -15,13 +15,16 @@ if (isset($_POST['addServSubmit'])){
     $insert = mysqli_query($conn,"insert into services (serviceType) values ('$servType')");
 
     if($insert){
-        // $(function(){
-        //     $("#addServices").modal("show")})
-        // echo '<script>alert("amaw ka lad!")</script>';
+
+        echo "<script>
+            $(function(){
+                $('#addServices').modal('show');
+            return function;
+            })
+
+                window.location.href = '../../FrontEnd/admin/dashboardpending.php';
+        </script>";
         
-        // echo '<script>
-        //     window.location.href = "../../FrontEnd/admin/dashboardpending.php?#services"</script>';
-        header('Location:../../FrontEnd/admin/dashboardpending.php');
         exit();
     }else{
         header('Location: ../../FrontEnd/admin/dashboardpending.php?error= Not added!');

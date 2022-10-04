@@ -27,7 +27,7 @@ include '../../BackEnd/database/config.php';
   <nav class="navbar navbar-expand-md px-2">
     <div class="container-fluid">
       <!-- LOGO -->
-      <a class="navbar-brand" href="dashboardpending.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
+      <a class="navbar-brand" href="dashboardpending.php" id="logo"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
       <!-- COLLAPSE BUTTON -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -93,8 +93,8 @@ include '../../BackEnd/database/config.php';
     <div class="row justify-content-center gap-4">
       <!-- HOME PAGE NAVIGATION -->
       <div class="col-md-2">
-        <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical">
-          <a href="#dashboard" class="nav-link active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true">
+        <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical" id="homeNav">
+          <a href="#dashboard" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true">
             Dashboard
           </a>
           <a href="#accounts" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false">
@@ -115,7 +115,7 @@ include '../../BackEnd/database/config.php';
 <!-- DASHBOARD TABS -->
           <div class="tab-pane show active" id="dashboard" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
             <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
-              <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist">
+              <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist" id="dashboardTabs">
                 <div class="col">
                   <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-primary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending">
                     Pending
@@ -266,7 +266,7 @@ include '../../BackEnd/database/config.php';
             </div>
           </div>
 <!-- SERVICES CONTENTS -->
-      <div class="tab-pane fade p-5" id="services" role="tabpanel" name="services" aria-labelledby="servicesTab" tabindex="0">
+      <div class="tab-pane fade p-5" id="services" role="tabpanel" aria-labelledby="servicesTab" tabindex="0">
         <div class="row justify-content-center">
           <div class="input-group rounded my-4 w-50">
             <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
@@ -300,14 +300,14 @@ include '../../BackEnd/database/config.php';
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-              <form id="serviceForm" class="needs-validation" novalidate="">
+              <form action="../../BackEnd/database/services.php" method="POST" class="needs-validation" novalidate="">
               <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
                   <label for="service" form-label text-nowrap">Enter Service Type: </label>
-                    <input type="text" class="form-control w-75 mx-auto mt-3" name="serviceType" id="serviceType" required>
+                    <input type="text" class="form-control w-75 mx-auto mt-3" name="serviceType" id="serviceType" required >
                     <div class="invalid-feedback">
                       Please enter a service type
                     </div>
-                <button type="submit" name="addServSubmit" id="addServSubmit" class="btn btn-primary mt-3">Add</button>
+                <button type="submit" name="addServSubmit" id="addServSub" class="btn btn-primary mt-3">Add</button>
               </form>
             </div>
           </div>
@@ -388,23 +388,81 @@ include '../../BackEnd/database/config.php';
       }, false)
     })
 </script>
+<!-- LOCAL STORAGE FOR TABS -->
+  <script>
+  const pillsTab = document.querySelector('#homeNav','#logo');
+  const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
 
-<script>
-  $(document).ready(function(){
-    console.log('work na tawn');
-    $("#serviceForm").submit(function(event){
-      console.log('test');
-      $.ajax({
-        type : "POST",
-        url : "../../BackEnd/database/services.php",
-        data : {serviceType:$("#serviceType").val()},
-        success : function(res){
-          $('#addService').modal('show');
-        }
-      });
+  pills.forEach(pill => {
+    pill.addEventListener('shown.bs.tab', (event) => {
+      const { target } = event;
+      const { id: targetId } = target;
+
+      savePillId(targetId);
     });
   });
-</script>image.png
+
+  const savePillId = (selector) => {
+    localStorage.setItem('activePillId', selector);
+  };
+
+  const getPillId = () => {
+    const activePillId = localStorage.getItem('activePillId');
+
+    // if local storage item is null, show default tab
+    if (!activePillId) return;
+
+    // call 'show' function
+    const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+    const tab = new bootstrap.Tab(someTabTriggerEl);
+
+    tab.show();
+  };
+
+  // get pill id on load
+  getPillId();
+  </script>
+<!-- LOCAL STORAGE FOR DASHBOARD TABS -->
+  <!-- <script>
+    const pillsTab2 = document.querySelector('#dashboardTabs');
+    const pills2 = pillsTab2.querySelectorAll('button[data-bs-toggle="pill"]');
+
+    pills2.forEach(pill => {
+      pill.addEventListener('shown.bs.tab', (event) => {
+        const { target } = event;
+        const { id: targetId } = target;
+
+        savePillId2(targetId);
+      });
+    });
+
+    const savePillId2 = (selector) => {
+      localStorage.setItem('activePillId', selector);
+    };
+
+    const getPillId2 = () => {
+      const activePillId2 = localStorage.getItem('activePillId');
+
+      // if local storage item is null, show default tab
+      if (!activePillId2) return;
+
+      // call 'show' function
+      const someTabTriggerEl2 = document.querySelector(`#${activePillId2}`)
+      const tab2 = new bootstrap.Tab(someTabTriggerEl2);
+
+      tab2.show();
+    };
+
+    // get pill id on load
+    getPillId2(); -->
+</script>
+<script>
+  const logo = document.getElementById('#logo');
+  localStorage.clear();
+  if(localStorage.length ===0){
+    windows.location.href = 'dashboardpending.php';
+  };
+</script>
 </body>
 
 </html>
