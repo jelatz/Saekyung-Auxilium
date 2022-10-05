@@ -1,6 +1,8 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+$result = mysqli_query($conn,"select * from services");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@ include '../../BackEnd/database/config.php';
       }
     }
   </style>
-  <title>Adimn Main Page</title>
+  <title>Adimn Home Page</title>
 </head>
 
 <body style="background-color: rgba(255,248,243);">
@@ -268,6 +270,8 @@ include '../../BackEnd/database/config.php';
 <!-- SERVICES CONTENTS -->
       <div class="tab-pane fade p-5" id="services" role="tabpanel" aria-labelledby="servicesTab" tabindex="0">
         <div class="row justify-content-center">
+      <!-- ALERT MESSAGE IF SERVICE TYPE IS SUCCESSFULLY ADDED -->
+        <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
           <div class="input-group rounded my-4 w-50">
             <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
             <span class="input-group-text border-0" id="search-addon">
@@ -283,9 +287,13 @@ include '../../BackEnd/database/config.php';
             </tr>
           </thead>
           <tbody>
+            <!-- RETRIEVE DATA FROM DATABASE -->
+            <?php while($rows = mysqli_fetch_array($result)){
+              ?>
             <tr>
-              <td>sample</td>
+              <td><?php echo $rows['serviceType']?></td>
             </tr>
+           <?php } ?>
           </tbody>
         </table>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
@@ -390,7 +398,7 @@ include '../../BackEnd/database/config.php';
 </script>
 <!-- LOCAL STORAGE FOR TABS -->
   <script>
-  const pillsTab = document.querySelector('#homeNav','#logo');
+  const pillsTab = document.querySelector('#homeNav');
   const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
 
   pills.forEach(pill => {
@@ -455,13 +463,6 @@ include '../../BackEnd/database/config.php';
 
     // get pill id on load
     getPillId2(); -->
-</script>
-<script>
-  const logo = document.getElementById('#logo');
-  localStorage.clear();
-  if(localStorage.length ===0){
-    windows.location.href = 'dashboardpending.php';
-  };
 </script>
 </body>
 
