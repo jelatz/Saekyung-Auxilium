@@ -21,16 +21,24 @@ session_start();
   <title>System Administrator</title>
 </head>
 <body style="background-color: rgba(255,248,243);">
+
 <!--header-->
+
 <nav class="navbar navbar-expand-md px-2">
   <div class="container-fluid">
+
 <!-- LOGO -->
+
     <a class="navbar-brand" href="home.php"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="200"></a>
+
 <!-- COLLAPSE BUTTON -->
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
 <!-- NAVBAR CONTENT -->
+
     <div class="collapse navbar-collapse justify-content-end">
       <div class="navbar-md-nav d-flex align-items-center">
         <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
@@ -55,7 +63,9 @@ session_start();
     </div>
   </div>
 </nav>
+
 <!--Modal for change password -->
+
 <div class="modal fade" id="chngePassModal" tabindex="-1" aria-labelledby="chngePassModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
@@ -79,7 +89,9 @@ session_start();
     </div>
   </div>
 </div>
+
 <!-- Modal for Notifications -->
+
 <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content" style="background-color: rgba(255,248,243);">
@@ -94,7 +106,9 @@ session_start();
     </div>
   </div>
 </div>
+
 <!--NAVBAR COLLAPSE CONTENT-->
+
 <div class="collapse navbar-collapse" id="navbarMenu">
   <div class="navbar-md-nav bg-inner">
     <ul class="navbar-nav bg-transparent text-center">
@@ -113,7 +127,9 @@ session_start();
     </ul>
   </div> 
 </div>
+
 <!-- SYSTEM ADMIN NAVIGATION -->
+
 <div class="container-md">
     <div class="row justify-content-center text-center">
         <ul class="nav nav-pills nav-justified gap-2 p-2">
@@ -129,9 +145,13 @@ session_start();
           </ul>
     </div>
 </div>
+
 <!-- NAVIGATION CONTENTS START -->
+
 <div class="tab-content text-center mt-3">
+
 <!-- Home contents START -->
+
   <div class="tab-pane container-md active" id="home">
     <div class="col-md-12 mx-auto p-3 bg-inner">
       <div class="table-responsive-sm mt-3">
@@ -161,10 +181,14 @@ session_start();
     </div>
   </div>
 <!-- HOME CONTENTS END -->
+
 <!-- ACCOUNTS CONTENTS START -->
+
   <div class="tab-pane container-md fade" id="accounts">
     <div class="col-md-12 mx-auto p-3 bg-inner">
+
       <!-- SEARCH BAR START -->
+
       <div class="input-group rounded my-4 w-50 mx-auto">
         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
         <span class="input-group-text border-0" id="search-addon">
@@ -172,6 +196,7 @@ session_start();
         </span>
       </div>
       <!-- SEARCH BAR END -->
+
       <!-- TABLE START -->
       <div class="table-responsive-sm mt-3">
         <table class="table table-sm table-hover table-bordered text-center" style="border-color: black;">
@@ -197,10 +222,14 @@ session_start();
         </table>
       </div>
       <!-- TABLE END -->
+
       <!-- CREATE NEW ACCOUNT BUTTON START -->
+
     <button type="button" class="btn btn-unselected" data-bs-toggle="modal" data-bs-target="#createModal">Create New Account</button>
           <!-- CREATE NEW ACCOUNT BUTTON END -->
-      <!-- Modal for Create START-->
+
+      <!-- Modal for Create ACCOUNT START-->
+
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
       <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content" style="background-color: rgb(255, 248,243)">
@@ -236,7 +265,9 @@ session_start();
       </div>
     </div>
     <!-- MODAL FOR CREATE END -->
+
     <!-- Modal for UPDATE START-->
+
   <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content" style="background-color: rgb(255, 248,243)">
@@ -273,7 +304,9 @@ session_start();
    <!-- MODAL FOR UPDATE END -->
   </div>
   <!--accounts tab ends-->
-  <!-- REPORTS CONTENT -->
+
+<!-- REPORTS CONTENT -->
+
 </div>
   <div class="tab-pane container-md fade" id="reports">
     <div class="col-12 p-3 bg-inner">

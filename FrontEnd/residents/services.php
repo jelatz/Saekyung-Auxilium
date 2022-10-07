@@ -1,6 +1,7 @@
 <?php
-session_start();
+// session_start();
 include '../../BackEnd/database/config.php';
+include '../../BackEnd/database/services.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,8 @@ include '../../BackEnd/database/config.php';
 </head>
 
 <body style="background-color: rgba(255,248,243);">
-  <!--header-->
+
+<!--header-->
   <nav class="navbar navbar-expand-md px-2">
     <div class="container-fluid">
       <!-- LOGO -->
@@ -65,7 +67,7 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </nav>
-  <!-- NOTIFICATION MODAL -->
+<!-- NOTIFICATION MODAL -->
   <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content" style="background-color: rgba(255,248,243);">
@@ -80,7 +82,7 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </div>
-  <!--NAVBAR COLLAPSE CONTENT-->
+<!--NAVBAR COLLAPSE CONTENT-->
   <div class="collapse navbar-collapse" id="navbarMenu">
     <div class="navbar-md-nav bg-inner">
       <ul class="navbar-nav bg-transparent text-center">
@@ -99,7 +101,7 @@ include '../../BackEnd/database/config.php';
       </ul>
     </div>
   </div>
-  <!-- SERVICES AND HISTORY -->
+<!-- SERVICES AND HISTORY -->
   <div class="container">
     <div class="row my-3 gap-3 mx-auto">
       <div class="col-sm-5 col-lg-3 mx-auto">
@@ -110,7 +112,7 @@ include '../../BackEnd/database/config.php';
       </div>
     </div>
   </div>
-  <!-- LIST OF SERVICES AND MODALS  -->
+<!-- LIST OF SERVICES AND MODALS  -->
   <div class="container">
     <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
@@ -137,7 +139,7 @@ include '../../BackEnd/database/config.php';
                           <?php if (isset($_SESSION['username'])) {
                             $userID = $_SESSION['username'];
                           } ?>
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>>
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?> name="accountID">
                         </div>
                       </div>
                       <div class="row g-0">
@@ -145,7 +147,10 @@ include '../../BackEnd/database/config.php';
                           <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Electrical">
+                        <?php if (isset($_SESSION['servType'])) {
+                            $servType = $_SESSION['servType'];
+                          } ?>
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $servType ?>>
                         </div>
                       </div>
                       <div class="row g-0">
@@ -153,7 +158,7 @@ include '../../BackEnd/database/config.php';
                           <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="elecConcern" class="form-control" rows="5"></textarea>
+                          <textarea name="elecConcern" class="form-control" rows="5" name="concern"></textarea>
                         </div>
                       </div>
                     </div>

@@ -22,7 +22,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
-<body class="bg-image" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
+<body class="bg-image position-relative" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
     <!-- navbar -->
 <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">
@@ -142,6 +142,9 @@ Array.prototype.slice.call(forms)
     }, false)
   })
 </script>
-</body>
 
+<footer class="mx-auto position-absolute bottom-0 start-50 translate-middle-x">
+    <p class="mx-auto fs-6">&#169Copyright 2022. All rights Reserved.</p>
+</footer>
+</body>
 </html>

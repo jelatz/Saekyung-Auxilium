@@ -464,6 +464,11 @@ $result = mysqli_query($conn,"select * from services");
     // get pill id on load
     getPillId2(); -->
 </script>
+<script>
+  // const logo = document.getElementById('#logo');
+  // localStorage.clear();
+  // window.location.href = 'dashboardpending.php';
+</script>
 </body>
 
 </html>
