@@ -1,9 +1,10 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+// QUERY TO RETREIVE SERVICE TYPE IN DB AND STORE IN SESSION
 $select = mysqli_query($conn,"select serviceType from services");
         $row = mysqli_fetch_array($select);
-            $_SESSION['servType'] = $row['serviceType'];
+            $_SESSION['servType'] = $row['serviceType']; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +107,8 @@ $select = mysqli_query($conn,"select serviceType from services");
 <!-- SERVICES AND HISTORY -->
   <div class="container">
     <div class="row my-3 gap-3 mx-auto">
+    <?php if (isset($_GET['error'])){ ?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p><?php }?>
+    <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php }?>
       <div class="col-sm-5 col-lg-3 mx-auto">
         <a href="services.php" class="btn btn-unselected w-100 active" aria-current="page">Services</a>
       </div>
@@ -157,7 +160,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="elecConcern" class="form-control" rows="5" name="concern"></textarea>
+                          <textarea class="form-control" rows="5" name="elecConcern"></textarea>
                         </div>
                       </div>
                     </div>
@@ -188,7 +191,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> <!--  get input value from db -->
                         </div>
                       </div>
                       <div class="row g-0">
@@ -196,9 +199,6 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                        <?php if (isset($_SESSION['servType'])) {
-                            $servType = $_SESSION['servType'];
-                          } ?>
                           <input type="text" readonly class="form-control-plaintext" value="Furniture">
                         </div>
                       </div>
@@ -238,7 +238,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>>
                         </div>
                       </div>
                       <div class="row g-0">
@@ -285,7 +285,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>>
                         </div>
                       </div>
                       <div class="row g-0">
@@ -332,7 +332,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> 
                         </div>
                       </div>
                       <div class="row g-0">
@@ -379,7 +379,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="2621"> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> 
                         </div>
                       </div>
                       <div class="row g-0">
@@ -427,7 +427,7 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="#"> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> 
                         </div>
                       </div>
                       <div class="row g-0">

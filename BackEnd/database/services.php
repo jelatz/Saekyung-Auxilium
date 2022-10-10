@@ -16,7 +16,11 @@ if (isset($_POST['addServSubmit'])){
     
     if($insert)
     {
-            header('Location:../../FrontEnd/admin/dashboardpending.php?success=Service Type Successfully Added!');
+        $select = mysqli_query($conn,"select * from services");
+        $row = mysqli_fetch_array($select);
+        $_SESSION['$servType'] = $row['serviceType'];
+            
+        header('Location:../../FrontEnd/admin/dashboardpending.php?success=Service Type Successfully Added!');
             exit();
     }else
     {
