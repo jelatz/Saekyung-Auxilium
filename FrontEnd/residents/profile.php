@@ -1,7 +1,6 @@
 <?php
   session_start();
   include '../../BackEnd/database/config.php';
-  // include '../../BackEnd/database/user.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -150,8 +149,6 @@
   <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" novalidate="">
     <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
     <div class="row text-center justify-content-center">
-      <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
-      <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
         <div class="col-lg-3 my-2">
             <div class="card h-100 my-2">
               <div class="card-header">Profile Picture</div>
@@ -162,7 +159,7 @@
                       <img src="../_assets/images/profile.png" class="picture-src" id="frame" title="">
                       <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
                     </div>
-                      <h6 class="">Choose Picture(Optional)</h6>
+                      <h6 class="mt-2">Choose Picture(Optional)</h6>
                   </div>
                 </div>
               </div>
@@ -172,6 +169,8 @@
           <div class="card h-100 my-2">
             <div class="card-header">User Details</div>
             <div class="card-body">
+              <?php if (isset($_GET['success'])){?><p class="success alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>     
+              <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
                 <input type="hidden" class="form-control" name="userID" value = <?php echo $userID ?>>
                 <label for="fName" class="form-label">Enter First Name: </label>
                 <input type="text" class="form-control w-75 mx-auto" name="fName" required="">

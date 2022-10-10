@@ -1,7 +1,9 @@
 <?php
-// session_start();
+session_start();
 include '../../BackEnd/database/config.php';
-include '../../BackEnd/database/services.php';
+$select = mysqli_query($conn,"select serviceType from services");
+        $row = mysqli_fetch_array($select);
+            $_SESSION['servType'] = $row['serviceType'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,10 +149,7 @@ include '../../BackEnd/database/services.php';
                           <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                        <?php if (isset($_SESSION['servType'])) {
-                            $servType = $_SESSION['servType'];
-                          } ?>
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $servType ?>>
+                          <input type="text" readonly class="form-control-plaintext" value="Electrical">
                         </div>
                       </div>
                       <div class="row g-0">
@@ -197,6 +196,9 @@ include '../../BackEnd/database/services.php';
                           <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                         </div>
                         <div class="col-12 col-sm-2">
+                        <?php if (isset($_SESSION['servType'])) {
+                            $servType = $_SESSION['servType'];
+                          } ?>
                           <input type="text" readonly class="form-control-plaintext" value="Furniture">
                         </div>
                       </div>
