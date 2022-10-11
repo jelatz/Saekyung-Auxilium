@@ -280,25 +280,38 @@ $result = mysqli_query($conn, "select * from services");
                 </span>
               </div>
             </div>
+            <form action="../../BackEnd/database/services.php" method="POST">
             <div class="table-responsive">
-              <table class="table table-bordered table">
+              <table class="table table-bordered table-sm">
                 <thead>
                   <tr>
-                    <th>Service Type</th>
+                    <th></th>
+                    <th><label for="serviceType">Service Type</label></th>
                   </tr>
                 </thead>
                 <tbody>
                   <!-- RETRIEVE DATA FROM DATABASE -->
-                  <?php while ($rows = mysqli_fetch_array($result)) {
+                  <?php
+                    if($result){
+                        while($row=mysqli_fetch_assoc($result))
+                        {
+                          $servType=$row['serviceType'];
+                            echo '<tr>
+                            <td class="align-middle p-1">
+                              '.$servType.'
+                            </td>
+                            <td>
+                                <button class="btn btn-danger \" ><a href="../../BackEnd/database/delete.php?deleteService='.$servType.'" class="text-decoration-none text-dark">Delete</a></button>
+                            </td>
+                            </tr>';
+                        }
+                    }
                   ?>
-                    <tr>
-                      <td><?php echo $rows['serviceType'] ?></td>
-                    </tr>
-                  <?php } ?>
                 </tbody>
-              </table>
+                  </table>
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
             </div>
+            </form>
           </div>
           <!-- MODAL FOR ADDING OF SERVICE -->
           <div class="modal fade" data-bs-backdrop="static" id="addService">

@@ -118,6 +118,7 @@ $select = mysqli_query($conn,"select serviceType from services");
     </div>
   </div>
 <!-- LIST OF SERVICES AND MODALS  -->
+
   <div class="container">
     <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
@@ -184,14 +185,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                     <div class="mb-3">
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> <!--  get input value from db -->
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
                         </div>
                       </div>
                       <div class="row g-0">
@@ -204,14 +205,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                       </div>
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
+                          <label for="furnitureConcern" class="col-form-label fw-bold">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="#" class="form-control" rows="5"></textarea>
+                          <textarea name="concern" class="form-control" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-unselected">Submit</button>
+                    <button type="submit" class="btn btn-unselected" name="furnitureRequest">Submit</button>
                   </form>
                 </div>
               </div>
@@ -231,14 +232,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                     <div class="mb-3">
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>>
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
                         </div>
                       </div>
                       <div class="row g-0">
@@ -254,11 +255,11 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="concern" class="col-form-label fw-bold">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="#" class="form-control" rows="5"></textarea>
+                          <textarea name="paintingConcern" class="form-control" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-unselected">Submit</button>
+                    <button type="submit" class="btn btn-unselected" name="paintingRequest">Submit</button>
                   </form>
                 </div>
               </div>
@@ -278,14 +279,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                     <div class="mb-3">
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>>
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
                         </div>
                       </div>
                       <div class="row g-0">
@@ -301,11 +302,11 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="concern" class="col-form-label fw-bold">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="#" class="form-control" rows="5"></textarea>
+                          <textarea name="plumbingConcern" class="form-control" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-unselected">Submit</button>
+                    <button type="submit" class="btn btn-unselected" name="plumbingRequest">Submit</button>
                   </form>
                 </div>
               </div>
@@ -325,14 +326,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                     <div class="mb-3">
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> 
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>> 
                         </div>
                       </div>
                       <div class="row g-0">
@@ -348,11 +349,11 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="concern" class="col-form-label fw-bold">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="#" class="form-control" rows="5"></textarea>
+                          <textarea name="securityConcern" class="form-control" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-unselected">Submit</button>
+                    <button type="submit" class="btn btn-unselected" name="securityRequest">Submit</button>
                   </form>
                 </div>
               </div>
@@ -372,14 +373,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                     <div class="mb-3">
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> 
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>> 
                         </div>
                       </div>
                       <div class="row g-0">
@@ -395,19 +396,75 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="concern" class="col-form-label fw-bold">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="#" class="form-control" rows="5"></textarea>
+                          <textarea name="tileConcern" class="form-control" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-unselected">Submit</button>
+                    <button type="submit" class="btn btn-unselected" name="tileRequest">Submit</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <?php 
+        $result = mysqli_query($conn,"SELECT LAST_INSERT_ID()");
+        $row = mysqli_fetch_all($result);
+        $limit = 15;
+        // $servType = "";
+        // $_SESSION['$serviceType'] = $row['serviceType'];
+        while ($row < 20)
+        {
+        echo '<div class="col-12 col-md-4 py-2">
+        <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#plumbingReq">Plumbing</button>
+        <!-- PLUMBING MODAL -->
+        <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true" data-bs-backdrop="static">
+          <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="background-color: rgb(255, 248,243)">
+              <div class="modal-header">
+                <h5 class="modal-title" id="plumbingReqTitle">Plumbing Request</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
+                  <div class="mb-3">
+                    <div class="row g-0">
+                      <div class="col-12 col-sm-4">
+                        <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
+                      </div>
+                      <div class="col-12 col-sm-2">
+                        <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
+                      </div>
+                    </div>
+                    <div class="row g-0">
+                      <div class="col-12 col-sm-4">
+                        <label for="Type" class="col-form-label fw-bold">Service Type: </label>
+                      </div>
+                      <div class="col-12 col-sm-2">
+                        <input type="text" readonly class="form-control-plaintext" value="Plumbing">
+                      </div>
+                    </div>
+                    <div class="row g-0">
+                      <div class="col-12 col-sm-4">
+                        <label for="concern" class="col-form-label fw-bold">Concern : </label>
+                      </div>
+                      <div class="col-12">
+                        <textarea name="plumbingConcern" class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-unselected" name="plumbingRequest">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>';
+    }
+        ?>
         <!-- OTHERS BUTTON -->
-        <div class="w-100"></div>
+        <!-- <div class="w-100"></div> -->
         <div class="col-lg-10 mt-2 py-2">
           <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#otherReq">Other</button>
           <!-- OTHER MODAL -->
@@ -420,14 +477,14 @@ $select = mysqli_query($conn,"select serviceType from services");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
                     <div class="mb-3">
                       <div class="row g-0">
                         <div class="col-12 col-sm-4">
                           <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                         </div>
                         <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?>> 
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>> 
                         </div>
                       </div>
                       <div class="row g-0">
@@ -435,11 +492,11 @@ $select = mysqli_query($conn,"select serviceType from services");
                           <label for="concern" class="col-form-label fw-bold">Concern : </label>
                         </div>
                         <div class="col-12">
-                          <textarea name="#" class="form-control" rows="5"></textarea>
+                          <textarea name="otherConcern" class="form-control" rows="5"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-unselected">Submit</button>
+                    <button type="submit" class="btn btn-unselected" name="otherRequest">Submit</button>
                   </form>
                 </div>
               </div>

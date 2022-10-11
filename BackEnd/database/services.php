@@ -2,6 +2,7 @@
 session_start();
 include 'config.php';
 
+// ADD SERVICE
 if (isset($_POST['addServSubmit'])){
 
     function validate($data){
@@ -26,5 +27,10 @@ if (isset($_POST['addServSubmit'])){
     {
         header('Location: ../../FrontEnd/admin/dashboardpending.php?error= Not added!');
     }
+}
+// DELETE SERVICE
+if(isset($_POST['servDelete']))
+{
+    
 }
 ?>
