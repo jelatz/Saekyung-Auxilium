@@ -7,7 +7,7 @@
         $result=mysqli_query($conn,$sql);
         if($result){
             // echo "Deleted Successfully";
-            header('location:../../FrontEnd/admin/dashboardpending.php');
+            header('Location:../../FrontEnd/admin/dashboardpending.php');
         }else{
             die(mysqli_error($conn));
         }

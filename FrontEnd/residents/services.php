@@ -409,12 +409,9 @@ $select = mysqli_query($conn,"select serviceType from services");
         </div>
         <?php 
         $result = mysqli_query($conn,"SELECT LAST_INSERT_ID()");
-        $row = mysqli_fetch_all($result);
-        $limit = 15;
-        // $servType = "";
-        // $_SESSION['$serviceType'] = $row['serviceType'];
-        while ($row < 20)
-        {
+        $row = mysqli_fetch_array($result);
+        // while ($row > 1)
+        // {
         echo '<div class="col-12 col-md-4 py-2">
         <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#plumbingReq">Plumbing</button>
         <!-- PLUMBING MODAL -->
@@ -461,7 +458,9 @@ $select = mysqli_query($conn,"select serviceType from services");
           </div>
         </div>
       </div>';
-    }
+      // break;
+    // }
+  
         ?>
         <!-- OTHERS BUTTON -->
         <!-- <div class="w-100"></div> -->

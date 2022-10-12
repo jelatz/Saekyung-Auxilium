@@ -40,9 +40,7 @@ $result = mysqli_query($conn, "select * from services");
           <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
           </a>
           <div class="dropdown">
-            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) {
-                                                                                                                    echo "Welcome! " . $_SESSION['username'];
-                                                                                                                  } ?>
+            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) { echo "Welcome! " . $_SESSION['username'];} ?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item">
@@ -96,7 +94,7 @@ $result = mysqli_query($conn, "select * from services");
       <!-- HOME PAGE NAVIGATION -->
       <div class="col-md-2">
         <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical" id="homeNav">
-          
+
           <a href="#dashboard" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true">
             Dashboard
           </a>
@@ -111,7 +109,7 @@ $result = mysqli_query($conn, "select * from services");
           </a>
         </nav>
       </div>
-<!-- HOME PAGE NAVIGATION CONTENTS -->
+      <!-- HOME PAGE NAVIGATION CONTENTS -->
       <div class="col-md-9 bg-secondary p-3">
         <div class="tab-content" id="homeNavContent">
           <!--DASHBOARD CONTENTS -->
@@ -135,7 +133,7 @@ $result = mysqli_query($conn, "select * from services");
                 </button>
               </div>
             </div>
-<!-- DASHBOARD TAB CONTENTS -->
+            <!-- DASHBOARD TAB CONTENTS -->
             <div class="tab-content" id="dashboardContent">
               <!-- PENDING CONTENTS -->
               <div class="tab-pane show active" id="pending" role="tabpanel">
@@ -239,7 +237,7 @@ $result = mysqli_query($conn, "select * from services");
               </div>
             </div>
           </div>
-<!-- ACCOUNTS CONTENTS -->
+          <!-- ACCOUNTS CONTENTS -->
           <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accountsTab" tabindex="0">
             <div class="row justify-content-center">
               <div class="input-group rounded my-4 w-50">
@@ -281,36 +279,35 @@ $result = mysqli_query($conn, "select * from services");
               </div>
             </div>
             <form action="../../BackEnd/database/services.php" method="POST">
-            <div class="table-responsive">
-              <table class="table table-bordered table-sm">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th><label for="serviceType">Service Type</label></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- RETRIEVE DATA FROM DATABASE -->
-                  <?php
-                    if($result){
-                        while($row=mysqli_fetch_assoc($result))
-                        {
-                          $servType=$row['serviceType'];
-                            echo '<tr>
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                  <thead>
+                    <tr>
+                      <th><label for="serviceType">Service Type</label></th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- RETRIEVE DATA FROM DATABASE -->
+                    <?php
+                    if ($result) {
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        $servType = $row['serviceType'];
+                        echo '<tr>
                             <td class="align-middle p-1">
-                              '.$servType.'
+                              ' . $servType . '
                             </td>
                             <td>
-                                <button class="btn btn-danger \" ><a href="../../BackEnd/database/delete.php?deleteService='.$servType.'" class="text-decoration-none text-dark">Delete</a></button>
+                                <button class="btn btn-danger \" ><a href="../../BackEnd/database/delete.php?deleteService=' . $servType . '" class="text-decoration-none text-dark">Delete</a></button>
                             </td>
                             </tr>';
-                        }
+                      }
                     }
-                  ?>
-                </tbody>
-                  </table>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
-            </div>
+                    ?>
+                  </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
+              </div>
             </form>
           </div>
           <!-- MODAL FOR ADDING OF SERVICE -->
@@ -335,7 +332,7 @@ $result = mysqli_query($conn, "select * from services");
               </div>
             </div>
           </div>
-<!-- REPORTS CONTENTS -->
+          <!-- REPORTS CONTENTS -->
           <div class="tab-pane container-md fade" id="reports">
             <div class="col-12 p-3">
               <p class="fw-bold text-start">Reports</p>
@@ -400,7 +397,7 @@ $result = mysqli_query($conn, "select * from services");
   </div>
   </div>
 
-<!-- SCRIPTS -->
+  <!-- SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="../_assets/js/bootstrap.bundle.js"></script>
   <script type="text/javascript">
@@ -417,7 +414,7 @@ $result = mysqli_query($conn, "select * from services");
         }, false)
       })
   </script>
-<!-- LOCAL STORAGE FOR TABS -->
+  <!-- LOCAL STORAGE FOR TABS -->
   <script>
     const pillsTab = document.querySelector('#homeNav');
     const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
@@ -489,7 +486,7 @@ $result = mysqli_query($conn, "select * from services");
     // get pill id on load
     getPillId2(); -->
   </script>
- 
+
 </body>
 
 </html>
