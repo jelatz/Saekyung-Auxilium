@@ -209,14 +209,12 @@
         <table class="table table-sm table-hover table-bordered text-center" style="border-color: black;">
           <thead>
             <tr>
-              <th>Building #</th>
-              <th>Room #</th>
+              <th>Building & Room #</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>sample</td>
               <td>sample</td>
               <td style="width: 25vw;">
                 <div class="btn-group">

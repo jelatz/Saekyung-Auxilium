@@ -256,11 +256,19 @@ $result = mysqli_query($conn, "select * from services");
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>sample</td>
+                  <?php 
+                    $userResult = mysqli_query($conn, "SELECT * FROM accounts");
+                    if($userResult){
+                    while ($row = mysqli_fetch_array($userResult));
+                      $userName = $row['accountID'];
+                    echo '
+                    <tr>
+                    <td>'.$userName.'</td>
                     <td>
                       <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
-                    </td>
+                    </td>';
+                  }
+                    ?>
                   </tr>
                 </tbody>
               </table>

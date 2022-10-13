@@ -407,57 +407,60 @@ $select = mysqli_query($conn,"select serviceType from services");
             </div>
           </div>
         </div>
-        <?php 
+        <?php
         $result = mysqli_query($conn,"SELECT LAST_INSERT_ID()");
         $row = mysqli_fetch_array($result);
-        // while ($row > 1)
-        // {
-        echo '<div class="col-12 col-md-4 py-2">
-        <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#plumbingReq">Plumbing</button>
-        <!-- PLUMBING MODAL -->
-        <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true" data-bs-backdrop="static">
-          <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content" style="background-color: rgb(255, 248,243)">
-              <div class="modal-header">
-                <h5 class="modal-title" id="plumbingReqTitle">Plumbing Request</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-              </div>
-              <div class="modal-body">
-                <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                  <div class="mb-3">
-                    <div class="row g-0">
-                      <div class="col-12 col-sm-4">
-                        <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
+        if($_SESSION['$servType'] >= 1){
+          echo '<div class="col-12 col-md-4 py-2">
+          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#plumbingReq">Electrical</button>
+          <!-- PLUMBING MODAL -->
+          <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content" style="background-color: rgb(255, 248,243)">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="plumbingReqTitle">Plumbing Request</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
+                    <div class="mb-3">
+                      <div class="row g-0">
+                        <div class="col-12 col-sm-4">
+                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
+                        </div>
                       </div>
-                      <div class="col-12 col-sm-2">
-                        <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
+                      <div class="row g-0">
+                        <div class="col-12 col-sm-4">
+                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                          <input type="text" readonly class="form-control-plaintext" value="Plumbing">
+                        </div>
+                      </div>
+                      <div class="row g-0">
+                        <div class="col-12 col-sm-4">
+                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
+                        </div>
+                        <div class="col-12">
+                          <textarea name="plumbingConcern" class="form-control" rows="5"></textarea>
+                        </div>
                       </div>
                     </div>
-                    <div class="row g-0">
-                      <div class="col-12 col-sm-4">
-                        <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                      </div>
-                      <div class="col-12 col-sm-2">
-                        <input type="text" readonly class="form-control-plaintext" value="Plumbing">
-                      </div>
-                    </div>
-                    <div class="row g-0">
-                      <div class="col-12 col-sm-4">
-                        <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                      </div>
-                      <div class="col-12">
-                        <textarea name="plumbingConcern" class="form-control" rows="5"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-unselected" name="plumbingRequest">Submit</button>
-                </form>
+                    <button type="submit" class="btn btn-unselected" name="plumbingRequest">Submit</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>';
+        </div>';
+        }
+        // while ($row > 1)
+        // {
+       
       // break;
     // }
   
