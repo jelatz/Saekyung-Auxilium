@@ -14,6 +14,7 @@ $result = mysqli_query($conn, "select * from services");
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
+  
   <style>
     @media screen and (min-width: 768px) {
       .navbar-nav {
@@ -460,6 +461,11 @@ $result = mysqli_query($conn, "select * from services");
     // get pill id on load
     getPillId();
   </script>
+
+
+
+
+
   <!-- LOCAL STORAGE FOR DASHBOARD TABS -->
   <!-- <script>
     const pillsTab2 = document.querySelector('#dashboardTabs');

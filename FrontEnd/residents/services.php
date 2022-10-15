@@ -1,10 +1,9 @@
 <?php
-session_start();
+// session_start();
 include '../../BackEnd/database/config.php';
+include '../../Backend/database/services.php';
 // QUERY TO RETREIVE SERVICE TYPE IN DB AND STORE IN SESSION
-$select = mysqli_query($conn,"select serviceType from services");
-        $row = mysqli_fetch_array($select);
-            $_SESSION['servType'] = $row['serviceType']; 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,395 +119,83 @@ $select = mysqli_query($conn,"select serviceType from services");
 <!-- LIST OF SERVICES AND MODALS  -->
 
   <div class="container">
-    <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
+  <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
+      <!-- BUTTONS -->
         <!-- ELECTRICAL BUTTON -->
-        <div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#elecReq">Electrical</button>
-          <!-- ELECTRICAL MODAL -->
-          <div class="modal fade" id="elecReq" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="elecReqTitle">Electrical Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <?php if (isset($_SESSION['username'])) {
-                            $userID = $_SESSION['username'];
-                          } ?>
-                          <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?> name="accountID">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Electrical">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea class="form-control" rows="5" name="elecConcern"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" name="elecSubmit" class="btn btn-unselected">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- FURNITURE BUTTON -->
-        <div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#furnitureReq">Furniture</button>
-          <!-- FURNITURE MODAL -->
-          <div class="modal fade" id="furnitureReq" tabindex="-1" aria-labelledby="furnitureReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="furnitureReqTitle">Furniture Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Furniture">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="furnitureConcern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="concern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="furnitureRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- PAINTING BUTTON -->
-        <div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#paintReq">Painting</button>
-          <!-- PAINTING MODAL -->
-          <div class="modal fade" id="paintReq" tabindex="-1" aria-labelledby="paintReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="paintReqTitle">Painting Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Painting">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="paintingConcern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="paintingRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- PLUMBING BUTTON -->
-        <div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#plumbingReq">Plumbing</button>
-          <!-- PLUMBING MODAL -->
-          <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="plumbingReqTitle">Plumbing Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Plumbing">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="plumbingConcern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="plumbingRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- SECURITY BUTTON -->
-        <div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#securityReq">Security</button>
-          <!-- SECURITY MODAL -->
-          <div class="modal fade" id="securityReq" tabindex="-1" aria-labelledby="securityReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="securityReqTitle">Security Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>> 
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Security">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="securityConcern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="securityRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- TILE BUTTON -->
-        <div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#tileReq">Tile</button>
-          <!-- TILE MODAL -->
-          <div class="modal fade" id="tileReq" tabindex="-1" aria-labelledby="tileReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="tileReqTitle">Tile Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>> 
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Tile">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="tileConcern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="tileRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <?php
-        $result = mysqli_query($conn,"SELECT LAST_INSERT_ID()");
-        $row = mysqli_fetch_array($result);
-        if($_SESSION['$servType'] >= 1){
-          echo '<div class="col-12 col-md-4 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#plumbingReq">Electrical</button>
-          <!-- PLUMBING MODAL -->
-          <div class="modal fade" id="plumbingReq" tabindex="-1" aria-labelledby="plumbingReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="plumbingReqTitle">Plumbing Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>>
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" value="Plumbing">
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="plumbingConcern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="plumbingRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>';
+          $select = mysqli_query($conn,"select * from services");
+          if($select)
+        {
+            while ($row = mysqli_fetch_assoc($select))
+            {
+              $_SESSION['service'] = $row['serviceType'];
+              $service = $_SESSION['service'];
+            echo  
+            '<div class="col-12 col-md-4 py-2">
+              <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#request">
+              '.$service.'
+              </button>
+            </div>'; 
         }
-        // while ($row > 1)
-        // {
-       
-      // break;
-    // }
-  
+        }
         ?>
-        <!-- OTHERS BUTTON -->
-        <!-- <div class="w-100"></div> -->
-        <div class="col-lg-10 mt-2 py-2">
-          <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#otherReq">Other</button>
-          <!-- OTHER MODAL -->
-          <div class="modal fade" id="otherReq" tabindex="-1" aria-labelledby="otherReq" aria-hidden="true" data-bs-backdrop="static">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-              <div class="modal-content" style="background-color: rgb(255, 248,243)">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="otherReqTitle">Other Request</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                    <div class="mb-3">
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                        </div>
-                        <div class="col-12 col-sm-2">
-                          <input type="text" readonly class="form-control-plaintext" name="accountID" value=<?php echo $userID ?>> 
-                        </div>
-                      </div>
-                      <div class="row g-0">
-                        <div class="col-12 col-sm-4">
-                          <label for="concern" class="col-form-label fw-bold">Concern : </label>
-                        </div>
-                        <div class="col-12">
-                          <textarea name="otherConcern" class="form-control" rows="5"></textarea>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-unselected" name="otherRequest">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 
+<!-- MODALS -->
+
+   <!-- ELECTRICAL MODAL --> 
+        <div class="modal fade" id="request" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true" data-bs-backdrop="static">
+          <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="background-color: rgb(255, 248,243)">
+              <div class="modal-header">
+                <h5 class="modal-title" id="elecReqTitle">
+                Service Request
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
+                  <div class="mb-3">
+                    <div class="row g-0">
+                      <div class="col-12 col-sm-4">
+                        <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
+                      </div>
+                      <div class="col-12 col-sm-2">
+                        <?php if (isset($_SESSION["username"])) {
+                          $userID = $_SESSION["username"];
+                        } ?>
+                        <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?> name="accountID">
+                      </div>
+                    </div>
+                    <div class="row g-0">
+                      <div class="col-12 col-sm-4">
+                        <label for="Type" class="col-form-label fw-bold">Service Type: </label>
+                      </div>
+                      <div class="col-12 col-sm-2">
+                        <input type="text" readonly class="form-control-plaintext" 
+                        value="FIX THIS PART!!!"> //THIS NEEDS FIX
+                      </div>
+                    </div>
+                    <div class="row g-0">
+                      <div class="col-12 col-sm-4">
+                        <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
+                      </div>
+                      <div class="col-12">
+                        <textarea class="form-control" rows="5" name="elecConcern"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" name="reqSubmit" class="btn btn-unselected">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- SCRIPTS -->
   <script src="../_assets/js/bootstrap.bundle.js"></script>
   <!-- form validation -->
   <script>
@@ -525,6 +212,7 @@ $select = mysqli_query($conn,"select serviceType from services");
         }, false)
       })
   </script>
+
 </body>
 
 </html>

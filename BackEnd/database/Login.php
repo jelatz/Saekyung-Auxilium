@@ -57,6 +57,7 @@ $username = validate ($_POST['username']);
 $password = validate ($_POST['password']);
 $password = md5($password);
 
+
 $result=mysqli_query($conn,"select * from accounts where accountID='".$username."' AND password = '".$password."' limit 1");
 
 $row=mysqli_fetch_array($result);

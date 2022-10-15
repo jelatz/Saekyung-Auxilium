@@ -3,7 +3,7 @@ session_start();
 include 'config.php';
 
 // ELECTRICAL
-if(isset($_POST['elecSubmit']))
+if(isset($_POST['reqSubmit']))
 {
 
 // FUNCTION FOR VALIDATION
