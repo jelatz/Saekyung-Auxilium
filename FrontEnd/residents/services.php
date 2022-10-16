@@ -121,13 +121,12 @@ include '../../Backend/database/services.php';
   <div class="container">
   <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
-      <!-- BUTTONS -->
-        <!-- ELECTRICAL BUTTON -->
+      <!-- SERVICE BUTTONS -->
         <?php
           $select = mysqli_query($conn,"select * from services");
           if($select)
         {
-            while ($row = mysqli_fetch_assoc($select))
+            while ($row = mysqli_fetch_array($select))
             {
               $_SESSION['service'] = $row['serviceType'];
               $service = $_SESSION['service'];
@@ -136,7 +135,7 @@ include '../../Backend/database/services.php';
               <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#request">
               '.$service.'
               </button>
-            </div>'; 
+            </div>';
         }
         }
         ?>
@@ -177,7 +176,9 @@ include '../../Backend/database/services.php';
                       </div>
                       <div class="col-12 col-sm-2">
                         <input type="text" readonly class="form-control-plaintext" 
-                        value="FIX THIS PART!!!"> //THIS NEEDS FIX
+                        value=<?php 
+                        $select3 = mysqli_query($conn,"SELECT ");
+                        ?>>
                       </div>
                     </div>
                     <div class="row g-0">

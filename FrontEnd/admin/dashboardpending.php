@@ -1,8 +1,6 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
-$result = mysqli_query($conn, "select * from services");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +12,7 @@ $result = mysqli_query($conn, "select * from services");
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-  
+
   <style>
     @media screen and (min-width: 768px) {
       .navbar-nav {
@@ -41,7 +39,9 @@ $result = mysqli_query($conn, "select * from services");
           <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
           </a>
           <div class="dropdown">
-            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) { echo "Welcome! " . $_SESSION['username'];} ?>
+            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) {
+                                                                                                                    echo "Welcome! " . $_SESSION['username'];
+                                                                                                                  } ?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item">
@@ -153,19 +153,31 @@ $result = mysqli_query($conn, "select * from services");
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
+                        <th>Concern</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php
+                        $result = mysqli_query($conn, "SELECT services.serviceType,requestID,accountID,concern,dateFiled FROM servicerequest INNER JOIN services WHERE servicerequest.serviceID = services.serviceID");
+                        if($result)
+                        {
+                          while ($row = mysqli_fetch_array($result)){ 
+                        ?>
                       <tr>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
+                        <td><?php echo $row['requestID'] ?></td>
+                        <td><?php echo $row['accountID'] ?></td>
+                        <td><?php echo $row['dateFiled'] ?></td>
+                        <td><?php echo $row['serviceType'] ?></td>
+                        <td><?php echo $row['concern'] ?></td>
                         <td>
                           <button type="submit" class="btn btn-primary btn-block">Accept</button>
                         </td>
                       </tr>
+                      <?php
+                    }
+                  }
+                ?>
                     </tbody>
                   </table>
                 </div>
@@ -257,19 +269,19 @@ $result = mysqli_query($conn, "select * from services");
                   </tr>
                 </thead>
                 <tbody>
-                  <?php 
-                    $userResult = mysqli_query($conn, "SELECT * FROM accounts");
-                    if($userResult){
+                  <?php
+                  $userResult = mysqli_query($conn, "SELECT * FROM accounts");
+                  if ($userResult) {
                     while ($row = mysqli_fetch_array($userResult));
-                      $userName = $row['accountID'];
+                    $userName = $row['accountID'];
                     echo '
                     <tr>
-                    <td>'.$userName.'</td>
+                    <td>' . $userName . '</td>
                     <td>
                       <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
                     </td>';
                   }
-                    ?>
+                  ?>
                   </tr>
                 </tbody>
               </table>
@@ -299,6 +311,7 @@ $result = mysqli_query($conn, "select * from services");
                   <tbody>
                     <!-- RETRIEVE DATA FROM DATABASE -->
                     <?php
+                    $result = mysqli_query($conn, "select * from services");
                     if ($result) {
                       while ($row = mysqli_fetch_assoc($result)) {
                         $servType = $row['serviceType'];

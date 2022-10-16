@@ -110,47 +110,34 @@ include '../../BackEnd/database/config.php';
                 <tr>
                     <th class="text-nowrap">Request #</th>
                     <th class="text-nowrap">Date Filed</th>
-                    <th class="text-nowrap">Services</th>
+                    <th class="text-nowrap">Service</th>
                     <th class="text-nowrap">Status</th>
                     <th class="text-nowrap">Date Completed</th>
+                    <th class="text-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody>
+              <?php
+                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID");
+                if($reqSelect)
+                {
+                while ($row = mysqli_fetch_array($reqSelect)){
+              ?>
                 <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
+                    <td><?php echo $row['requestID']?></td>
+                    <td><?php echo $row['dateFiled'] ?></td>
+                    <td><?php echo $row['serviceType'] ?></td>
+                    <td><?php echo $row['status'] ?></td>
+                    <td>Depends on the row</td>
+                    <td>
+                      <button type="submit" name="cancelReq" class="btn btn-danger">Cancel</button>
+                    </td>
+                    
                 </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
-                <tr>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                    <td>sample</td>
-                </tr>
+              <?php 
+              }
+              }
+              ?>
             </tbody>
         </table>
     </div>

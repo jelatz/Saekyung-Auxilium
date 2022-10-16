@@ -71,7 +71,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <div class="invalid-feedback">
         Please enter password
     </div>
-    <input type="checkbox" class="checkbox" name="remember"><span>Remember me</span>
+    <input type="checkbox" class="checkbox" name="rememberme"><span>Remember me</span>
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
     <button class="btn submit-btn" type="submit" name="adminLogin">Login</button>
 </form>

@@ -25,14 +25,14 @@ if($row["usertype"]=="user"){
 // check remember me checkbox
     if (isset($_POST['remember'])){
 // set cookie
-        setcookie('resuname',$username,time()+10,"/");
-        setcookie('respass',$password,time()+10,"/");
+        setcookie('resuname',$username,time()+100,"/");
+        setcookie('respass',$password,time()+100,"/");
     }
 // cookie expire
     else
     {
-        setcookie('resuname',$username,10,"/");
-        setcookie('respass',$password,10,"/");
+        setcookie('resuname',$username,100,"/");
+        setcookie('respass',$password,100,"/");
     }
 // redirect to index.php
     header('Location:../../FrontEnd/residents/services.php');
@@ -66,14 +66,14 @@ if($row["usertype"]=="admin"){
 $_SESSION["username"] = $row['accountID'];
 $_SESSION["password"] = $row['password'];
 
-if (isset($_POST['remember'])){
+if (isset($_POST['rememberme'])){
 
-setcookie('adminuser', $username, time()+30,"/");
-setcookie('adminpass', $password, time()+30,"/");
+setcookie('adminuser', $username, time()+100,"/");
+setcookie('adminpass', $password, time()+100,"/");
 
 }else{
-setcookie('adminuser', $username, 30,"/");
-setcookie('adminpass', $password, 30,"/");
+setcookie('adminuser', $username, 100,"/");
+setcookie('adminpass', $password, 100,"/");
 }
 
 header('Location:../../FrontEnd/admin/dashboardpending.php');
@@ -81,6 +81,16 @@ exit();
 }elseif($row["usertype"]=="systemadmin"){
 $_SESSION["username"] = $row['accountID'];
 $_SESSION["password"] = $row['password'];
+
+if (isset($_POST['rememberme'])){
+
+    setcookie('sysadminuser', $username, time()+100,"/");
+    setcookie('sysadminpass', $password, time()+100,"/");
+    
+    }else{
+    setcookie('sysadminuser', $username, 100,"/");
+    setcookie('sysadminpass', $password, 100,"/");
+    }
 header('Location:../../FrontEnd/systemadmin/home.php');
 exit();
 }else{

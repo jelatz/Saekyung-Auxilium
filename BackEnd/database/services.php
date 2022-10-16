@@ -13,14 +13,13 @@ if (isset($_POST['addServSubmit'])){
     }
     $servType = validate($_POST['serviceType']);
     
-    $insert = mysqli_query($conn,"insert into services (serviceType) values ('$servType')");
-    
+    $insert = mysqli_query($conn,"INSERT INTO services (serviceType) VALUES ('$servType')");
     if($insert)
     {
         $select = mysqli_query($conn,"select * from services");
         $row = mysqli_fetch_row($select);
         $_SESSION['servType'] = $row['serviceType'];
-            
+
         header('Location:../../FrontEnd/admin/dashboardpending.php?success=Service Type Successfully Added!');
             exit();
     }else
@@ -28,5 +27,4 @@ if (isset($_POST['addServSubmit'])){
         header('Location: ../../FrontEnd/admin/dashboardpending.php?error= Not added!');
     }
 }
-
 ?>
