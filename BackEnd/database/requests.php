@@ -111,10 +111,12 @@ function validate($data){
 // VARIABLES FOR FURNITURE REQUEST
     $accountID = validate ($_POST['accountID']);
     $concern = validate ($_POST['plumbingConcern']);
+    $service_Type = validate ($_POST['service_type']);
+    $status = validate ($_POST['status']);
 
 
 // QUERY FOR INSERTING DATA FROM FURNITURE REQUEST FORM
-    $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = ('Plumbing')),'$concern',CURRENT_TIMESTAMP)");
+    $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = $service_Type,'$concern',CURRENT_TIMESTAMP)");
     
    //CONDITION IF DATA IS INSERTED
     if($insert)

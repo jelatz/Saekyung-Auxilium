@@ -122,79 +122,43 @@ include '../../BackEnd/database/config.php';
     <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
         <!-- SERVICE BUTTONS -->
-        <?php
-        $select = mysqli_query($conn, "SELECT * FROM services");
-        while ($row = mysqli_fetch_array($select)) {
-          $id = $row['serviceID'];
-          // $_SESSION['serv_id'] = $row['serviceID'];
-          // $serv_id = $_SESSION['serv_id'];
-          $_SESSION['service'] = $row['serviceType'];
-          $service = $_SESSION['service'];
-          echo
-          '<div class="col-12 col-md-4 py-2">
-              <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#request' . $id . '">
-                ' . $service . '
-              </button>
-            </div>';
-        }
-        ?>
-     </div>
+        <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">User: </label>
+            <div class="col-sm-10">
+              <input type="hidden" value="Pending" name="status">
+              <input type="text" class="form-control-plaintext" name="accountID" value=<?php echo $_SESSION['username'] ?>>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Service Type</label>
+            <div class="col-sm-10">
+              <select class="form-select">
+                <?php 
+                $result = mysqli_query($conn,"SELECT * FROM services");
+                while ($row = mysqli_fetch_assoc($result)){
+                  ?>
+                  <option selected name="service_type"><?php echo $row['serviceType']?></option>
+                  <?php } ?>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Concern: </label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="5" name="elecConcern"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" name="reqSubmit" class="btn btn-unselected">Submit</button>
+        </form>
+
+      </div>
     </div>
   </div>
-        <!-- MODALS -->
 
-        <!--   ELECTRICAL MODAL  -->
-        <?php
-        $select2 = mysqli_query($conn, "SELECT serviceID FROM services");
-        while ($row2 = mysqli_fetch_array($select2)) {
 
-          echo '
-       <div class="modal fade" id="request'.$id.'" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true" data-bs-backdrop="static" role="dialog">
-          <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content" style="background-color: rgb(255, 248,243)">
-              <div class="modal-header">
-                <h5 class="modal-title" id="elecReqTitle">
-                Service Request
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-              </div>
-              <div class="modal-body">
-                <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
-                  <div class="mb-3">
-                    <div class="row g-0">
-                      <div class="col-12 col-sm-4">
-                        <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
-                      </div>
-                      <div class="col-12 col-sm-2">
-                        <input type="text" readonly class="form-control-plaintext" value=' . $_SESSION["username"] . ' name="accountID">
-                        <input type="hidden" readonly class="form-control-plaintext" value="Pending" name="status">
-                      </div>
-                    </div>
-                    <div class="row g-0">
-                      <div class="col-12 col-sm-4">
-                        <label for="Type" class="col-form-label fw-bold">Service Type: </label>
-                      </div>
-                      <div class="col-12 col-sm-2">
-                        <input type="text" readonly class="form-control-plaintext" value=' . $service . '>
-                      </div>
-                    </div>
-                    <div class="row g-0">
-                      <div class="col-12 col-sm-4">
-                        <label for="concern" class="col-form-label fw-bold pb-3 ">Concern : </label>
-                      </div>
-                      <div class="col-12">
-                        <textarea class="form-control" rows="5" name="elecConcern"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="submit" name="reqSubmit" class="btn btn-unselected">Submit</button>
-                </form>
-              </div>
-            </div>
-          </div>';
-        }
-        ?>
+
 
 
   <!-- SCRIPTS -->
