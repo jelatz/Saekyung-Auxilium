@@ -133,12 +133,13 @@ include '../../BackEnd/database/config.php';
           <div class="row mb-3">
             <label for="inputPassword3" class="col-sm-2 col-form-label">Service Type</label>
             <div class="col-sm-10">
-              <select class="form-select">
+              <select class="form-select" name="service_type">
+                <option selected>Please select a Service</option>
                 <?php 
                 $result = mysqli_query($conn,"SELECT * FROM services");
                 while ($row = mysqli_fetch_assoc($result)){
                   ?>
-                  <option selected name="service_type"><?php echo $row['serviceType']?></option>
+                  <option><?php echo $row['serviceType'] ?></option>
                   <?php } ?>
               </select>
             </div>
