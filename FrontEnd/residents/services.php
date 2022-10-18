@@ -1,7 +1,7 @@
 <?php
-// session_start();
+session_start();
 include '../../BackEnd/database/config.php';
-include '../../Backend/database/services.php';
+// include '../../Backend/database/services.php';
 // QUERY TO RETREIVE SERVICE TYPE IN DB AND STORE IN SESSION
 
 ?>
@@ -32,7 +32,7 @@ include '../../Backend/database/services.php';
 
 <body style="background-color: rgba(255,248,243);">
 
-<!--header-->
+  <!--header-->
   <nav class="navbar navbar-expand-md px-2">
     <div class="container-fluid">
       <!-- LOGO -->
@@ -69,7 +69,7 @@ include '../../Backend/database/services.php';
       </div>
     </div>
   </nav>
-<!-- NOTIFICATION MODAL -->
+  <!-- NOTIFICATION MODAL -->
   <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content" style="background-color: rgba(255,248,243);">
@@ -84,7 +84,7 @@ include '../../Backend/database/services.php';
       </div>
     </div>
   </div>
-<!--NAVBAR COLLAPSE CONTENT-->
+  <!--NAVBAR COLLAPSE CONTENT-->
   <div class="collapse navbar-collapse" id="navbarMenu">
     <div class="navbar-md-nav bg-inner">
       <ul class="navbar-nav bg-transparent text-center">
@@ -103,11 +103,11 @@ include '../../Backend/database/services.php';
       </ul>
     </div>
   </div>
-<!-- SERVICES AND HISTORY -->
+  <!-- SERVICES AND HISTORY -->
   <div class="container">
     <div class="row my-3 gap-3 mx-auto">
-    <?php if (isset($_GET['error'])){ ?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p><?php }?>
-    <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php }?>
+      <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
+      <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
       <div class="col-sm-5 col-lg-3 mx-auto">
         <a href="services.php" class="btn btn-unselected w-100 active" aria-current="page">Services</a>
       </div>
@@ -116,37 +116,40 @@ include '../../Backend/database/services.php';
       </div>
     </div>
   </div>
-<!-- LIST OF SERVICES AND MODALS  -->
+  <!-- LIST OF SERVICES AND MODALS  -->
 
   <div class="container">
-  <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
+    <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
-      <!-- SERVICE BUTTONS -->
+        <!-- SERVICE BUTTONS -->
         <?php
-          $select = mysqli_query($conn,"select * from services");
-          if($select)
-        {
-            while ($row = mysqli_fetch_array($select))
-            {
-              $_SESSION['service'] = $row['serviceType'];
-              $service = $_SESSION['service'];
-            echo  
-            '<div class="col-12 col-md-4 py-2">
-              <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#request">
-              '.$service.'
+        $select = mysqli_query($conn, "SELECT * FROM services");
+        while ($row = mysqli_fetch_array($select)) {
+          $id = $row['serviceID'];
+          // $_SESSION['serv_id'] = $row['serviceID'];
+          // $serv_id = $_SESSION['serv_id'];
+          $_SESSION['service'] = $row['serviceType'];
+          $service = $_SESSION['service'];
+          echo
+          '<div class="col-12 col-md-4 py-2">
+              <button type="button" class="btn btn-unselected w-100" data-bs-toggle="modal" data-bs-target="#request' . $id . '">
+                ' . $service . '
               </button>
             </div>';
         }
-        }
         ?>
-      </div>
+     </div>
     </div>
   </div>
+        <!-- MODALS -->
 
-<!-- MODALS -->
+        <!--   ELECTRICAL MODAL  -->
+        <?php
+        $select2 = mysqli_query($conn, "SELECT serviceID FROM services");
+        while ($row2 = mysqli_fetch_array($select2)) {
 
-   <!-- ELECTRICAL MODAL --> 
-        <div class="modal fade" id="request" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true" data-bs-backdrop="static">
+          echo '
+       <div class="modal fade" id="request'.$id.'" tabindex="-1" aria-labelledby="elecReq" aria-hidden="true" data-bs-backdrop="static" role="dialog">
           <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content" style="background-color: rgb(255, 248,243)">
               <div class="modal-header">
@@ -164,10 +167,8 @@ include '../../Backend/database/services.php';
                         <label for="bldgNum" class="col-form-label fw-bold">Building & Unit #: </label>
                       </div>
                       <div class="col-12 col-sm-2">
-                        <?php if (isset($_SESSION["username"])) {
-                          $userID = $_SESSION["username"];
-                        } ?>
-                        <input type="text" readonly class="form-control-plaintext" value=<?php echo $userID ?> name="accountID">
+                        <input type="text" readonly class="form-control-plaintext" value=' . $_SESSION["username"] . ' name="accountID">
+                        <input type="hidden" readonly class="form-control-plaintext" value="Pending" name="status">
                       </div>
                     </div>
                     <div class="row g-0">
@@ -175,10 +176,7 @@ include '../../Backend/database/services.php';
                         <label for="Type" class="col-form-label fw-bold">Service Type: </label>
                       </div>
                       <div class="col-12 col-sm-2">
-                        <input type="text" readonly class="form-control-plaintext" 
-                        value=<?php 
-                        $select3 = mysqli_query($conn,"SELECT ");
-                        ?>>
+                        <input type="text" readonly class="form-control-plaintext" value=' . $service . '>
                       </div>
                     </div>
                     <div class="row g-0">
@@ -194,10 +192,14 @@ include '../../Backend/database/services.php';
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-<!-- SCRIPTS -->
-  <script src="../_assets/js/bootstrap.bundle.js"></script>
+          </div>';
+        }
+        ?>
+
+
+  <!-- SCRIPTS -->
+  <script src="../_assets/js/bootstrap.bundle.js">
+  </script>
   <!-- form validation -->
   <script>
     var forms = document.querySelectorAll('.needs-validation')

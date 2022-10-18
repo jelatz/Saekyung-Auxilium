@@ -4750,7 +4750,6 @@
     _initializeBackDrop() {
       return new Backdrop({
         isVisible: Boolean(this._config.backdrop),
-        // 'static' option will be translated to true, and booleans will keep their value,
         isAnimated: this._isAnimated()
       });
     }

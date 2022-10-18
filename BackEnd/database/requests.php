@@ -14,9 +14,11 @@ function validate($data){
     return $data;
 }
 
-// VARIABLES FOR ELECTRICAL REQUEST
+// VARIABLES FOR ELECT[RICAL REQUEST
     $accountID = validate ($_POST['accountID']);
     $concern = validate ($_POST['elecConcern']);
+    $status = validate ($_POST['status']);
+    $stat = validate ("Pending");
 
 
 // QUERY FOR INSERTING DATA FROM ELECTRICAL REQUEST FORM
@@ -212,3 +214,4 @@ function validate($data){
     }
 }
 ?>
+ 
