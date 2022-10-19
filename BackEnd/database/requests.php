@@ -22,10 +22,9 @@ function validate($data){
 // ADD STATUS TO STATUS TABLE
 $insertstat = mysqli_query($conn,"INSERT INTO `status` (`status`) VALUES ('$status')");
 if($insertstat){
-    header('Location:../../FrontEnd/Residents/services.php?success=Request Sent!');
-    exit();
+    
 // QUERY FOR INSERTING DATA FROM ELECTRICAL REQUEST FORM
-    $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = '$servType'),'$concern',CURRENT_TIMESTAMP)");
+    $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,statusID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = '$servType' limit 1),(SELECT statusID FROM `status` WHERE `status`='$status'),'$concern',CURRENT_TIMESTAMP)");
     if($insert)
     {   
         header('Location:../../FrontEnd/Residents/services.php?success=Request Sent!');
