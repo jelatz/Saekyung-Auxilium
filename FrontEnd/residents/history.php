@@ -118,7 +118,7 @@ include '../../BackEnd/database/config.php';
             </thead>
             <tbody>
               <?php
-                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID");
+                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status,request_status.dateCompleted FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID");
                 if($reqSelect)
                 {
                 while ($row = mysqli_fetch_array($reqSelect)){
@@ -128,7 +128,7 @@ include '../../BackEnd/database/config.php';
                     <td><?php echo $row['dateFiled'] ?></td>
                     <td><?php echo $row['serviceType'] ?></td>
                     <td><?php echo $row['status'] ?></td>
-                    <td>Depends on the row</td>
+                    <td><?php echo $row['dateCompleted'] ?></td>
                     <td>
                       <button type="submit" name="cancelReq" class="btn btn-danger">Cancel</button>
                     </td>

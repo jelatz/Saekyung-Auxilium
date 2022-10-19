@@ -20,11 +20,13 @@ function validate($data){
     $status = validate ($_POST['status']);
     $servType = validate($_POST['service_type']);
 // ADD STATUS TO STATUS TABLE
-$insertstat = mysqli_query($conn,"INSERT INTO `status` (`status`) VALUES ('$status')");
+$insertstat = mysqli_query($conn,"INSERT INTO request_status (`status`) VALUES ('$status')");
+$select = mysqli_query($conn,"SELECT * FROM `status`");
+$row2 = mysqli_fetch_assoc($select);
+$stats = $row2['status'];
 if($insertstat){
-    
 // QUERY FOR INSERTING DATA FROM ELECTRICAL REQUEST FORM
-    $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,statusID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = '$servType' limit 1),(SELECT statusID FROM `status` WHERE `status`='$status'),'$concern',CURRENT_TIMESTAMP)");
+    $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,statusID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = '$servType' limit 1),(SELECT (statusID) FROM request_status WHERE `status`='$stats' limit 1),'$concern',CURRENT_TIMESTAMP)");
     if($insert)
     {   
         header('Location:../../FrontEnd/Residents/services.php?success=Request Sent!');
