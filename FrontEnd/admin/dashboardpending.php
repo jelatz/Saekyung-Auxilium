@@ -111,7 +111,7 @@ include '../../BackEnd/database/config.php';
         </nav>
       </div>
       <!-- HOME PAGE NAVIGATION CONTENTS -->
-      <div class="col-md-9 bg-secondary p-3">
+      <div class="col-md-9 bg-inner p-3">
         <div class="tab-content" id="homeNavContent">
           <!--DASHBOARD CONTENTS -->
           <!-- DASHBOARD TABS -->
@@ -119,17 +119,17 @@ include '../../BackEnd/database/config.php';
             <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
             <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist" id="dashboardTabs">
               <div class="col">
-                <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-primary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending">
+                <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-secondary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending">
                   Pending
                 </button>
               </div>
               <div class="col">
-                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-primary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing">
+                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing">
                   On-Going
                 </button>
               </div>
               <div class="col">
-                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-primary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab">
+                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab">
                   Completed
                 </button>
               </div>
@@ -153,31 +153,35 @@ include '../../BackEnd/database/config.php';
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
+                        <!-- <th>Status</th> -->
                         <th>Concern</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <form action="../../BackEnd/database/requests.php" method="POST">
                       <?php
-                        $result = mysqli_query($conn, "SELECT services.serviceType,requestID,accountID,concern,dateFiled FROM servicerequest INNER JOIN services WHERE servicerequest.serviceID = services.serviceID");
+                        $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending'");
                         if($result)
                         {
                           while ($row = mysqli_fetch_array($result)){ 
                         ?>
                       <tr>
-                        <td><?php echo $row['requestID'] ?></td>
+                        <td><?php echo date("Y").$row['requestID'] ?></td>
                         <td><?php echo $row['accountID'] ?></td>
                         <td><?php echo $row['dateFiled'] ?></td>
                         <td><?php echo $row['serviceType'] ?></td>
                         <td><?php echo $row['concern'] ?></td>
                         <td>
-                          <button type="submit" class="btn btn-primary btn-block">Accept</button>
+                          <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
+                          <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
                       <?php
                     }
                   }
                 ?>
+                </form>
                     </tbody>
                   </table>
                 </div>
@@ -199,19 +203,40 @@ include '../../BackEnd/database/config.php';
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
+                        <th>Concern</th>
+                        <th>Status</th>
+                        <th>Notes</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <form action="../../BackEnd/database/requests.php" method="POST">
+                      <?php
+                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Approved'");
+                        if($result)
+                        {
+                          while ($row = mysqli_fetch_array($result)){  
+                        ?>
                       <tr>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
+                        <td><?php echo date("Y").$row['requestID'] ?></td>
+                        <td><?php echo $row['accountID'] ?></td>
+                        <td><?php echo $row['dateFiled'] ?></td>
+                        <td><?php echo $row['serviceType'] ?></td>
+                        <td><?php echo $row['concern'] ?></td>
+                        <td><?php echo $row['status'] ?></td>
                         <td>
-                          <button type="submit" class="btn btn-primary btn-block">Complete</button>
+                        <textarea class="form-control" rows="1" name="adminNotes"></textarea>
+                        </td>
+                        <td>
+                          <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
+                          <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
+                      <?php
+                    }
+                  }
+                ?>
+                </form>
                     </tbody>
                   </table>
                 </div>
