@@ -118,7 +118,7 @@ include '../../BackEnd/database/config.php';
             </thead>
             <tbody>
               <?php
-                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status,request_status.dateCompleted FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID");
+                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID");
                 if($reqSelect)
                 {
                 while ($row = mysqli_fetch_array($reqSelect)){

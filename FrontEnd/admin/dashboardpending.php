@@ -39,9 +39,10 @@ include '../../BackEnd/database/config.php';
           <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
           </a>
           <div class="dropdown">
-            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) {
-                                                                                                                    echo "Welcome! " . $_SESSION['username'];
-                                                                                                                  } ?>
+            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) 
+              {
+              echo "Welcome! " . $_SESSION['username'];
+              } ?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item">
@@ -153,35 +154,41 @@ include '../../BackEnd/database/config.php';
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
-                        <!-- <th>Status</th> -->
+                        <th>Status</th>
                         <th>Concern</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <form action="../../BackEnd/database/requests.php" method="POST">
                       <?php
                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending'");
-                        if($result)
-                        {
-                          while ($row = mysqli_fetch_array($result)){ 
-                        ?>
-                      <tr>
-                        <td><?php echo date("Y").$row['requestID'] ?></td>
-                        <td><?php echo $row['accountID'] ?></td>
-                        <td><?php echo $row['dateFiled'] ?></td>
-                        <td><?php echo $row['serviceType'] ?></td>
-                        <td><?php echo $row['concern'] ?></td>
+                        // if($result)
+                        // {
+                          while ($row = mysqli_fetch_array($result)) 
+                          {
+                            $idpending = $row['requestID'];
+                            $accountID = $row['accountID'];
+                            $dateFiled = $row['dateFiled'];
+                            $serviceType = $row['serviceType'];
+                            $status = $row['status'];
+                            $concern = $row['concern'];
+                       
+                      echo '<tr>
+                      <form action="../../BackEnd/database/requests.php?idpending='.$idpending.'" method="POST">
+                        <td> '.date("Y").$idpending.'</td>
+                        <td> '.$accountID.'</td>
+                        <td> '.$dateFiled.'</td>
+                        <td> '.$serviceType.'</td>
+                        <td> '.$status.'</td>
+                        <td> '.$concern.'</td>
                         <td>
                           <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
                           <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
-                      <?php
-                    }
-                  }
+                      </form>';
+                          }
                 ?>
-                </form>
                     </tbody>
                   </table>
                 </div>
@@ -210,30 +217,34 @@ include '../../BackEnd/database/config.php';
                       </tr>
                     </thead>
                     <tbody>
-                    <form action="../../BackEnd/database/requests.php" method="POST">
+                    
                       <?php
-                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Approved'");
-                        if($result)
-                        {
+                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='On-going'");
+                        
                           while ($row = mysqli_fetch_array($result)){  
-                        ?>
-                      <tr>
-                        <td><?php echo date("Y").$row['requestID'] ?></td>
-                        <td><?php echo $row['accountID'] ?></td>
-                        <td><?php echo $row['dateFiled'] ?></td>
-                        <td><?php echo $row['serviceType'] ?></td>
-                        <td><?php echo $row['concern'] ?></td>
-                        <td><?php echo $row['status'] ?></td>
-                        <td>
-                        <textarea class="form-control" rows="1" name="adminNotes"></textarea>
-                        </td>
-                        <td>
-                          <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
-                          <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
-                        </td>
-                      </tr>
-                      <?php
-                    }
+                            $id = $row['requestID'];
+                            $accountID = $row['accountID'];
+                            $dateFiled = $row['dateFiled'];
+                            $serviceType = $row['serviceType'];
+                            $status = $row['status'];
+                            $concern = $row['concern'];
+                            echo '<tr>
+                            <form action="../../BackEnd/database/requests.php?idpending='.$idpending.'" method="POST">
+                              <td> '.date("Y").$idpending.'</td>
+                              <td> '.$accountID.'</td>
+                              <td> '.$dateFiled.'</td>
+                              <td> '.$serviceType.'</td>
+                              <td> '.$concern.'</td>
+                              <td> '.$status.'</td>
+                              <td>
+                              <textarea class="form-control" rows="1" name="notes"></textarea>
+                              </td>
+                              <td>
+                                <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
+                                <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
+                              </td>
+                            </tr>
+                            </form>';
                   }
                 ?>
                 </form>

@@ -122,7 +122,7 @@ include '../../BackEnd/database/config.php';
     <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
         <!-- SERVICE BUTTONS -->
-        <form action="../../BackEnd/database/requests.php" method="POST" class="needs-validation" novalidate="">
+        <form action="../../BackEnd/database/requests.php?" method="POST" class="needs-validation" novalidate="">
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">User: </label>
             <div class="col-sm-10">
@@ -136,9 +136,11 @@ include '../../BackEnd/database/config.php';
                 <option selected>Please select a Service</option>
                 <?php 
                 $result = mysqli_query($conn,"SELECT * FROM services");
-                while ($row = mysqli_fetch_assoc($result)){
+                while ($row = mysqli_fetch_array($result)){
+                  $serviceID = $row['serviceID'];
+                  $serviceType = $row['serviceType']
                   ?>
-                  <option><?php echo $row['serviceType'] ?></option>
+                  <option><?php echo $serviceType ?></option>
                   <?php } ?>
               </select>
             </div>
@@ -149,9 +151,9 @@ include '../../BackEnd/database/config.php';
               <textarea class="form-control" rows="5" name="concern"></textarea>
             </div>
           </div>
-          <input type="hidden" value="Pending" name="status">
-
-
+          <input type="hidden" value="Pending" name="pending">     
+          <input type="hidden" value="On-going" name="ongoing">     
+          <input type="hidden" value="Completed" name="completed">     
           <button type="submit" name="reqSubmit" class="btn btn-unselected">Submit</button>
         </form>
 
