@@ -124,22 +124,42 @@ include '../../BackEnd/database/config.php';
                 while ($row = mysqli_fetch_array($reqSelect)){
               ?>
                 <tr>
-                    <td><?php echo $row['requestID']?></td>
+                    <td><?php echo date("Y").$row['requestID']?></td>
                     <td><?php echo $row['dateFiled'] ?></td>
                     <td><?php echo $row['serviceType'] ?></td>
                     <td><?php echo $row['status'] ?></td>
                     <td><?php echo $row['dateCompleted'] ?></td>
                     <td>
-                      <button type="submit" name="cancelReq" class="btn btn-danger">Cancel</button>
+                      <button type="submit" name="cancelReq" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#info<?php $row['requestID']; ?>"><i class="bi bi-eye"></i>
+                      </button>
+                      <button type="submit" name="cancelReq" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i>
+                      </button>
                     </td>
-                    
-                </tr>
-              <?php 
+                  </tr>
+                  <?php 
               }
-              }
-              ?>
+            }
+            ?>
             </tbody>
         </table>
+    </div>
+  </div>
+</div>
+<!-- MODAL FOR SERVICE REQUEST INFO -->
+<div class="modal" tabindex="-1" id="info">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalBasicLabel">REPAIR NOTES</h5>
+        <button type="button" class="btn-close"  aria-label="Close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        notes about the repair
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>

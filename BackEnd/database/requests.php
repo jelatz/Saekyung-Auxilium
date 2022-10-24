@@ -2,10 +2,6 @@
 session_start();
 include 'config.php';
 
-// REQUESTS
-if(isset($_POST['reqSubmit']))
-{
-
 // FUNCTION FOR VALIDATION
 function validate($data){
     $data = trim($data);
@@ -13,6 +9,12 @@ function validate($data){
     $data = htmlspecialchars($data);
     return $data;
 }
+
+// REQUESTS
+if(isset($_POST['reqSubmit']))
+{
+
+
 
 // VARIABLES FOR REQUEST
     
@@ -54,10 +56,32 @@ else
 
 if(isset($_POST['accept_btn']))
 {
-    $idpending = $_GET['idpending'];
-    $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 2 WHERE requestID='$idpending'");
+    $maintPerson = validate($_POST['maintPerson']);
+    
+    $id = $_GET['id'];
+    $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 2 WHERE requestID='$id'");
     if($update)
     {
+        header('Location:../../FrontEnd/admin/dashboardpending.php');
+        exit();
+    }
+    else
+    {
+        echo "<script> alert(`Can't accept this request!');</script>";
+        header('Location:../../FrontEnd/admin/dashboardpending.php');
+        exit();
+    }
+}
+
+// COMPLETE REPORT
+
+if(isset($_POST['complete_btn']))
+{
+    $id = $_GET['id'];
+    $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 3 WHERE requestID='$id'");
+    if($update)
+    {
+        $insert = mysqli_query($conn,"INSERT INTO servicerequest (dateCompleted) VALUES (CURRENT_TIMESTAMP)");
         header('Location:../../FrontEnd/admin/dashboardpending.php');
         exit();
     }

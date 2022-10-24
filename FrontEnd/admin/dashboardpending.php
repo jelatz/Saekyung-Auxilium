@@ -104,7 +104,7 @@ include '../../BackEnd/database/config.php';
             Accounts
           </a>
           <a href="#services" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="servicesTab" aria-controls="services" role="tab" aria-selected="false">
-            Services
+            Services & Personnel
           </a>
           <a href="#reports" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="reportsTab" aria-controls="reports" role="tab" aria-selected="false">
             Reports
@@ -154,8 +154,8 @@ include '../../BackEnd/database/config.php';
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
-                        <th>Status</th>
                         <th>Concern</th>
+                        <th>Maintenance Personnel</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -166,7 +166,7 @@ include '../../BackEnd/database/config.php';
                         // {
                           while ($row = mysqli_fetch_array($result)) 
                           {
-                            $idpending = $row['requestID'];
+                            $id = $row['requestID'];
                             $accountID = $row['accountID'];
                             $dateFiled = $row['dateFiled'];
                             $serviceType = $row['serviceType'];
@@ -174,13 +174,15 @@ include '../../BackEnd/database/config.php';
                             $concern = $row['concern'];
                        
                       echo '<tr>
-                      <form action="../../BackEnd/database/requests.php?idpending='.$idpending.'" method="POST">
-                        <td> '.date("Y").$idpending.'</td>
+                      <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
+                        <td> '.date("Y").$id.'</td>
                         <td> '.$accountID.'</td>
                         <td> '.$dateFiled.'</td>
                         <td> '.$serviceType.'</td>
-                        <td> '.$status.'</td>
                         <td> '.$concern.'</td>
+                        <td> 
+                        <textarea class="form-control" rows="1" name="maintPerson"></textarea>
+                        </td>
                         <td>
                           <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
                           <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
@@ -229,8 +231,8 @@ include '../../BackEnd/database/config.php';
                             $status = $row['status'];
                             $concern = $row['concern'];
                             echo '<tr>
-                            <form action="../../BackEnd/database/requests.php?idpending='.$idpending.'" method="POST">
-                              <td> '.date("Y").$idpending.'</td>
+                            <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
+                              <td> '.date("Y").$id.'</td>
                               <td> '.$accountID.'</td>
                               <td> '.$dateFiled.'</td>
                               <td> '.$serviceType.'</td>
@@ -240,14 +242,12 @@ include '../../BackEnd/database/config.php';
                               <textarea class="form-control" rows="1" name="notes"></textarea>
                               </td>
                               <td>
-                                <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
-                                <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
+                                <button type="submit" class="btn btn-primary btn-block" name="complete_btn">Complete</button>
                               </td>
                             </tr>
                             </form>';
                   }
                 ?>
-                </form>
                     </tbody>
                   </table>
                 </div>
@@ -273,13 +273,26 @@ include '../../BackEnd/database/config.php';
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
-                      </tr>
+                    <?php
+                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Completed'");
+                        
+                          while ($row = mysqli_fetch_array($result)){  
+                            $id = $row['requestID'];
+                            $accountID = $row['accountID'];
+                            $dateFiled = $row['dateFiled'];
+                            $serviceType = $row['serviceType'];
+                            $dateCompleted = $row['dateCompleted'];
+                            echo '<tr>
+                            <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
+                              <td> '.date("Y").$id.'</td>
+                              <td> '.$accountID.'</td>
+                              <td> '.$dateFiled.'</td>
+                              <td> '.$serviceType.'</td>
+                              <td> '.$dateCompleted.'</td>
+                            </tr>
+                            </form>';
+                  }
+                ?>
                     </tbody>
                   </table>
                 </div>
