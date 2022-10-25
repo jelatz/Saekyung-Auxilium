@@ -146,9 +146,9 @@ include '../../BackEnd/database/config.php';
             </div>
           </div>
           <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Concern: </label>
+              <label for="inputEmail3" class="col-sm-2 col-form-label" >Concern: </label>
             <div class="col-sm-10">
-              <textarea class="form-control" rows="5" name="concern"></textarea>
+              <textarea class="form-control" rows="5" name="concern" placeholder="Please enter you detailed concern" required></textarea>
             </div>
           </div>
           <input type="hidden" value="Pending" name="pending">     

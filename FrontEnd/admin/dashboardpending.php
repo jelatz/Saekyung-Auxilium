@@ -1,6 +1,23 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+
+$dashboard = 1;
+$accounts = 2;
+$services = 3;
+$reports = 4;
+$pending = 1;
+$ongoing = 5;
+$completed = 6;
+
+global $dashboard;
+global $accounts;
+global $services;
+global $reports;
+global $pending;
+global $ongoing;
+global $completed;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,17 +113,17 @@ include '../../BackEnd/database/config.php';
       <!-- HOME PAGE NAVIGATION -->
       <div class="col-md-2">
         <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical" id="homeNav">
-
-          <a href="#dashboard" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true">
+          
+          <a href="#dashboard<?php $dashboard ?>" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true" onclick="window.location.reload()">
             Dashboard
           </a>
-          <a href="#accounts" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false">
+          <a href="#accounts<?php $accounts ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false" onclick="window.location.reload()">
             Accounts
           </a>
-          <a href="#services" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="servicesTab" aria-controls="services" role="tab" aria-selected="false">
-            Services & Personnel
+          <a href="#services<?php $services ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="servicesTab" aria-controls="services" role="tab" aria-selected="false" onclick="window.location.reload()">
+            Services
           </a>
-          <a href="#reports" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="reportsTab" aria-controls="reports" role="tab" aria-selected="false">
+          <a href="#reports<?php $reports ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="reportsTab" aria-controls="reports" role="tab" aria-selected="false" onclick="window.location.reload()">
             Reports
           </a>
         </nav>
@@ -116,21 +133,21 @@ include '../../BackEnd/database/config.php';
         <div class="tab-content" id="homeNavContent">
           <!--DASHBOARD CONTENTS -->
           <!-- DASHBOARD TABS -->
-          <div class="tab-pane show active" id="dashboard" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
+          <div class="tab-pane show active" id="dashboard<?php $dashboard ?>" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0" >
             <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
             <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist" id="dashboardTabs">
               <div class="col">
-                <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-secondary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending">
+                <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-secondary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending<?php $pending ?>" onclick="window.location.reload()">
                   Pending
                 </button>
               </div>
               <div class="col">
-                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing">
+                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing<?php $ongoing ?>">
                   On-Going
                 </button>
               </div>
               <div class="col">
-                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab">
+                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab<?php $completed ?>">
                   Completed
                 </button>
               </div>
@@ -138,7 +155,7 @@ include '../../BackEnd/database/config.php';
             <!-- DASHBOARD TAB CONTENTS -->
             <div class="tab-content" id="dashboardContent">
               <!-- PENDING CONTENTS -->
-              <div class="tab-pane show active" id="pending" role="tabpanel">
+              <div class="tab-pane show active" id="pending<?php $pending ?>" role="tabpanel">
                 <!-- SEARCH BAR -->
                 <div class="input-group rounded my-4 w-50 mx-auto">
                   <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -155,7 +172,6 @@ include '../../BackEnd/database/config.php';
                         <th>Date Filed</th>
                         <th>Service Type</th>
                         <th>Concern</th>
-                        <th>Maintenance Personnel</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -180,9 +196,6 @@ include '../../BackEnd/database/config.php';
                         <td> '.$dateFiled.'</td>
                         <td> '.$serviceType.'</td>
                         <td> '.$concern.'</td>
-                        <td> 
-                        <textarea class="form-control" rows="1" name="maintPerson"></textarea>
-                        </td>
                         <td>
                           <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
                           <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
@@ -196,7 +209,7 @@ include '../../BackEnd/database/config.php';
                 </div>
               </div>
               <!-- ON-GOING CONTENTS -->
-              <div class="tab-pane fade" id="onGoing" role="tabpanel">
+              <div class="tab-pane fade" id="onGoing<?php $ongoing ?>" role="tabpanel">
                 <!-- SEARCH BAR -->
                 <div class="input-group rounded my-4 w-50 mx-auto">
                   <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -213,7 +226,6 @@ include '../../BackEnd/database/config.php';
                         <th>Date Filed</th>
                         <th>Service Type</th>
                         <th>Concern</th>
-                        <th>Status</th>
                         <th>Notes</th>
                         <th>Action</th>
                       </tr>
@@ -228,7 +240,6 @@ include '../../BackEnd/database/config.php';
                             $accountID = $row['accountID'];
                             $dateFiled = $row['dateFiled'];
                             $serviceType = $row['serviceType'];
-                            $status = $row['status'];
                             $concern = $row['concern'];
                             echo '<tr>
                             <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
@@ -237,7 +248,6 @@ include '../../BackEnd/database/config.php';
                               <td> '.$dateFiled.'</td>
                               <td> '.$serviceType.'</td>
                               <td> '.$concern.'</td>
-                              <td> '.$status.'</td>
                               <td>
                               <textarea class="form-control" rows="1" name="notes"></textarea>
                               </td>
@@ -253,7 +263,7 @@ include '../../BackEnd/database/config.php';
                 </div>
               </div>
               <!-- COMPLETED CONTENTS -->
-              <div class="tab-pane fade" id="completed" role="tabpanel">
+              <div class="tab-pane fade" id="completed<?php $completed ?>" role="tabpanel">
                 <!-- SEARCH BAR -->
                 <div class="input-group rounded my-4 w-50 mx-auto">
                   <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -269,6 +279,8 @@ include '../../BackEnd/database/config.php';
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
+                        <th>Concern</th>
+                        <th>Notes</th>
                         <th>Date Completed</th>
                       </tr>
                     </thead>
@@ -281,6 +293,8 @@ include '../../BackEnd/database/config.php';
                             $accountID = $row['accountID'];
                             $dateFiled = $row['dateFiled'];
                             $serviceType = $row['serviceType'];
+                            $concern = $row['concern'];
+                            $notes = $row['notes'];
                             $dateCompleted = $row['dateCompleted'];
                             echo '<tr>
                             <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
@@ -288,6 +302,8 @@ include '../../BackEnd/database/config.php';
                               <td> '.$accountID.'</td>
                               <td> '.$dateFiled.'</td>
                               <td> '.$serviceType.'</td>
+                              <td> '.$concern.'</td>
+                              <td> '.$notes.'</td>
                               <td> '.$dateCompleted.'</td>
                             </tr>
                             </form>';
@@ -300,7 +316,7 @@ include '../../BackEnd/database/config.php';
             </div>
           </div>
           <!-- ACCOUNTS CONTENTS -->
-          <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accountsTab" tabindex="0">
+          <div class="tab-pane fade" id="accounts<?php $accounts ?>" role="tabpanel" aria-labelledby="accountsTab" tabindex="0">
             <div class="row justify-content-center">
               <div class="input-group rounded my-4 w-50">
                 <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
@@ -313,7 +329,7 @@ include '../../BackEnd/database/config.php';
               <table class="table table-sm table-bordered">
                 <thead>
                   <tr>
-                    <th>AccountsID</th>
+                    <th>Account ID</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -321,7 +337,7 @@ include '../../BackEnd/database/config.php';
                   <?php
                   $userResult = mysqli_query($conn, "SELECT * FROM accounts");
                   if ($userResult) {
-                    while ($row = mysqli_fetch_array($userResult));
+                    while ($row = mysqli_fetch_array($userResult)){
                     $userName = $row['accountID'];
                     echo '
                     <tr>
@@ -330,6 +346,7 @@ include '../../BackEnd/database/config.php';
                       <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
                     </td>';
                   }
+                  }
                   ?>
                   </tr>
                 </tbody>
@@ -337,7 +354,7 @@ include '../../BackEnd/database/config.php';
             </div>
           </div>
           <!-- SERVICES CONTENTS -->
-          <div class="tab-pane fade p-5" id="services" role="tabpanel" aria-labelledby="servicesTab" tabindex="0">
+          <div class="tab-pane fade p-5" id="services<?php $services ?>" role="tabpanel" aria-labelledby="servicesTab" tabindex="0">
             <div class="row justify-content-center">
               <!-- ALERT MESSAGE IF SERVICE TYPE IS SUCCESSFULLY ADDED -->
               <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
@@ -404,7 +421,7 @@ include '../../BackEnd/database/config.php';
             </div>
           </div>
           <!-- REPORTS CONTENTS -->
-          <div class="tab-pane container-md fade" id="reports">
+          <div class="tab-pane container-md fade" id="reports<?php $reports ?>">
             <div class="col-12 p-3">
               <p class="fw-bold text-start">Reports</p>
               <div class="row my-5">
@@ -455,7 +472,7 @@ include '../../BackEnd/database/config.php';
               </div>
               <div class="row justify-content-center my-2">
                 <div class="col-sm-6">
-                  <button type="submit" class="btn btn-unselected  text-nowrap">View Report</button>
+                  <button type="submit" class="btn btn-unselected text-nowrap">View Report</button>
                 </div>
               </div>
             </div>

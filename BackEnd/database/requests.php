@@ -14,8 +14,6 @@ function validate($data){
 if(isset($_POST['reqSubmit']))
 {
 
-
-
 // VARIABLES FOR REQUEST
     
     $accountID = validate ($_POST['accountID']);
@@ -56,8 +54,6 @@ else
 
 if(isset($_POST['accept_btn']))
 {
-    $maintPerson = validate($_POST['maintPerson']);
-    
     $id = $_GET['id'];
     $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 2 WHERE requestID='$id'");
     if($update)
@@ -78,12 +74,12 @@ if(isset($_POST['accept_btn']))
 if(isset($_POST['complete_btn']))
 {
     $id = $_GET['id'];
-    $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 3 WHERE requestID='$id'");
+    $notes = validate ($_POST['notes']);
+    $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 3,notes='$notes', dateCompleted = CURRENT_TIMESTAMP WHERE requestID='$id'");
     if($update)
-    {
-        $insert = mysqli_query($conn,"INSERT INTO servicerequest (dateCompleted) VALUES (CURRENT_TIMESTAMP)");
-        header('Location:../../FrontEnd/admin/dashboardpending.php');
-        exit();
+    {      
+            header('Location:../../FrontEnd/admin/dashboardpending.php');
+            exit();
     }
     else
     {
