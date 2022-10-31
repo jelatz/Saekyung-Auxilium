@@ -47,7 +47,9 @@ if($insert)
 else
 {
     header('Location:../../FrontEnd/residents/services.php?error=Request not sent!');
+    exit();
 }
+$conn -> close();
 }
 
 // ACCEPTING REQUESTS
@@ -67,6 +69,7 @@ if(isset($_POST['accept_btn']))
         header('Location:../../FrontEnd/admin/dashboardpending.php');
         exit();
     }
+    $conn -> close();
 }
 
 // COMPLETE REPORT
@@ -87,6 +90,7 @@ if(isset($_POST['complete_btn']))
         header('Location:../../FrontEnd/admin/dashboardpending.php');
         exit();
     }
+    $conn -> close();
 }
 
 

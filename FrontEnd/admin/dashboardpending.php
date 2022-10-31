@@ -29,7 +29,6 @@ global $completed;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-
   <style>
     @media screen and (min-width: 768px) {
       .navbar-nav {
@@ -109,7 +108,7 @@ global $completed;
   </div>
   <!-- ADMIN HOME PAGE CONTAINER -->
   <div class="container-fluid mt-5 text-center">
-    <div class="row justify-content-center gap-4">
+    <div class="row justify-content-center gap-3">
       <!-- HOME PAGE NAVIGATION -->
       <div class="col-md-2">
         <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical" id="homeNav">
@@ -422,60 +421,35 @@ global $completed;
           </div>
           <!-- REPORTS CONTENTS -->
           <div class="tab-pane container-md fade" id="reports<?php $reports ?>">
-            <div class="col-12 p-3">
-              <p class="fw-bold text-start">Reports</p>
-              <div class="row my-5">
-                <div class="col-6 fw-bold">Montly</div>
-                <div class="col-6 fw-bold">Yearly</div>
-              </div>
-              <div class="row text-center">
-                <ul class="list-inline p-0 p-md-2">
-                  <span>
-                    <i class="bi bi-person-bounding-box" style="background-color:blue; color:blue;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Electrical</li>
-                  </span>
-                  <span><i class="bi bi-person-bounding-box" style="background-color:orangered; color:orangered;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Furniture</li>
-                  </span>
-                  <span><i class="bi bi-person-bounding-box" style="background-color:gray; color:gray;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Painting</li>
-                  </span>
-                  <span><i class="bi bi-person-bounding-box" style="background-color:yellow; color:yellow;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Plumbing</li>
-                  </span>
-                  <span><i class="bi bi-person-bounding-box" style="background-color:darkblue; color:darkblue;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Security</li>
-                  </span>
-                  <span><i class="bi bi-person-bounding-box" style="background-color:green; color:green;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Tile</li>
-                  </span>
-                  <span><i class="bi bi-person-bounding-box" style="background-color:red; color:red;"></i>
-                    <li class="list-inline-item fw-bold text-dark">Others</li>
-                  </span>
-                </ul>
-              </div>
-              <!-- DOWNLOADING REPORTS -->
-              <div class="row justify-content-center">
-                <div class="col-7 my-3 fw-bold">Date</div>
-              </div>
-              <div class="row justify-content-center">
-                <form action="/action_page.php">
-                  <div class="mb-3 mt-3">
-                    <label for="from" class="form-label">From:</label>
-                    <input type="date" class="form-control mx-auto w-auto" id="from">
-                  </div>
-                  <div class="mb-3">
-                    <label for="to" class="form-label">To:</label>
-                    <input type="date" class="form-control mx-auto w-auto" id="to">
-                  </div>
-                </form>
-              </div>
-              <div class="row justify-content-center my-2">
-                <div class="col-sm-6">
-                  <button type="submit" class="btn btn-unselected text-nowrap">View Report</button>
-                </div>
+            <div class="row justify-content-center text-center">
+              <div class="col mx-auto">
+                <?php 
+                  $result = mysqli_query($conn,"SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
+                ?>
+              <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
               </div>
             </div>
+            <div class="row">
+
+            </div>
+              <!-- VIEW REPORTS -->
+              <div class="row text-start mt-5 mb-2">
+                    <h5>Date</h5>
+              </div>
+              <form action="#" class="form-inline">
+                <div class="row text-start mb-3">
+                  <label for="From" class="col-sm-1 col-form-label h6">From: </label>
+                  <div class="col-sm-3">
+                    <input type="date" class="form-control" id="from">
+                  </div>
+                  <label for="To" class="col-sm-1 col-form-label h6">To: </label>
+                  <div class="col-sm-3">
+                    <input type="date" class="form-control" id="from">
+                  </div>
+                  <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
+                </div>
+              </form>
+            <!-- REPORT END -->
           </div>
         </div>
       </div>
@@ -486,9 +460,9 @@ global $completed;
   </div>
 
   <!-- SCRIPTS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="../_assets/js/bootstrap.bundle.js"></script>
-  <script type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../_assets/js/bootstrap.bundle.js"></script>
+<script type="text/javascript">
     var forms = document.querySelectorAll('.needs-validation')
     Array.prototype.slice.call(forms)
       .forEach(function(form) {
@@ -540,13 +514,8 @@ global $completed;
     // get pill id on load
     getPillId();
   </script>
-
-
-
-
-
   <!-- LOCAL STORAGE FOR DASHBOARD TABS -->
-  <!-- <script>
+    <!-- <script>
     const pillsTab2 = document.querySelector('#dashboardTabs');
     const pills2 = pillsTab2.querySelectorAll('button[data-bs-toggle="pill"]');
 
@@ -578,8 +547,39 @@ global $completed;
 
     // get pill id on load
     getPillId2(); -->
-  </script>
+    <!-- </script> -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+      
+        var data = google.visualization.arrayToDataTable([
+          ['serviceType', 'completed'],
+          
+          <?php
+            while ($row = mysqli_fetch_array($result))
+            {
+              echo "['".$row["serviceType"]."' , ".$row["completed"]."],";
+            }
+          ?>
+         
+        ]);
+
+        var options = {
+          backgroundColor: 'transparent',
+          title: 'Service Request Reports'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+ 
+    
 </body>
 
 </html>
