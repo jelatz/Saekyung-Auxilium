@@ -429,9 +429,6 @@ global $completed;
               <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
               </div>
             </div>
-            <div class="row">
-
-            </div>
               <!-- VIEW REPORTS -->
               <div class="row text-start mt-5 mb-2">
                     <h5>Date</h5>
