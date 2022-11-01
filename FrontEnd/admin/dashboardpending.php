@@ -433,20 +433,43 @@ global $completed;
               <div class="row text-start mt-5 mb-2">
                     <h5>Date</h5>
               </div>
-              <form action="#" class="form-inline">
+              <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
                 <div class="row text-start mb-3">
                   <label for="From" class="col-sm-1 col-form-label h6">From: </label>
                   <div class="col-sm-3">
-                    <input type="date" class="form-control" id="from">
+                    <input type="datetime-local" class="form-control" id="from" name="from">
                   </div>
                   <label for="To" class="col-sm-1 col-form-label h6">To: </label>
                   <div class="col-sm-3">
-                    <input type="date" class="form-control" id="from">
+                    <input type="datetime-local" class="form-control" id="from" name="to">
                   </div>
                   <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
                 </div>
               </form>
             <!-- REPORT END -->
+            <?php 
+            $id = 'reportView';
+            ?>
+            <div class="row fade" id="report_view<?php $id ?>">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th>Request #</th>
+                        <th>User</th>
+                        <th>Date Filed</th>
+                        <th>Service Type</th>
+                        <th>Concern</th>
+                        <th>Notes</th>
+                        <th>Date Completed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- RESULTS FOR VIEW REPORTS -->
+                    </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
