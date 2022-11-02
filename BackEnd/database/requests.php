@@ -86,7 +86,7 @@ if(isset($_POST['complete_btn']))
     }
     else
     {
-        echo "<script> alert(`Can't accept this request!');</script>";
+        echo "<script> alert(`Can't complete this request!');</script>";
         header('Location:../../FrontEnd/admin/dashboardpending.php');
         exit();
     }

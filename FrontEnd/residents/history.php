@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+// include '../../BackEnd/database/requests.php';
 ?>
 
 
@@ -40,7 +41,8 @@ include '../../BackEnd/database/config.php';
       <div class="dropdown">
         <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php if(isset($_SESSION['username'])){
-        echo "Welcome! " . $_SESSION['username'];}?>
+            $username = $_SESSION['username'];
+        echo "Welcome! " . $username;}?>
         <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
          <li class="nav-item my-2">
@@ -109,6 +111,7 @@ include '../../BackEnd/database/config.php';
             <thead>
                 <tr>
                     <th class="text-nowrap">Request #</th>
+                    <th class="text-nowrap">Unit #</th>
                     <th class="text-nowrap">Date Filed</th>
                     <th class="text-nowrap">Service</th>
                     <th class="text-nowrap">Status</th>
@@ -117,26 +120,27 @@ include '../../BackEnd/database/config.php';
                 </tr>
             </thead>
             <tbody>
-              <?php
-                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID");
+          <?php
+                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE accountID = '$username' ORDER BY requestID DESC");
                 if($reqSelect)
                 {
-                while ($row = mysqli_fetch_array($reqSelect)){
-              ?>
+                  while ($row = mysqli_fetch_array($reqSelect)){
+                    ?>
                 <tr>
-                    <td><?php echo date("Y").$row['requestID']?></td>
-                    <td><?php echo $row['dateFiled'] ?></td>
-                    <td><?php echo $row['serviceType'] ?></td>
-                    <td><?php echo $row['status'] ?></td>
-                    <td><?php echo $row['dateCompleted'] ?></td>
-                    <td>
-                      <button type="submit" name="cancelReq" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#info<?php $row['requestID']; ?>"><i class="bi bi-eye"></i>
-                      </button>
-                      <button type="submit" name="cancelReq" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <?php 
+                  <td><?php echo date("Y").$row['requestID']?></td>
+                  <td><?php echo $row['accountID']?></td>
+                  <td><?php echo $row['dateFiled'] ?></td>
+                  <td><?php echo $row['serviceType'] ?></td>
+                  <td><?php echo $row['status'] ?></td>
+                  <td><?php echo $row['dateCompleted'] ?></td>
+                  <td>
+                    <button type="submit" name="info" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#info<?php $row['requestID']; ?>"><i class="bi bi-eye"></i>
+                  </button>
+                  <button type="submit" name="cancelReq" class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i>
+                </button>
+              </td>
+            </tr>
+            <?php 
               }
             }
             ?>

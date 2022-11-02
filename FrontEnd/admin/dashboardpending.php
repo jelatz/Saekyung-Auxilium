@@ -285,7 +285,7 @@ global $completed;
                     </thead>
                     <tbody>
                     <?php
-                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Completed'");
+                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Completed' ORDER BY requestID DESC");
                         
                           while ($row = mysqli_fetch_array($result)){  
                             $id = $row['requestID'];
