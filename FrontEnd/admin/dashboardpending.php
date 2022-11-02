@@ -53,6 +53,7 @@ global $completed;
       <div class="collapse navbar-collapse justify-content-end">
         <div class="navbar-md-nav d-flex align-items-center">
           <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
+          <!-- INSERT ALL FETCHED ARRAY HERE FOR NOTIFICATION COUNTER-->
           </a>
           <div class="dropdown">
             <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) 
@@ -99,7 +100,8 @@ global $completed;
           <h5 class="modal-title" id="norifTitle">Change Password</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">SAMPLE NOTIFICATIONS
+        <div class="modal-body">
+          <!-- INSERT BOOTSTRAP TOAST FOR NOTIFICATIONS -->
         </div>
         <div class="modal-footer">
         </div>
@@ -445,32 +447,9 @@ global $completed;
                   </div>
                   <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
                 </div>
-              </form>
-            <!-- REPORT END -->
-            <?php 
-            $id = 'reportView';
-            ?>
-            <div class="row fade" id="report_view<?php $id ?>">
-              <div class="table-responsive">
-                <table class="table table-bordered table-sm">
-                    <thead>
-                      <tr>
-                        <th>Request #</th>
-                        <th>User</th>
-                        <th>Date Filed</th>
-                        <th>Service Type</th>
-                        <th>Concern</th>
-                        <th>Notes</th>
-                        <th>Date Completed</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- RESULTS FOR VIEW REPORTS -->
-                    </tbody>
-                </table>
-              </div>
-            </div>
+                  </form>
           </div>
+          <!-- REPORTS CONTENT END -->
         </div>
       </div>
     </div>
@@ -479,61 +458,64 @@ global $completed;
   </div>
   </div>
 
-  <!-- SCRIPTS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../_assets/js/bootstrap.bundle.js"></script>
-<script type="text/javascript">
-    var forms = document.querySelectorAll('.needs-validation')
-    Array.prototype.slice.call(forms)
-      .forEach(function(form) {
-        form.addEventListener('submit', function(event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-  </script>
+<!-- SCRIPTS -->
+  <!-- JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- BOOTSTRAP JS -->
+    <script src="../_assets/js/bootstrap.bundle.js"></script>
+  <!-- FORM VALIDATION SCRIPT -->
+    <script type="text/javascript">
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+          .forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+            
+              form.classList.add('was-validated')
+            }, false)
+          })
+    </script>
   <!-- LOCAL STORAGE FOR TABS -->
-  <script>
-    const pillsTab = document.querySelector('#homeNav');
-    const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
+    <script>
+      const pillsTab = document.querySelector('#homeNav');
+      const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
 
-    pills.forEach(pill => {
-      pill.addEventListener('shown.bs.tab', (event) => {
-        const {
-          target
-        } = event;
-        const {
-          id: targetId
-        } = target;
+      pills.forEach(pill => {
+        pill.addEventListener('shown.bs.tab', (event) => {
+          const {
+            target
+          } = event;
+          const {
+            id: targetId
+          } = target;
 
-        savePillId(targetId);
+          savePillId(targetId);
+        });
       });
-    });
 
-    const savePillId = (selector) => {
-      localStorage.setItem('activePillId', selector);
-    };
+      const savePillId = (selector) => {
+        localStorage.setItem('activePillId', selector);
+      };
 
-    const getPillId = () => {
-      const activePillId = localStorage.getItem('activePillId');
+      const getPillId = () => {
+        const activePillId = localStorage.getItem('activePillId');
 
-      // if local storage item is null, show default tab
-      if (!activePillId) return;
+        // if local storage item is null, show default tab
+        if (!activePillId) return;
 
-      // call 'show' function
-      const someTabTriggerEl = document.querySelector(`#${activePillId}`)
-      const tab = new bootstrap.Tab(someTabTriggerEl);
+        // call 'show' function
+        const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+        const tab = new bootstrap.Tab(someTabTriggerEl);
 
-      tab.show();
-    };
+        tab.show();
+      };
 
-    // get pill id on load
-    getPillId();
-  </script>
+      // get pill id on load
+      getPillId();
+    </script>
   <!-- LOCAL STORAGE FOR DASHBOARD TABS -->
     <!-- <script>
     const pillsTab2 = document.querySelector('#dashboardTabs');
@@ -568,38 +550,39 @@ global $completed;
     // get pill id on load
     getPillId2(); -->
     <!-- </script> -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+  <!-- GOOGLE PIE CHART SCRIPT -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-      
-        var data = google.visualization.arrayToDataTable([
-          ['serviceType', 'completed'],
-          
-          <?php
-            while ($row = mysqli_fetch_array($result))
-            {
-              echo "['".$row["serviceType"]."' , ".$row["completed"]."],";
-            }
-          ?>
-         
-        ]);
+        function drawChart() {
+        
+          var data = google.visualization.arrayToDataTable([
+            ['serviceType', 'completed'],
 
-        var options = {
-          backgroundColor: 'transparent',
-          title: 'Service Request Reports'
-        };
+            <?php
+              while ($row = mysqli_fetch_array($result))
+              {
+                echo "['".$row["serviceType"]."' , ".$row["completed"]."],";
+              }
+            ?>
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+          ]);
 
-        chart.draw(data, options);
-      }
-    </script>
+          var options = {
+            backgroundColor: 'transparent',
+            title: 'Service Request Reports'
+          };
 
- 
-    
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+          chart.draw(data, options);
+        }
+      </script>
+
+  <!-- VIEW REPORTS SCRIPT -->
+
 </body>
 
 </html>

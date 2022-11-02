@@ -13,14 +13,14 @@ function validate($data){
 
 if(isset($_POST['view_report'])){
     $from = validate ($_POST['from']);
+    $_SESSION['from'] = $from;
     $to = validate ($_POST['to']);
+    $_SESSION['to'] = $to;
 
-    $result = mysqli_query($conn, "SELECT dateCompleted FROM servicerequest WHERE dateCompleted BETWEEN '$from' AND '$to'");
-    $row = mysqli_fetch_all($result);
-
-
-    print_r($row);
-
+    // $result = mysqli_query($conn, "SELECT dateCompleted FROM servicerequest WHERE dateCompleted BETWEEN '$from' AND '$to'");
+    
+    header('Location:../../FrontEnd/admin/reportsView.php');
+    exit();
 }
 
 
