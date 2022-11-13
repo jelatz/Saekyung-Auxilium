@@ -2,22 +2,12 @@
 session_start();
 include '../../BackEnd/database/config.php';
 
-$dashboard = 1;
-$accounts = 2;
-$services = 3;
-$reports = 4;
-$pending = 1;
-$ongoing = 5;
-$completed = 6;
+if(isset($_GET['notifid']))
+{
+  $notifid = $_GET['notifid'];
+  $update = mysqli_query($conn,"UPDATE notifications SET status = 1 WHERE notifID = $notifid");
 
-global $dashboard;
-global $accounts;
-global $services;
-global $reports;
-global $pending;
-global $ongoing;
-global $completed;
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,14 +42,51 @@ global $completed;
       <!-- NAVBAR CONTENT -->
       <div class="collapse navbar-collapse justify-content-end">
         <div class="navbar-md-nav d-flex align-items-center">
-          <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
-          <!-- INSERT ALL FETCHED ARRAY HERE FOR NOTIFICATION COUNTER-->
-          </a>
           <div class="dropdown">
-            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) 
-              {
-              echo "Welcome! " . $_SESSION['username'];
-              } ?>
+            <!-- NOTIFICATIONS -->
+            <?php
+              $selectnotif = mysqli_query($conn,"SELECT * FROM notifications WHERE status = 0");
+              $count = mysqli_num_rows($selectnotif);
+            ?>
+            <button type="button" class="btn btn-link  border-0 mx-auto " data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21"><span class="badge bg-danger rounded-circle" style="position: relative; top:-10px;">
+            <?php
+              echo $count;
+            ?>
+          </span>
+            </button>
+            <ul class="dropdown-menu px-5 m-0 bg-transparent border-0" style="left: -10rem;">
+              <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                  <img src="../_assets/images/bell-fill.svg" class="img-fluid me-2" width="21">
+                  <strong class="me-auto text-center">Notifications</strong>
+                </div>
+                <?php 
+                  $select = mysqli_query($conn,"SELECT * FROM notifications WHERE status = 0");
+                  while ($row = mysqli_fetch_array($select))
+                  {
+                    $notifID = $row['notifID'];
+                ?>
+                <a href="dashboardpending.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto"><?php echo $row['user'];?></strong>
+                      <small class="text-muted"><?php echo time();?></small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      <p><?php echo $row['message']?></p>
+                    </div>
+                  </div>
+                </a>
+                  <?php
+                  }
+                  ?>
+              </div>
+            </ul>
+          </div>
+          <!-- INSERT ALL FETCHED ARRAY HERE FOR NOTIFICATION COUNTER-->
+          <div class="dropdown">
+            <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php if (isset($_SESSION['username'])) { echo "Welcome! " . $_SESSION['username']; } ?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item">
@@ -92,30 +119,14 @@ global $completed;
       </ul>
     </div>
   </div>
-  <!-- NOTIFICATION MODAL -->
-  <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content" style="background-color: rgba(255,248,243);">
-        <div class="modal-header">
-          <h5 class="modal-title" id="norifTitle">Change Password</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- INSERT BOOTSTRAP TOAST FOR NOTIFICATIONS -->
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- ADMIN HOME PAGE CONTAINER -->
   <div class="container-fluid mt-5 text-center">
     <div class="row justify-content-center gap-3">
       <!-- HOME PAGE NAVIGATION -->
       <div class="col-md-2">
         <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical" id="homeNav">
-          
-          <a href="#dashboard<?php $dashboard ?>" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true" onclick="window.location.reload()">
+
+          <a href="#dashboard<?php echo $dashboard ?>" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true" onclick="window.location.reload()">
             Dashboard
           </a>
           <a href="#accounts<?php $accounts ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false" onclick="window.location.reload()">
@@ -134,7 +145,7 @@ global $completed;
         <div class="tab-content" id="homeNavContent">
           <!--DASHBOARD CONTENTS -->
           <!-- DASHBOARD TABS -->
-          <div class="tab-pane show active" id="dashboard<?php $dashboard ?>" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0" >
+          <div class="tab-pane show active" id="dashboard<?php echo $dashboard; ?>" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
             <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
             <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist" id="dashboardTabs">
               <div class="col">
@@ -178,33 +189,30 @@ global $completed;
                     </thead>
                     <tbody>
                       <?php
-                        $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending'");
-                        // if($result)
-                        // {
-                          while ($row = mysqli_fetch_array($result)) 
-                          {
-                            $id = $row['requestID'];
-                            $accountID = $row['accountID'];
-                            $dateFiled = $row['dateFiled'];
-                            $serviceType = $row['serviceType'];
-                            $status = $row['status'];
-                            $concern = $row['concern'];
-                       
-                      echo '<tr>
-                      <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
-                        <td> '.date("Y").$id.'</td>
-                        <td> '.$accountID.'</td>
-                        <td> '.$dateFiled.'</td>
-                        <td> '.$serviceType.'</td>
-                        <td> '.$concern.'</td>
+                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending'");
+                      while ($row = mysqli_fetch_array($result)) {
+                        $id = $row['requestID'];
+                        $accountID = $row['accountID'];
+                        $dateFiled = $row['dateFiled'];
+                        $serviceType = $row['serviceType'];
+                        $status = $row['status'];
+                        $concern = $row['concern'];
+
+                        echo '<tr>
+                      <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
+                        <td> ' . date("Y") . $id . '</td>
+                        <td> ' . $accountID . '</td>
+                        <td> ' . $dateFiled . '</td>
+                        <td> ' . $serviceType . '</td>
+                        <td> ' . $concern . '</td>
                         <td>
                           <button type="submit" class="btn btn-primary btn-block" name="accept_btn">Accept</button>
                           <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
                       </form>';
-                          }
-                ?>
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
@@ -232,33 +240,33 @@ global $completed;
                       </tr>
                     </thead>
                     <tbody>
-                    
+
                       <?php
-                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='On-going'");
-                        
-                          while ($row = mysqli_fetch_array($result)){  
-                            $id = $row['requestID'];
-                            $accountID = $row['accountID'];
-                            $dateFiled = $row['dateFiled'];
-                            $serviceType = $row['serviceType'];
-                            $concern = $row['concern'];
-                            echo '<tr>
-                            <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
-                              <td> '.date("Y").$id.'</td>
-                              <td> '.$accountID.'</td>
-                              <td> '.$dateFiled.'</td>
-                              <td> '.$serviceType.'</td>
-                              <td> '.$concern.'</td>
+                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='On-going'");
+
+                      while ($row = mysqli_fetch_array($result)) {
+                        $id = $row['requestID'];
+                        $accountID = $row['accountID'];
+                        $dateFiled = $row['dateFiled'];
+                        $serviceType = $row['serviceType'];
+                        $concern = $row['concern'];
+                        echo '<tr>
+                            <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
+                              <td> ' . date("Y") . $id . '</td>
+                              <td> ' . $accountID . '</td>
+                              <td> ' . $dateFiled . '</td>
+                              <td> ' . $serviceType . '</td>
+                              <td> ' . $concern . '</td>
                               <td>
-                              <textarea class="form-control" rows="1" name="notes"></textarea>
+                              <textarea class="form-control" rows="1" name="notes" placeholder="Progress Notes: <br> Maintenance Personnel Assigned: <br> Additional Notes:"></textarea>
                               </td>
                               <td>
                                 <button type="submit" class="btn btn-primary btn-block" name="complete_btn">Complete</button>
                               </td>
                             </tr>
                             </form>';
-                  }
-                ?>
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
@@ -286,30 +294,30 @@ global $completed;
                       </tr>
                     </thead>
                     <tbody>
-                    <?php
-                         $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Completed' ORDER BY requestID DESC");
-                        
-                          while ($row = mysqli_fetch_array($result)){  
-                            $id = $row['requestID'];
-                            $accountID = $row['accountID'];
-                            $dateFiled = $row['dateFiled'];
-                            $serviceType = $row['serviceType'];
-                            $concern = $row['concern'];
-                            $notes = $row['notes'];
-                            $dateCompleted = $row['dateCompleted'];
-                            echo '<tr>
-                            <form action="../../BackEnd/database/requests.php?id='.$id.'" method="POST">
-                              <td> '.date("Y").$id.'</td>
-                              <td> '.$accountID.'</td>
-                              <td> '.$dateFiled.'</td>
-                              <td> '.$serviceType.'</td>
-                              <td> '.$concern.'</td>
-                              <td> '.$notes.'</td>
-                              <td> '.$dateCompleted.'</td>
+                      <?php
+                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Completed' ORDER BY requestID DESC");
+
+                      while ($row = mysqli_fetch_array($result)) {
+                        $id = $row['requestID'];
+                        $accountID = $row['accountID'];
+                        $dateFiled = $row['dateFiled'];
+                        $serviceType = $row['serviceType'];
+                        $concern = $row['concern'];
+                        $notes = $row['notes'];
+                        $dateCompleted = $row['dateCompleted'];
+                        echo '<tr>
+                            <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
+                              <td> ' . date("Y") . $id . '</td>
+                              <td> ' . $accountID . '</td>
+                              <td> ' . $dateFiled . '</td>
+                              <td> ' . $serviceType . '</td>
+                              <td> ' . $concern . '</td>
+                              <td> ' . $notes . '</td>
+                              <td> ' . $dateCompleted . '</td>
                             </tr>
                             </form>';
-                  }
-                ?>
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
@@ -338,15 +346,15 @@ global $completed;
                   <?php
                   $userResult = mysqli_query($conn, "SELECT * FROM accounts");
                   if ($userResult) {
-                    while ($row = mysqli_fetch_array($userResult)){
-                    $userName = $row['accountID'];
-                    echo '
+                    while ($row = mysqli_fetch_array($userResult)) {
+                      $userName = $row['accountID'];
+                      echo '
                     <tr>
                     <td>' . $userName . '</td>
                     <td>
                       <button type="submit" class="btn btn-primary btn-sm">Reset Password</button>
                     </td>';
-                  }
+                    }
                   }
                   ?>
                   </tr>
@@ -425,29 +433,29 @@ global $completed;
           <div class="tab-pane container-md fade" id="reports<?php $reports ?>">
             <div class="row justify-content-center text-center">
               <div class="col mx-auto">
-                <?php 
-                  $result = mysqli_query($conn,"SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
+                <?php
+                $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
                 ?>
-              <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
+                <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
               </div>
             </div>
-              <!-- VIEW REPORTS -->
-              <div class="row text-start mt-5 mb-2">
-                    <h5>Date</h5>
-              </div>
-              <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
-                <div class="row text-start mb-3">
-                  <label for="From" class="col-sm-1 col-form-label h6">From: </label>
-                  <div class="col-sm-3">
-                    <input type="datetime-local" class="form-control" id="from" name="from">
-                  </div>
-                  <label for="To" class="col-sm-1 col-form-label h6">To: </label>
-                  <div class="col-sm-3">
-                    <input type="datetime-local" class="form-control" id="from" name="to">
-                  </div>
-                  <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
+            <!-- VIEW REPORTS -->
+            <div class="row text-start mt-5 mb-2">
+              <h5>Date</h5>
+            </div>
+            <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
+              <div class="row text-start mb-3">
+                <label for="From" class="col-sm-1 col-form-label h6">From: </label>
+                <div class="col-sm-3">
+                  <input type="datetime-local" class="form-control" id="from" name="from">
                 </div>
-                  </form>
+                <label for="To" class="col-sm-1 col-form-label h6">To: </label>
+                <div class="col-sm-3">
+                  <input type="datetime-local" class="form-control" id="from" name="to">
+                </div>
+                <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
+              </div>
+            </form>
           </div>
           <!-- REPORTS CONTENT END -->
         </div>
@@ -458,66 +466,66 @@ global $completed;
   </div>
   </div>
 
-<!-- SCRIPTS -->
+  <!-- SCRIPTS -->
   <!-- JQUERY -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- BOOTSTRAP JS -->
-    <script src="../_assets/js/bootstrap.bundle.js"></script>
+  <script src="../_assets/js/bootstrap.bundle.js"></script>
   <!-- FORM VALIDATION SCRIPT -->
-    <script type="text/javascript">
-        var forms = document.querySelectorAll('.needs-validation')
-        Array.prototype.slice.call(forms)
-          .forEach(function(form) {
-            form.addEventListener('submit', function(event) {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
-            
-              form.classList.add('was-validated')
-            }, false)
-          })
-    </script>
+  <script type="text/javascript">
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  </script>
   <!-- LOCAL STORAGE FOR TABS -->
-    <script>
-      const pillsTab = document.querySelector('#homeNav');
-      const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
+  <script>
+    const pillsTab = document.querySelector('#homeNav');
+    const pills = pillsTab.querySelectorAll('a[data-bs-toggle="pill"]');
 
-      pills.forEach(pill => {
-        pill.addEventListener('shown.bs.tab', (event) => {
-          const {
-            target
-          } = event;
-          const {
-            id: targetId
-          } = target;
+    pills.forEach(pill => {
+      pill.addEventListener('shown.bs.tab', (event) => {
+        const {
+          target
+        } = event;
+        const {
+          id: targetId
+        } = target;
 
-          savePillId(targetId);
-        });
+        savePillId(targetId);
       });
+    });
 
-      const savePillId = (selector) => {
-        localStorage.setItem('activePillId', selector);
-      };
+    const savePillId = (selector) => {
+      localStorage.setItem('activePillId', selector);
+    };
 
-      const getPillId = () => {
-        const activePillId = localStorage.getItem('activePillId');
+    const getPillId = () => {
+      const activePillId = localStorage.getItem('activePillId');
 
-        // if local storage item is null, show default tab
-        if (!activePillId) return;
+      // if local storage item is null, show default tab
+      if (!activePillId) return;
 
-        // call 'show' function
-        const someTabTriggerEl = document.querySelector(`#${activePillId}`)
-        const tab = new bootstrap.Tab(someTabTriggerEl);
+      // call 'show' function
+      const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+      const tab = new bootstrap.Tab(someTabTriggerEl);
 
-        tab.show();
-      };
+      tab.show();
+    };
 
-      // get pill id on load
-      getPillId();
-    </script>
+    // get pill id on load
+    getPillId();
+  </script>
   <!-- LOCAL STORAGE FOR DASHBOARD TABS -->
-    <!-- <script>
+  <!-- <script>
     const pillsTab2 = document.querySelector('#dashboardTabs');
     const pills2 = pillsTab2.querySelectorAll('button[data-bs-toggle="pill"]');
 
@@ -549,38 +557,47 @@ global $completed;
 
     // get pill id on load
     getPillId2(); -->
-    <!-- </script> -->
+  <!-- </script> -->
   <!-- GOOGLE PIE CHART SCRIPT -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-        
-          var data = google.visualization.arrayToDataTable([
-            ['serviceType', 'completed'],
+    function drawChart() {
 
-            <?php
-              while ($row = mysqli_fetch_array($result))
-              {
-                echo "['".$row["serviceType"]."' , ".$row["completed"]."],";
-              }
-            ?>
+      var data = google.visualization.arrayToDataTable([
+        ['serviceType', 'completed'],
 
-          ]);
-
-          var options = {
-            backgroundColor: 'transparent',
-            title: 'Service Request Reports'
-          };
-
-          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-          chart.draw(data, options);
+        <?php
+        while ($row = mysqli_fetch_array($result)) {
+          echo "['" . $row["serviceType"] . "' , " . $row["completed"] . "],";
         }
-      </script>
+        ?>
 
+      ]);
+
+      var options = {
+        backgroundColor: 'transparent',
+        title: 'Service Request Reports'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+  <!-- NOTIFICATION TOAST SCRIPT -->
+  <script>
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function(toastEl) {
+      return new bootstrap.Toast(toastEl, {
+        autohide: false
+      }).show()
+    })
+  </script>
   <!-- VIEW REPORTS SCRIPT -->
 
 </body>

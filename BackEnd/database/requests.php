@@ -17,6 +17,7 @@ if(isset($_POST['reqSubmit']))
 // VARIABLES FOR REQUEST
     
     $accountID = validate ($_POST['accountID']);
+    $_SESSION['reqSubmitID'] = $accountID;
     $concern = validate ($_POST['concern']);
     $pending = validate($_POST['pending']);
     $ongoing = validate($_POST['ongoing']);
@@ -31,13 +32,16 @@ if($row == null)
     $insertstat = mysqli_query($conn,"INSERT INTO request_status (status) VALUES ('Pending'),('On-going'),('Completed')");
     if($insertstat)
     {
+        
         $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,statusID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = '$servType' limit 1),(SELECT (statusID) FROM request_status WHERE `status`='$pending' limit 1),'$concern',CURRENT_TIMESTAMP)");
+        $insertnotif = mysqli_query($conn,"INSERT INTO notifications (user,message) VALUES ('$accountID', '$concern')");
         header('Location:../../FrontEnd/Residents/services.php?success=Request Sent!');
         exit();
     }
 }
 else{
 $insert = mysqli_query($conn,"INSERT INTO servicerequest (accountID,serviceID,statusID,concern,dateFiled) VALUES ('$accountID',(SELECT (serviceID) FROM services WHERE serviceType = '$servType' limit 1),(SELECT (statusID) FROM request_status WHERE `status`='$pending' limit 1),'$concern',CURRENT_TIMESTAMP)");
+$insertnotif = mysqli_query($conn,"INSERT INTO notifications (user,message) VALUES ('$accountID', '$concern')");
 }
 if($insert)
 {   
