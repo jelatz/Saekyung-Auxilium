@@ -107,8 +107,6 @@ include '../../BackEnd/database/config.php';
   <!-- SERVICES AND HISTORY -->
   <div class="container">
     <div class="row my-3 gap-3 mx-auto">
-      <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
-      <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
       <div class="col-sm-5 col-lg-3 mx-auto">
         <a href="services.php" class="btn btn-unselected w-100 active" aria-current="page">Services</a>
       </div>
@@ -122,6 +120,8 @@ include '../../BackEnd/database/config.php';
   <div class="container">
     <div class="col-11 p-2 col-sm-10 col-lg-7 bg-inner my-4 my-lg-5 p-sm-4 justify-content-center mx-auto">
       <div class="row mx-auto justify-content-around">
+      <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
+      <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
         <!-- SERVICE BUTTONS -->
         <form action="../../BackEnd/database/requests.php?" method="POST" class="needs-validation" novalidate="">
           <div class="row mb-3">

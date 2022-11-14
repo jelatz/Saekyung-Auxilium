@@ -69,8 +69,8 @@ if(isset($_GET['notifid']))
                 <a href="dashboardpending.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
                   <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
-                      <strong class="me-auto"><?php echo $row['user'];?></strong>
-                      <small class="text-muted"><?php echo time();?></small>
+                      <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
+                      <small class="text-muted">5 seconds ago</small>
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div class="toast-body">
@@ -126,16 +126,16 @@ if(isset($_GET['notifid']))
       <div class="col-md-2">
         <nav class="nav nav-pills flex-column gap-2" role="tablist" aria-orientation="vertical" id="homeNav">
 
-          <a href="#dashboard<?php echo $dashboard ?>" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true" onclick="window.location.reload()">
+          <a href="#dashboard" class="nav-link show active bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="dashboardTab" aria-controls="dashboard" role="tab" aria-selected="true" onclick="window.location.reload()">
             Dashboard
           </a>
-          <a href="#accounts<?php $accounts ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false" onclick="window.location.reload()">
+          <a href="#accounts" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="accountsTab" aria-controls="accounts" role="tab" aria-selected="false" onclick="window.location.reload()">
             Accounts
           </a>
-          <a href="#services<?php $services ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="servicesTab" aria-controls="services" role="tab" aria-selected="false" onclick="window.location.reload()">
+          <a href="#services" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="servicesTab" aria-controls="services" role="tab" aria-selected="false" onclick="window.location.reload()">
             Services
           </a>
-          <a href="#reports<?php $reports ?>" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="reportsTab" aria-controls="reports" role="tab" aria-selected="false" onclick="window.location.reload()">
+          <a href="#reports" class="nav-link bg-adminBackground w-100 text-dark text-nowrap" type="button" data-bs-toggle="pill" id="reportsTab" aria-controls="reports" role="tab" aria-selected="false" onclick="window.location.reload()">
             Reports
           </a>
         </nav>
@@ -145,21 +145,21 @@ if(isset($_GET['notifid']))
         <div class="tab-content" id="homeNavContent">
           <!--DASHBOARD CONTENTS -->
           <!-- DASHBOARD TABS -->
-          <div class="tab-pane show active" id="dashboard<?php echo $dashboard; ?>" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
+          <div class="tab-pane show active" id="dashboard" role="tabpanel" aria-labelledby="dashboardTab" tabindex="0">
             <!-- <div class="row row-cols-3 row-cols-sm-1 px-5 justify-content-center mt-5"> -->
             <div class="nav nav-pills nav-justified gap-3 mt-3" role="tablist" id="dashboardTabs">
               <div class="col">
-                <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-secondary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending<?php $pending ?>" onclick="window.location.reload()">
+                <button type="button" class="nav-link active w-100 text-nowrap text-dark bg-secondary active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending" onclick="window.location.reload()">
                   Pending
                 </button>
               </div>
               <div class="col">
-                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing<?php $ongoing ?>">
+                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" id="ongoingTab" role="tab" data-bs-toggle="pill" data-bs-target="#onGoing">
                   On-Going
                 </button>
               </div>
               <div class="col">
-                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab<?php $completed ?>">
+                <button type="button" class="nav-link w-100 text-nowrap text-dark bg-secondary" data-bs-toggle="pill" data-bs-target="#completed" role="tab" id="completedTab">
                   Completed
                 </button>
               </div>
@@ -167,7 +167,7 @@ if(isset($_GET['notifid']))
             <!-- DASHBOARD TAB CONTENTS -->
             <div class="tab-content" id="dashboardContent">
               <!-- PENDING CONTENTS -->
-              <div class="tab-pane show active" id="pending<?php $pending ?>" role="tabpanel">
+              <div class="tab-pane show active" id="pending" role="tabpanel">
                 <!-- SEARCH BAR -->
                 <div class="input-group rounded my-4 w-50 mx-auto">
                   <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />

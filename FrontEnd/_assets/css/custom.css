@@ -1,5 +1,10 @@
 /* custom css */
 /* vstack and hstack */
+@import url('../fontawesome/css/fontawesome.css');
+*{
+    font-family: montserrat;
+}
+
 .hstack {
     display: flex;
     flex-direction: row;
@@ -14,7 +19,7 @@
     align-self: stretch;
   }
 /* custom index css*/
-.form-box{
+/* .form-box{
     width: 28rem;
     height: 480px;
     position: relative;
@@ -22,7 +27,7 @@
     background-color: antiquewhite;
     padding: 5px;
     overflow: hidden;
-}
+} */
 .button-box{
     width: 25rem;
     margin: 30px auto;

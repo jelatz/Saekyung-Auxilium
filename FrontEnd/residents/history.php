@@ -125,6 +125,7 @@ include '../../BackEnd/database/config.php';
                 if($reqSelect)
                 {
                   while ($row = mysqli_fetch_array($reqSelect)){
+                    $requestID = $row['requestID'];
                     ?>
                 <tr>
                   <td><?php echo date("Y").$row['requestID']?></td>
@@ -154,15 +155,19 @@ include '../../BackEnd/database/config.php';
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalBasicLabel">REPAIR NOTES</h5>
+        <h5 class="modal-title" id="modalBasicLabel">NOTES</h5>
         <button type="button" class="btn-close"  aria-label="Close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        notes about the repair
+        <?php
+        $result = mysqli_query($conn,"SELECT notes FROM servicerequest where requestID = $requestID limit 1");
+        $row = mysqli_fetch_array($result);
+        $concern = $row['notes'];
+        ?>
+        <p class="h5"><?php echo $concern; ?></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
