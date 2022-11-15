@@ -24,7 +24,7 @@ if(isset($_POST['reqSubmit']))
     $completed = validate($_POST['completed']);
     $servType = validate($_POST['service_type']);
 
-// ADD PENDING STATUS TO STATUS TABLE
+// ADD STATUS TO TABLE
 $select = mysqli_query($conn,"SELECT * FROM request_status");
 $row = mysqli_fetch_array($select);
 if($row == null)
@@ -97,4 +97,5 @@ if(isset($_POST['complete_btn']))
     $conn -> close();
 }
 
+// DELETE 
 

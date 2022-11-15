@@ -1,6 +1,10 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+$userdetails = mysqli_query($conn,"SELECT firstname,lastname FROM accounts WHERE userID = '".$_SESSION['username']."'");
+$row = mysqli_fetch_array($userdetails);
+$firstname = $row['firstname'];
+$lastname = $row['lastname'];
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +47,14 @@ include '../../BackEnd/database/config.php';
       <div class="dropdown">
         <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <?php
+        if($firstname > 0){
+          echo "Welcome! ";
+          echo $firstname;
+          echo '&nbsp';
+          echo$lastname;
+        }else{
         if(isset($_SESSION['username'])){
-        echo "Welcome! " . $_SESSION['username'];}?>
+        echo "Welcome! " . $_SESSION['username'];}}?>
         <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i>
         </button>
         <ul class="dropdown-menu bg-inner p-2">

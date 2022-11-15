@@ -1,6 +1,13 @@
 <?php
   session_start();
   include '../../BackEnd/database/config.php';
+
+
+  $userdetails = mysqli_query($conn,"SELECT firstname,lastname FROM accounts WHERE userID = '".$_SESSION['username']."'");
+  $row = mysqli_fetch_array($userdetails);
+  $firstname = $row['firstname'];
+  $lastname = $row['lastname'];
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,14 +92,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 <!-- NAVBAR CONTENT -->
+  
     <div class="collapse navbar-collapse justify-content-end">
       <div class="navbar-md-nav d-flex align-items-center">
         <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
         </a>
       <div class="dropdown">
-      <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php
+      <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <?php
+        if($firstname > 0){
+          echo "Welcome! ";
+          echo $firstname;
+          echo '&nbsp';
+          echo$lastname;
+        }else{
         if(isset($_SESSION['username'])){
-        echo "Welcome! " . $_SESSION['username'];}?>
+        echo "Welcome! " . $_SESSION['username'];}}?>
         <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
         <ul class="dropdown-menu bg-inner p-2">
           <li class="nav-item my-2">
@@ -148,7 +163,11 @@
 <div class="container-md my-5">
   <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" novalidate="">
     <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
-   
+    <?php 
+      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = $userID limit 1");
+      $row = mysqli_fetch_array($select);
+      $img = $row['img'];
+    ?>
     <div class="row text-center justify-content-center">
         <div class="col-lg-3 my-2">
             <div class="card h-100 my-2">
@@ -157,10 +176,10 @@
                 <div class="container">
                   <div class="picture-container">
                     <div class="picture mt-4">
-                      <img src="../_assets/images/profile.png" class="picture-src" id="frame" title="">
+                      <img src="<?php echo $img ;?>" class="picture-src" id="frame" title="">
                       <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
                     </div>
-                      <h6 class="mt-2">Choose Picture(Optional)</h6>
+                    <h6 class="mt-2">Choose Picture(Optional)</h6>
                   </div>
                 </div>
               </div>
@@ -212,5 +231,6 @@ Array.prototype.slice.call(forms)
         frame.src=URL.createObjectURL(event.target.files[0]);
     }
 </script>
+
 </body>
 </html>

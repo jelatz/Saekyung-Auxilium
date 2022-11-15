@@ -149,8 +149,14 @@
 <div class="container-md my-5">
   <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" novalidate="">
     <div class="row text-center justify-content-center">
+    <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
       <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
       <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
+      <?php 
+      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = $userID limit 1");
+      $row = mysqli_fetch_array($select);
+      $img = $row['img'];
+    ?>
         <div class="col-lg-3 my-2">
             <div class="card h-100 my-2">
               <div class="card-header">Profile Picture</div>
@@ -158,7 +164,7 @@
                 <div class="container">
                   <div class="picture-container">
                     <div class="picture mt-4">
-                      <img src="../_assets/images/profile.png" class="picture-src" id="frame" title="">
+                      <img src="<?php echo $img ;?>" class="picture-src" id="frame" title="">
                       <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
                     </div>
                       <h6 class="">Choose Picture(Optional)</h6>
@@ -167,10 +173,12 @@
               </div>
             </div>
           </div>
+          <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
         <div class="col-lg-6 my-2">
           <div class="card h-100 my-2">
             <div class="card-header">User Details</div>
             <div class="card-body">
+            <input type="text" class="form-control" name="userID" value = <?php echo $userID ?>>
                 <label for="fName" class="form-label">Enter First Name: </label>
                 <input type="text" class="form-control w-75 mx-auto" name="fName" required="">
                 <div class="invalid-feedback">
@@ -181,7 +189,7 @@
                 <div class="invalid-feedback">
                   Please enter your last name:
                 </div>
-                <input type="submit" name="submit" value="Submit" class="btn btn-primary mt-3 w-75">
+                <input type="submit" name="submitAmin" value="Submit" class="btn btn-primary mt-3 w-75">
           </form>
             </div>
           </div>

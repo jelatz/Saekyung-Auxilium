@@ -3,7 +3,10 @@ session_start();
 include '../../BackEnd/database/config.php';
 // include '../../Backend/database/services.php';
 // QUERY TO RETREIVE SERVICE TYPE IN DB AND STORE IN SESSION
-
+$userdetails = mysqli_query($conn,"SELECT firstname,lastname FROM accounts WHERE userID = '".$_SESSION['username']."'");
+$row = mysqli_fetch_array($userdetails);
+$firstname = $row['firstname'];
+$lastname = $row['lastname'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +51,15 @@ include '../../BackEnd/database/config.php';
           </a>
           <div class="dropdown">
             <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <?php
-              // if (isset($_SESSION['username'])) {
-                echo "Welcome! " . $_SESSION['username'];
-              // } 
-              ?>
+            <?php
+        if($firstname > 0){
+          echo "Welcome! ";
+          echo $firstname;
+          echo '&nbsp';
+          echo$lastname;
+        }else{
+        if(isset($_SESSION['username'])){
+        echo "Welcome! " . $_SESSION['username'];}}?>
               <i class="bi bi-caret-down-fill align-text-baseline ms-3"></i></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item my-2">
@@ -125,14 +132,14 @@ include '../../BackEnd/database/config.php';
         <!-- SERVICE BUTTONS -->
         <form action="../../BackEnd/database/requests.php?" method="POST" class="needs-validation" novalidate="">
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">User: </label>
-            <div class="col-sm-10">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Bldg & Unit #: </label>
+            <div class="col-sm-9">
               <input type="text" class="form-control-plaintext" name="accountID" value=<?php echo $_SESSION['username'] ?>>
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Service Type</label>
-            <div class="col-sm-10">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Service Type</label>
+            <div class="col-sm-9">
               <select class="form-select" name="service_type">
                 <option selected>Please select a Service</option>
                 <?php 
@@ -147,8 +154,8 @@ include '../../BackEnd/database/config.php';
             </div>
           </div>
           <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label" >Concern: </label>
-            <div class="col-sm-10">
+              <label for="inputEmail3" class="col-sm-3 col-form-label" >Concern: </label>
+            <div class="col-sm-9">
               <textarea class="form-control" rows="5" name="concern" placeholder="Please enter you detailed concern" required></textarea>
             </div>
           </div>
