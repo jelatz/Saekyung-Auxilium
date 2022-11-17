@@ -83,12 +83,12 @@ $_SESSION["password"] = $row['password'];
 
 if (isset($_POST['rememberme'])){
 
-    setcookie('sysadminuser', $username, time()+100,"/");
-    setcookie('sysadminpass', $password, time()+100,"/");
+    setcookie('adminuser', $username, time()+100,"/");
+    setcookie('adminpass', $password, time()+100,"/");
     
     }else{
-    setcookie('sysadminuser', $username, 100,"/");
-    setcookie('sysadminpass', $password, 100,"/");
+    setcookie('adminuser', $username, 100,"/");
+    setcookie('adminpass', $password, 100,"/");
     }
 header('Location:../../FrontEnd/systemadmin/home.php');
 exit();

@@ -3,11 +3,14 @@ include '../BackEnd/database/config.php';
 session_start();
 $username_cookie = '';
 $password_cookie = '';
+$admin_cookie = '';
+$admin_pass_cookie = '';
 if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     $username_cookie = $_COOKIE['resuname'];
     $password_cookie = $_COOKIE['respass'];
-}elseif(isset($_COOKIE['adminuser'])){
-
+}elseif(isset($_COOKIE['adminuser']) && isset($_COOKIE['admipass'])){
+    $admin_cookie = $_COOKIE['adminuser'];
+    $admin_pass_cookie = $_COOKIE['adminpass'];
 }
 ?>
 
@@ -47,7 +50,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 
     <!-- RESIDENT LOGIN -->
 
-<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation mt-5" novalidate="">
+<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation mt-3" novalidate="">
     
     <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required="" value="<?php echo $username_cookie;?>">
     <div class="invalid-feedback">
@@ -64,18 +67,18 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
         <button class="btn submit-btn" type="submit" name="resLogin">Login</button>
 </form>
 <!-- ADMIN LOGIN -->
-<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation mt-5" method="POST" novalidate="">
-    <input type="text" class="input-field" name="username" placeholder="Username" required="">
+<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation mt-3" method="POST" novalidate="">
+    <input type="text" class="input-field" name="username" placeholder="Username" required="" value="<?php echo $admin_cookie;?>">
     <div class="invalid-feedback">
         Please enter username
     </div>
-    <input type="password" class="input-field" name="password" placeholder="Password" required="">
+    <input type="password" class="input-field" name="password" placeholder="Password" required="" value="<?php echo $admin_pass_cookie;?>">
     <div class="invalid-feedback">
         Please enter password
     </div>
     <input type="checkbox" class="checkbox" name="rememberme"><span>Remember me</span>
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
-    <button class="btn submit-btn" type="submit" name="adminLogin">Login</button>
+    <button class="btn submit-btn mt-2" type="submit" name="adminLogin">Login</button>
 </form>
 </div>
 <script src="../_assets/js/bootstrap.bundle.js"></script>

@@ -184,6 +184,11 @@ if(isset($_GET['notifid']))
                   </span>
                 </div>
                 <div class="table-responsive">
+                <?php if(isset($_GET['notif']))
+                {
+                  
+                }
+                ?>
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -207,7 +212,6 @@ if(isset($_GET['notifid']))
                         $status = $row['status'];
                         $concern = $row['concern'];
 
-                        if(isset($_GET['notif'])){
                         echo 
                         '<tr>
                       <form action="../../BackEnd/database/requests.php?id=' . $id . '"  method="POST">
@@ -221,7 +225,7 @@ if(isset($_GET['notifid']))
                           <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
-                      </form>';}
+                      </form>';
                       }
                       ?>
                     </tbody>
