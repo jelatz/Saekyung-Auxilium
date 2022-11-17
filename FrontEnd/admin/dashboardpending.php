@@ -3,13 +3,12 @@ session_start();
 include '../../BackEnd/database/config.php';
 
 if(isset($_GET['notifid']))
-{
-  $notifid = $_GET['notifid'];
-  $id = $_GET['id'];
-  $update = mysqli_query($conn,"UPDATE notifications SET status = 1 WHERE notifID = $notifid");
-  header("Location:dashboardpending.php?id=$id");
-  exit();
-}
+    {
+    $notifid = $_GET['notifid'];
+    $update = mysqli_query($conn,"UPDATE notifications SET status = 1 WHERE notifID = $notifid");
+    header('Location:dashboardpending.php?notif='.$notifid.'');
+    exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +71,8 @@ if(isset($_GET['notifid']))
                   while ($row = mysqli_fetch_array($select))
                   {
                     $notifID = $row['notifID'];
+                    $_SESSION['notifID'] = $notifID;
+                    
                 ?>
                 <a href="dashboardpending.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
                   <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity:70%";>
@@ -196,6 +197,7 @@ if(isset($_GET['notifid']))
                     </thead>
                     <tbody>
                       <?php
+                      
                       $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending' ORDER BY servicerequest.dateFiled DESC");
                       while ($row = mysqli_fetch_array($result)) {
                         $id = $row['requestID'];
@@ -205,8 +207,10 @@ if(isset($_GET['notifid']))
                         $status = $row['status'];
                         $concern = $row['concern'];
 
-                        echo '<tr>
-                      <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
+                        if(isset($_GET['notif'])){
+                        echo 
+                        '<tr>
+                      <form action="../../BackEnd/database/requests.php?id=' . $id . '"  method="POST">
                         <td> ' . date("Y") . $id . '</td>
                         <td> ' . $accountID . '</td>
                         <td> ' . $dateFiled . '</td>
@@ -217,7 +221,7 @@ if(isset($_GET['notifid']))
                           <button type="submit" class="btn btn-primary btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
-                      </form>';
+                      </form>';}
                       }
                       ?>
                     </tbody>

@@ -55,7 +55,7 @@ $lastname = $row['lastname'];
               $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
               $count = mysqli_num_rows($selectnotif);
             ?>
-            <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none" data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21">
+            <button type="button" class="btn btn-link border-0 text-decoration-none" data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21">
             <?php
               if($count == 0){
 
@@ -125,7 +125,7 @@ $lastname = $row['lastname'];
       </div>
     </div>
   </nav>
-
+  
   <!--NAVBAR COLLAPSE CONTENT-->
 
   <div class="collapse navbar-collapse" id="navbarMenu">

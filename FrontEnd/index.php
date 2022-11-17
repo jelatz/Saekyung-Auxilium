@@ -22,30 +22,33 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
-<body class="bg-image position-relative" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
+<body class="bg-image position-relative" style="background-image:url(_assets/images/final.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
     <!-- navbar -->
-<nav class="navbar navbar-expand-md justify-content-center">
+<!-- <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">
         <a href="index.php" class="navbar-brand mx-auto d-block"><img src="_assets/images/FINAL LOGO.png" alt="logo" width="250"></a>
     </div>
-</nav>
+</nav> -->
 
 <!-- form box -->
-<div class="form-box my-5">
-    <div class="button-box">
-        <div id="btn"></div>
-        <button type="button" class="toggle-btn" onclick="residentlogin()">Resident Login</button>
-        <button type="button" class="toggle-btn" onclick="adminlogin()">Admin Login</button>
-    </div>
-
-    <!-- RESIDENT LOGIN -->
+<div class="form-box">
 <?php 
     if (isset($_GET['error'])){?>
-    <p class="alert alert-danger text-center mx-auto fw-bold" id="residentError" style="width:90%;"><?php echo $_GET['error'];?>Invalid Username or Password</p>  
+    <p class="alert alert-danger text-center mx-auto fw-bold mt-3" id="residentError" style="width:90%;"><?php echo $_GET['error'];?>Invalid Username or Password</p>  
 <?php  
 }?>
     <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
-<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation" novalidate="">
+    <h2 class="text-center mt-3">Login</h2>
+    <div class="button-box">
+        <div id="btn"></div>
+        <button type="button" class="toggle-btn" onclick="residentlogin()">Resident</button>
+        <button type="button" class="toggle-btn" onclick="adminlogin()">Admin</button>
+    </div>
+
+    <!-- RESIDENT LOGIN -->
+
+<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation mt-5" novalidate="">
+    
     <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required="" value="<?php echo $username_cookie;?>">
     <div class="invalid-feedback">
         Please enter username
@@ -60,9 +63,8 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     </div>
         <button class="btn submit-btn" type="submit" name="resLogin">Login</button>
 </form>
-
 <!-- ADMIN LOGIN -->
-<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation" method="POST" novalidate="">
+<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation mt-5" method="POST" novalidate="">
     <input type="text" class="input-field" name="username" placeholder="Username" required="">
     <div class="invalid-feedback">
         Please enter username
