@@ -64,6 +64,12 @@ if(isset($_POST['accept_btn']))
     $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 2 WHERE requestID='$id'");
     if($update)
     {
+        $update_notif = mysqli_query($conn,"UPDATE notifications_resident SET status = 1");
+        $result = mysqli_query($conn,"SELECT * FROM notifications");
+        $row = mysqli_fetch_array($result);
+        $user = $row['user'];
+        $message = $row['message'];
+        $insert = mysqli_query($conn,"INSERT INTO notifications_resident (user,message) VALUES ('$user', 'Your request has been acknowledged!')");
         header('Location:../../FrontEnd/admin/dashboardpending.php');
         exit();
     }
@@ -85,6 +91,7 @@ if(isset($_POST['complete_btn']))
     $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 3,notes='$notes', dateCompleted = CURRENT_TIMESTAMP WHERE requestID='$id'");
     if($update)
     {      
+        $insert = mysqli_query($conn,"INSERT INTO notifications_resident (user,message) VALUES ('$user', 'Your request has been completed!')");
             header('Location:../../FrontEnd/admin/dashboardpending.php');
             exit();
     }
@@ -97,5 +104,4 @@ if(isset($_POST['complete_btn']))
     $conn -> close();
 }
 
-// DELETE 
 

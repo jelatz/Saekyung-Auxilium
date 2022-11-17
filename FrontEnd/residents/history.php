@@ -6,6 +6,12 @@ $userdetails = mysqli_query($conn,"SELECT firstname,lastname FROM accounts WHERE
 $row = mysqli_fetch_array($userdetails);
 $firstname = $row['firstname'];
 $lastname = $row['lastname'];
+
+if(isset($_GET['notifid']))
+{
+  $notifid = $_GET['notifid'];
+  $update = mysqli_query($conn,"UPDATE notifications_resident SET status = 1 WHERE notifID = $notifid");
+}
 ?>
 
 
@@ -40,16 +46,61 @@ $lastname = $row['lastname'];
 <!-- NAVBAR CONTENT -->
     <div class="collapse navbar-collapse justify-content-end">
       <div class="navbar-md-nav d-flex align-items-center">
-        <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
-        </a>
+      <div class="dropdown">
+            <!-- NOTIFICATIONS -->
+            <?php
+              $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
+              $count = mysqli_num_rows($selectnotif);
+            ?>
+             <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none" data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21">
+            <?php
+              if($count == 0){
+
+              }else{
+                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-10px;">';
+                echo $count;
+              }
+            ?>
+          </span>
+            </button>
+            <ul class="dropdown-menu px-5 m-0 bg-transparent border-0" style="left: -10rem;">
+              <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                  <img src="../_assets/images/bell-fill.svg" class="img-fluid me-2" width="21">
+                  <strong class="me-auto text-center">Notifications</strong>
+                </div>
+                <?php 
+                  $select = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
+                  while ($row = mysqli_fetch_array($select))
+                  {
+                    $notifID = $row['notifID'];
+                ?>
+                <a href="history.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
+                      <small class="text-muted">5 seconds ago</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      <p><?php echo $row['message']?></p>
+                    </div>
+                  </div>
+                </a>
+                  <?php
+                  }
+                  ?>
+              </div>
+            </ul>
+          </div>
       <div class="dropdown">
         <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <?php
         if($firstname > 0){
-          echo "Welcome! ";
-          echo $firstname;
+          echo "WELCOME ";
+          echo strtoupper($firstname);
           echo '&nbsp';
-          echo$lastname;
+          echo strtoupper($lastname) , '!';
         }else{
         if(isset($_SESSION['username'])){
         echo "Welcome! " . $_SESSION['username'];}}?>
@@ -126,7 +177,7 @@ $lastname = $row['lastname'];
                     <th class="text-nowrap">Service</th>
                     <th class="text-nowrap">Status</th>
                     <th class="text-nowrap">Date Completed</th>
-                    <th class="text-nowrap">Action</th>
+                    <th class="text-nowrap">Notes</th>
                 </tr>
             </thead>
             <tbody>
@@ -144,10 +195,7 @@ $lastname = $row['lastname'];
                   <td><?php echo $row['serviceType'] ?></td>
                   <td><?php echo $row['status'] ?></td>
                   <td><?php echo $row['dateCompleted'] ?></td>
-                  <td>
-                    <button type="submit" name="info" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#info<?php $row['requestID']; ?>"><i class="bi bi-eye"></i>
-                  </button>
-              </td>
+                  <td><?php echo $row['notes'] ?></td>
             </tr>
             <?php 
               }
@@ -158,28 +206,15 @@ $lastname = $row['lastname'];
     </div>
   </div>
 </div>
-<!-- MODAL FOR SERVICE REQUEST INFO -->
-<div class="modal" tabindex="-1" id="info">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalBasicLabel">NOTES</h5>
-        <button type="button" class="btn-close"  aria-label="Close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <?php
-        $result = mysqli_query($conn,"SELECT notes FROM servicerequest where requestID = $requestID limit 1");
-        $row = mysqli_fetch_array($result);
-        $concern = $row['notes'];
-        ?>
-        <p class="h5"><?php echo $concern; ?></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 <script src="../_assets/js/bootstrap.bundle.js"></script>
+  <!-- NOTIFICATION TOAST SCRIPT -->
+  <script>
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function(toastEl) {
+      return new bootstrap.Toast(toastEl, {
+        autohide: false
+      }).show()
+    })
+  </script>
 </body>
 </html>

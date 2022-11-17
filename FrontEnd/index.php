@@ -76,7 +76,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <button class="btn submit-btn" type="submit" name="adminLogin">Login</button>
 </form>
 </div>
-
+<script src="../_assets/js/bootstrap.bundle.js"></script>
 <script>
     var x = document.getElementById("login-resident");
     // var a = document.getElementById("residentError");

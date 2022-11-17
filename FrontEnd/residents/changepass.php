@@ -48,10 +48,10 @@ $lastname = $row['lastname'];
         <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <?php
         if($firstname > 0){
-          echo "Welcome! ";
-          echo $firstname;
+          echo "WELCOME ";
+          echo strtoupper($firstname);
           echo '&nbsp';
-          echo$lastname;
+          echo strtoupper($lastname) , '!';
         }else{
         if(isset($_SESSION['username'])){
         echo "Welcome! " . $_SESSION['username'];}}?>
@@ -110,22 +110,33 @@ $lastname = $row['lastname'];
 <!-- Change Password -->
 <div class="container-fluid mt-5">
     <div class="col col-md-8 mx-auto p-5">
-        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-dark text-light p-4" novalidate="">
+        <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-transparent text-light p-4" novalidate="">
         <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
         <?php if (isset($_GET['success'])){?><p class="error alert alert-danger"><?php echo $_GET['success'];?></p> <?php } ?>
             <div class="mb-3">
                 <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
                 <input type="hidden" class="form-control" name="userName" value = <?php echo $userID ?>>
-                <label  for="oldPassword" class="form-label" >Current Password</label>
+                <label  for="oldPassword" class="form-label text-dark" >
+                  <strong>Current Password:</strong>
+                </label>
                 <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
-                <div class="invalid-feedback">Current password required</div>
-                <label for="newPassword" class="form-label" >Set New Password</label>
+                <div class="invalid-feedback">
+                  <strong>Current password required</strong>
+                </div>
+                <label for="newPassword" class="form-label text-dark" >
+                  <strong>Set New Password</strong>
+                </label>
                 <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                 <div class="invalid-feedback">Enter a new password</div>
-                <label for="newConfirmPassword" class="form-label" >Confirm New Password</label>
+                <label for="newConfirmPassword" class="form-label text-dark">
+                  <strong>Confirm New Password</strong>
+                </label>
                 <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" required>
                 <div class="invalid-feedback">Confirm password</div>
-                <p class="mt-2 alert alert-info mt-3" role="alert"><strong>Password must only contain Alphanumeric characters</strong></p>
+                  <small class="text-muted">
+                    <span style="color:red;">*</span>
+                    Password must only contain Alphanumeric characters
+                  </small>
             </div>
                 <button type="submit" name="resSubmit" class="btn btn-unselected">Change Password</button>
         </form>    

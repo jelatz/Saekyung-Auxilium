@@ -5,8 +5,10 @@ include '../../BackEnd/database/config.php';
 if(isset($_GET['notifid']))
 {
   $notifid = $_GET['notifid'];
+  $id = $_GET['id'];
   $update = mysqli_query($conn,"UPDATE notifications SET status = 1 WHERE notifID = $notifid");
-
+  header("Location:dashboardpending.php?id=$id");
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -48,9 +50,14 @@ if(isset($_GET['notifid']))
               $selectnotif = mysqli_query($conn,"SELECT * FROM notifications WHERE status = 0");
               $count = mysqli_num_rows($selectnotif);
             ?>
-            <button type="button" class="btn btn-link  border-0 mx-auto " data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21"><span class="badge bg-danger rounded-circle" style="position: relative; top:-10px;">
+            <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none" data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21">
             <?php
-              echo $count;
+              if($count == 0){
+
+              }else{
+                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-10px;">';
+                echo $count;
+              }
             ?>
           </span>
             </button>
@@ -67,10 +74,10 @@ if(isset($_GET['notifid']))
                     $notifID = $row['notifID'];
                 ?>
                 <a href="dashboardpending.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
-                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="opacity:70%";>
                     <div class="toast-header">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
-                      <small class="text-muted">5 seconds ago</small>
+                      <small class="text-muted text-dark">5 seconds ago</small>
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div class="toast-body">
@@ -189,7 +196,7 @@ if(isset($_GET['notifid']))
                     </thead>
                     <tbody>
                       <?php
-                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending'");
+                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending' ORDER BY servicerequest.dateFiled DESC");
                       while ($row = mysqli_fetch_array($result)) {
                         $id = $row['requestID'];
                         $accountID = $row['accountID'];
@@ -362,7 +369,9 @@ if(isset($_GET['notifid']))
               </table>
             </div>
           </div>
+
           <!-- SERVICES CONTENTS -->
+          
           <div class="tab-pane fade p-5" id="services<?php $services ?>" role="tabpanel" aria-labelledby="servicesTab" tabindex="0">
             <div class="row justify-content-center">
               <!-- ALERT MESSAGE IF SERVICE TYPE IS SUCCESSFULLY ADDED -->

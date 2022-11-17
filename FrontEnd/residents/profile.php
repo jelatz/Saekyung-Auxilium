@@ -101,10 +101,10 @@
       <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <?php
         if($firstname > 0){
-          echo "Welcome! ";
-          echo $firstname;
+          echo "WELCOME ";
+          echo strtoupper($firstname);
           echo '&nbsp';
-          echo$lastname;
+          echo strtoupper($lastname) , '!';
         }else{
         if(isset($_SESSION['username'])){
         echo "Welcome! " . $_SESSION['username'];}}?>
@@ -187,18 +187,22 @@
           </div>
         <div class="col-lg-6 my-2">
           <div class="card h-100 my-2">
-            <div class="card-header">User Details</div>
+            <div class="card-header">
+              User Details
+            </div>
             <div class="card-body">
               <?php if (isset($_GET['success'])){?><p class="success alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>     
               <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
                 <input type="hidden" class="form-control" name="userID" value = <?php echo $userID ?>>
-                <label for="fName" class="form-label">Enter First Name: </label>
-                <input type="text" class="form-control w-75 mx-auto" name="fName" required="">
+                <label for="fName" class="form-label">
+                  Enter First Name: 
+                </label>
+                <input type="text" class="form-control w-75 mx-auto" name="fName" required="" placeholder="<?php echo $firstname ; ?>">
                 <div class="invalid-feedback">
                   Please enter your first name:
                 </div>
                 <label for="lName" class="form-label">Enter Last Name: </label>
-                <input type="text" class="form-control w-75 mx-auto" name="lName" required="">
+                <input type="text" class="form-control w-75 mx-auto" name="lName" required="" placeholder="<?php echo $lastname ; ?>">
                 <div class="invalid-feedback">
                   Please enter your last name:
                 </div>

@@ -7,6 +7,8 @@ $userdetails = mysqli_query($conn,"SELECT firstname,lastname FROM accounts WHERE
 $row = mysqli_fetch_array($userdetails);
 $firstname = $row['firstname'];
 $lastname = $row['lastname'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,16 +49,62 @@ $lastname = $row['lastname'];
       <!-- NAVBAR CONTENT -->
       <div class="collapse navbar-collapse justify-content-end">
         <div class="navbar-md-nav d-flex align-items-center">
-          <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
-          </a>
+        <div class="dropdown">
+            <!-- NOTIFICATIONS -->
+            <?php
+              $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
+              $count = mysqli_num_rows($selectnotif);
+            ?>
+            <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none" data-bs-toggle="dropdown"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="21">
+            <?php
+              if($count == 0){
+
+              }else{
+                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-10px;">';
+                echo $count;
+              }
+            ?>
+          </span>
+            </button>
+            <ul class="dropdown-menu px-5 m-0 bg-transparent border-0" style="left: -10rem;">
+              <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                  <img src="../_assets/images/bell-fill.svg" class="img-fluid me-2" width="21">
+                  <strong class="me-auto text-center">Notifications</strong>
+                </div>
+                <?php 
+                  $select = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
+                  while ($row = mysqli_fetch_array($select))
+                  {
+                    $notifID = $row['notifID'];
+                ?>
+                <a href="history.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
+                      <small class="text-muted">5 seconds ago</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      <p><?php echo $row['message']?></p>
+                    </div>
+                  </div>
+                </a>
+                  <?php
+                  }
+                  ?>
+              </div>
+            </ul>
+          </div>
+<!-- ACCOUNTS DROPDOWN -->
           <div class="dropdown">
             <button class="btn btn-unselected mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?php
         if($firstname > 0){
-          echo "Welcome! ";
-          echo $firstname;
+          echo "WELCOME ";
+          echo strtoupper($firstname);
           echo '&nbsp';
-          echo$lastname;
+          echo strtoupper($lastname) , '!';
         }else{
         if(isset($_SESSION['username'])){
         echo "Welcome! " . $_SESSION['username'];}}?>
@@ -77,22 +125,9 @@ $lastname = $row['lastname'];
       </div>
     </div>
   </nav>
-  <!-- NOTIFICATION MODAL -->
-  <div class="modal fade" id="notif" tabindex="-1" aria-labelledby="notif" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content" style="background-color: rgba(255,248,243);">
-        <div class="modal-header">
-          <h5 class="modal-title" id="norifTitle">Change Password</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">SAMPLE NOTIFICATIONS
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
+
   <!--NAVBAR COLLAPSE CONTENT-->
+
   <div class="collapse navbar-collapse" id="navbarMenu">
     <div class="navbar-md-nav bg-inner">
       <ul class="navbar-nav bg-transparent text-center">
@@ -111,7 +146,9 @@ $lastname = $row['lastname'];
       </ul>
     </div>
   </div>
+
   <!-- SERVICES AND HISTORY -->
+  
   <div class="container">
     <div class="row my-3 gap-3 mx-auto">
       <div class="col-sm-5 col-lg-3 mx-auto">
@@ -162,16 +199,12 @@ $lastname = $row['lastname'];
           <input type="hidden" value="Pending" name="pending">     
           <input type="hidden" value="On-going" name="ongoing">     
           <input type="hidden" value="Completed" name="completed">     
-          <button type="submit" name="reqSubmit" class="btn btn-unselected">Submit</button>
+          <button type="submit" name="reqSubmit" class="btn btn-unselected w-100">Submit</button>
         </form>
 
       </div>
     </div>
   </div>
-
-
-
-
 
   <!-- SCRIPTS -->
   <script src="../_assets/js/bootstrap.bundle.js">
@@ -191,7 +224,15 @@ $lastname = $row['lastname'];
         }, false)
       })
   </script>
-
+  <!-- NOTIFICATION TOAST SCRIPT -->
+  <script>
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function(toastEl) {
+      return new bootstrap.Toast(toastEl, {
+        autohide: false
+      }).show()
+    })
+  </script>
 </body>
 
 </html>
