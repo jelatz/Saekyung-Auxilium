@@ -173,22 +173,10 @@ if(isset($_GET['notifid']))
               </div>
             </div>
             <!-- DASHBOARD TAB CONTENTS -->
-            <div class="tab-content" id="dashboardContent">
+            <div class="tab-content mt-5" id="dashboardContent">
               <!-- PENDING CONTENTS -->
               <div class="tab-pane show active" id="pending" role="tabpanel">
-                <!-- SEARCH BAR -->
-                <div class="input-group rounded my-4 w-50 mx-auto">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                  <span class="input-group-text border-0" id="search-addon">
-                    <i class="bi bi-search"></i>
-                  </span>
-                </div>
                 <div class="table-responsive">
-                <?php if(isset($_GET['notif']))
-                {
-                  
-                }
-                ?>
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -202,10 +190,10 @@ if(isset($_GET['notifid']))
                     </thead>
                     <tbody>
                       <?php
-                      
                       $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending' ORDER BY servicerequest.dateFiled DESC");
                       while ($row = mysqli_fetch_array($result)) {
                         $id = $row['requestID'];
+                        $_SESSION['servreqID'] = $id;
                         $accountID = $row['accountID'];
                         $dateFiled = $row['dateFiled'];
                         $serviceType = $row['serviceType'];
@@ -214,7 +202,7 @@ if(isset($_GET['notifid']))
 
                         echo 
                         '<tr>
-                      <form action="../../BackEnd/database/requests.php?id=' . $id . '"  method="POST">
+                      <form action="../../BackEnd/database/requests.php?id=' . $id . '"  method="POST" id="request">
                         <td> ' . date("Y") . $id . '</td>
                         <td> ' . $accountID . '</td>
                         <td> ' . $dateFiled . '</td>
@@ -227,20 +215,13 @@ if(isset($_GET['notifid']))
                       </tr>
                       </form>';
                       }
-                      ?>
+                      ?>                      
                     </tbody>
                   </table>
                 </div>
               </div>
               <!-- ON-GOING CONTENTS -->
               <div class="tab-pane fade" id="onGoing<?php $ongoing ?>" role="tabpanel">
-                <!-- SEARCH BAR -->
-                <div class="input-group rounded my-4 w-50 mx-auto">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                  <span class="input-group-text border-0" id="search-addon">
-                    <i class="bi bi-search"></i>
-                  </span>
-                </div>
                 <div class="table-responsive">
                   <table class="table table-bordered">
                     <thead>
@@ -255,7 +236,35 @@ if(isset($_GET['notifid']))
                       </tr>
                     </thead>
                     <tbody>
+                      <?php
+                      if(isset($_GET['id'])){
+                        $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='On-going'");
 
+                      while ($row = mysqli_fetch_array($result)) {
+                        $id = $row['requestID'];
+                        $accountID = $row['accountID'];
+                        $dateFiled = $row['dateFiled'];
+                        $serviceType = $row['serviceType'];
+                        $concern = $row['concern'];
+                        echo '<tr>
+                            <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
+                              <td> ' . date("Y") . $id . '</td>
+                              <td> ' . $accountID . '</td>
+                              <td> ' . $dateFiled . '</td>
+                              <td> ' . $serviceType . '</td>
+                              <td> ' . $concern . '</td>
+                              <td>
+                              <textarea class="form-control" rows="1" name="notes" placeholder="Progress Notes: <br> Maintenance Personnel Assigned: <br> Additional Notes:"></textarea>
+                              </td>
+                              <td>
+                                <button type="submit" class="btn btn-primary btn-block" name="complete_btn">Complete</button>
+                              </td>
+                            </tr>
+                            </form>';
+                      }
+                      }
+
+                      ?>
                       <?php
                       $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='On-going'");
 
@@ -288,13 +297,6 @@ if(isset($_GET['notifid']))
               </div>
               <!-- COMPLETED CONTENTS -->
               <div class="tab-pane fade" id="completed<?php $completed ?>" role="tabpanel">
-                <!-- SEARCH BAR -->
-                <div class="input-group rounded my-4 w-50 mx-auto">
-                  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                  <span class="input-group-text border-0" id="search-addon">
-                    <i class="bi bi-search"></i>
-                  </span>
-                </div>
                 <div class="table-responsive">
                   <table class="table table-bordered">
                     <thead>

@@ -153,7 +153,7 @@
       <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
       <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
       <?php 
-      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = $userID limit 1");
+      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = '$userID' limit 1");
       $row = mysqli_fetch_array($select);
       $img = $row['img'];
     ?>
