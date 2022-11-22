@@ -1,6 +1,18 @@
 /* custom css */
 /* vstack and hstack */
+@font-face {
+    font-family: 'Montserrat';
+    src: url(‘webfont.eot’); 
+    src: url(‘webfont.eot?#iefix’) format(‘embedded-opentype’),
+        url(‘webfont.svg#svgFontName’) format(‘svg’),
+        url(‘webfont.woff’) format(‘woff’),
+        url(‘webfont.ttf’)  format(‘truetype’);
+    }
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body,html{
+    height: 100%;
+    overflow: scroll;
+}
 
 *{
     font-family: 'Montserrat', sans-serif;
@@ -182,6 +194,12 @@ span{
 .bg-inner{
     background-color: #FFE5B4;
 }
+.bg-inner2{
+    background-color: #FFFFE0;
+}
+.bg-inner3{
+    background: rgba(0, 0, 0, 0.5);
+}
 .bg-adminBackground{
     background-color: rgb(231, 228, 221) !important;
 }
@@ -230,3 +248,5 @@ span{
      }
      
 }
+
+/* RESIDENT DASHBOARD */
