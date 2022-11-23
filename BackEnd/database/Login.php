@@ -75,7 +75,7 @@ setcookie('adminuser', $username, 100,"/");
 setcookie('adminpass', $password, 100,"/");
 }
 
-header('Location:../../FrontEnd/admin/dashboardpending.php');
+header('Location:../../FrontEnd/admin/dashboard.php');
 exit();
 }elseif($row["usertype"]=="systemadmin"){
 $_SESSION["username"] = $row['userID'];

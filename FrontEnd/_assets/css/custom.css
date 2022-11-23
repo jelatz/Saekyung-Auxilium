@@ -232,6 +232,10 @@ span{
 .nav-link.active{
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
+.white.active{
+    background-color:rgb(117, 112, 112) !important;
+    color: white !important;
+}
 /* customize css for admin dashboard */
 @media screen and (min-width: 768px){
     .medium{

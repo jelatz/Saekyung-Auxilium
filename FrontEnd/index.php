@@ -52,7 +52,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 
 <form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation mt-3" novalidate="">
     
-    <input type="text" name="username" class="input-field" placeholder="Enter Building & Unit #" required="" value="<?php echo $username_cookie;?>">
+    <input type="text" name="username" class="input-field" placeholder="Username" required="" value="<?php echo $username_cookie;?>">
     <div class="invalid-feedback">
         Please enter username
     </div>
