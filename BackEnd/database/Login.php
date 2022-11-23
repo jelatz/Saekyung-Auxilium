@@ -35,7 +35,7 @@ if($row["usertype"]=="user"){
         setcookie('respass',$password,100,"/");
     }
 // redirect to index.php
-    header('Location:../../FrontEnd/residents/services.php');
+    header('Location:../../FrontEnd/residents/dashboard.php');
     exit();
 }
 // error for invalid username or password

@@ -39,7 +39,7 @@ body,html{
     position: relative;
     top:20%;
     margin: auto ;
-    background-color: antiquewhite;
+    background-color: #FFE5B4;
     padding: 5px;
     overflow: hidden;
     border-radius: 15px;
@@ -49,7 +49,6 @@ body,html{
     width: 25rem;
     margin: 30px auto;
     position: relative;
-    box-shadow: 0 0 20px 9px #ff61241f;
     border-radius: 30px;
     height: 3rem;
 }
@@ -73,9 +72,11 @@ body,html{
     position: absolute;
     width: 210px;
     height: 100%;
-    background: rgb(255, 184,105);
+    background: #E7E7E7;
     border-radius: 30px;
     transition: .5s;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
 }  
 
 .input_group{
@@ -92,9 +93,9 @@ body,html{
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 1 px solid black;
     outline: none;
-    background: transparent;
+    background: #E7E7E7;
+
 }    
 
 .submit-btn{
@@ -102,11 +103,12 @@ body,html{
     padding: 10px 20px;
     cursor: pointer;
     margin: 1px 1px;
-    background: rgb(255, 184, 105);
+    background: #1F2022;
     outline: none;
     border-radius: 30px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    color: white;
 }   
 
 .checkbox{
@@ -249,4 +251,9 @@ span{
      
 }
 
-/* RESIDENT DASHBOARD */
+/* RESIDENT */
+@media screen and (max-width: 992px){
+.form-control-plaintext{
+    text-align: center !important;
+}
+}

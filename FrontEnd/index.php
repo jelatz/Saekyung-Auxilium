@@ -41,7 +41,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 <?php  
 }?>
     <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>
-    <h2 class="text-center mt-3">Login</h2>
+    <h2 class="text-center mt-4">Login</h2>
     <div class="button-box">
         <div id="btn"></div>
         <button type="button" class="toggle-btn" onclick="residentlogin()">Resident</button>
@@ -64,7 +64,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <div class="mb-2">
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
     </div>
-        <button class="btn submit-btn" type="submit" name="resLogin">Login</button>
+        <button class="btn submit-btn fw-bold fs-5" type="submit" name="resLogin">Login</button>
 </form>
 <!-- ADMIN LOGIN -->
 <form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation mt-3" method="POST" novalidate="">
@@ -78,7 +78,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     </div>
     <input type="checkbox" class="checkbox" name="rememberme"><span>Remember me</span>
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
-    <button class="btn submit-btn mt-2" type="submit" name="adminLogin">Login</button>
+    <button class="btn submit-btn mt-2 fw-bold fs-5 type="submit" name="adminLogin">Login</button>
 </form>
 </div>
 <script src="../_assets/js/bootstrap.bundle.js"></script>

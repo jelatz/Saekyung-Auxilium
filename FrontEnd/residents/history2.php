@@ -15,7 +15,7 @@ include '../../BackEnd/database/config.php';
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-  <title>Resident Services</title>
+  <title>Resident History</title>
 </head>
 
 <body
@@ -84,61 +84,55 @@ include '../../BackEnd/database/config.php';
 <!-- NAVIGATION TABS START-->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3 col-lg-2 p-0 bg-transparent">
+    <div class="col-md-3 col-lg-2 p-0 bg-transparent mb-md-2">
       <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
         <a href="dashboard.php" class="nav-link text-white ps-5">Dashboard</a>
-        <a href="services2.php" class="nav-link text-white ps-5 active">Services</a>
-        <a href="history2.php" class="nav-link text-white ps-5">History</a>
+        <a href="services2.php" class="nav-link text-white ps-5">Services</a>
+        <a href="history2.php" class="nav-link text-white ps-5 active">History</a>
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
     <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 50.5rem;">
-      <h1 class="text-white p-5">Concerns and Issues</h1>
-      <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 m-3" style="border-radius: 10px;">
-        <div class="col">
-          <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
-      <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-        <!-- SERVICE BUTTONS -->
-        <form action="../../BackEnd/database/requests.php?" method="POST" class="needs-validation" novalidate="">
-          <div class="row mb-3">
-            <label for="inputEmail3" class="col-lg-2 col-form-label">User: </label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control-plaintext" id="userreq" name="accountID" value=<?php echo $_SESSION['username']; ?>>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="inputPassword3" class="col-lg-2 col-form-label">Service Type</label>
-            <div class="col-lg-10">
-              <select class="form-select" name="service_type">
-                <option selected>Please select a Service</option>
-                <?php 
-                $result = mysqli_query($conn,"SELECT * FROM services");
-                while ($row = mysqli_fetch_array($result)){
-                  $serviceID = $row['serviceID'];
-                  $serviceType = $row['serviceType']
-                  ?>
-                  <option><?php echo $serviceType ?></option>
-                  <?php } ?>
-              </select>
-            </div>
-          </div>
-          <div class="row mb-3">
-              <label for="inputEmail3" class="col-lg-2 col-form-label" >Concern: </label>
-            <div class="col-lg-10">
-              <textarea class="form-control" rows="5" name="concern" placeholder="Please enter you detailed concern" required></textarea>
-            </div>
-          </div>
-          <input type="hidden" value="Pending" name="pending">     
-          <input type="hidden" value="On-going" name="ongoing">     
-          <input type="hidden" value="Completed" name="completed">
-          <div class="row justify-content-end">  
-            <div class="col-lg-2">
-              <button type="submit" name="reqSubmit" class="btn btn-unselected w-100 text-white fs-5" style="background-color:#1F2022;">Submit</button>
-            </div>
-          </div>
-        </form>
+        <h1 class="text-white p-5">Transaction History</h1>
+        <div class="row justify-content-center text-center py-5 fs-5 m-3">
+        <div class="table-responsive-lg">
+        <table class="table table-sm table-hover text-center bg-white" style="border-radius: 10px;">
+            <thead>
+                <tr class="bg-inner">
+                    <th class="text-nowrap">Request #</th>
+                    <th class="text-nowrap">Bldng & Unit #</th>
+                    <th class="text-nowrap">Date Filed</th>
+                    <th class="text-nowrap">Service</th>
+                    <th class="text-nowrap">Status</th>
+                    <th class="text-nowrap">Date Completed</th>
+                    <th class="text-nowrap">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+          <?php
+                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.accountID = '".$_SESSION['username']."' ORDER BY requestID DESC");
+                if($reqSelect)
+                {
+                  while ($row = mysqli_fetch_array($reqSelect)){
+                    $requestID = $row['requestID'];
+                    ?>
+                <tr>
+                  <td><?php echo date("Y").$row['requestID']?></td>
+                  <td><?php echo $row['accountID']?></td>
+                  <td><?php echo $row['dateFiled'] ?></td>
+                  <td><?php echo $row['serviceType'] ?></td>
+                  <td><?php echo $row['status'] ?></td>
+                  <td><?php echo $row['dateCompleted'] ?></td>
+                  <td><?php echo $row['notes'] ?></td>
+            </tr>
+            <?php 
+              }
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
         </div>
-      </div>
     </div>
   <!-- NAVIGATION CONTENTS START -->
 

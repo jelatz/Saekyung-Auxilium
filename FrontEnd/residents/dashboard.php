@@ -65,7 +65,7 @@
               </div>
           </li>
           <li class="nav-item">
-            <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="m-3 ms-5"><a href="#" class="ms-3 text-dark" style="font-size:18px ;">Logout </a>
+            <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="m-3 ms-5"><a href="../../BackEnd/database/logout.php" class="ms-3 text-dark" style="font-size:18px ;">Logout </a>
           </li>
         </ul>
       </div>
@@ -85,9 +85,9 @@
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-5">
+    <div class="col-md-9 col-lg-10 bg-inner3 pb-5 px-5" style="height: 50.5rem;">
       <h1 class="text-white p-5">Welcome <strong>1101!</strong></h1>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 bg-inner justify-content-center text-center p-5 fs-5 m-3" style="border-radius: 10px;">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 bg-inner justify-content-center text-center p-5 fs-5" style="border-radius: 10px;">
         <div class="col my-4">
           <a href="#" class="text-decoration-none text-dark">
             <img src="../_assets/images/electrical.png" alt="electrical" class="img-fluid" width="100">
@@ -112,19 +112,19 @@
             <p class="my-3">Report electrical issues lurking within the walls of your home</p>
           </a>
         </div>
-        <div class="col my-4">
+        <div class="col my-4 mb-5">
           <a href="#" class="text-decoration-none text-dark">
             <img src="../_assets/images/tile.png" alt="tile" class="img-fluid" width="100">
             <p class="my-3">Report electrical issues lurking within the walls of your home</p>
           </a>
         </div>
-        <div class="col my-4">
+        <div class="col my-4 mb-5">
           <a href="#" class="text-decoration-none text-dark">
             <img src="../_assets/images/furniture.png" alt="furniture" class="img-fluid" width="100">
             <p class="my-3">Report electrical issues lurking within the walls of your home</p>
           </a>
         </div>
-        <div class="col my-4">
+        <div class="col my-4 mb-5">
           <a href="#" class="text-decoration-none text-dark">
             <img src="../_assets/images/others.png" alt="other" class="img-fluid" width="100">
             <p class="my-3">Report electrical issues lurking within the walls of your home</p>
