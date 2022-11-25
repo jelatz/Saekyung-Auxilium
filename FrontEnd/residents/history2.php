@@ -1,13 +1,32 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+function validate($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 if(isset($_GET['notifid']))
     {
     $notifid = $_GET['notifid'];
     $update = mysqli_query($conn,"UPDATE notifications_resident SET status = 1 WHERE notifID = $notifid");
     header('Location:history2.php?notif='.$notifid.'');
     exit();
-    }
+    } 
+$searchResult = "";
+    if(isset($_POST['search']))
+    {
+      try{
+        $searchInput = validate($_POST['searchInput']);
+    
+        $result = mysqli_query($conn,"SELECT servicerequest.requestID, accounts.userID, services.serviceType,servicerequest.dateFiled, request_status.status, servicerequest.concern, servicerequest.dateCompleted, servicerequest.notes  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR request_status.status LIKE '%$searchInput%'");
+    
+        $searchResult = mysqli_fetch_all($result);
+      }catch(exception $e){
+        echo '<script>alert(`No results Found!`)</script>';
+      }
+  }
 ?>
 
 
@@ -128,7 +147,7 @@ if(isset($_GET['notifid']))
         <h1 class="text-white mb-4">Transaction History</h1>
         <div class="row justify-content-center">
           <div class="col-5">
-            <form class="d-flex" method="POST" action="../../BackEnd/database/search.php">
+            <form class="d-flex" method="POST" action="">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
               <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
             </form>
@@ -153,7 +172,7 @@ if(isset($_GET['notifid']))
             </thead>
             <tbody>
           <?php
-              if(!isset($_GET['searchReq'])){
+              if(!$searchResult){
                 $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.accountID = '".$_SESSION['username']."' ORDER BY requestID DESC");
                 if($reqSelect)
                 {
@@ -173,28 +192,21 @@ if(isset($_GET['notifid']))
               }
             }
           }else{
-            if(isset($_GET['searchReq'])){
-            $reqID = $_GET['searchReq'];
-            $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID = '$reqID' ORDER BY requestID DESC");
-            if($reqSelect)
-            {
-              while ($row = mysqli_fetch_array($reqSelect)){
-                $requestID = $row['requestID'];
+            foreach($searchResult as $value){
                 ?>
             <tr>
-              <td><?php echo date("Y").$row['requestID']?></td>
-              <td><?php echo $row['accountID']?></td>
-              <td><?php echo $row['dateFiled'] ?></td>
-              <td><?php echo $row['serviceType'] ?></td>
-              <td><?php echo $row['status'] ?></td>
-              <td><?php echo $row['dateCompleted'] ?></td>
-              <td><?php echo $row['notes'] ?></td>
+              <td><?php echo date("Y").$value[0];?></td>
+              <td><?php echo $value[1]; ?></td>
+              <td><?php echo $value[2]; ?></td>
+              <td><?php echo $value[3]; ?></td>
+              <td><?php echo $value[4]; ?></td>
+              <td><?php echo $value[5]; ?></td>
+              <td><?php echo $value[6]; ?></td>
             </tr>
                 <?php
+                }
           }
-        }
-      }
-    }
+    
             ?>
             </tbody>
         </table>
