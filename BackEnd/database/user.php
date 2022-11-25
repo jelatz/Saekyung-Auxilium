@@ -24,11 +24,11 @@ if(isset($_POST['submit'])){
     $sql = mysqli_query($conn,"UPDATE accounts SET firstname = '$fName', lastname = '$lName', img = '$target' WHERE userID = '$userID'");
   }if ($sql)
   {
-     header('Location:../../FrontEnd/residents/profile.php?success=Profile Successfully Updated!');
+     header('Location:../../FrontEnd/residents/profile2.php?success=Profile Successfully Updated!');
   }
 else
   {
-      header('Location:../../FrontEnd/residents/profile.php?error=Profile Failed To Update!');
+      header('Location:../../FrontEnd/residents/profile2.php?error=Profile Failed To Update!');
   }
 }
 

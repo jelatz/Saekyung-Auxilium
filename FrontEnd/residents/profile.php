@@ -170,7 +170,7 @@
     ?>
     <div class="row text-center justify-content-center">
         <div class="col-lg-3 my-2">
-            <div class="card h-100 my-2">
+            <div class="card h-100  my-2">
               <div class="card-header">Profile Picture</div>
               <div class="card-body">
                 <div class="container">

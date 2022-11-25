@@ -64,7 +64,6 @@ $lastname = $row['lastname'];
                 echo $count;
               }
             ?>
-          </span>
             </button>
             <ul class="dropdown-menu px-5 m-0 bg-transparent border-0" style="left: -10rem;">
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">

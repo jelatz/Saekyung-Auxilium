@@ -45,12 +45,12 @@ $insertnotif = mysqli_query($conn,"INSERT INTO notifications (user,message) VALU
 }
 if($insert)
 {   
-    header('Location:../../FrontEnd/Residents/services.php?success=Request Sent!');
+    header('Location:../../FrontEnd/Residents/history2.php?success=Request Sent!');
     exit();
 }
 else
 {
-    header('Location:../../FrontEnd/residents/services.php?error=Request not sent!');
+    header('Location:../../FrontEnd/residents/services2.php?error=Request not sent!');
     exit();
 }
 $conn -> close();
