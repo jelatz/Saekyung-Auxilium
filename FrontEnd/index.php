@@ -37,7 +37,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 <div class="form-box">
 <?php 
     if (isset($_GET['error'])){?>
-    <p class="alert alert-danger text-center mx-auto fw-bold mt-3" id="residentError" style="width:90%;"><?php echo $_GET['error'];?>Invalid Username or Password</p>  
+    <p class="alert alert-danger text-center mx-auto fw-bold mt-2 p-0" id="residentError" style="width:90%;"><?php echo $_GET['error'];?>Invalid Username or Password</p>  
 <?php  
 }?>
     <?php if (isset($_GET['success'])){?><p class="error alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>

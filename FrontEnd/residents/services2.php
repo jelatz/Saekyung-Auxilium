@@ -38,7 +38,7 @@ if(isset($_GET['notifid']))
             ?>
     <div class="d-flex flex-row">
       <div class="dropdown" style="width: 5rem;">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-3"
+        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-2"
           data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
         </button>
         <?php
@@ -65,7 +65,7 @@ if(isset($_GET['notifid']))
                   <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header bg-inner">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
-                      <small class="text-muted">5 seconds ago</small>
+                      <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div class="toast-body">

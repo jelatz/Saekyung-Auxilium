@@ -57,7 +57,7 @@ $searchResult = "";
             ?>
     <div class="d-flex flex-row">
       <div class="dropdown" style="width: 5rem;">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-3"
+        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-2"
           data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
         </button>
         <?php
@@ -84,7 +84,7 @@ $searchResult = "";
                   <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header bg-inner">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
-                      <small class="text-muted">5 seconds ago</small>
+                      <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <div class="toast-body">
@@ -171,15 +171,20 @@ $searchResult = "";
                 </tr>
             </thead>
             <tbody>
-          <?php
+              <?php
+              if(isset($_GET['notifid'])){
+                        echo '<script>
+                        document.getElementById("'.$requestID.'").classList.add("active");
+                        </script>';}
               if(!$searchResult){
                 $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.accountID = '".$_SESSION['username']."' ORDER BY requestID DESC");
                 if($reqSelect)
                 {
                   while ($row = mysqli_fetch_array($reqSelect)){
                     $requestID = $row['requestID'];
+                    
                     ?>
-                <tr>
+                <tr id="<?php $requestID ;?>">
                   <td><?php echo date("Y").$row['requestID']?></td>
                   <td><?php echo $row['accountID']?></td>
                   <td><?php echo $row['dateFiled'] ?></td>
@@ -189,7 +194,7 @@ $searchResult = "";
                   <td><?php echo $row['notes'] ?></td>
             </tr>
             <?php 
-              }
+            }
             }
           }else{
             foreach($searchResult as $value){
