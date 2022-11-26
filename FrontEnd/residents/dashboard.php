@@ -48,11 +48,11 @@ if(isset($_GET['notifid']))
                 echo $count;
               }
             ?>
-        <ul class="dropdown-menu px-5 m-0 bg-transparent border-0" style="left: -23.8rem;">
+        <ul class="dropdown-menu m-0 p-0 border-0" style="left: -15rem; width: 290px; ">
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-inner">
-                  <img src="../_assets/images/bell.png" class="img-fluid me-2" width="21">
-                  <strong class="me-auto text-center">Notifications</strong>
+                <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
+                  <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
+                  <strong class="me-auto text-center bg-transparent">Notifications</strong>
                 </div>
                 <?php 
                   $select = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
@@ -98,7 +98,7 @@ if(isset($_GET['notifid']))
               </div>
               <div class="col pt-3">
                 <p class="mb-0" style="font-size: 18px;
-                ;">Unit no.: 1101!</p>
+                ;">Unit no.:<?php echo $userID; ?></p>
                 <a href="profile2.php">Edit My Profile</a>
               </div>
           </li>
@@ -124,7 +124,21 @@ if(isset($_GET['notifid']))
     </div>
   <!-- NAVIGATION TABS END -->
     <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100%;">
-      <h1 class="text-white mb-4">Welcome <strong>1101!</strong></h1>
+      <h1 class="text-white mb-4">Welcome <strong>
+        
+      <?php
+      
+                $selectUser = mysqli_query($conn, "SELECT firstname,lastname FROM accounts WHERE userID = $userID limit 1");
+                $row = mysqli_fetch_array($selectUser);
+                $firstname = strtoupper($row['firstname']);
+                $lastname = strtoupper($row['lastname']);
+                if($row > 1){
+                  echo "$lastname $firstname";
+                }else{
+                  echo $userID;
+                }
+                ?>
+      </strong></h1>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 bg-inner justify-content-center text-center p-3 py-5 fs-5" style="border-radius: 10px;">
         <div class="col my-4">
           <a href="services2.php?servid=1" class="text-decoration-none text-dark">

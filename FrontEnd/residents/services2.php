@@ -49,11 +49,11 @@ if(isset($_GET['notifid']))
                 echo $count;
               }
             ?>
-        <ul class="dropdown-menu px-5 m-0 bg-transparent border-0" style="left: -23.8rem;">
+        <ul class="dropdown-menu m-0 p-0 border-0" style="left: -15rem; width: 290px; ">
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-inner">
-                  <img src="../_assets/images/bell.png" class="img-fluid me-2" width="21">
-                  <strong class="me-auto text-center">Notifications</strong>
+                <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
+                  <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
+                  <strong class="me-auto text-center bg-transparent">Notifications</strong>
                 </div>
                 <?php 
                   $select = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
@@ -99,7 +99,7 @@ if(isset($_GET['notifid']))
               </div>
               <div class="col pt-3">
                 <p class="mb-0" style="font-size: 18px;
-                ;">Unit no.: 1101!</p>
+                ;">Unit no.:<?php echo $userID; ?></p>
                 <a href="profile2.php">Edit My Profile</a>
               </div>
           </li>

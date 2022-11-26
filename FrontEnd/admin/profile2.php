@@ -1,34 +1,20 @@
-<?php
+<?php 
 session_start();
 include '../../BackEnd/database/config.php';
-function validate($data){
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+
+$userdetails = mysqli_query($conn,"SELECT firstname,lastname FROM accounts WHERE userID = '".$_SESSION['username']."'");
+$row = mysqli_fetch_array($userdetails);
+$firstname = $row['firstname'];
+$lastname = $row['lastname'];
+
 if(isset($_GET['notifid']))
     {
     $notifid = $_GET['notifid'];
     $update = mysqli_query($conn,"UPDATE notifications_resident SET status = 1 WHERE notifID = $notifid");
     header('Location:history2.php?notif='.$notifid.'');
     exit();
-    } 
-$searchResult = "";
-    if(isset($_POST['search']))
-    {
-      try{
-        $searchInput = validate($_POST['searchInput']);
-    
-        $result = mysqli_query($conn,"SELECT servicerequest.requestID, accounts.userID, services.serviceType,servicerequest.dateFiled, request_status.status, servicerequest.concern, servicerequest.dateCompleted, servicerequest.notes  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR request_status.status LIKE '%$searchInput%'");
-    
-        $searchResult = mysqli_fetch_all($result);
-      }catch(exception $e){
-        echo '<script>alert(`No results Found!`)</script>';
-      }
-  }
+    }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +26,58 @@ $searchResult = "";
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-  <title>Resident History</title>
+  <title>Resident Dashboard</title>
+  <style>
+     /*Profile Pic Start*/
+.picture-container{
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+.picture{
+    width: 106px;
+    height: 106px;
+    background-color: #999999;
+    border: 4px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    margin: 0px auto;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.picture:hover{
+    border-color: #2ca8ff;
+}
+.content.ct-wizard-green .picture:hover{
+    border-color: #05ae0e;
+}
+.content.ct-wizard-blue .picture:hover{
+    border-color: #3472f7;
+}
+.content.ct-wizard-orange .picture:hover{
+    border-color: #ff9500;
+}
+.content.ct-wizard-red .picture:hover{
+    border-color: #ff3b30;
+}
+.picture input[type="file"] {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    width: 60%;
+}
+
+.picture-src{
+    width: 100%;
+    height: 100%;
+}
+/*Profile Pic End*/
+  </style>
 </head>
 
 <body
@@ -102,7 +139,7 @@ $searchResult = "";
       <!-- PROFILE DROPDOWN -->
       <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
       <?php 
-      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = $userID limit 1");
+      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = '$userID' limit 1");
       $row = mysqli_fetch_array($select);
       $img = $row['img'];
     ?>
@@ -135,87 +172,60 @@ $searchResult = "";
 <!-- NAVIGATION TABS START-->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3 col-lg-2 p-0 bg-transparent mb-md-2">
+    <div class="col-md-3 col-lg-2 p-0 bg-transparent">
       <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
         <a href="dashboard.php" class="nav-link text-white ps-5">Dashboard</a>
         <a href="services2.php" class="nav-link text-white ps-5">Services</a>
-        <a href="history2.php" class="nav-link text-white ps-5 active">History</a>
+        <a href="history2.php" class="nav-link text-white ps-5">History</a>
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100%;">
-        <h1 class="text-white mb-4">Transaction History</h1>
-        <div class="row justify-content-center">
-          <div class="col-5">
-            <form class="d-flex" method="POST" action="">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
-              <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
-            </form>
-          </div>
-        </div>
-        <div class="row justify-content-center text-center fs-5 m-3">
-        <?php if (isset($_GET['error2'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error2']; ?></p><?php } ?>
-        <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
-      <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-        <div class="table-responsive-lg">
-        <table class="table table-sm table-hover text-center bg-white" style="border-radius: 10px;">
-            <thead>
-                <tr class="bg-inner">
-                    <th class="text-nowrap p-2">Request #</th>
-                    <th class="text-nowrap p-2">Bldng & Unit #</th>
-                    <th class="text-nowrap p-2">Date Filed</th>
-                    <th class="text-nowrap p-2">Service</th>
-                    <th class="text-nowrap p-2">Status</th>
-                    <th class="text-nowrap p-2">Date Completed</th>
-                    <th class="text-nowrap p-2">Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-              <?php
-              if(isset($_GET['notifid'])){
-                        echo '<script>
-                        document.getElementById("'.$requestID.'").classList.add("active");
-                        </script>';}
-              if(!$searchResult){
-                $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.accountID = '".$_SESSION['username']."' ORDER BY requestID DESC");
-                if($reqSelect)
-                {
-                  while ($row = mysqli_fetch_array($reqSelect)){
-                    $requestID = $row['requestID'];
-                    
-                    ?>
-                <tr id="<?php $requestID ;?>">
-                  <td><?php echo date("Y").$row['requestID']?></td>
-                  <td><?php echo $row['accountID']?></td>
-                  <td><?php echo $row['dateFiled'] ?></td>
-                  <td><?php echo $row['serviceType'] ?></td>
-                  <td><?php echo $row['status'] ?></td>
-                  <td><?php echo $row['dateCompleted'] ?></td>
-                  <td><?php echo $row['notes'] ?></td>
-            </tr>
-            <?php 
-            }
-            }
-          }else{
-            foreach($searchResult as $value){
-                ?>
-            <tr>
-              <td><?php echo date("Y").$value[0];?></td>
-              <td><?php echo $value[1]; ?></td>
-              <td><?php echo $value[2]; ?></td>
-              <td><?php echo $value[3]; ?></td>
-              <td><?php echo $value[4]; ?></td>
-              <td><?php echo $value[5]; ?></td>
-              <td><?php echo $value[6]; ?></td>
-            </tr>
-                <?php
-                }
-          }
-    
-            ?>
-            </tbody>
-        </table>
-    </div>
+    <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh;">
+        <h1 class="text-white">Profile</h1>
+        <p class="text-white">Optional update for personal details and change password</p>
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-5 bg-inner text-center p-2" style="border-radius: 10px;">
+            <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" novalidate="">
+              <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
+    <?php 
+      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = '$userID' limit 1");
+      $row = mysqli_fetch_array($select);
+      $img = $row['img'];
+    ?>
+              <div class="card-body">
+                <div class="container">
+                  <div class="picture-container">
+                    <div class="picture mt-4">
+                      <img src="<?php echo $img ;?>" class="picture-src" id="frame" title="">
+                      <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
+                    </div>
+                    <h6 class="mt-2">Profile Picture (Optional)</h6>
+                  </div>
+                </div>
+              </div>
+              <!-- USER DETAILS LOGIN -->
+              <div class="card-body">
+              <?php if (isset($_GET['success'])){?><p class="success alert alert-success"><?php echo $_GET['success'];?></p> <?php } ?>     
+              <?php if (isset($_GET['error'])){?><p class="error alert alert-danger"><?php echo $_GET['error'];?></p> <?php } ?>
+                <input type="hidden" class="form-control" name="userID" value = <?php echo $userID ?>>
+                <label for="fName" class="form-label">
+                  Enter First Name: 
+                </label>
+                <input type="text" class="form-control w-75 mx-auto" name="fName" placeholder="">
+                <div class="invalid-feedback">
+                  Please enter your first name:
+                </div>
+                <label for="lName" class="form-label">Enter Last Name: </label>
+                <input type="text" class="form-control w-75 mx-auto" name="lName" placeholder="">
+                <div class="invalid-feedback">
+                  Please enter your last name:
+                </div>
+                <input type="submit" name="submit" value="Submit" class="btn text-white mt-3 w-50 fs-6" style="background-color: #1F2022;">
+                <div class="row my-2">
+                <a href="changepass2.php">Change Password?</a>
+                </div>
+          </form>
+            </div>
         </div>
     </div>
   <!-- NAVIGATION CONTENTS START -->
@@ -249,7 +259,13 @@ $searchResult = "";
           form.classList.add('was-validated')
         }, false)
       })
-  </script>
+</script>
+<!-- PROFILE PICTURE PREVIEW -->
+<script type="text/javascript">
+    function preview(){
+        frame.src=URL.createObjectURL(event.target.files[0]);
+    }
+</script>
 </body>
 
 </html>
