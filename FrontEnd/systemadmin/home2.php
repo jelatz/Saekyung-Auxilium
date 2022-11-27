@@ -1,15 +1,9 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
-
-$userdetails = mysqli_query($conn, "SELECT firstname,lastname FROM accounts WHERE userID = '" . $_SESSION['username'] . "'");
-$row = mysqli_fetch_array($userdetails);
-$firstname = $row['firstname'];
-$lastname = $row['lastname'];
-
 if (isset($_GET['notifid'])) {
   $notifid = $_GET['notifid'];
-  $update = mysqli_query($conn, "UPDATE notifications_resident SET status = 1 WHERE notifID = $notifid");
+  $update = mysqli_query($conn, "UPDATE notifications SET status = 1 WHERE notifID = $notifid");
   header('Location:history2.php?notif=' . $notifid . '');
   exit();
 }
@@ -25,66 +19,7 @@ if (isset($_GET['notifid'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-  <title>Resident Dashboard</title>
-  <style>
-    /*Profile Pic Start*/
-    .picture-container {
-      position: relative;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .picture {
-      width: 106px;
-      height: 106px;
-      background-color: #999999;
-      border: 4px solid #CCCCCC;
-      color: #FFFFFF;
-      border-radius: 50%;
-      margin: 0px auto;
-      overflow: hidden;
-      transition: all 0.2s;
-      -webkit-transition: all 0.2s;
-    }
-
-    .picture:hover {
-      border-color: #2ca8ff;
-    }
-
-    .content.ct-wizard-green .picture:hover {
-      border-color: #05ae0e;
-    }
-
-    .content.ct-wizard-blue .picture:hover {
-      border-color: #3472f7;
-    }
-
-    .content.ct-wizard-orange .picture:hover {
-      border-color: #ff9500;
-    }
-
-    .content.ct-wizard-red .picture:hover {
-      border-color: #ff3b30;
-    }
-
-    .picture input[type="file"] {
-      cursor: pointer;
-      display: block;
-      height: 100%;
-      left: 0;
-      opacity: 0 !important;
-      position: absolute;
-      top: 0;
-      width: 60%;
-    }
-
-    .picture-src {
-      width: 100%;
-      height: 100%;
-    }
-
-    /*Profile Pic End*/
-  </style>
+  <title>System Admin Home</title>
 </head>
 
 <body style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
@@ -120,7 +55,7 @@ if (isset($_GET['notifid'])) {
               while ($row = mysqli_fetch_array($select)) {
                 $notifID = $row['notifID'];
               ?>
-                <a href="history2.php?notifid=<?php echo $notifID; ?>" class="text-decoration-none text-dark">
+                <a href="requests.php?notifid=<?php echo $notifID; ?>" class="text-decoration-none text-dark">
                   <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header bg-inner">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user']; ?></strong>
@@ -178,53 +113,60 @@ if (isset($_GET['notifid'])) {
     <div class="row">
       <div class="col-md-3 col-lg-2 p-0 bg-transparent">
         <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-          <a href="dashboard.php" class="nav-link text-white ps-5">Dashboard</a>
-          <a href="requests.php" class="nav-link text-white ps-5">Requests</a>
+          <a href="home2.php" class="nav-link text-white ps-5 active">Home</a>
+          <a href="accounts.php" class="nav-link text-white ps-5">Accounts</a>
+          <a href="services.php" class="nav-link text-white ps-5">Services</a>
+          <a href="reports.php" class="nav-link text-white ps-5">Reports</a>
         </nav>
       </div>
       <!-- NAVIGATION TABS END -->
-      <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh;">
-        <h1 class="text-white">Profile</h1>
-        <p class="text-white">Optional update for personal details and change password</p>
-        <div class="row justify-content-center mt-5">
-          <div class="col-lg-5 bg-inner text-center p-2" style="border-radius: 10px;">
-            <form action="../../BackEnd/database/user.php" class="needs-validation h-100" method="POST" enctype="multipart/form-data" novalidate="">
-              <?php if (isset($_SESSION['username'])) {
-                $userID = $_SESSION['username'];
-              } ?>
-              <?php
-              $select = mysqli_query($conn, "SELECT * FROM accounts WHERE userID = '$userID' limit 1");
-              $row = mysqli_fetch_array($select);
-              $img = $row['img'];
-              ?>
-              <div class="card-body">
-                <div class="container">
-                <?php if (isset($_GET['success'])) { ?><p class="success alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-              <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p> <?php } ?>
-                  <div class="picture-container">
-                    <div class="picture mt-4">
-                      <img src="<?php echo $img; ?>" class="picture-src" id="frame" title="">
-                      <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
-                    </div>
-                    <h6 class="mt-2">Change Profile Picture (Optional)</h6>
-                  </div>
-                </div>
-              </div>
-              <!-- USER DETAILS LOGIN -->
-              <div class="card-body">
-                <input type="hidden" class="form-control" name="userID" value=<?php echo $userID ?>>
+      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+        <h1 class="text-white mb-4">Welcome <strong>
+            <?php
 
-                <input type="submit" name="submitAdmin" value="Upload" class="btn text-white mt-3 w-50 fs-6" style="background-color: #1F2022;">
-                <div class="row my-2">
-                  <a href="chngepass.php">Change Password?</a>
-                </div>
-            </form>
+            $selectUser = mysqli_query($conn, "SELECT firstname,lastname FROM accounts WHERE userID = '$userID' limit 1");
+            $row = mysqli_fetch_array($selectUser);
+            $firstname = strtoupper($row['firstname']);
+            $lastname = strtoupper($row['lastname']);
+            if ($row > 1) {
+              echo "$lastname $firstname";
+            } else {
+              echo $userID;
+            }
+            ?>
+        </h1>
+        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5" style="border-radius: 10px;" style="height: 100%;">
+          <div class="col-6 mx-auto">
+            <?php
+            $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
+            ?>
+            <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
           </div>
+
+          <!-- VIEW REPORTS -->
+          <div class="row text-start mt-5 mb-2 text-white">
+            <h5 class="text-dark ps-0">Date</h5>
+          </div>
+          <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
+            <div class="row text-start mb-3">
+              <label for="From" class="col-sm-1 col-form-label h6">From: </label>
+              <div class="col-sm-3">
+                <input type="datetime-local" class="form-control" id="from" name="from">
+              </div>
+              <label for="To" class="col-sm-1 col-form-label h6">To: </label>
+              <div class="col-sm-3">
+                <input type="datetime-local" class="form-control" id="from" name="to">
+              </div>
+              <button type="submit" class="btn btn-secondary
+                 w-25 ms-5" name="view_report">View Report</button>
+            </div>
+          </form>
         </div>
       </div>
-      <!-- NAVIGATION CONTENTS START -->
-
     </div>
+    <!-- NAVIGATION CONTENTS START -->
+
+  </div>
   </div>
   <!-- NAVIGATION CONTENTS END -->
   <!-- BOOTSTRAP JS -->
@@ -254,10 +196,34 @@ if (isset($_GET['notifid'])) {
         }, false)
       })
   </script>
-  <!-- PROFILE PICTURE PREVIEW -->
+  <!-- GOOGLE PIE CHART SCRIPT -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    function preview() {
-      frame.src = URL.createObjectURL(event.target.files[0]);
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['serviceType', 'completed'],
+
+        <?php
+        while ($row = mysqli_fetch_array($result)) {
+          echo "['" . $row["serviceType"] . "' , " . $row["completed"] . "],";
+        }
+        ?>
+      ]);
+
+      var options = {
+        backgroundColor: 'transparent',
+        title: 'Service Request Reports'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
     }
   </script>
 </body>

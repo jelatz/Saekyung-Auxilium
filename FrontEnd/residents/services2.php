@@ -36,20 +36,21 @@ if(isset($_GET['notifid']))
               $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
               $count = mysqli_num_rows($selectnotif);
             ?>
-    <div class="d-flex flex-row">
-      <div class="dropdown" style="width: 5rem;">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-2"
+    <div class="d-flex flex-row gap-2">
+      <div class="dropdown position-relative p-0 m-0">
+        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none"
           data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
-        </button>
+      
         <?php
               if($count == 0){
 
               }else{
-                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-16px;">';
+                echo '<span class="badge bg-danger rounded-circle" style="position: absolute; top:-10px; left:2rem;">';
                 echo $count;
               }
             ?>
-        <ul class="dropdown-menu m-0 p-0 border-0" style="left: -15rem; width: 290px; ">
+              </button>
+        <ul class="dropdown-menu position-absolute p-0 m-0" style="left: -15.3rem; width: 300px;" >
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
                   <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
@@ -124,7 +125,7 @@ if(isset($_GET['notifid']))
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 50.5rem;">
+    <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh">
       <h1 class="text-white mb-4">Concerns and Issues</h1>
       <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 m-3" style="border-radius: 10px;">
         <div class="col">
@@ -188,7 +189,7 @@ if(isset($_GET['notifid']))
           <input type="hidden" value="Completed" name="completed">
           <div class="row justify-content-end">  
             <div class="col-lg-2">
-              <button type="submit" name="reqSubmit" class="btn btn-unselected w-100 text-white fs-5" style="background-color:#1F2022;">Submit</button>
+              <button type="submit" name="reqSubmit" class="btn w-100 text-white fs-5" style="background-color:#1F2022;">Submit</button>
             </div>
           </div>
         </form>

@@ -20,7 +20,7 @@ if(isset($_GET['notifid']))
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-  <title>Resident Dashboard</title>
+  <title>Residents Dashboard</title>
 </head>
 
 <body
@@ -35,20 +35,21 @@ if(isset($_GET['notifid']))
               $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
               $count = mysqli_num_rows($selectnotif);
             ?>
-    <div class="d-flex flex-row">
-      <div class="dropdown" style="width: 5rem;">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-2"
+    <div class="d-flex flex-row gap-2">
+      <div class="dropdown position-relative p-0 m-0">
+        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none"
           data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
-        </button>
+      
         <?php
               if($count == 0){
 
               }else{
-                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-16px;">';
+                echo '<span class="badge bg-danger rounded-circle" style="position: absolute; top:-10px; left:2rem;">';
                 echo $count;
               }
             ?>
-        <ul class="dropdown-menu m-0 p-0 border-0" style="left: -15rem; width: 290px; ">
+              </button>
+        <ul class="dropdown-menu position-absolute p-0 m-0" style="left: -15.3rem; width: 300px;" >
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
                   <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
@@ -111,10 +112,11 @@ if(isset($_GET['notifid']))
   </div>
 </nav>
 <!-- NAVBAR END -->
-
-<!-- NAVIGATION TABS START-->
+<!-- MAIN CONTENT -->
 <div class="container-fluid">
   <div class="row">
+
+<!-- NAVIGATION TABS START-->
     <div class="col-md-3 col-lg-2 p-0 bg-transparent">
       <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
         <a href="dashboard.php" class="nav-link text-white ps-5 active">Dashboard</a>
@@ -122,8 +124,9 @@ if(isset($_GET['notifid']))
         <a href="history2.php" class="nav-link text-white ps-5">History</a>
       </nav>
     </div>
-  <!-- NAVIGATION TABS END -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100%;">
+<!-- NAVIGATION TABS END -->
+<!-- NAV CONTENTS START -->
+    <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
       <h1 class="text-white mb-4">Welcome <strong>
         
       <?php
@@ -184,11 +187,10 @@ if(isset($_GET['notifid']))
         </div>       
       </div>
     </div>
-  <!-- NAVIGATION CONTENTS START -->
-
+<!-- NAVIGATION CONTENTS END -->
   </div>
 </div>
-<!-- NAVIGATION CONTENTS END -->
+<!-- MAIN CONTENT END -->
 <!-- BOOTSTRAP JS -->
 <script src="../_assets/js/bootstrap.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

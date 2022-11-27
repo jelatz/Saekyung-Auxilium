@@ -72,13 +72,13 @@ if(isset($_POST['accept_btn']))
         $user = $row['user'];
         $message = $row['message'];
         $insert = mysqli_query($conn,"INSERT INTO notifications_resident (user,message) VALUES ('$user', 'Your request has been acknowledged!')");
-        header('Location:../../FrontEnd/admin/dashboardpending.php');
+        header('Location:../../FrontEnd/admin/requests.php');
         exit(); 
     }
     else
     {
         echo "<script> alert(`Can't accept this request!');</script>";
-        header('Location:../../FrontEnd/admin/dashboardpending.php');
+        header('Location:../../FrontEnd/admin/requests.php');
         exit();
     }
     $conn -> close();
@@ -95,14 +95,14 @@ if(isset($_POST['complete_btn']))
     $update = mysqli_query($conn,"UPDATE servicerequest SET statusID = 3,notes='$notes', dateCompleted = CURRENT_TIMESTAMP WHERE requestID='$id'");
     if($update)
     {      
-        $insert = mysqli_query($conn,"INSERT INTO notifications_resident (user,message) VALUES ('$user', 'Your request has been completed!')");
-            header('Location:../../FrontEnd/admin/dashboardpending.php');
+        $insert = mysqli_query($conn,"INSERT INTO notifications_resident (user,message) VALUES ('$id', 'Your request has been completed!')");
+            header('Location:../../FrontEnd/admin/requests.php');
             exit();
     }
     else
     {
         echo "<script> alert(`Can't complete this request!');</script>";
-        header('Location:../../FrontEnd/admin/dashboardpending.php');
+        header('Location:../../FrontEnd/admin/requests.php');
         exit();
     }
     $conn -> close();

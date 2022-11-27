@@ -25,6 +25,7 @@ $searchResult = "";
         $searchResult = mysqli_fetch_all($result);
       }catch(exception $e){
         echo '<script>alert(`No results Found!`)</script>';
+        header('Location:history2.php');
       }
   }
 ?>
@@ -55,20 +56,21 @@ $searchResult = "";
               $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
               $count = mysqli_num_rows($selectnotif);
             ?>
-    <div class="d-flex flex-row">
-      <div class="dropdown" style="width: 5rem;">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-2"
+    <div class="d-flex flex-row gap-2">
+      <div class="dropdown position-relative p-0 m-0">
+        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none"
           data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
-        </button>
+      
         <?php
               if($count == 0){
 
               }else{
-                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-16px;">';
+                echo '<span class="badge bg-danger rounded-circle" style="position: absolute; top:-10px; left:2rem;">';
                 echo $count;
               }
             ?>
-        <ul class="dropdown-menu m-0 p-0 border-0" style="left: -15rem; width: 290px; ">
+              </button>
+        <ul class="dropdown-menu position-absolute p-0 m-0" style="left: -15.3rem; width: 300px;" >
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
                   <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
@@ -143,7 +145,7 @@ $searchResult = "";
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100%;">
+    <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh;">
         <h1 class="text-white mb-4">Transaction History</h1>
         <div class="row justify-content-center">
           <div class="col-5">
@@ -157,7 +159,7 @@ $searchResult = "";
         <?php if (isset($_GET['error2'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error2']; ?></p><?php } ?>
         <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
       <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-        <div class="table-responsive-lg">
+        <div class="table-responsive">
         <table class="table table-sm table-hover text-center bg-white" style="border-radius: 10px;">
             <thead>
                 <tr class="bg-inner">

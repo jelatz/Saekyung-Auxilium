@@ -26,7 +26,7 @@ if(isset($_GET['notifid']))
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../_assets/css/bootstrap.css">
     <link rel="stylesheet" href="../_assets/css/custom.css">
-    <title>Resident Dashboard</title>
+    <title>Residents Changepass</title>
     <style>
         /*Profile Pic Start*/
         .picture-container {
@@ -99,20 +99,21 @@ if(isset($_GET['notifid']))
               $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
               $count = mysqli_num_rows($selectnotif);
             ?>
-    <div class="d-flex flex-row">
-      <div class="dropdown" style="width: 5rem;">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none ps-2"
+    <div class="d-flex flex-row gap-2">
+      <div class="dropdown position-relative p-0 m-0">
+        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none"
           data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
-        </button>
+      
         <?php
               if($count == 0){
 
               }else{
-                echo '<span class="badge bg-danger rounded-circle" style="position: relative; top:-10px; left:-16px;">';
+                echo '<span class="badge bg-danger rounded-circle" style="position: absolute; top:-10px; left:2rem;">';
                 echo $count;
               }
             ?>
-        <ul class="dropdown-menu m-0 p-0 border-0" style="left: -15rem; width: 290px; ">
+              </button>
+        <ul class="dropdown-menu position-absolute p-0 m-0" style="left: -15.3rem; width: 300px;" >
               <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
                   <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
