@@ -47,10 +47,11 @@ include '../../BackEnd/database/config.php';
           <a href="#" class="nav-link btn-link align-items-center me-3" data-bs-toggle="modal" data-bs-target="#notif"><img src="../_assets/images/bell-fill.svg" class="img-fluid" width="20">
           </a>
           <div class="dropdown">
-            <button class="btn btn-unselected mx-1 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><?php
-                                                                                                                                  if (isset($_SESSION['username'])) {
-                                                                                                                                    echo "Welcome! " . $_SESSION['username'];
-                                                                                                                                  } ?></button>
+            <button class="btn btn-unselected mx-1 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <?php
+              if (isset($_SESSION['username'])) {
+                echo "Welcome! " . $_SESSION['username'];
+              } ?></button>
             <ul class="dropdown-menu bg-inner p-2">
               <li class="nav-item my-2">
                 <a class="btn btn-unselected w-100" href="profile.php" name="profile">Profile</a>
@@ -338,66 +339,66 @@ include '../../BackEnd/database/config.php';
 
     <!-- REPORTS CONTENT -->
 
-  <!-- REPORTS CONTENTS -->
-  <div class="tab-pane container-md fade" id="reports<?php $reports ?>">
-            <div class="row justify-content-center text-center">
-              <div class="col mx-auto">
-                <?php
-                $result2 = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
-                ?>
-                <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
-              </div>
-            </div>
-            <!-- VIEW REPORTS -->
-            <div class="row text-start mt-5 mb-2">
-              <h5>Date</h5>
-            </div>
-            <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
-              <div class="row text-start mb-3">
-                <label for="From" class="col-sm-1 col-form-label h6">From: </label>
-                <div class="col-sm-3">
-                  <input type="datetime-local" class="form-control" id="from" name="from">
-                </div>
-                <label for="To" class="col-sm-1 col-form-label h6">To: </label>
-                <div class="col-sm-3">
-                  <input type="datetime-local" class="form-control" id="from" name="to">
-                </div>
-                <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
-              </div>
-            </form>
+    <!-- REPORTS CONTENTS -->
+    <div class="tab-pane container-md fade" id="reports<?php $reports ?>">
+      <div class="row justify-content-center text-center">
+        <div class="col mx-auto">
+          <?php
+          $result2 = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
+          ?>
+          <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
+        </div>
+      </div>
+      <!-- VIEW REPORTS -->
+      <div class="row text-start mt-5 mb-2">
+        <h5>Date</h5>
+      </div>
+      <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
+        <div class="row text-start mb-3">
+          <label for="From" class="col-sm-1 col-form-label h6">From: </label>
+          <div class="col-sm-3">
+            <input type="datetime-local" class="form-control" id="from" name="from">
           </div>
-          <!-- REPORTS CONTENT END -->
+          <label for="To" class="col-sm-1 col-form-label h6">To: </label>
+          <div class="col-sm-3">
+            <input type="datetime-local" class="form-control" id="from" name="to">
+          </div>
+          <button type="submit" class="btn btn-primary w-25 ms-5" name="view_report">View Report</button>
+        </div>
+      </form>
+    </div>
+    <!-- REPORTS CONTENT END -->
   </div>
   <!-- SERVICES CONTENTS -->
-          
+
   <div class="tab-pane fade p-5" id="services<?php $services ?>" role="tabpanel" aria-labelledby="servicesTab" tabindex="0">
-            <div class="row justify-content-center">
-              <!-- ALERT MESSAGE IF SERVICE TYPE IS SUCCESSFULLY ADDED -->
-              <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-              <div class="input-group rounded my-4 w-50">
-                <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-                <span class="input-group-text border-0" id="search-addon">
-                  <i class="bi bi-search"></i>
-                </span>
-              </div>
-            </div>
-            <form action="../../BackEnd/database/services.php" method="POST">
-              <div class="table-responsive">
-                <table class="table table-bordered table-sm">
-                  <thead>
-                    <tr>
-                      <th><label for="serviceType">Service Type</label></th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- RETRIEVE DATA FROM DATABASE -->
-                    <?php
-                    $result = mysqli_query($conn, "select * from services");
-                    if ($result) {
-                      while ($row = mysqli_fetch_assoc($result)) {
-                        $servType = $row['serviceType'];
-                        echo '<tr>
+    <div class="row justify-content-center">
+      <!-- ALERT MESSAGE IF SERVICE TYPE IS SUCCESSFULLY ADDED -->
+      <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
+      <div class="input-group rounded my-4 w-50">
+        <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="bi bi-search"></i>
+        </span>
+      </div>
+    </div>
+    <form action="../../BackEnd/database/services.php" method="POST">
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th><label for="serviceType">Service Type</label></th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- RETRIEVE DATA FROM DATABASE -->
+            <?php
+            $result = mysqli_query($conn, "select * from services");
+            if ($result) {
+              while ($row = mysqli_fetch_assoc($result)) {
+                $servType = $row['serviceType'];
+                echo '<tr>
                             <td class="align-middle p-1">
                               ' . $servType . '
                             </td>
@@ -405,37 +406,37 @@ include '../../BackEnd/database/config.php';
                                 <button class="btn btn-danger \" ><a href="../../BackEnd/database/delete.php?deleteService=' . $servType . '" class="text-decoration-none text-dark">Delete</a></button>
                             </td>
                             </tr>';
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
-              </div>
-            </form>
-          </div>
-          <!-- MODAL FOR ADDING OF SERVICE -->
-          <div class="modal fade" data-bs-backdrop="static" id="addService">
-            <div class="modal-dialog modal-md modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5">Add Services</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                  <form action="../../BackEnd/database/services.php" method="POST" class="needs-validation" novalidate="">
-                    <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p> <?php } ?>
-                    <label for="service" form-label text-nowrap">Enter Service Type: </label>
-                    <input type="text" class="form-control w-75 mx-auto mt-3" name="serviceType" id="serviceType" required>
-                    <div class="invalid-feedback">
-                      Please enter a service type
-                    </div>
-                    <button type="submit" name="addServSubmit" id="addServSub" class="btn btn-primary mt-3">Add</button>
-                  </form>
-                </div>
-              </div>
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addService">Add Service</button>
+      </div>
+    </form>
+  </div>
+  <!-- MODAL FOR ADDING OF SERVICE -->
+  <div class="modal fade" data-bs-backdrop="static" id="addService">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Add Services</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form action="../../BackEnd/database/services.php" method="POST" class="needs-validation" novalidate="">
+            <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p> <?php } ?>
+            <label for="service" form-label text-nowrap">Enter Service Type: </label>
+            <input type="text" class="form-control w-75 mx-auto mt-3" name="serviceType" id="serviceType" required>
+            <div class="invalid-feedback">
+              Please enter a service type
             </div>
-          </div>
+            <button type="submit" name="addServSubmit" id="addServSub" class="btn btn-primary mt-3">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- SCRIPTS -->
@@ -495,8 +496,8 @@ include '../../BackEnd/database/config.php';
     getPillId();
   </script>
   <!-- REPORTS SCRIPT -->
-   <!-- GOOGLE PIE CHART SCRIPT -->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- GOOGLE PIE CHART SCRIPT -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {
       'packages': ['corechart']

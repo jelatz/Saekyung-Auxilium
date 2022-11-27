@@ -90,7 +90,7 @@ if (isset($_POST['rememberme'])){
     setcookie('adminuser', $username, 100,"/");
     setcookie('adminpass', $password, 100,"/");
     }
-header('Location:../../FrontEnd/systemadmin/home.php');
+header('Location:../../FrontEnd/systemadmin/home2.php');
 exit();
 }else{
 header('Location:../../FrontEnd/index.php?error');

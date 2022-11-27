@@ -132,8 +132,8 @@ if (isset($_POST['search'])) {
     <div class="row">
       <div class="col-md-3 col-lg-2 p-0 bg-transparent">
         <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-          <a href="home2.php" class="nav-link text-white ps-5 active">Home</a>
-          <a href="accounts.php" class="nav-link text-white ps-5">Accounts</a>
+          <a href="home2.php" class="nav-link text-white ps-5">Home</a>
+          <a href="accounts.php" class="nav-link text-white ps-5 active">Accounts</a>
           <a href="services.php" class="nav-link text-white ps-5">Services</a>
           <a href="reports.php" class="nav-link text-white ps-5">Reports</a>
         </nav>
@@ -143,70 +143,7 @@ if (isset($_POST['search'])) {
       <!-- NAVIGATION CONTENTS -->
       <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
         <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;">
-          <div class="col-5 mb-4">
-            <form class="d-flex" method="POST" action="">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
-              <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
-            </form>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-hover table-striped table-sm">
-              <thead>
-                <tr class="text-center">
-                  <th>Request #</th>
-                  <th>User</th>
-                  <th>Date Filed</th>
-                  <th>Service Type</th>
-                  <th>Concern</th>
-                  <th>Notes</th>
-                  <th>Date Completed</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (!$searchResult) {
-                  $result = mysqli_query($conn, "SELECT *,services.serviceType FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID");
-                  while ($row = mysqli_fetch_array($result)) {
-                    $id = $row['requestID'];
-                    $accountID = $row['accountID'];
-                    $dateFiled = $row['dateFiled'];
-                    $serviceType = $row['serviceType'];
-                    $concern = $row['concern'];
-                    $notes = $row['notes'];
-                    $dateCompleted = $row['dateCompleted'];
-                ?>
-                    <tr class="justify-content-center text-center">
-                      <td><?php echo date('Y') . $id ?></td>
-                      <td><?php echo $accountID ?></td>
-                      <td><?php echo $dateFiled ?></td>
-                      <td><?php echo $serviceType ?></td>
-                      <td><?php echo $concern ?></td>
-                      <td><?php echo $notes ?></td>
-                      <td><?php echo $dateCompleted ?></td>
-                    </tr>
-
-                  <?php
-                  }
-                } else {
-                  foreach ($searchResult as $value) {
-                  ?>
-                    <tr>
-                      <td><?php echo date("Y") . $value[0]; ?></td>
-                      <td><?php echo $value[1]; ?></td>
-                      <td><?php echo $value[2]; ?></td>
-                      <td><?php echo $value[3]; ?></td>
-                      <td><?php echo $value[4]; ?></td>
-                      <td><?php echo $value[5]; ?></td>
-                      <td><?php echo $value[6]; ?></td>
-                    </tr>
-                <?php
-                  }
-                }
-                ?>
-              </tbody>
-
-            </table>
-          </div>
+            
         </div>
       </div>
       <!-- NAVIGATION CONTENTS END -->
