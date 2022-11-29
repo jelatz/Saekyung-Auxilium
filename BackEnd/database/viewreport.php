@@ -24,7 +24,17 @@ if(isset($_POST['view_report'])){
 }
 
 
+if(isset($_POST['view_report_sysadmin'])){
+    $from = validate ($_POST['from']);
+    $_SESSION['from'] = $from;
+    $to = validate ($_POST['to']);
+    $_SESSION['to'] = $to;
 
+    // $result = mysqli_query($conn, "SELECT dateCompleted FROM servicerequest WHERE dateCompleted BETWEEN '$from' AND '$to'");
+    
+    header('Location:../../FrontEnd/systemadmin/reportsView.php');
+    exit();
+}
 
 
 

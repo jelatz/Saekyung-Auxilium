@@ -113,13 +113,14 @@ if (isset($_GET['notifid'])) {
     <div class="row">
       <div class="col-md-3 col-lg-2 p-0 bg-transparent">
         <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-        <a href="home2.php" class="nav-link text-white ps-5">Home</a>
+          <a href="home2.php" class="nav-link text-white ps-5">Home</a>
           <a href="accounts.php" class="nav-link text-white ps-5">Accounts</a>
           <a href="services.php" class="nav-link text-white ps-5">Services</a>
           <a href="reports.php" class="nav-link text-white ps-5 active">Reports</a>
         </nav>
       </div>
       <!-- NAVIGATION TABS END -->
+      <!-- NAVIGATION CONTENTS START -->
       <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
         <h1 class="text-white mb-4">Welcome <strong>
             <?php
@@ -135,7 +136,7 @@ if (isset($_GET['notifid'])) {
             }
             ?>
         </h1>
-        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5" style="border-radius: 10px;" style="height: 100%;">
+        <div class="row bg-inner justify-content-center text-center p-3 fs-5" style="border-radius: 10px;" style="height: 100%;">
           <div class="col-6 mx-auto">
             <?php
             $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
@@ -158,13 +159,12 @@ if (isset($_GET['notifid'])) {
                 <input type="datetime-local" class="form-control" id="from" name="to">
               </div>
               <button type="submit" class="btn btn-secondary
-                 w-25 ms-5" name="view_report">View Report</button>
+                 w-25 ms-5" name="view_report_sysadmin">View Report</button>
             </div>
           </form>
         </div>
       </div>
     </div>
-    <!-- NAVIGATION CONTENTS START -->
 
   </div>
   </div>

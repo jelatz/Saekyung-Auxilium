@@ -155,22 +155,32 @@ if(isset($_GET['notifid']))
         <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0"
           data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="35" style="height:35px;">
         </button>
-        <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; " >
-          <li class="nav-item">
-            <div class="row">
-              <div class="col-4"> 
-                <img src="<?php echo $img;?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+        <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; ">
+            <li class="nav-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="<?php echo $img; ?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+                </div>
+                <div class="col pt-3">
+                  <p class="mb-0" style="font-size: 18px;
+                ;">User:<?php echo $userID; ?></p>
+                  <a href="profile2.php">Edit My Profile</a>
+                </div>
               </div>
-              <div class="col pt-3">
-                <p class="mb-0" style="font-size: 18px;
-                ;">User: <?php echo $userID; ?></p>
-                <a href="profile2.php">Edit My Profile</a>
-              </div>
-          </li>
-          <li class="nav-item">
-            <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="m-3 ms-5"><a href="../../BackEnd/database/logout.php" class="ms-3 text-dark" style="font-size:18px ;">Logout </a>
-          </li>
-        </ul>
+            </li>
+            <li class="nav-item logout">
+              <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
+              <div class="row">
+                  <div class="col-4 pe-1 text-end">
+                    <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
+                  </div>
+                  <div class="col">
+                    <p class="text-decoration-none ps-1">Logout</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -187,7 +197,7 @@ if(isset($_GET['notifid']))
                 </nav>
             </div>
             <!-- NAVIGATION TABS END -->
-            <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh;">
+            <div class="col-md-9 col-lg-10 bg-inner3 p-5 " style="height: 100vh; overflow:auto;">
                 <h1 class="text-white">Change Password</h1>
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-5 bg-inner text-center p-2" style="border-radius: 10px;">

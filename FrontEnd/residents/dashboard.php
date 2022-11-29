@@ -62,8 +62,8 @@ if(isset($_GET['notifid']))
                     $notifID = $row['notifID'];
                 ?>
                 <a href="history2.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
-                  <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-inner">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
                       <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -91,22 +91,32 @@ if(isset($_GET['notifid']))
         <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0"
           data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="35" style="height:35px;">
         </button>
-        <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; " >
-          <li class="nav-item">
-            <div class="row">
-              <div class="col-4"> 
-                <img src="<?php echo $img;?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+        <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; ">
+            <li class="nav-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="<?php echo $img; ?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+                </div>
+                <div class="col pt-3">
+                  <p class="mb-0" style="font-size: 18px;
+                ;">User:<?php echo $userID; ?></p>
+                  <a href="profile2.php">Edit My Profile</a>
+                </div>
               </div>
-              <div class="col pt-3">
-                <p class="mb-0" style="font-size: 18px;
-                ;">Unit no.:<?php echo $userID; ?></p>
-                <a href="profile2.php">Edit My Profile</a>
-              </div>
-          </li>
-          <li class="nav-item">
-            <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="m-3 ms-5"><a href="../../BackEnd/database/logout.php" class="ms-3 text-dark" style="font-size:18px ;">Logout </a>
-          </li>
-        </ul>
+            </li>
+            <li class="nav-item logout">
+              <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
+              <div class="row">
+                  <div class="col-4 pe-1 text-end">
+                    <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
+                  </div>
+                  <div class="col">
+                    <p class="text-decoration-none ps-1">Logout</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -126,7 +136,7 @@ if(isset($_GET['notifid']))
     </div>
 <!-- NAVIGATION TABS END -->
 <!-- NAV CONTENTS START -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+<div class="col-md-9 col-lg-10 bg-inner3 p-5 " style="height: 100vh; overflow:inherit;">
       <h1 class="text-white mb-4">Welcome <strong>
         
       <?php
@@ -135,10 +145,10 @@ if(isset($_GET['notifid']))
                 $row = mysqli_fetch_array($selectUser);
                 $firstname = strtoupper($row['firstname']);
                 $lastname = strtoupper($row['lastname']);
-                if($row > 1){
+                if($row['firstname'] > 1 || $row['lastname'] > 1){
                   echo "$lastname $firstname";
                 }else{
-                  echo $userID;
+                  echo "$userID";
                 }
                 ?>
       </strong></h1>
@@ -146,43 +156,43 @@ if(isset($_GET['notifid']))
         <div class="col my-4">
           <a href="services2.php?servid=1" class="text-decoration-none text-dark">
             <img src="../_assets/images/electrical.png" alt="electrical" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report electrical issues lurking within the walls of your home</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=2" class="text-decoration-none text-dark">
             <img src="../_assets/images/plumbing.png" alt="plumbing" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report plumbing for any leaking of waters inside the room</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=3" class="text-decoration-none text-dark">
             <img src="../_assets/images/painting.png" alt="painting" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report painting for any scratches on the walls</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=4" class="text-decoration-none text-dark">
             <img src="../_assets/images/security.png" alt="security" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report for a security when something is not right within the vicinity</p>
           </a>
         </div>
         <div class="col my-4 mb-5">
           <a href="services2.php?servid=5" class="text-decoration-none text-dark">
             <img src="../_assets/images/tile.png" alt="tile" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report if there are some cracks on the tiles that can cause harm</p>
           </a>
         </div>
         <div class="col my-4 mb-5">
           <a href="services2.php?servid=6" class="text-decoration-none text-dark">
             <img src="../_assets/images/furniture.png" alt="furniture" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report furniture if it is dangerous to use and needs urgent repair</p>
           </a>
         </div>
         <div class="col my-4 mb-5">
           <a href="services2.php?servid=7" class="text-decoration-none text-dark">
             <img src="../_assets/images/others.png" alt="other" class="img-fluid" width="100">
-            <p class="my-3">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-10 mx-auto">Report other concern that has not been indicated</p>
           </a>
         </div>       
       </div>
@@ -191,6 +201,7 @@ if(isset($_GET['notifid']))
   </div>
 </div>
 <!-- MAIN CONTENT END -->
+
 <!-- BOOTSTRAP JS -->
 <script src="../_assets/js/bootstrap.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

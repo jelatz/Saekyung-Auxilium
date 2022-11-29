@@ -11,7 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 body,html{
     height: 100%;
-    overflow: initial;
+    overflow: auto;
 }
 
 *{
@@ -229,6 +229,9 @@ span{
     background-color: rgb(241, 181, 115) !important;
 }
 
+.nav-buttons:hover{
+    background-color: rgba(0,0,0,0.8) !important;
+}
 
 /* nav-link colors */
 .nav-link.active{

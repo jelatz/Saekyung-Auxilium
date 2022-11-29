@@ -7,13 +7,12 @@ $row = mysqli_fetch_array($userdetails);
 $firstname = $row['firstname'];
 $lastname = $row['lastname'];
 
-if(isset($_GET['notifid']))
-    {
+if (isset($_GET['notifid'])) {
     $notifid = $_GET['notifid'];
-    $update = mysqli_query($conn,"UPDATE notifications_resident SET status = 1 WHERE notifID = $notifid");
-    header('Location:history2.php?notif='.$notifid.'');
+    $update = mysqli_query($conn, "UPDATE notifications_resident SET status = 1 WHERE notifID = $notifid");
+    header('Location:history2.php?notif=' . $notifid . '');
     exit();
-    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -89,93 +88,100 @@ if(isset($_GET['notifid']))
 </head>
 
 <body style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
-<!-- NAVBAR START-->
-<nav class="navbar navbar-expand-md px-2 bg-inner">
-  <div class="container-fluid">
-    <a href="dashboard.php" class="navbar-brand"><img src="../_assets/images/FINAL LOGO.png" alt="LOGO"
-        class="img-fluid position-relative" width=150; style="top:3px;"></a>
-    <!-- NOTIFICATIONS DROPDOWN-->
-    <?php
-              $selectnotif = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
-              $count = mysqli_num_rows($selectnotif);
+    <!-- NAVBAR START-->
+    <nav class="navbar navbar-expand-md px-2 bg-inner">
+        <div class="container-fluid">
+            <a href="dashboard.php" class="navbar-brand"><img src="../_assets/images/FINAL LOGO.png" alt="LOGO" class="img-fluid position-relative" width=150; style="top:3px;"></a>
+            <!-- NOTIFICATIONS DROPDOWN-->
+            <?php
+            $selectnotif = mysqli_query($conn, "SELECT * FROM notifications_resident WHERE status = 0");
+            $count = mysqli_num_rows($selectnotif);
             ?>
-    <div class="d-flex flex-row gap-2">
-      <div class="dropdown position-relative p-0 m-0">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none"
-          data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
-      
-        <?php
-              if($count == 0){
+            <div class="d-flex flex-row gap-2">
+                <div class="dropdown position-relative p-0 m-0">
+                    <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none" data-bs-toggle="dropdown"><img src="../_assets/images/bell.png" class="img-fluid" width="25">
 
-              }else{
-                echo '<span class="badge bg-danger rounded-circle" style="position: absolute; top:-10px; left:2rem;">';
-                echo $count;
-              }
-            ?>
-              </button>
-        <ul class="dropdown-menu position-absolute p-0 m-0" style="left: -15.3rem; width: 300px;" >
-              <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
-                  <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
-                  <strong class="me-auto text-center bg-transparent">Notifications</strong>
+                        <?php
+                        if ($count == 0) {
+                        } else {
+                            echo '<span class="badge bg-danger rounded-circle" style="position: absolute; top:-10px; left:2rem;">';
+                            echo $count;
+                        }
+                        ?>
+                    </button>
+                    <ul class="dropdown-menu position-absolute p-0 m-0" style="left: -15.3rem; width: 300px;">
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header bg-inner2 text-start" style="height: 3rem;">
+                                <img src="../_assets/images/bell.png" class="img-fluid me-2 bg-transparent" width="21">
+                                <strong class="me-auto text-center bg-transparent">Notifications</strong>
+                            </div>
+                            <?php
+                            $select = mysqli_query($conn, "SELECT * FROM notifications_resident WHERE status = 0");
+                            while ($row = mysqli_fetch_array($select)) {
+                                $notifID = $row['notifID'];
+                            ?>
+                                <a href="history2.php?notifid=<?php echo $notifID; ?>" class="text-decoration-none text-dark">
+                                    <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
+                                        <div class="toast-header bg-inner">
+                                            <strong class="me-auto">Bldg & Unit #: <?php echo $row['user']; ?></strong>
+                                            <!-- <small class="text-muted">5 seconds ago</small> -->
+                                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                        </div>
+                                        <div class="toast-body">
+                                            <p><?php echo $row['message'] ?></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </ul>
                 </div>
-                <?php 
-                  $select = mysqli_query($conn,"SELECT * FROM notifications_resident WHERE status = 0");
-                  while ($row = mysqli_fetch_array($select))
-                  {
-                    $notifID = $row['notifID'];
+                <!-- NOTIFICATIONS DROPDOWN END -->
+                <!-- PROFILE DROPDOWN -->
+                <?php if (isset($_SESSION['username'])) {
+                    $userID = $_SESSION['username'];
+                } ?>
+                <?php
+                $select = mysqli_query($conn, "SELECT * FROM accounts WHERE userID = $userID limit 1");
+                $row = mysqli_fetch_array($select);
+                $img = $row['img'];
                 ?>
-                <a href="history2.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
-                  <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-inner">
-                      <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
-                      <!-- <small class="text-muted">5 seconds ago</small> -->
-                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                      <p><?php echo $row['message']?></p>
-                    </div>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0" data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="35" style="height:35px;">
+                    </button>
+                    <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; ">
+            <li class="nav-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="<?php echo $img; ?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+                </div>
+                <div class="col pt-3">
+                  <p class="mb-0" style="font-size: 18px;
+                ;">User:<?php echo $userID; ?></p>
+                  <a href="profile2.php">Edit My Profile</a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item logout">
+              <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
+              <div class="row">
+                  <div class="col-4 pe-1 text-end">
+                    <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
                   </div>
-                </a>
-                  <?php
-                  }
-                  ?>
-              </div>
-            </ul>
-      </div>
-      <!-- NOTIFICATIONS DROPDOWN END -->
-      <!-- PROFILE DROPDOWN -->
-      <?php if(isset($_SESSION['username'])){ $userID = $_SESSION['username'];}?>
-      <?php 
-      $select = mysqli_query($conn,"SELECT * FROM accounts WHERE userID = $userID limit 1");
-      $row = mysqli_fetch_array($select);
-      $img = $row['img'];
-    ?>
-      <div class="dropdown">
-        <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0"
-          data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="35" style="height:35px;">
-        </button>
-        <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; " >
-          <li class="nav-item">
-            <div class="row">
-              <div class="col-4"> 
-                <img src="<?php echo $img;?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
-              </div>
-              <div class="col pt-3">
-                <p class="mb-0" style="font-size: 18px;
-                ;">Unit no.:<?php echo $userID; ?></p>
-                <a href="profile2.php">Edit My Profile</a>
-              </div>
-          </li>
-          <li class="nav-item">
-            <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="m-3 ms-5"><a href="../../BackEnd/database/logout.php" class="ms-3 text-dark" style="font-size:18px ;">Logout </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-<!-- NAVBAR END -->
+                  <div class="col">
+                    <p class="text-decoration-none ps-1">Logout</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR END -->
 
     <!-- NAVIGATION TABS START-->
     <div class="container-fluid">
@@ -188,7 +194,7 @@ if(isset($_GET['notifid']))
                 </nav>
             </div>
             <!-- NAVIGATION TABS END -->
-            <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh;">
+            <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh; overflow-y:scroll;">
                 <h1 class="text-white">Change Password</h1>
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-5 bg-inner text-center p-2" style="border-radius: 10px;">
@@ -208,7 +214,8 @@ if(isset($_GET['notifid']))
                                     <div class="container p-0">
                                         <div class="picture-container">
                                             <div class="picture mt-4">
-                                                <img src="<?php echo $img; ?>" class="picture-src" id="frame" title="">
+                                                <img src="
+                                                <?php echo $img; ?>" class="picture-src" id="frame" title="">
                                                 <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
                                                 <span class="mt-2">Profile Picture (Optional)</span>
                                             </div>

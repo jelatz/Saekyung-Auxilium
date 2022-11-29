@@ -16,6 +16,12 @@ if (isset($_POST['search'])) {
         exit();
     }
 }
+
+// if(isset('dl_report')){
+
+
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,18 +49,16 @@ if (isset($_POST['search'])) {
         <nav class="navbar navbar-expand-md px-2">
             <div class="container-fluid justify-content-center">
                 <!-- LOGO -->
-                <a class="navbar-brand" href="dashboard.php" id="logo"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="300"></a>
+                <a class="navbar-brand" href="home2.php" id="logo"><img src="../_assets/images/FINAL LOGO.png" class="img-fluid" width="300"></a>
         </nav>
 
         <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;">
-            <h2 class="text-start mb-4"><strong>Maintenance and Repair Reports</strong></h2>
-            <div class="row justify-content-end">
-                <div class="col-5 mb-5">
-                    <form class="d-flex" method="POST" action="">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
-                        <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
-                    </form>
-                </div>
+            <h1 class="text-start mb-5">Maintenance & Repair Reports</h1>
+            <div class="col-5 mb-4">
+                <form class="d-flex mt-4" method="POST" action="">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
+                    <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
+                </form>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-striped table-sm">
@@ -111,11 +115,12 @@ if (isset($_POST['search'])) {
                         }
                         ?>
                     </tbody>
+
                 </table>
             </div>
-            <div class="row mt-2">
-                <div class="col-2">
-                    <a href="dashboard.php" class="btn w-100 btn-outline-secondary text-white nav-buttons" style="background-color: #1F2022; border-radius:10px;">Back</a>
+            <div class="row justify-content-end text-end">
+                <div class="col">
+                    <button type="submit" class="btn text-white mt-3" style="background-color:#1F2022;" name="dl_report"> Download Report</button>
                 </div>
             </div>
         </div>

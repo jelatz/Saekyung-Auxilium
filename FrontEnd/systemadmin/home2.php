@@ -42,7 +42,7 @@ if (isset($_POST['search'])) {
   <!-- NAVBAR START-->
   <nav class="navbar navbar-expand-md px-2 bg-inner">
     <div class="container-fluid">
-      <a href="dashboard.php" class="navbar-brand"><img src="../_assets/images/FINAL LOGO.png" alt="LOGO" class="img-fluid position-relative" width=150; style="top:3px;"></a>
+      <a href="home2.php" class="navbar-brand"><img src="../_assets/images/FINAL LOGO.png" alt="LOGO" class="img-fluid position-relative" width=150; style="top:3px;"></a>
 
       <!-- NOTIFICATIONS DROPDOWN-->
       <?php
@@ -141,8 +141,35 @@ if (isset($_POST['search'])) {
       <!-- NAVIGATION TABS END -->
 
       <!-- NAVIGATION CONTENTS -->
-      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
-        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;">
+      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100%; overflow:initial;">
+        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;overflow:initial;">
+        <div class="col-6 mx-auto">
+            <?php
+            $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
+            ?>
+            <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
+          </div>
+
+          <!-- VIEW REPORTS -->
+          <div class="row text-start mt-5 mb-2 text-white">
+            <h5 class="text-dark ps-0">Date</h5>
+          </div>
+          <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
+            <div class="row text-start mb-3">
+              <label for="From" class="col-sm-1 col-form-label h6">From: </label>
+              <div class="col-sm-3">
+                <input type="datetime-local" class="form-control" id="from" name="from">
+              </div>
+              <label for="To" class="col-sm-1 col-form-label h6">To: </label>
+              <div class="col-sm-3">
+                <input type="datetime-local" class="form-control" id="from" name="to">
+              </div>
+              <button type="submit" class="btn btn-secondary
+                 w-25 ms-5" name="view_report_sysadmin">View Report</button>
+            </div>
+          </form>
+       
+    
           <div class="col-5 mb-4">
             <form class="d-flex" method="POST" action="">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
@@ -209,9 +236,9 @@ if (isset($_POST['search'])) {
           </div>
         </div>
       </div>
+      </div>
       <!-- NAVIGATION CONTENTS END -->
     </div>
-  </div>
 <!-- NAVIGATION -->
   <!-- BOOTSTRAP JS -->
   <script src="../_assets/js/bootstrap.bundle.js"></script>

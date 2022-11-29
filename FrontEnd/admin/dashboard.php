@@ -97,9 +97,19 @@ if (isset($_GET['notifid'])) {
                 ;">User:<?php echo $userID; ?></p>
                   <a href="profile2.php">Edit My Profile</a>
                 </div>
+              </div>
             </li>
-            <li class="nav-item">
-              <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="m-3 ms-5"><a href="../../BackEnd/database/logout.php" class="ms-3 text-dark" style="font-size:18px ;">Logout </a>
+            <li class="nav-item logout">
+              <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
+              <div class="row">
+                  <div class="col-4 pe-1 text-end">
+                    <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
+                  </div>
+                  <div class="col">
+                    <p class="text-decoration-none ps-1">Logout</p>
+                  </div>
+                </div>
+              </a>
             </li>
           </ul>
         </div>
@@ -111,14 +121,14 @@ if (isset($_GET['notifid'])) {
   <!-- NAVIGATION TABS START-->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3 col-lg-2 p-0 bg-transparent">
+      <div class="col-md-3 col-lg-2 p-0 bg-transparent" style="height: 100%;">
         <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
           <a href="dashboard.php" class="nav-link text-white ps-5 active">Dashboard</a>
           <a href="requests.php" class="nav-link text-white ps-5">Requests</a>
         </nav>
       </div>
       <!-- NAVIGATION TABS END -->
-      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+      <div class="col-md-9 col-lg-10 bg-inner3 p-5 " style="height: 100vh;">
         <h1 class="text-white mb-4">Welcome <strong>
             <?php
 
@@ -126,14 +136,15 @@ if (isset($_GET['notifid'])) {
             $row = mysqli_fetch_array($selectUser);
             $firstname = strtoupper($row['firstname']);
             $lastname = strtoupper($row['lastname']);
-            if ($row > 1) {
+            if($row['firstname'] > 1 || $row['lastname'] > 1){
               echo "$lastname $firstname";
             } else {
-              echo $userID;
+              echo "$userID";
             }
             ?>
+            </strong>
         </h1>
-        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5" style="border-radius: 10px;" style="height: 100%;">
+        <div class="row bg-inner justify-content-center text-center p-3  fs-5" style="border-radius: 10px;" style="height: 100%;">
           <div class="col-6 mx-auto">
             <?php
             $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
