@@ -149,13 +149,13 @@ if (isset($_GET['notifid'])) {
                 $img = $row['img'];
                 ?>
                 <div class="dropdown">
-                    <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0" data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="35" style="height:35px;">
+                    <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0" data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="40" style="height:40px;">
                     </button>
                     <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; ">
                         <li class="nav-item">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="<?php echo $img; ?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+                                    <img src="<?php echo $img; ?>" alt="profile" width="45" class="m-3 ms-5 rounded-pill" style="height:45px;">
                                 </div>
                                 <div class="col pt-3">
                                     <p class="mb-0" style="font-size: 18px;
