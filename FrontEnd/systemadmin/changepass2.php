@@ -178,10 +178,10 @@ if (isset($_GET['notifid'])) {
         <div class="row">
             <div class="col-md-3 col-lg-2 p-0 bg-transparent">
                 <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-                    <a href="home2.php" class="nav-link text-white ps-5">Home</a>
+                    <a href="home2.php" class="nav-link text-white ps-5">Dashboard</a>
                     <a href="accounts.php" class="nav-link text-white ps-5">Accounts</a>
                     <a href="services.php" class="nav-link text-white ps-5">Services</a>
-                    <a href="reports.php" class="nav-link text-white ps-5">Reports</a>
+                    <a href="requests.php" class="nav-link text-white ps-5">Requests</a>
                 </nav>
             </div>
             <!-- NAVIGATION TABS END -->

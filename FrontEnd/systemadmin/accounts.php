@@ -10,17 +10,17 @@ if (isset($_GET['notifid'])) {
 
 $searchResult = "";
 if (isset($_POST['search'])) {
-    try {
-        $searchInput = ($_POST['searchInput']);
+  try {
+    $searchInput = ($_POST['searchInput']);
 
-        $result = mysqli_query($conn, "SELECT servicerequest.requestID, accounts.userID, servicerequest.dateFiled, services.serviceType, servicerequest.concern, servicerequest.notes, servicerequest.dateCompleted  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR servicerequest.concern LIKE '%$searchInput%' OR servicerequest.notes LIKE '%$searchInput%' OR servicerequest.dateCompleted LIKE '%$searchInput%'");
+    $result = mysqli_query($conn, "SELECT * FROM accounts WHERE userID LIKE %'$searchInput%'");
 
-        $searchResult = mysqli_fetch_all($result);
-    } catch (exception $e) {
-        echo '<script>alert(`No results Found!`)</script>';
-        header('Location:dashboard.php');
-        exit();
-    }
+    $searchResult = mysqli_fetch_all($result);
+  } catch (exception $e) {
+    echo '<script>alert(`No results Found!`)</script>';
+    header('Location:accounts.php');
+    exit();
+  }
 }
 ?>
 
@@ -34,7 +34,7 @@ if (isset($_POST['search'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../_assets/css/bootstrap.css">
   <link rel="stylesheet" href="../_assets/css/custom.css">
-  <title>System Admin Home</title>
+  <title>System Admin Accounts</title>
 </head>
 
 <body style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
@@ -42,7 +42,7 @@ if (isset($_POST['search'])) {
   <!-- NAVBAR START-->
   <nav class="navbar navbar-expand-md px-2 bg-inner">
     <div class="container-fluid">
-      <a href="dashboard.php" class="navbar-brand"><img src="../_assets/images/FINAL LOGO.png" alt="LOGO" class="img-fluid position-relative" width=150; style="top:3px;"></a>
+      <a href="home2.php" class="navbar-brand"><img src="../_assets/images/FINAL LOGO.png" alt="LOGO" class="img-fluid position-relative" width=150; style="top:3px;"></a>
 
       <!-- NOTIFICATIONS DROPDOWN-->
       <?php
@@ -102,13 +102,13 @@ if (isset($_POST['search'])) {
         $img = $row['img'];
         ?>
         <div class="dropdown">
-          <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0" data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="35" style="height:35px;">
+          <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0" data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="40" style="height:40px;">
           </button>
           <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; ">
             <li class="nav-item">
               <div class="row">
                 <div class="col-4">
-                  <img src="<?php echo $img; ?>" alt="profile" width="35" class="m-3 ms-5 rounded-pill" style="height:35px;">
+                  <img src="<?php echo $img; ?>" alt="profile" width="45" class="m-3 ms-5 rounded-pill" style="height:45px;">
                 </div>
                 <div class="col pt-3">
                   <p class="mb-0" style="font-size: 18px;
@@ -132,24 +132,171 @@ if (isset($_POST['search'])) {
     <div class="row">
       <div class="col-md-3 col-lg-2 p-0 bg-transparent">
         <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-          <a href="home2.php" class="nav-link text-white ps-5">Home</a>
+          <a href="home2.php" class="nav-link text-white ps-5">Dashboard</a>
           <a href="accounts.php" class="nav-link text-white ps-5 active">Accounts</a>
           <a href="services.php" class="nav-link text-white ps-5">Services</a>
-          <a href="reports.php" class="nav-link text-white ps-5">Reports</a>
+          <a href="requests.php" class="nav-link text-white ps-5">Requests</a>
         </nav>
       </div>
       <!-- NAVIGATION TABS END -->
 
       <!-- NAVIGATION CONTENTS -->
       <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
-        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;">
-            
+        <h1 class="text-white mb-4">View Accounts</h1>
+        <div class="row justify-content-between ps-3">
+          <div class="col-md-5 mb-3 col-lg-4 d-flex flex-row p-0 align-items-center justify-content-between" style="background-color: #FFE5B4; border-radius:10px;">
+            <button type="button" class="btn bg-white h-100" style="border-radius: 10px; width:4rem;" data-bs-toggle="modal" data-bs-target="#newAccount">
+              <img src="../_assets/images/add.png" alt="add" class="img-fluid" width="25">
+            </button>
+            <p class="d-inline m-0 mx-auto fw-bold text-nowrap justify-content-center">Create New Account</p>
+          </div>
+          <div class="col-md-7 col-lg-8">
+            <form class="d-flex" method="POST" action="accounts.php">
+              <div class="input-group">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searchInput">
+                <span class="input-group-text">
+                  <button class="btn btn-sm input-group-text w-100 h-100 p-0 m-0" style="border-radius:10px;" type="submit" name="search">
+                    <img src="../_assets/images/Search.png" alt="search" class="img-fluid p-0 m-0" width="25">
+                  </button>
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
+
+        <!-- MODAL FOR NEW ACCOUNT -->
+        <div class="modal fade" id="newAccount" data-bs-backdrop="static" data-keyboard="true" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="background-color: rgb(255, 248,243)">
+              <div class="modal-header">
+                <h5 class="modal-title" id="createModalTitle">Create New Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="../../BackEnd/database/user.php" method="POST" class="text-start h-100 needs-validate" novalidate="">
+                  <label for="userName" class="form-label">Username: </label>
+                  <input type="text" class="form-control" name="userName" required>
+                  <label for="password" class="form-label">Password: </label>
+                  <input type="text" class="form-control" name="password" required>
+                  <label for="defaultPass" class="form-label">Default Password: </label>
+                  <input type="text" class="form-control" name="defaultPassword" required>
+                  <label for="firstname" class="form-label">Firstname: </label>
+                  <input type="text" class="form-control" name="firstname" >
+                  <label for="lastname" class="form-label">Lastname: </label>
+                  <input type="text" class="form-control" name="lastname" >
+                  <select name="userType" class="form-select mt-4" required>
+                    <option selected="" name="userType">Select a User Type</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                    <option value="SysAdmin">System Admin</option>
+                  </select>
+                  <div class="row row-cols-2 d-flex justify-content-end">
+                    <div class="col text-end">
+                      <input type="submit" class="btn btn-primary mt-4" value="Create Account" name="createNewAccount">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- MODAL FOR NEW ACCOUNT END  -->
+
+        <!-- TABLE START -->
+        <div class="table-responsive-sm mt-3">
+          <table class="table table-hover table-bordered text-center" style="border-color: black;">
+            <thead style="background-color: #FFE5B4; border-radius: 10px;">
+              <tr>
+                <th style="border-radius:10px 0px 0 0px;">Building & Room #</th>
+                <th style="border-radius: 0 10px 0px 0">Action</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <?php
+              if (!$searchResult) {
+                $selectUser = mysqli_query($conn, "SELECT * FROM accounts");
+                while ($row = mysqli_fetch_array($selectUser)) {
+                $accountID = $row ['accountID'];
+              ?>
+                  <tr>
+
+                    <td><?php echo $row['userID']; ?></td>
+                    <td style="width: 25vw;">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID;?>"><i class="bi bi-pencil"></i>
+                          Update</button>
+                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
+                          Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                <?php
+                }
+              } else {
+                foreach ($searchResult as $value) {
+                ?>
+                  <tr>
+                    <td><?php echo $value[0] ?></td>
+                    <td style="width: 25vw;">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-pencil"></i>
+                          Update</button>
+                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
+                          Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+              <?php
+                }
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
+        <!-- TABLE END -->
+<!-- UPDATE ACCOUNTS MODAL START -->
+<div class="modal fade" id="updateModal<?php echo $accountID;?>" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content" style="background-color: rgb(255, 248,243)">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateModalTitle">Update Account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../../BackEnd/database/user.php" method="POST" class="text-start h-100 needs-validate" novalidate="">
+                  <label for="userName" class="form-label">Username: </label>
+                  <input type="text" class="form-control" name="userName" required>
+                  <label for="password" class="form-label">Password: </label>
+                  <input type="text" class="form-control" name="password" required>
+                  <label for="defaultPass" class="form-label">Default Password: </label>
+                  <input type="text" class="form-control" name="defaultPassword" required>
+                  <label for="firstname" class="form-label">Firstname: </label>
+                  <input type="text" class="form-control" name="firstname" >
+                  <label for="lastname" class="form-label">Lastname: </label>
+                  <input type="text" class="form-control" name="lastname" >
+                  <select name="userType" class="form-select mt-4" required>
+                    <option selected="" name="userType">Select a User Type</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                    <option value="SysAdmin">System Admin</option>
+                  </select>
+                  <div class="row row-cols-2 d-flex justify-content-end">
+                    <div class="col text-end">
+                      <input type="submit" class="btn btn-primary mt-4" value="Update" name="createNewAccount">
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
+<!-- UPDATE ACCOUNTS MODAL END -->
       </div>
       <!-- NAVIGATION CONTENTS END -->
     </div>
   </div>
-<!-- NAVIGATION -->
+  <!-- NAVIGATION -->
   <!-- BOOTSTRAP JS -->
   <script src="../_assets/js/bootstrap.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

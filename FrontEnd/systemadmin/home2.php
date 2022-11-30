@@ -10,17 +10,17 @@ if (isset($_GET['notifid'])) {
 
 $searchResult = "";
 if (isset($_POST['search'])) {
-    try {
-        $searchInput = ($_POST['searchInput']);
+  try {
+    $searchInput = ($_POST['searchInput']);
 
-        $result = mysqli_query($conn, "SELECT servicerequest.requestID, accounts.userID, servicerequest.dateFiled, services.serviceType, servicerequest.concern, servicerequest.notes, servicerequest.dateCompleted  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR servicerequest.concern LIKE '%$searchInput%' OR servicerequest.notes LIKE '%$searchInput%' OR servicerequest.dateCompleted LIKE '%$searchInput%'");
+    $result = mysqli_query($conn, "SELECT servicerequest.requestID, accounts.userID, servicerequest.dateFiled, services.serviceType, servicerequest.concern, servicerequest.notes, servicerequest.dateCompleted  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR servicerequest.concern LIKE '%$searchInput%' OR servicerequest.notes LIKE '%$searchInput%' OR servicerequest.dateCompleted LIKE '%$searchInput%'");
 
-        $searchResult = mysqli_fetch_all($result);
-    } catch (exception $e) {
-        echo '<script>alert(`No results Found!`)</script>';
-        header('Location:dashboard.php');
-        exit();
-    }
+    $searchResult = mysqli_fetch_all($result);
+  } catch (exception $e) {
+    echo '<script>alert(`No results Found!`)</script>';
+    header('Location:dashboard.php');
+    exit();
+  }
 }
 ?>
 
@@ -132,27 +132,41 @@ if (isset($_POST['search'])) {
     <div class="row">
       <div class="col-md-3 col-lg-2 p-0 bg-transparent">
         <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-          <a href="home2.php" class="nav-link text-white ps-5 active">Home</a>
+          <a href="home2.php" class="nav-link text-white ps-5 active">Dashboard</a>
           <a href="accounts.php" class="nav-link text-white ps-5">Accounts</a>
           <a href="services.php" class="nav-link text-white ps-5">Services</a>
-          <a href="reports.php" class="nav-link text-white ps-5">Reports</a>
+          <a href="requests.php" class="nav-link text-white ps-5">Requests</a>
         </nav>
       </div>
       <!-- NAVIGATION TABS END -->
 
       <!-- NAVIGATION CONTENTS -->
       <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100%; overflow:initial;">
-        <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;overflow:initial;">
-        <div class="col-6 mx-auto">
+      <h1 class="text-white mb-4">Welcome <strong>
+            <?php
+
+            $selectUser = mysqli_query($conn, "SELECT firstname,lastname FROM accounts WHERE userID = '$userID' limit 1");
+            $row = mysqli_fetch_array($selectUser);
+            $firstname = strtoupper($row['firstname']);
+            $lastname = strtoupper($row['lastname']);
+            if ($row['lastname'] > 1 || $row['firstname'] > 1) {
+              echo "$lastname $firstname";
+            } else {
+              echo $userID;
+            }
+            ?>
+        </h1>
+        <div class="row bg-inner justify-content-start text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;overflow:auto;">
+          <div class="col-md-8">
             <?php
             $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
             ?>
-            <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
+            <div id="piechart" class="mx-auto" style="width: 100%; height:20rem;"></div>
           </div>
 
           <!-- VIEW REPORTS -->
           <div class="row text-start mt-5 mb-2 text-white">
-            <h5 class="text-dark ps-0">Date</h5>
+            <h5 class="text-dark ps-2">Date</h5>
           </div>
           <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
             <div class="row text-start mb-3">
@@ -168,78 +182,12 @@ if (isset($_POST['search'])) {
                  w-25 ms-5" name="view_report_sysadmin">View Report</button>
             </div>
           </form>
-       
-    
-          <div class="col-5 mb-4">
-            <form class="d-flex" method="POST" action="">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
-              <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
-            </form>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-hover table-striped table-sm">
-              <thead>
-                <tr class="text-center">
-                  <th>Request #</th>
-                  <th>User</th>
-                  <th>Date Filed</th>
-                  <th>Service Type</th>
-                  <th>Concern</th>
-                  <th>Notes</th>
-                  <th>Date Completed</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (!$searchResult) {
-                  $result = mysqli_query($conn, "SELECT *,services.serviceType FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID");
-                  while ($row = mysqli_fetch_array($result)) {
-                    $id = $row['requestID'];
-                    $accountID = $row['accountID'];
-                    $dateFiled = $row['dateFiled'];
-                    $serviceType = $row['serviceType'];
-                    $concern = $row['concern'];
-                    $notes = $row['notes'];
-                    $dateCompleted = $row['dateCompleted'];
-                ?>
-                    <tr class="justify-content-center text-center">
-                      <td><?php echo date('Y') . $id ?></td>
-                      <td><?php echo $accountID ?></td>
-                      <td><?php echo $dateFiled ?></td>
-                      <td><?php echo $serviceType ?></td>
-                      <td><?php echo $concern ?></td>
-                      <td><?php echo $notes ?></td>
-                      <td><?php echo $dateCompleted ?></td>
-                    </tr>
-
-                  <?php
-                  }
-                } else {
-                  foreach ($searchResult as $value) {
-                  ?>
-                    <tr>
-                      <td><?php echo date("Y") . $value[0]; ?></td>
-                      <td><?php echo $value[1]; ?></td>
-                      <td><?php echo $value[2]; ?></td>
-                      <td><?php echo $value[3]; ?></td>
-                      <td><?php echo $value[4]; ?></td>
-                      <td><?php echo $value[5]; ?></td>
-                      <td><?php echo $value[6]; ?></td>
-                    </tr>
-                <?php
-                  }
-                }
-                ?>
-              </tbody>
-
-            </table>
-          </div>
         </div>
       </div>
-      </div>
-      <!-- NAVIGATION CONTENTS END -->
     </div>
-<!-- NAVIGATION -->
+    <!-- NAVIGATION CONTENTS END -->
+  </div>
+  <!-- NAVIGATION -->
   <!-- BOOTSTRAP JS -->
   <script src="../_assets/js/bootstrap.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

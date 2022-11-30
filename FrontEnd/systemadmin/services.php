@@ -34,7 +34,7 @@ if (isset($_POST['search'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../_assets/css/bootstrap.css">
     <link rel="stylesheet" href="../_assets/css/custom.css">
-    <title>System Admin Home</title>
+    <title>System Admin Services</title>
 </head>
 
 <body style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
@@ -132,26 +132,21 @@ if (isset($_POST['search'])) {
         <div class="row">
             <div class="col-md-3 col-lg-2 p-0 bg-transparent">
                 <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
-                    <a href="home2.php" class="nav-link text-white ps-5">Home</a>
+                    <a href="home2.php" class="nav-link text-white ps-5">Dashboard</a>
                     <a href="accounts.php" class="nav-link text-white ps-5 ">Accounts</a>
                     <a href="services.php" class="nav-link text-white ps-5 active">Services</a>
-                    <a href="reports.php" class="nav-link text-white ps-5">Reports</a>
+                    <a href="requests.php" class="nav-link text-white ps-5">Requests</a>
                 </nav>
             </div>
             <!-- NAVIGATION TABS END -->
 
             <!-- NAVIGATION CONTENTS -->
             <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+            <h1 class="text-white mb-4">Services</h1>
                 <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 mt-3" style="border-radius: 10px;" style="height: 100%;">
                     <div class="row justify-content-center">
                         <!-- ALERT MESSAGE IF SERVICE TYPE IS SUCCESSFULLY ADDED -->
                         <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-                        <div class="input-group rounded my-4 w-50">
-                            <input type="search" class="form-control rounded w-50" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-                            <span class="input-group-text border-0" id="search-addon">
-                                <i class="bi bi-search"></i>
-                            </span>
-                        </div>
                     </div>
                     <form action="../../BackEnd/database/services.php" method="POST">
                         <div class="table-responsive">

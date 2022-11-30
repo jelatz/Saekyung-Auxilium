@@ -140,7 +140,7 @@ if(isset($_GET['notifid']))
   $completed = 3;
   ?>
 <div class="col-md-9 col-lg-10 bg-inner3 p-5 " style="height: 100vh; overflow:auto;">
-      <!-- <h1 class="text-white mb-4">Welcome <strong><?php echo $userID; ?></strong></h1> -->
+      <h1 class="text-white mb-4">View Requests</strong></h1>
       <div class="row bg-inner text-center p-3 py-5 fs-5" style="border-radius: 10px;">
       <div class="nav nav-pills gap-3 p-2" role="tablist" id="dashboardTabs">
               <div class="col">
@@ -164,15 +164,15 @@ if(isset($_GET['notifid']))
               <!-- PENDING CONTENTS -->
               <div class="tab-pane show active" id="pending<?php echo $pending;?>" role="tabpanel">
                 <div class="table-responsive">
-                  <table class="table table-bordered border-dark">
-                    <thead>
+                  <table class="table" style="border-radius: 15px;">
+                    <thead style="background-color: #FFFFFF; border-radius:10px;">
                       <tr>
-                        <th>Request #</th>
+                        <th style="border-radius:10px 0px 0 0px;">Request #</th>
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
                         <th>Concern</th>
-                        <th>Action</th>
+                        <th style="border-radius: 0 10px 0px 0">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -188,16 +188,17 @@ if(isset($_GET['notifid']))
                         $concern = $row['concern'];
 
                         echo 
-                        '<tr>
+                        '<tr class="text-white fs-6 align-middle" style="background-color:rgba(0, 0, 0, 0.75);">
                       <form action="../../BackEnd/database/requests.php?id=' . $id . '"  method="POST" id="request">
-                        <td> ' . date("Y") . $id . '</td>
+                        <td> 
+                        ' . date("Y") . $id . '</td>
                         <td> ' . $accountID . '</td>
                         <td> ' . $dateFiled . '</td>
                         <td> ' . $serviceType . '</td>
                         <td> ' . $concern . '</td>
                         <td>
-                          <button type="submit" class="btn text-white btn-block" style="background-color:#1F2022" name="accept_btn">Accept</button>
-                          <button type="submit" class="btn text-white btn-block" style="background-color:#1F2022" name="reject_btn">Reject</button>
+                          <button type="submit" class="btn btn-sm btn-primary text-white btn-block" name="accept_btn">Accept</button>
+                          <button type="submit" class="btn btn-sm btn-danger text-white btn-block" name="reject_btn">Reject</button>
                         </td>
                       </tr>
                       </form>';
@@ -210,16 +211,16 @@ if(isset($_GET['notifid']))
               <!-- ON-GOING CONTENTS -->
               <div class="tab-pane fade" id="onGoing<?php echo $ongoing; ?>" role="tabpanel">
                 <div class="table-responsive">
-                  <table class="table table-bordered border-dark">
-                    <thead>
+                  <table class="table">
+                    <thead style="background-color: #FFFFFF; border-radius: 10px;">
                       <tr>
-                        <th>Request #</th>
+                        <th style="border-radius:10px 0px 0 0px;">Request #</th>
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
                         <th>Concern</th>
                         <th>Notes</th>
-                        <th>Action</th>
+                        <th style="border-radius:0px 10px 0px 0px;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -233,7 +234,8 @@ if(isset($_GET['notifid']))
                         $dateFiled = $row['dateFiled'];
                         $serviceType = $row['serviceType'];
                         $concern = $row['concern'];
-                        echo '<tr>
+                        echo '<tr class="text-white fs-6 align-middle" style="background-color:rgba(0, 0, 0, 0.75)
+                        ;">
                             <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
                               <td> ' . date("Y") . $id . '</td>
                               <td> ' . $accountID . '</td>
@@ -244,7 +246,7 @@ if(isset($_GET['notifid']))
                               <textarea class="form-control" rows="1" name="notes"></textarea>
                               </td>
                               <td>
-                                <button type="submit" class="btn text-white btn-block" name="complete_btn" style="background-color:#1F2022;">Complete</button>
+                                <button type="submit" class="btn btn-primary btn-sm text-white btn-block" name="complete_btn" >Complete</button>
                               </td>
                             </tr>
                             </form>';
@@ -257,16 +259,16 @@ if(isset($_GET['notifid']))
               <!-- COMPLETED CONTENTS -->
               <div class="tab-pane fade" id="completed<?php echo $completed; ?>" role="tabpanel">
                 <div class="table-responsive">
-                  <table class="table table-bordered border-dark">
-                    <thead>
+                  <table class="table">
+                    <thead style="background-color: #FFFFFF; border-radius: 10px;">
                       <tr>
-                        <th>Request #</th>
+                        <th style="border-radius:10px 0px 0 0px;">Request #</th>
                         <th>User</th>
                         <th>Date Filed</th>
                         <th>Service Type</th>
                         <th>Concern</th>
                         <th>Notes</th>
-                        <th>Date Completed</th>
+                        <th style="border-radius:0px 10px 0 0px;">Date Completed</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -281,7 +283,8 @@ if(isset($_GET['notifid']))
                         $concern = $row['concern'];
                         $notes = $row['notes'];
                         $dateCompleted = $row['dateCompleted'];
-                        echo '<tr>
+                        echo '<tr class="text-white fs-6 align-middle" style="background-color:rgba(0, 0, 0, 0.75)
+                        ;">
                             <form action="../../BackEnd/database/requests.php?id=' . $id . '" method="POST">
                               <td> ' . date("Y") . $id . '</td>
                               <td> ' . $accountID . '</td>

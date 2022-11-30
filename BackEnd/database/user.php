@@ -77,10 +77,12 @@ if(isset($_POST['createNewAccount'])){
   }
   $userName = validate ($_POST['userName']);
   $password = validate ($_POST['password']);
+  $firstname = validate ($_POST['firstname']);
+  $lastname = validate ($_POST['lastname']);
   $defaultPassword = validate (md5($_POST['defaultPassword']));
   $userType = validate ($_POST['userType']);
   // INSE
-  $insert = mysqli_query($conn,"insert into accounts (accountID,password,defaultPass,usertype) values ('$userName','$password','$defaultPassword','$userType')");
+  $insert = mysqli_query($conn,"insert into accounts (userID,password,defaultPass,firstname, lastname, usertype) values ('$userName','$password','$defaultPassword', '$firstname', '$lastname', '$userType')");
   echo "<script> console.log('letse');</script>";
 
   if($insert)

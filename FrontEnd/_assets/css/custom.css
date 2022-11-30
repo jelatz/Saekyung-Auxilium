@@ -10,6 +10,7 @@
     }
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 body,html{
+    width: 100%;
     height: 100%;
     overflow: auto;
 }
@@ -66,7 +67,7 @@ body,html{
     width: 12rem;
     height: 3rem;  
 }
-
+           
 #btn{
     top: 0;
     left: 0;
@@ -241,6 +242,8 @@ span{
 .white.active{
     background-color:rgb(117, 112, 112) !important;
     color: white !important;
+    font-weight:bolder !important;
+    /* font-size: small !important; */
 }
 /* customize css for admin dashboard */
 @media screen and (min-width: 768px){

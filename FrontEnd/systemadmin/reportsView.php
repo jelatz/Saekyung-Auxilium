@@ -120,6 +120,7 @@ if (isset($_POST['search'])) {
             </div>
             <div class="row justify-content-end text-end">
                 <div class="col">
+                    <a href="home2.php" class="btn mt-3 text-white" style="background-color: #1F2022;">Back</a>
                     <button type="submit" class="btn text-white mt-3" style="background-color:#1F2022;" name="dl_report"> Download Report</button>
                 </div>
             </div>
