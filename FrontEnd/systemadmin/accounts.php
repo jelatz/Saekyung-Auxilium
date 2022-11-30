@@ -182,9 +182,9 @@ if (isset($_POST['search'])) {
                   <label for="defaultPass" class="form-label">Default Password: </label>
                   <input type="text" class="form-control" name="defaultPassword" required>
                   <label for="firstname" class="form-label">Firstname: </label>
-                  <input type="text" class="form-control" name="firstname" >
+                  <input type="text" class="form-control" name="firstname">
                   <label for="lastname" class="form-label">Lastname: </label>
-                  <input type="text" class="form-control" name="lastname" >
+                  <input type="text" class="form-control" name="lastname">
                   <select name="userType" class="form-select mt-4" required>
                     <option selected="" name="userType">Select a User Type</option>
                     <option value="User">User</option>
@@ -217,14 +217,14 @@ if (isset($_POST['search'])) {
               if (!$searchResult) {
                 $selectUser = mysqli_query($conn, "SELECT * FROM accounts");
                 while ($row = mysqli_fetch_array($selectUser)) {
-                $accountID = $row ['accountID'];
+                  $accountID = $row['accountID'];
               ?>
                   <tr>
 
                     <td><?php echo $row['userID']; ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID;?>"><i class="bi bi-pencil"></i>
+                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-pencil"></i>
                           Update</button>
                         <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
                           Delete</button>
@@ -255,43 +255,9 @@ if (isset($_POST['search'])) {
           </table>
         </div>
         <!-- TABLE END -->
-<!-- UPDATE ACCOUNTS MODAL START -->
-<div class="modal fade" id="updateModal<?php echo $accountID;?>" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
-<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content" style="background-color: rgb(255, 248,243)">
-            <div class="modal-header">
-              <h5 class="modal-title" id="updateModalTitle">Update Account</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="../../BackEnd/database/user.php" method="POST" class="text-start h-100 needs-validate" novalidate="">
-                  <label for="userName" class="form-label">Username: </label>
-                  <input type="text" class="form-control" name="userName" required>
-                  <label for="password" class="form-label">Password: </label>
-                  <input type="text" class="form-control" name="password" required>
-                  <label for="defaultPass" class="form-label">Default Password: </label>
-                  <input type="text" class="form-control" name="defaultPassword" required>
-                  <label for="firstname" class="form-label">Firstname: </label>
-                  <input type="text" class="form-control" name="firstname" >
-                  <label for="lastname" class="form-label">Lastname: </label>
-                  <input type="text" class="form-control" name="lastname" >
-                  <select name="userType" class="form-select mt-4" required>
-                    <option selected="" name="userType">Select a User Type</option>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                    <option value="SysAdmin">System Admin</option>
-                  </select>
-                  <div class="row row-cols-2 d-flex justify-content-end">
-                    <div class="col text-end">
-                      <input type="submit" class="btn btn-primary mt-4" value="Update" name="createNewAccount">
-                    </div>
-                  </div>
-                </form>
-              </div>
-          </div>
-        </div>
-      </div>
-<!-- UPDATE ACCOUNTS MODAL END -->
+        <!-- UPDATE ACCOUNTS MODAL START -->
+
+        <!-- UPDATE ACCOUNTS MODAL END -->
       </div>
       <!-- NAVIGATION CONTENTS END -->
     </div>
