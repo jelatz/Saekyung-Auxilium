@@ -1,16 +1,16 @@
 <?php
 // session_start();
 include 'config.php';
-
+function validate($data){
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 // INSERT USERS PROFILE PICTURE AND DETAILS
 if(isset($_POST['submit'])){
 
-  function validate($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
+
 // VARIABLES FOR USER DETAILS
   $userID = validate ($_POST['userID']);
   $fName = validate ($_POST['fName']);
@@ -76,21 +76,39 @@ if(isset($_POST['createNewAccount'])){
     return $data;
   }
   $userName = validate ($_POST['userName']);
-  $password = validate ($_POST['password']);
+  $password = validate (md5($_POST['password']));
   $firstname = validate ($_POST['firstname']);
   $lastname = validate ($_POST['lastname']);
   $defaultPassword = validate (md5($_POST['defaultPassword']));
   $userType = validate ($_POST['userType']);
-  // INSE
+  // INSERT USER PROFILE
   $insert = mysqli_query($conn,"insert into accounts (userID,password,defaultPass,firstname, lastname, usertype) values ('$userName','$password','$defaultPassword', '$firstname', '$lastname', '$userType')");
   echo "<script> console.log('letse');</script>";
 
   if($insert)
   {
-    header('Location:../../FrontEnd/systemadmin/home.php?success= Successfully Added!');
+    header('Location:../../FrontEnd/systemadmin/accounts.php?success= Successfully Added!');
   }else
   {
     header('Location:../../FrontEnd/systemadmin/home.php?error=Account not created!');
   }
+}
+
+// UPDATE USER PROFILE
+if(isset($_POST['updateProfile'])){
+  $accountID = $_GET['update'];
+  $username = validate($_POST['username']);
+  $password = validate (md5($_POST['password']));
+  $def_password = validate (md5($_POST['default_pass']));
+  $firstname = validate($_POST['firstname']);
+  $lastname = validate($_POST['lastname']);
+  $userType = validate($_POST['userType']);
+
+$result = mysqli_query($conn,"UPDATE accounts SET userID = '$username', password = '$password', defaultPass = '$def_password', firstname = '$firstname', lastname = '$lastname', usertype = '$userType' WHERE accountID = '$accountID'");
+
+print_r($result);
+
+header('Location:../../FrontEnd/systemadmin/accounts.php?update');
+exit();
 }
 ?>

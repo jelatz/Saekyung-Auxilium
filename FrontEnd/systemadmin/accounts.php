@@ -9,11 +9,12 @@ if (isset($_GET['notifid'])) {
 }
 
 $searchResult = "";
+$accountID = "";
 if (isset($_POST['search'])) {
   try {
     $searchInput = ($_POST['searchInput']);
 
-    $result = mysqli_query($conn, "SELECT * FROM accounts WHERE userID LIKE %'$searchInput%'");
+    $result = mysqli_query($conn, "SELECT * FROM accounts WHERE userID LIKE '%$searchInput%'");
 
     $searchResult = mysqli_fetch_all($result);
   } catch (exception $e) {
@@ -205,6 +206,10 @@ if (isset($_POST['search'])) {
 
         <!-- TABLE START -->
         <div class="table-responsive-sm mt-3">
+          <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
+          <?php if (isset($_GET['update'])){
+            echo "<script>alert('User Updated Successfully!');</script>";
+          } ?>
           <table class="table table-hover table-bordered text-center" style="border-color: black;">
             <thead style="background-color: #FFE5B4; border-radius: 10px;">
               <tr>
@@ -216,7 +221,8 @@ if (isset($_POST['search'])) {
               <?php
               if (!$searchResult) {
                 $selectUser = mysqli_query($conn, "SELECT * FROM accounts");
-                while ($row = mysqli_fetch_array($selectUser)) {
+                $count = 0;
+                while ($count < 10 && $row = mysqli_fetch_assoc($selectUser)) {
                   $accountID = $row['accountID'];
               ?>
                   <tr>
@@ -224,29 +230,162 @@ if (isset($_POST['search'])) {
                     <td><?php echo $row['userID']; ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-pencil"></i>
+                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
                           Update</button>
                         <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
                           Delete</button>
                       </div>
                     </td>
                   </tr>
+                  <!-- ACCOUNT UPDATE MODAL AFTER SEARCH START -->
+                  <div class="modal fade" id="updateModal<?php echo $accountID; ?>" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content" style="background-color: rgb(255, 248,243); box-shadow:10px 10px 250px 250px rgba(0, 0, 0, 0.58); border-radius:15px;">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="updateModalTitle">Update Account</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="../../BackEnd/database/user.php?accountid=<?php echo $accountID; ?>" method="POST">
+                            <div class="mb-3">
+                              <div class="row g-0 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="userName" class="col-form-label fw-bold">Username </label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control w-100" id="userName" name="username" placeholder="<?php echo $row['userID']; ?>">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="password" class="col-form-label fw-bold">Password</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="password" class="col-form-label fw-bold">Def Password</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="default_pass" name="defPassword" placeholder="Enter Default Password">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="firstname" class="col-form-label fw-bold">Firstname</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="firstname" name="firstname" placeholder="<?php echo $row['firstname']; ?>">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="lastname" class="col-form-label fw-bold">Lastname</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="lastname" name="lastname" placeholder="<?php echo $row['lastname']; ?>">
+                                </div>
+                              </div>
+                              <select name="userType" class="form-select mt-4">
+                                <option selected="" name="userType">Select a User Type</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                                <option value="SysAdmin">System Admin</option>
+                              </select>
+                              <div class="row justify-content-center">
+                              <button type="submit" class="btn btn-unselected my-3 w-50 text-white mx-auto" id="updateBtn" name="updateProfile" style="background-color: #1F2022;">Update</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ACCOUNT UPDATE MODAL END -->
                 <?php
+                $count++;
                 }
               } else {
                 foreach ($searchResult as $value) {
                 ?>
                   <tr>
-                    <td><?php echo $value[0] ?></td>
+                    <td><?php echo $value['1'] ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-pencil"></i>
+                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $value[0]; ?>"><i class="bi bi-pencil"></i>
                           Update</button>
                         <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
                           Delete</button>
                       </div>
                     </td>
                   </tr>
+                  <!-- ACCOUNT UPDATE MODAL AFTER SEARCH START -->
+                  <div class="modal fade" id="updateModal<?php echo $value[0]; ?>" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content" style="background-color: rgb(255, 248,243)">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="updateModalTitle">Update Account</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="../../BackEnd/database/user.php?update=<?php echo $value[0];?>" method="POST">
+                            <div class="mb-3">
+                              <div class="row g-0 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="userName" class="col-form-label fw-bold">Username </label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="userName" name="username" placeholder="<?php echo $value[1];?>">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="password" class="col-form-label fw-bold">Password</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="password" class="col-form-label fw-bold">Def Password</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="default_pass" name="default_pass" placeholder="Enter Default Password">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="firstname" class="col-form-label fw-bold">Firstname</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="firstname" name="firstname" placeholder="<?php echo $value[4]; ?>">
+                                </div>
+                              </div>
+                              <div class="row g-0 my-3 justify-content-around">
+                                <div class="col-12 col-sm-3">
+                                  <label for="lastname" class="col-form-label fw-bold">Lastname</label>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                  <input type="text" class="form-control" id="lastname" name="lastname" placeholder="<?php echo $value[5]; ?>">
+                                </div>
+                              </div>
+                              <select name="userType" class="form-select mt-4">
+                                <option selected="" name="userType">Select a User Type</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                                <option value="SysAdmin">System Admin</option>
+                              </select>
+                              <button type="submit" class="btn btn-unselected my-3 w-75" id="updateBtn" name="updateProfile">Update</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ACCOUNT UPDATE MODAL AFTER SEARCH END -->
               <?php
                 }
               }

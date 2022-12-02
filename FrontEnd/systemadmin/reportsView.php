@@ -17,10 +17,27 @@ if (isset($_POST['search'])) {
     }
 }
 
-// if(isset('dl_report')){
+if(isset($_POST['dl_report'])){
 
+    require('../../BackEnd/database/phpToPDF.php');
 
-// }
+    //Your HTML in a variable
+    $my_html="<HTML><h2>PDF from HTML using phpToPDF</h2></HTML>";
+
+    //Set Your Options -- we are saving the PDF as 'my_filename.pdf' to a 'my_pdfs' folder
+    $pdf_options = array(
+      "source_type" => 'html',
+      "source" => $my_html,
+      "action" => 'save',
+      "save_directory" => 'my_pdfs',
+      "file_name" => 'my_filename.pdf');
+
+    //Code to generate PDF file from options above
+    phptopdf($pdf_options);
+
+    header('Location:reportsView.php');
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -119,10 +136,12 @@ if (isset($_POST['search'])) {
                 </table>
             </div>
             <div class="row justify-content-end text-end">
+                <form method="POST">
                 <div class="col">
                     <a href="home2.php" class="btn mt-3 text-white" style="background-color: #1F2022;">Back</a>
                     <button type="submit" class="btn text-white mt-3" style="background-color:#1F2022;" name="dl_report"> Download Report</button>
                 </div>
+                    </form>
             </div>
         </div>
     </div>

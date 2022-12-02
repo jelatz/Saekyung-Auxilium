@@ -1,10 +1,11 @@
 <?php
 session_start();
 include '../../BackEnd/database/config.php';
+$message = "";
 if (isset($_GET['notifid'])) {
   $notifid = $_GET['notifid'];
-  $update = mysqli_query($conn, "UPDATE notifications SET status = 1 WHERE notifID = $notifid");
-  header('Location:history2.php?notif=' . $notifid . '');
+  $update = mysqli_query($conn, "UPDATE notifications SET status = 1 WHERE notifID = $notifid ");
+  header('Location:requests.php?notif=' . $notifid . '');
   exit();
 }
 ?>
@@ -54,8 +55,9 @@ if (isset($_GET['notifid'])) {
               $select = mysqli_query($conn, "SELECT * FROM notifications WHERE status = 0");
               while ($row = mysqli_fetch_array($select)) {
                 $notifID = $row['notifID'];
+                $sendMessage = $row ['message'];
               ?>
-                <a href="requests.php?notifid=<?php echo $notifID; ?>" class="text-decoration-none text-dark">
+                <a href="requests.php?notifid=<?php echo $notifID;?>&sendMessage=<?php echo $sendMessage ?>"class="text-decoration-none text-dark"> 
                   <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header bg-inner">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user']; ?></strong>
@@ -174,23 +176,57 @@ if (isset($_GET['notifid'])) {
                       $status = $row['status'];
                       $concern = $row['concern'];
 
-                      echo
-                      '<tr class="text-white fs-6 align-middle" style="background-color:rgba(0, 0, 0, 0.75)
-;">
-                      <form action="../../BackEnd/database/requests.php?id=' . $id . '"  method="POST" id="request">
+                      if(!isset($_GET['notif'])){
+                      ?>
+                      <tr class="text-white fs-6 align-middle" style="background-color:rgba(0, 0, 0, 0.75);">
+                      <form action="../../BackEnd/database/requests.php?id=<?php $id ; ?>"  method="POST" id="request">
                         <td style="border-radius: 0px 0px 0px 10px"> 
-                        ' . date("Y") . $id . '</td>
-                        <td> ' . $accountID . '</td>
-                        <td> ' . $dateFiled . '</td>
-                        <td> ' . $serviceType . '</td>
-                        <td> ' . $concern . '</td>
+                        <?php echo date("Y") . $id ;?></td>
+                        <td> <?php echo $accountID; ?></td>
+                        <td> <?php echo $dateFiled; ?></td>
+                        <td> <?php echo $serviceType; ?></td>
+                        <td> <?php echo $concern; ?></td>
                         <td style="border-radius: 0 0px 10px 0">
                           <button type="submit" class="btn btn-primary btn-sm text-white btn-block"name="accept_btn">Accept</button>
                           <button type="submit" class="btn btn-danger btn-sm text-white btn-block"name="reject_btn">Reject</button>
                         </td>
-                      </tr>
-                      </form>';
+                      </form>
+                    </tr>
+                      <?php
+                      
+                    }else{
+                      $get_id = $_GET['notif'];
+                      $get_message = $_GET['sendMessage'];
+                    while ($row = mysqli_fetch_array($result)) {
+                      $id = $row['requestID'];
+                      $_SESSION['servreqID'] = $id;
+                      $accountID = $row['accountID'];
+                      $dateFiled = $row['dateFiled'];
+                      $serviceType = $row['serviceType'];
+                      $status = $row['status'];
+                      $concern = $row['concern'];
+
+                      if($get_message == $concern){
+                      ?>
+                      <tr class="text-white fs-6 align-middle" style="background-color:red;">
+                      <form action="../../BackEnd/database/requests.php?id=<?php echo $id ;?>"  method="POST" id="request">
+                        <td style="border-radius: 0px 0px 0px 10px"> 
+                        <?php echo date("Y") . $id ;?></td>
+                        <td> <?php echo $accountID; ?></td>
+                        <td> <?php echo $dateFiled; ?></td>
+                        <td> <?php echo $serviceType; ?></td>
+                        <td> <?php echo $concern; ?></td>
+                        <td style="border-radius: 0 0px 10px 0">
+                          <button type="submit" class="btn btn-primary btn-sm text-white btn-block"name="accept_btn">Accept</button>
+                          <button type="submit" class="btn btn-danger btn-sm text-white btn-block"name="reject_btn">Reject</button>
+                        </td>
+                      </form>
+                    </tr>
+                      <?php
+                      }
                     }
+                  }
+                }
                     ?>
                   </tbody>
                 </table>
