@@ -61,7 +61,7 @@ if(isset($_POST['dl_report'])){
 </head>
 
 <body style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
-
+<h1>hi</h1>
     <div class="container-md">
         <nav class="navbar navbar-expand-md px-2">
             <div class="container-fluid justify-content-center">
