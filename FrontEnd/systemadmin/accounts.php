@@ -142,7 +142,7 @@ if (isset($_POST['search'])) {
       <!-- NAVIGATION TABS END -->
 
       <!-- NAVIGATION CONTENTS -->
-      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100%; overflow:auto">
         <h1 class="text-white mb-4">View Accounts</h1>
         <div class="row justify-content-between ps-3">
           <div class="col-md-5 mb-3 col-lg-4 d-flex flex-row p-0 align-items-center justify-content-between" style="background-color: #FFE5B4; border-radius:10px;">
@@ -222,7 +222,7 @@ if (isset($_POST['search'])) {
               if (!$searchResult) {
                 $selectUser = mysqli_query($conn, "SELECT * FROM accounts");
                 $count = 0;
-                while ($count < 10 && $row = mysqli_fetch_assoc($selectUser)) {
+                while ($count < 20 && $row = mysqli_fetch_assoc($selectUser)) {
                   $accountID = $row['accountID'];
               ?>
                   <tr>
@@ -232,7 +232,7 @@ if (isset($_POST['search'])) {
                       <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
                           Update</button>
-                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
+                        <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
                           Delete</button>
                       </div>
                     </td>
@@ -261,7 +261,7 @@ if (isset($_POST['search'])) {
                                   <label for="password" class="col-form-label fw-bold">Password</label>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control" id="password" name="password" placeholder="Enter Password">
+                                  <input type="text" class="form-control" id="password" name="password" value="<?php echo $row ['password']?>">
                                 </div>
                               </div>
                               <div class="row g-0 my-3 justify-content-around">
@@ -269,7 +269,7 @@ if (isset($_POST['search'])) {
                                   <label for="password" class="col-form-label fw-bold">Def Password</label>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control" id="default_pass" name="defPassword" placeholder="Enter Default Password">
+                                  <input type="text" class="form-control" id="default_pass" name="defPassword" value="<?php echo $row['defaultPass'];?>">
                                 </div>
                               </div>
                               <div class="row g-0 my-3 justify-content-around">

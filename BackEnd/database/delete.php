@@ -8,7 +8,7 @@
         $result=mysqli_query($conn,$sql);
         if($result){
             // echo "Deleted Successfully";
-            header('Location:../../FrontEnd/systemadmin/home.php');
+            header('Location:../../FrontEnd/systemadmin/services.php');
         }else{
             die(mysqli_error($conn));
         }

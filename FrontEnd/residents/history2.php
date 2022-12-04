@@ -20,7 +20,7 @@ $searchResult = "";
       try{
         $searchInput = validate($_POST['searchInput']);
     
-        $result = mysqli_query($conn,"SELECT servicerequest.requestID, accounts.userID, services.serviceType,servicerequest.dateFiled, request_status.status, servicerequest.concern, servicerequest.dateCompleted, servicerequest.notes  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR request_status.status LIKE '%$searchInput%'");
+        $result = mysqli_query($conn,"SELECT servicerequest.requestID, accounts.userID, servicerequest.dateFiled, services.serviceType, servicerequest.concern, request_status.status,  servicerequest.dateCompleted, servicerequest.notes  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR request_status.status LIKE '%$searchInput%'");
     
         $searchResult = mysqli_fetch_all($result);
       }catch(exception $e){
@@ -177,6 +177,7 @@ $searchResult = "";
                     <th class="text-nowrap p-2">Bldng & Unit #</th>
                     <th class="text-nowrap p-2">Date Filed</th>
                     <th class="text-nowrap p-2">Service</th>
+                    <th class="text-nowrap p-2">Concern</th>
                     <th class="text-nowrap p-2">Status</th>
                     <th class="text-nowrap p-2">Date Completed</th>
                     <th class="text-nowrap p-2">Notes</th>
@@ -201,6 +202,7 @@ $searchResult = "";
                   <td><?php echo $row['accountID']?></td>
                   <td><?php echo $row['dateFiled'] ?></td>
                   <td><?php echo $row['serviceType'] ?></td>
+                  <td><?php echo $row['concern'] ?></td>
                   <td><?php echo $row['status'] ?></td>
                   <td><?php echo $row['dateCompleted'] ?></td>
                   <td><?php echo $row['notes'] ?></td>
@@ -219,6 +221,7 @@ $searchResult = "";
               <td><?php echo $value[4]; ?></td>
               <td><?php echo $value[5]; ?></td>
               <td><?php echo $value[6]; ?></td>
+              <td><?php echo $value[7]; ?></td>
             </tr>
                 <?php
                 }
