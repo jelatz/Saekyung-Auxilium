@@ -13,4 +13,19 @@
             die(mysqli_error($conn));
         }
     }
-?>
+
+    if(isset($_POST['deleteAccount'])){
+        $accID = $_GET['accID'];
+
+        $result = mysqli_query($conn, "DELETE FROM accounts WHERE accountID = '$accID'");
+
+        if($result){
+            header('Location:../../FrontEnd/systemadmin/accounts.php');
+            exit();
+        }
+        else
+        {   
+            header('Location:../../FrontEnd/systemadmin/accounts.php');
+            exit();
+        }
+    }

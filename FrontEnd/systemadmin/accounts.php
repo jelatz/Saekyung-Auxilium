@@ -207,7 +207,7 @@ if (isset($_POST['search'])) {
         <!-- TABLE START -->
         <div class="table-responsive-sm mt-3">
           <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-          <?php if (isset($_GET['update'])){
+          <?php if (isset($_GET['update'])) {
             echo "<script>alert('User Updated Successfully!');</script>";
           } ?>
           <table class="table table-hover table-bordered text-center" style="border-color: black;">
@@ -230,10 +230,12 @@ if (isset($_POST['search'])) {
                     <td><?php echo $row['userID']; ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
-                          Update</button>
-                        <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
-                          Delete</button>
+                        <form action="../../BackEnd/database/delete.php?accID=<?php echo $accountID; ?>" method="POST">
+                          <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
+                            Update</button>
+                          <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
+                            Delete</button>
+                        </form>
                       </div>
                     </td>
                   </tr>
@@ -261,7 +263,7 @@ if (isset($_POST['search'])) {
                                   <label for="password" class="col-form-label fw-bold">Password</label>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control" id="password" name="password" value="<?php echo $row ['password']?>">
+                                  <input type="text" class="form-control" id="password" name="password" value="<?php echo $row['password'] ?>">
                                 </div>
                               </div>
                               <div class="row g-0 my-3 justify-content-around">
@@ -269,7 +271,7 @@ if (isset($_POST['search'])) {
                                   <label for="password" class="col-form-label fw-bold">Def Password</label>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control" id="default_pass" name="defPassword" value="<?php echo $row['defaultPass'];?>">
+                                  <input type="text" class="form-control" id="default_pass" name="defPassword" value="<?php echo $row['defaultPass']; ?>">
                                 </div>
                               </div>
                               <div class="row g-0 my-3 justify-content-around">
@@ -295,7 +297,7 @@ if (isset($_POST['search'])) {
                                 <option value="SysAdmin">System Admin</option>
                               </select>
                               <div class="row justify-content-center">
-                              <button type="submit" class="btn btn-unselected my-3 w-50 text-white mx-auto" id="updateBtn" name="updateProfile" style="background-color: #1F2022;">Update</button>
+                                <button type="submit" class="btn btn-unselected my-3 w-50 text-white mx-auto" id="updateBtn" name="updateProfile" style="background-color: #1F2022;">Update</button>
                               </div>
                             </div>
                           </form>
@@ -305,7 +307,7 @@ if (isset($_POST['search'])) {
                   </div>
                   <!-- ACCOUNT UPDATE MODAL END -->
                 <?php
-                $count++;
+                  $count++;
                 }
               } else {
                 foreach ($searchResult as $value) {
@@ -314,9 +316,10 @@ if (isset($_POST['search'])) {
                     <td><?php echo $value['1'] ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
+                      <form action="../../BackEnd/database/delete.php?accID=<?php echo $value[0]; ?>" method="POST">
                         <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $value[0]; ?>"><i class="bi bi-pencil"></i>
                           Update</button>
-                        <button class="btn btn-danger btn-sm" id="deleteBtn"><i class="bi bi-trash"></i>
+                        <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
                           Delete</button>
                       </div>
                     </td>
@@ -330,14 +333,14 @@ if (isset($_POST['search'])) {
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="../../BackEnd/database/user.php?update=<?php echo $value[0];?>" method="POST">
+                          <form action="../../BackEnd/database/user.php?update=<?php echo $value[0]; ?>" method="POST">
                             <div class="mb-3">
                               <div class="row g-0 justify-content-around">
                                 <div class="col-12 col-sm-3">
                                   <label for="userName" class="col-form-label fw-bold">Username </label>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control" id="userName" name="username" placeholder="<?php echo $value[1];?>">
+                                  <input type="text" class="form-control" id="userName" name="username" placeholder="<?php echo $value[1]; ?>">
                                 </div>
                               </div>
                               <div class="row g-0 my-3 justify-content-around">

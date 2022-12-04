@@ -156,43 +156,43 @@ if(isset($_GET['notifid']))
         <div class="col my-4">
           <a href="services2.php?servid=1" class="text-decoration-none text-dark">
             <img src="../_assets/images/electrical.png" alt="electrical" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report electrical issues lurking within the walls of your home</p>
+            <p class="my-3 col-12 mx-auto">Report poor circuit protection, grounding issues, not working switches of light or any other electrical problems</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=2" class="text-decoration-none text-dark">
             <img src="../_assets/images/plumbing.png" alt="plumbing" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report plumbing for any leaking of waters inside the room</p>
+            <p class="my-3 col-12 mx-auto">Set a concern report to take measures with the plumbing issues such as dripping faucets, running toilets, slow or clogged drains, and many others</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=3" class="text-decoration-none text-dark">
             <img src="../_assets/images/painting.png" alt="painting" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report painting for any scratches on the walls</p>
+            <p class="my-3 col-12 mx-auto">Seek and request painting services includes interior, exterior and metal door painting, wallpaper removal, etc.</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=4" class="text-decoration-none text-dark">
             <img src="../_assets/images/security.png" alt="security" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report for a security when something is not right within the vicinity</p>
+            <p class="my-3 col-12 mx-auto">Contact security that shows unlawful or suspicious acts, mitigating risks, hazards, etc.</p>
           </a>
         </div>
-        <div class="col my-4 mb-5">
+        <div class="col my-4">
           <a href="services2.php?servid=5" class="text-decoration-none text-dark">
             <img src="../_assets/images/tile.png" alt="tile" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report if there are some cracks on the tiles that can cause harm</p>
+            <p class="my-3 col-12 mx-auto">Conduct a request for tile floor repair service for dents turned into cracks, tile cracks, and improper installed joists.</p>
           </a>
         </div>
-        <div class="col my-4 mb-5">
+        <div class="col my-4 ">
           <a href="services2.php?servid=6" class="text-decoration-none text-dark">
             <img src="../_assets/images/furniture.png" alt="furniture" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report furniture if it is dangerous to use and needs urgent repair</p>
+            <p class="my-3 col-12 mx-auto">Ask for furniture home services request such as cabinet fixtures, remake and remodel existing furniture, upholstery/re-upholstery, repair and refurbish, etc.</p>
           </a>
         </div>
-        <div class="col my-4 mb-5">
+        <div class="col my-4">
           <a href="services2.php?servid=7" class="text-decoration-none text-dark">
             <img src="../_assets/images/others.png" alt="other" class="img-fluid" width="100">
-            <p class="my-3 col-10 mx-auto">Report other concern that has not been indicated</p>
+            <p class="my-3 col-12 mx-auto">Request or report other concerns unstated</p>
           </a>
         </div>       
       </div>

@@ -215,9 +215,7 @@ if (isset($_GET['notifid'])) {
                                         <div class="picture-container">
                                             <div class="picture mt-4">
                                                 <img src="
-                                                <?php echo $img; ?>" class="picture-src" id="frame" title="">
-                                                <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
-                                                <span class="mt-2">Profile Picture (Optional)</span>
+                                                <?php echo $img; ?>" class="picture-src" id="frame" title="" onclick="window.open(this.src,'_self','toolbar=yes','menubar=yes','resizable=yes', 'targetWindow')">
                                             </div>
                                         </div>
                                     </div>
