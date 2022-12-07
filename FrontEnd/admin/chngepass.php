@@ -213,8 +213,9 @@ if (isset($_GET['notifid'])) {
                   <div class="container p-0">
                     <div class="picture-container">
                       <div class="picture mt-4">
-                          <img src="<?php echo $img; ?>" class="picture-src" id="profile" title="" onclick="window.open(this.src,'_self','toolbar=yes','menubar=yes','resizable=yes', 'targetWindow')">
-                        </div>
+                        <img src="<?php echo $img; ?>" class="picture-src" id="profile" title="">
+                        <!-- "window.open(this.src,'_self','toolbar=yes','menubar=yes','resizable=yes', 'targetWindow')"> -->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -224,6 +225,17 @@ if (isset($_GET['notifid'])) {
                 <p class="p-0 m-0 fw-bold">User : <?php echo $userID; ?></p>
               </div>
             </div>
+
+            <div class="modal" id="imgView">
+              <div class="modal-dialog modal-xl" style="top:15rem;">
+                <div class="modal-content">
+                  <div class="moday-body">
+                    <img src="<?php echo $img; ?>" alt="profileImage" width="100%" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- USER DETAILS LOGIN -->
             <div class="card-body">
               <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-transparent text-light p-4" novalidate="">
@@ -251,10 +263,6 @@ if (isset($_GET['notifid'])) {
                   </label>
                   <input type="password" class="form-control" id="newConfirmPassword" name="newConfirmPassword" required>
                   <div class="invalid-feedback">Confirm password</div>
-                  <!-- <small class="text-muted">
-                                        <span style="color:red;">*</span>
-                                        Password must only contain Alphanumeric characters
-                                    </small> -->
                 </div>
                 <button type="submit" name="resSubmit" class="btn text-white" style="background-color: #1F2022;">Change Password</button>
               </form>
@@ -298,9 +306,20 @@ if (isset($_GET['notifid'])) {
       function preview() {
         frame.src = URL.createObjectURL(event.target.files[0]);
       }
+    </script>
+    <script>
+      var img = document.getElementById("profile");
+      var modal = document.getElementById("imgView");
 
-      function show() {
-        document.getElementById('profile').style.display = "block";      }
+      img.onclick = function() {
+        modal.style.display = "block";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
     </script>
 </body>
 

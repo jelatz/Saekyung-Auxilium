@@ -13,7 +13,7 @@ include '../BackEnd/database/config.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Forgot Password</title>
 </head>
-<body class="bg-image" style="background-image:url(_assets/images/indexbackgroundblur.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
+<body class="bg-image" style="background-image:url(_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
     <!-- navbar -->
 <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">

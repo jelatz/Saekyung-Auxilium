@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if($_SESSION['username'] == 0 && $_SESSION['password'] == 0){
+  header('Location:../index.php');
+  exit();
+}
+
 include '../../BackEnd/database/config.php';
 if (isset($_GET['notifid'])) {
   $notifid = $_GET['notifid'];

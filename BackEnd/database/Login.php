@@ -12,7 +12,9 @@ if (isset($_POST['resLogin'])){
             }
 
     $username = validate ($_POST['username']);
+    $pass = validate ($_POST['password']);
     $password = validate (md5($_POST['password'])); 
+    
 // JOIN USERS TABLE
 $result=mysqli_query($conn,"select * from accounts where userID ='".$username."' AND password = '$password' limit 1");
 
@@ -26,13 +28,13 @@ if($row["usertype"]=="user"){
     if (isset($_POST['remember'])){
 // set cookie
         setcookie('resuname',$username,time()+100,"/");
-        setcookie('respass',$password,time()+100,"/");
+        setcookie('respass',$pass,time()+100,"/");
     }
 // cookie expire
     else
     {
         setcookie('resuname',$username,100,"/");
-        setcookie('respass',$password,100,"/");
+        setcookie('respass',$pass,100,"/");
     }
 // redirect to index.php
     header('Location:../../FrontEnd/residents/dashboard.php');
@@ -54,6 +56,7 @@ else{
     }
 
 $username = validate ($_POST['username']);
+$pass = validate ($_POST['password']);
 $password = validate (md5($_POST['password']));
 
 
@@ -77,7 +80,8 @@ setcookie('adminpass', $password, 100,"/");
 
 header('Location:../../FrontEnd/admin/dashboard.php');
 exit();
-}elseif($row["usertype"]=="systemadmin"){
+}
+elseif($row["usertype"]=="systemadmin"){
 $_SESSION["username"] = $row['userID'];
 $_SESSION["password"] = $row['password'];
 
@@ -96,7 +100,5 @@ exit();
 header('Location:../../FrontEnd/index.php?error');
 exit();
 }
-
-
 }
 ?>
