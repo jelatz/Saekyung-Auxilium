@@ -152,31 +152,31 @@ if (isset($_GET['notifid'])) {
                     <button type="button" class="btn btn-link border-0 mx-auto text-decoration-none p-0" data-bs-toggle="dropdown"><img src="<?php echo $img; ?>" class="img-fluid rounded-pill" width="40" style="height:40px;">
                     </button>
                     <ul class="dropdown-menu position-absolute bg-inner2" style="left: -15.7rem; width: 290px; ">
-            <li class="nav-item">
-              <div class="row">
-                <div class="col-4">
-                  <img src="<?php echo $img; ?>" alt="profile" width="45" class="m-3 ms-5 rounded-pill" style="height:45px;">
-                </div>
-                <div class="col pt-3">
-                  <p class="mb-0" style="font-size: 18px;
+                        <li class="nav-item">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="<?php echo $img; ?>" alt="profile" width="45" class="m-3 ms-5 rounded-pill" style="height:45px;">
+                                </div>
+                                <div class="col pt-3">
+                                    <p class="mb-0" style="font-size: 18px;
                 ;">User:<?php echo $userID; ?></p>
-                  <a href="profile2.php">Edit My Profile</a>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item logout">
-              <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
-              <div class="row">
-                  <div class="col-4 pe-1 text-end">
-                    <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
-                  </div>
-                  <div class="col">
-                    <p class="text-decoration-none ps-1">Logout</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-          </ul>
+                                    <a href="profile2.php">Edit My Profile</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item logout">
+                            <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
+                                <div class="row">
+                                    <div class="col-4 pe-1 text-end">
+                                        <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-decoration-none ps-1">Logout</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@ if (isset($_GET['notifid'])) {
                 </nav>
             </div>
             <!-- NAVIGATION TABS END -->
-            <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh; overflow-y:scroll;">
+            <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh; overflow:auto;">
                 <h1 class="text-white">Change Password</h1>
                 <div class="row justify-content-center mt-5">
                     <div class="col-lg-5 bg-inner text-center p-2" style="border-radius: 10px;">
@@ -214,18 +214,29 @@ if (isset($_GET['notifid'])) {
                                     <div class="container p-0">
                                         <div class="picture-container">
                                             <div class="picture mt-4">
-                                                <img src="
-                                                <?php echo $img; ?>" class="picture-src" id="frame" title="" onclick="window.open(this.src,'_self','toolbar=yes','menubar=yes','resizable=yes', 'targetWindow')">
+                                                <img src="<?php echo $img; ?>" class="picture-src" id="profile" title="">
+                                                <!-- onclick="window.open(this.src,'_self','toolbar=yes','menubar=yes','resizable=yes', 'targetWindow')"> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-8 p-0 text-start align-self-center">
-                                <p class="p-0 m-0 fw-bold"><?php echo $lastname . ',' . '&nbsp' . $firstname; ?></p>
+                                <p class="p-0 m-0 fw-bold"><?php echo $lastname . '&nbsp' . $firstname; ?></p>
                                 <p class="p-0 m-0 fw-bold">Unit no. : <?php echo $userID; ?></p>
                             </div>
                         </div>
+
+                        <div class="modal" id="imgView">
+                            <div class="modal-dialog modal-xl modal-centered" style="max-height: 5rem; margin-top:8rem;">
+                                <div class="modal-content">
+                                    <div class="moday-body">
+                                        <img src="<?php echo $img; ?>" alt="profileImage" class="img-fluid" width="100%" height="50%" style="max-height: 50rem;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- USER DETAILS LOGIN -->
                         <div class="card-body">
                             <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-transparent text-light p-4" novalidate="">
@@ -290,7 +301,6 @@ if (isset($_GET['notifid'])) {
                             event.preventDefault()
                             event.stopPropagation()
                         }
-
                         form.classList.add('was-validated')
                     }, false)
                 })
@@ -299,6 +309,26 @@ if (isset($_GET['notifid'])) {
         <script type="text/javascript">
             function preview() {
                 frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+        </script>
+        <!-- PROFILE PICTURE PREVIEW -->
+        <script type="text/javascript">
+            function preview() {
+                frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+        </script>
+        <script>
+            var img = document.getElementById("profile");
+            var modal = document.getElementById("imgView");
+
+            img.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
         </script>
 </body>

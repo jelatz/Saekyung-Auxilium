@@ -227,7 +227,7 @@ if (isset($_GET['notifid'])) {
                                 <div class="invalid-feedback">
                                     Please enter your last name:
                                 </div>
-                                <input type="submit" name="submit" value="Submit" class="btn text-white mt-3 w-50 fs-6" style="background-color: #1F2022;">
+                                <input type="submit" name="submitSysAdmin" value="Submit" class="btn text-white mt-3 w-50 fs-6" style="background-color: #1F2022;">
                                 <div class="row my-2">
                                     <a href="changepass2.php">Change Password?</a>
                                 </div>

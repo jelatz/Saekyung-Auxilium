@@ -213,7 +213,7 @@ if (isset($_GET['notifid'])) {
                   <div class="container p-0">
                     <div class="picture-container">
                       <div class="picture mt-4">
-                        <img src="<?php echo $img; ?>" class="picture-src" id="profile" title="">
+                      <img src="<?php echo $img; ?>" class="picture-src" id="profile" title="">
                         <!-- "window.open(this.src,'_self','toolbar=yes','menubar=yes','resizable=yes', 'targetWindow')"> -->
                       </div>
                     </div>
@@ -227,14 +227,14 @@ if (isset($_GET['notifid'])) {
             </div>
 
             <div class="modal" id="imgView">
-              <div class="modal-dialog modal-xl" style="top:15rem;">
-                <div class="modal-content">
-                  <div class="moday-body">
-                    <img src="<?php echo $img; ?>" alt="profileImage" width="100%" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-            </div>
+                            <div class="modal-dialog modal-xl modal-centered" style="max-height: 5rem; margin-top:8rem;">
+                                <div class="modal-content">
+                                    <div class="moday-body">
+                                        <img src="<?php echo $img; ?>" alt="profileImage" class="img-fluid" width="100%" height="50%" style="max-height: 50rem;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
             <!-- USER DETAILS LOGIN -->
             <div class="card-body">

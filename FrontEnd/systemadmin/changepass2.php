@@ -205,9 +205,7 @@ if (isset($_GET['notifid'])) {
                                     <div class="container p-0">
                                         <div class="picture-container">
                                             <div class="picture mt-4">
-                                                <img src="<?php echo $img; ?>" class="picture-src" id="frame" title="">
-                                                <input type="file" id="wizard-picture" class="" onchange="preview()" accept="image/*" name="upload">
-                                                <span class="mt-2">Profile Picture (Optional)</span>
+                                                <img src="<?php echo $img; ?>" class="picture-src" id="profile" title="">
                                             </div>
                                         </div>
                                     </div>
@@ -216,6 +214,17 @@ if (isset($_GET['notifid'])) {
                             <div class="col-8 p-0 text-start align-self-center">
                                 <p class="p-0 m-0 fw-bold"><?php echo $lastname . '&nbsp' . $firstname; ?></p>
                                 <p class="p-0 m-0 fw-bold">User : <?php echo $userID; ?></p>
+                            </div>
+                        </div>
+
+
+                        <div class="modal" id="imgView">
+                            <div class="modal-dialog modal-xl modal-centered" style="max-height: 5rem; margin-top:8rem;">
+                                <div class="modal-content">
+                                    <div class="moday-body">
+                                        <img src="<?php echo $img; ?>" alt="profileImage" class="img-fluid" width="100%" height="50%" style="max-height: 50rem;">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- USER DETAILS LOGIN -->
@@ -291,6 +300,20 @@ if (isset($_GET['notifid'])) {
         <script type="text/javascript">
             function preview() {
                 frame.src = URL.createObjectURL(event.target.files[0]);
+            }
+        </script>
+        <script>
+            var img = document.getElementById("profile");
+            var modal = document.getElementById("imgView");
+
+            img.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
         </script>
 </body>
