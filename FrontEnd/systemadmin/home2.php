@@ -114,7 +114,7 @@ if (isset($_POST['search'])) {
             <li class="nav-item">
               <div class="row">
                 <div class="col-4">
-                  <img src="<?php echo $img; ?>" alt="profile" width="45" class="m-3 ms-5 rounded-pill" style="height:45px;">
+                  <img src="<?php echo $img; ?>" alt="profile" width="45" class="mt-3 rounded-pill" style="height:45px; margin-left:2.7rem;">
                 </div>
                 <div class="col pt-3">
                   <p class="mb-0" style="font-size: 18px;

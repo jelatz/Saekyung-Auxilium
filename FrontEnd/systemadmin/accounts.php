@@ -231,16 +231,18 @@ if (isset($_POST['search'])) {
                     <td style="width: 25vw;">
                       <div class="btn-group">
                         <form action="../../BackEnd/database/delete.php?accID=<?php echo $accountID; ?>" method="POST">
-                          <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
+                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal
+                          <?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
                             Update</button>
-                          <button class="btn btn-danger btn-sm w-100" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
+                          <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
                             Delete</button>
                         </form>
                       </div>
                     </td>
                   </tr>
                   <!-- ACCOUNT UPDATE MODAL AFTER SEARCH START -->
-                  <div class="modal fade" id="updateModal<?php echo $accountID; ?>" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+                  <div class="modal fade" id="updateModal
+                  <?php echo $accountID; ?>" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
                     <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
                       <div class="modal-content" style="background-color: rgb(255, 248,243); box-shadow:10px 10px 250px 250px rgba(0, 0, 0, 0.58); border-radius:15px;">
                         <div class="modal-header">
@@ -255,7 +257,8 @@ if (isset($_POST['search'])) {
                                   <label for="userName" class="col-form-label fw-bold">Username </label>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                  <input type="text" class="form-control w-100" id="userName" name="username" placeholder="<?php echo $row['userID']; ?>">
+                                  <input type="text" class="form-control w-100" id="userName" name="username" placeholder="
+                                  <?php echo $row['userID']; ?>">
                                 </div>
                               </div>
                               <div class="row g-0 my-3 justify-content-around">
@@ -316,11 +319,11 @@ if (isset($_POST['search'])) {
                     <td><?php echo $value['1'] ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
-                      <form action="../../BackEnd/database/delete.php?accID=<?php echo $value[0]; ?>" method="POST">
-                        <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $value[0]; ?>"><i class="bi bi-pencil"></i>
-                          Update</button>
-                        <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
-                          Delete</button>
+                        <form action="../../BackEnd/database/delete.php?accID=<?php echo $value[0]; ?>" method="POST">
+                          <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $value[0]; ?>"><i class="bi bi-pencil"></i>
+                            Update</button>
+                          <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
+                            Delete</button>
                       </div>
                     </td>
                   </tr>
