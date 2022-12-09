@@ -177,7 +177,7 @@ if(isset($_GET['notifid']))
                     </thead>
                     <tbody>
                       <?php
-                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending' ORDER BY servicerequest.dateFiled DESC");
+                      $result = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE status='Pending' ORDER BY servicerequest.dateFiled ASC");
                       while ($row = mysqli_fetch_array($result)) {
                         $id = $row['requestID'];
                         $_SESSION['servreqID'] = $id;

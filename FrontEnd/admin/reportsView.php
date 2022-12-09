@@ -71,7 +71,7 @@ if (isset($_POST['search'])) {
                     </thead>
                     <tbody>
                         <?php
-                        if (!$searchResult) {
+                        if (!$result) {
                             $result = mysqli_query($conn, "SELECT *,services.serviceType FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE dateCompleted BETWEEN '" . $_SESSION['from'] . "' AND '" . $_SESSION['to'] . "'");
                             while ($row = mysqli_fetch_array($result)) {
                                 $id = $row['requestID'];

@@ -81,7 +81,7 @@ if(isset($_GET['notifid']))
 </head>
 
 <body
-  style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center; height:100%;">
+  style="background-image:url(../_assets/images/resident.png); background-repeat: no-repeat; background-size: cover; background-position:center;">
 <!-- NAVBAR START-->
 <nav class="navbar navbar-expand-md px-2 bg-inner">
   <div class="container-fluid">
@@ -119,8 +119,8 @@ if(isset($_GET['notifid']))
                     $notifID = $row['notifID'];
                 ?>
                 <a href="history2.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
-                  <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-inner">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
                       <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -191,7 +191,7 @@ if(isset($_GET['notifid']))
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-  <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh; overflow-y:scroll;">
+  <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh;">
         <h1 class="text-white">Profile</h1>
         <p class="text-white">Optional update for personal details and change password</p>
         <div class="row justify-content-center mt-5">

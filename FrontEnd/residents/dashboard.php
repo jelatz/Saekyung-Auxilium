@@ -129,8 +129,8 @@ if(isset($_GET['notifid']))
 </nav>
 <!-- NAVBAR END -->
 <!-- MAIN CONTENT -->
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid" style="overflow: auto;">
+  <div class="row" style="overflow: auto;">
 
 <!-- NAVIGATION TABS START-->
     <div class="col-md-3 col-lg-2 p-0 bg-transparent">
@@ -142,8 +142,8 @@ if(isset($_GET['notifid']))
     </div>
 <!-- NAVIGATION TABS END -->
 <!-- NAV CONTENTS START -->
-<div class="col-md-9 col-lg-10 bg-inner3 p-5 " style="height: 100vh; overflow:inherit;">
-      <h1 class="text-white mb-4">Welcome <strong>
+<div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="overflow: auto;">
+      <h1 class="text-white my-4">Welcome <strong>
         
       <?php
       
@@ -158,47 +158,47 @@ if(isset($_GET['notifid']))
                 }
                 ?>
       </strong></h1>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 bg-inner justify-content-center text-center p-3 py-5 fs-5" style="border-radius: 10px;">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 bg-inner justify-content-center text-center py-5 fs-5" style="border-radius: 10px;">
         <div class="col my-4">
           <a href="services2.php?servid=1" class="text-decoration-none text-dark">
             <img src="../_assets/images/electrical.png" alt="electrical" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Report poor circuit protection, grounding issues, not working switches of light or any other electrical problems</p>
+            <p class="my-3 col-10 mx-auto">Report poor circuit protection, grounding issues, not working switches of light or any other electrical problems</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=2" class="text-decoration-none text-dark">
             <img src="../_assets/images/plumbing.png" alt="plumbing" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Set a concern report to take measures with the plumbing issues such as dripping faucets, running toilets, slow or clogged drains, and many others</p>
+            <p class="my-3 col-10 mx-auto">Set a concern report to take measures with the plumbing issues such as dripping faucets, running toilets, slow or clogged drains, and many others</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=3" class="text-decoration-none text-dark">
             <img src="../_assets/images/painting.png" alt="painting" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Seek and request painting services includes interior, exterior and metal door painting, wallpaper removal, etc.</p>
+            <p class="my-3 col-10 mx-auto">Seek and request painting services includes interior, exterior and metal door painting, wallpaper removal, etc.</p>
           </a>
         </div>
         <div class="col my-4">
           <a href="services2.php?servid=4" class="text-decoration-none text-dark">
             <img src="../_assets/images/security.png" alt="security" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Contact security that shows unlawful or suspicious acts, mitigating risks, hazards, etc.</p>
+            <p class="my-3 col-10 mx-auto">Contact security that shows unlawful or suspicious acts, mitigating risks, hazards, etc.</p>
           </a>
         </div>
-        <div class="col my-4 mx-5">
+        <div class="col my-4 mx-3">
           <a href="services2.php?servid=5" class="text-decoration-none text-dark">
             <img src="../_assets/images/tile.png" alt="tile" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Conduct a request for tile floor repair service for dents turned into cracks, tile cracks, and improper installed joists.</p>
+            <p class="my-3 col-10 mx-auto">Conduct a request for tile floor repair service for dents turned into cracks, tile cracks, and improper installed joists.</p>
           </a>
         </div>
-        <div class="col my-4 mx-5">
+        <div class="col my-4 mx-3">
           <a href="services2.php?servid=6" class="text-decoration-none text-dark">
             <img src="../_assets/images/furniture.png" alt="furniture" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Ask for furniture home services request such as cabinet fixtures, remake and remodel existing furniture, upholstery/re-upholstery, repair and refurbish, etc.</p>
+            <p class="my-3 col-10 mx-auto">Ask for furniture home services request such as cabinet fixtures, remake and remodel existing furniture, upholstery/re-upholstery, repair and refurbish, etc.</p>
           </a>
         </div>
-        <div class="col my-4 mx-5">
+        <div class="col my-4 mx-3">
           <a href="services2.php?servid=7" class="text-decoration-none text-dark">
             <img src="../_assets/images/others.png" alt="other" class="img-fluid" width="100">
-            <p class="my-3 col-9 mx-auto">Request or report other concerns unstated</p>
+            <p class="my-3 col-10 mx-auto">Request or report other concerns unstated</p>
           </a>
         </div>       
       </div>

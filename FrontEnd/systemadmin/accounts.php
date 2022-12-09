@@ -74,8 +74,8 @@ if (isset($_POST['search'])) {
                 $notifID = $row['notifID'];
               ?>
                 <a href="requests.php?notifid=<?php echo $notifID; ?>" class="text-decoration-none text-dark">
-                  <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-inner">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user']; ?></strong>
                       <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

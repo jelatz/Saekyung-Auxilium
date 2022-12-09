@@ -7,6 +7,7 @@ function validate($data){
   $data = htmlspecialchars($data);
   return $data;
 }
+
 if(isset($_GET['notifid']))
     {
     $notifid = $_GET['notifid'];
@@ -14,18 +15,22 @@ if(isset($_GET['notifid']))
     header('Location:history2.php?notif='.$notifid.'');
     exit();
     } 
+// SEARCH
 $searchResult = "";
+$result = "";
     if(isset($_POST['search']))
     {
       try{
-        $searchInput = validate($_POST['searchInput']);
+        $searchInput = ($_POST['searchInput']);
     
-        $result = mysqli_query($conn,"SELECT servicerequest.requestID, accounts.userID, servicerequest.dateFiled, services.serviceType, servicerequest.concern, request_status.status,  servicerequest.dateCompleted, servicerequest.notes  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR request_status.status LIKE '%$searchInput%'");
+        $result = mysqli_query($conn,"SELECT servicerequest.requestID, accounts.userID, servicerequest.dateFiled, services.serviceType, servicerequest.concern, request_status.status,  servicerequest.dateCompleted, servicerequest.notes  FROM servicerequest INNER JOIN accounts ON servicerequest.accountID = accounts.accountID INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.requestID LIKE '%$searchInput%' OR servicerequest.concern LIKE '%$searchInput%' OR servicerequest.accountID LIKE '%$searchInput%' OR services.serviceType LIKE '%$searchInput%' OR request_status.status LIKE '%$searchInput%' OR servicerequest.notes LIKE '%$searchInput%' ORDER BY servicerequest.requestID DESC");
     
         $searchResult = mysqli_fetch_all($result);
-      }catch(exception $e){
+      }
+      catch(exception $e){
         echo '<script>alert(`No results Found!`)</script>';
         header('Location:history2.php');
+        exit();
       }
   }
 ?>
@@ -83,8 +88,8 @@ $searchResult = "";
                     $notifID = $row['notifID'];
                 ?>
                 <a href="history2.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
-                  <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-inner">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
                       <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -145,9 +150,9 @@ $searchResult = "";
 <!-- NAVBAR END -->
 
 <!-- NAVIGATION TABS START-->
-<div class="container-fluid">
+<div class="container-fluid" style="overflow: auto;">
   <div class="row">
-    <div class="col-md-3 col-lg-2 p-0 bg-transparent mb-md-2">
+    <div class="col-md-3 col-lg-2 p-0 bg-transparent">
       <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
         <a href="dashboard.php" class="nav-link text-white ps-5">Dashboard</a>
         <a href="services2.php" class="nav-link text-white ps-5">Services</a>
@@ -155,12 +160,14 @@ $searchResult = "";
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-    <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh; overflow-y:scroll;">
-        <h1 class="text-white mb-4">Transaction History</h1>
+
+    <!-- NAVIGATION CONTENTS START -->
+    <div class="col-md-9 col-lg-10 bg-inner3 p-md-5">
+        <h1 class="text-white my-4">Transaction History</h1>
         <div class="row justify-content-end">
-          <div class="col-5">
+          <div class="col-lg-6">
             <form class="d-flex me-4" method="POST" action="">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchInput">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="searchInput">
               <button class="btn btn-outline-secondary text-white" style="background-color: #1F2022; border-radius:10px;" type="submit" name="search">Search</button>
             </form>
           </div>
@@ -169,12 +176,12 @@ $searchResult = "";
         <?php if (isset($_GET['error2'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error2']; ?></p><?php } ?>
         <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
       <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
-        <div class="table-responsive mt-3">
+        <div class="table-responsive mt-3 px-0">
         <table class="table table-sm table-hover text-center bg-white" style="border-radius: 10px;">
             <thead>
                 <tr class="bg-inner" style="border-radius: 10px;">
                     <th class="text-nowrap p-2">Request #</th>
-                    <th class="text-nowrap p-2">Bldng & Unit #</th>
+                    <th class="text-nowrap p-2">User</th>
                     <th class="text-nowrap p-2">Date Filed</th>
                     <th class="text-nowrap p-2">Service</th>
                     <th class="text-nowrap p-2">Concern</th>
@@ -185,11 +192,8 @@ $searchResult = "";
             </thead>
             <tbody>
               <?php
-              if(isset($_GET['notifid'])){
-                        echo '<script>
-                        document.getElementById("'.$requestID.'").classList.add("active");
-                        </script>';}
-              if(!$searchResult){
+              if(!$result){
+                
                 $reqSelect = mysqli_query($conn, "SELECT *,services.serviceType,request_status.status FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID INNER JOIN request_status ON servicerequest.statusID = request_status.statusID WHERE servicerequest.accountID = '".$_SESSION['username']."' ORDER BY requestID DESC");
                 if($reqSelect)
                 {
@@ -226,15 +230,12 @@ $searchResult = "";
                 <?php
                 }
           }
-    
             ?>
             </tbody>
         </table>
     </div>
         </div>
     </div>
-  <!-- NAVIGATION CONTENTS START -->
-
   </div>
 </div>
 <!-- NAVIGATION CONTENTS END -->

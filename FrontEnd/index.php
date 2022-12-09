@@ -25,7 +25,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Saekyung Auxilium: Condominium Management Information System</title>
 </head>
-<body class="bg-image position-relative" style="background-image:url(_assets/images/login.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100vh;">
+<body class="bg-image position-relative" style="background-image:url(_assets/images/login.png); background-repeat: no-repeat; background-size: cover; background-position: center; height: 100%;" style="overflow: auto;">
     <!-- navbar -->
 <!-- <nav class="navbar navbar-expand-md justify-content-center">
     <div class="container-sm p-0">
@@ -78,6 +78,11 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     <a href="forgotPass.php" class="nav-link align-items-center me-3">Forgot Password</a>
     <button class="btn submit-btn mt-2 fw-bold fs-5 mt-4" type=submit" name="adminLogin">Login</button>
 </form>
+</div>
+<div class="container-fluid">
+<footer class="mx-auto position-absolute bottom-0 start-50 translate-middle-x">
+    <p class="mx-auto fs-6 text-white">&#169Copyright 2022. All rights Reserved.</p>
+</footer>
 </div>
 <script src="../_assets/js/bootstrap.bundle.js"></script>
 <script>
@@ -146,8 +151,6 @@ Array.prototype.slice.call(forms)
   })
 </script>
 
-<footer class="mx-auto position-absolute bottom-0 start-50 translate-middle-x">
-    <p class="mx-auto fs-6 text-white">&#169Copyright 2022. All rights Reserved.</p>
-</footer>
+
 </body>
 </html>

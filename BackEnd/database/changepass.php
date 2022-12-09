@@ -22,12 +22,12 @@ if (isset($_POST['resSubmit'])){
     if($newPassword == $newConfirmPassword){
       if ($row > 0){
           $sql = mysqli_query($conn,"update accounts set password = '$newPassword' where accountID = '$userName'");
-          header('Location:../../FrontEnd/residents/changepass.php?success=Password Updated!');
+          header('Location:../../FrontEnd/residents/changepass2.php?success=Password Updated!');
       }else{
-        header('Location:../../FrontEnd/residents/changepass.php?error=Incorrect Password!');
+        header('Location:../../FrontEnd/residents/changepass2.php?error=Incorrect Password!');
       }
     }else{
-      header('Location:../../FrontEnd/residents/changepass.php?error=Password does not match!');
+      header('Location:../../FrontEnd/residents/changepass2.php?error=New Password does not match!');
     }
 }//ADMIN CHANGE PASSWORD
 elseif (isset($_POST['adminSubmit'])){

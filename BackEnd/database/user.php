@@ -20,11 +20,25 @@ if(isset($_POST['submit'])){
   $target = '../../FrontEnd/_assets/images/uploads/' . $upload;
   
 // move uploaded img to img folder and db
-  if(move_uploaded_file($_FILES['upload']['tmp_name'], $target) || $fName && $lName){
-    $sql = mysqli_query($conn,"UPDATE accounts SET firstname = '$fName', lastname = '$lName', img = '$target' WHERE userID = '$userID'");
-  }if ($sql)
-  {
-     header('Location:../../FrontEnd/residents/profile2.php?success=Profile Successfully Updated!');
+  if(move_uploaded_file($_FILES['upload']['tmp_name'], $target) && $fName < 1 && $lName < 1){
+
+    $update = mysqli_query($conn,"UPDATE accounts SET img = '$target' WHERE userID = '$userID'");
+
+    header('Location:../../FrontEnd/residents/profile2.php?success=Profile Successfully Updated!');
+    exit();
+
+  }
+  elseif(move_uploaded_file($_FILES['upload']['tmp_name'], $target && $fName && $lName)){
+    $update = mysqli_query($conn,"UPDATE accounts SET firstname = '$fName', lastname = '$lName', img = '$target' WHERE userID = '$userID'");
+    header('Location:../../FrontEnd/residents/profile2.php?success=Profile Successfully Updated!');
+    exit();
+  }
+  
+  elseif($fName && $lName){
+
+    $sql = mysqli_query($conn,"UPDATE accounts SET firstname = '$fName', lastname = '$lName' WHERE userID = '$userID'");  
+    header('Location:../../FrontEnd/residents/profile2.php?success=Profile Successfully Updated!');
+    exit();
   }
 else
   {

@@ -63,8 +63,8 @@ if(isset($_GET['notifid']))
                     $notifID = $row['notifID'];
                 ?>
                 <a href="history2.php?notifid=<?php echo $notifID;?>" class="text-decoration-none text-dark">
-                  <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-inner">
+                  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
                       <strong class="me-auto">Bldg & Unit #: <?php echo $row['user'];?></strong>
                       <!-- <small class="text-muted">5 seconds ago</small> -->
                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -125,7 +125,7 @@ if(isset($_GET['notifid']))
 <!-- NAVBAR END -->
 
 <!-- NAVIGATION TABS START-->
-<div class="container-fluid">
+<div class="container-fluid" style="overflow: auto;">
   <div class="row">
     <div class="col-md-3 col-lg-2 p-0 bg-transparent">
       <nav class="nav nav-pills flex-column fs-5 gap-1 p-0">
@@ -135,22 +135,22 @@ if(isset($_GET['notifid']))
       </nav>
     </div>
   <!-- NAVIGATION TABS END -->
-  <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh; overflow-y:scroll;">
-      <h1 class="text-white mb-4">Concerns and Issues</h1>
-      <div class="row bg-inner justify-content-center text-center p-3 py-5 fs-5 my-5" style="border-radius: 10px;">
+  <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+      <h1 class="text-white my-4">Concerns and Issues</h1>
+      <div class="row bg-inner justify-content-center text-center p-4 fs-5" style="border-radius: 10px;">
         <div class="col">
           <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p><?php } ?>
       <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
         <!-- SERVICE BUTTONS -->
         <form action="../../BackEnd/database/requests.php?" method="POST" class="needs-validation" novalidate="">
           <div class="row mb-3">
-            <label for="inputEmail3" class="col-lg-2 col-form-label">User: </label>
-            <div class="col-lg-10">
+            <label for="inputEmail3" class="col-3 col-lg-2 col-form-label text-start">User: </label>
+            <div class="col-6 col-lg-10">
               <input type="text" class="form-control-plaintext" id="userreq" name="accountID" value=<?php echo $_SESSION['username']; ?>>
             </div>
           </div>
           <div class="row mb-3">
-            <label for="inputPassword3" class="col-lg-2 col-form-label">Service Type</label>
+            <label for="inputPassword3" class="col-lg-2 col-form-label text-start">Service Type</label>
             <div class="col-lg-10">
               <select class="form-select" name="service_type">
                 <option selected>
@@ -189,7 +189,7 @@ if(isset($_GET['notifid']))
             </div>
           </div>
           <div class="row mb-3">
-              <label for="inputEmail3" class="col-lg-2 col-form-label" >Concern: </label>
+              <label for="inputEmail3" class="col-lg-2 col-form-label text-start" >Concern: </label>
             <div class="col-lg-10">
               <textarea class="form-control" rows="5" name="concern" placeholder="Please enter you detailed concern" required></textarea>
             </div>

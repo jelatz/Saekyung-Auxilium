@@ -121,8 +121,8 @@ if (isset($_GET['notifid'])) {
                                 $notifID = $row['notifID'];
                             ?>
                                 <a href="history2.php?notifid=<?php echo $notifID; ?>" class="text-decoration-none text-dark">
-                                    <div class="toast bg-inner" role="alert" aria-live="assertive" aria-atomic="true">
-                                        <div class="toast-header bg-inner">
+                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                        <div class="toast-header">
                                             <strong class="me-auto">Bldg & Unit #: <?php echo $row['user']; ?></strong>
                                             <!-- <small class="text-muted">5 seconds ago</small> -->
                                             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -194,10 +194,10 @@ if (isset($_GET['notifid'])) {
                 </nav>
             </div>
             <!-- NAVIGATION TABS END -->
-            <div class="col-md-9 col-lg-10 bg-inner3 p-lg-5" style="height: 100vh; overflow:auto;">
+            <div class="col-md-9 col-lg-10 bg-inner3 p-5" style="height: 100vh; overflow:auto;">
                 <h1 class="text-white">Change Password</h1>
                 <div class="row justify-content-center mt-5">
-                    <div class="col-lg-5 bg-inner text-center p-2" style="border-radius: 10px;">
+                    <div class="col-lg-7 bg-inner text-center p-2" style="border-radius: 10px;">
                         <?php if (isset($_SESSION['username'])) {
                             $userID = $_SESSION['username'];
                         } ?>
@@ -241,7 +241,7 @@ if (isset($_GET['notifid'])) {
                         <div class="card-body">
                             <form action="../../BackEnd/database/changepass.php" method="POST" class="needs-validation bg-transparent text-light p-4" novalidate="">
                                 <?php if (isset($_GET['error'])) { ?><p class="error alert alert-danger"><?php echo $_GET['error']; ?></p> <?php } ?>
-                                <?php if (isset($_GET['success'])) { ?><p class="error alert alert-danger"><?php echo $_GET['success']; ?></p> <?php } ?>
+                                <?php if (isset($_GET['success'])) { ?><p class="error alert alert-success"><?php echo $_GET['success']; ?></p> <?php } ?>
                                 <div class="mb-3">
                                     <?php if (isset($_SESSION['username'])) {
                                         $userID = $_SESSION['username'];
