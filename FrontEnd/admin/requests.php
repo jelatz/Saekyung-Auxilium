@@ -139,9 +139,9 @@ if(isset($_GET['notifid']))
   $ongoing = 2;
   $completed = 3;
   ?>
-<div class="col-md-9 col-lg-10 bg-inner3 p-5 " style="height: 100vh; overflow:auto;">
-      <h1 class="text-white mb-4">View Requests</strong></h1>
-      <div class="row bg-inner text-center p-3 py-5 fs-5" style="border-radius: 10px;">
+<div class="col-md-9 col-lg-10 bg-inner3 p-md-5 " style="height: 100vh; overflow:auto;">
+      <h1 class="text-white my-4">View Requests</strong></h1>
+      <div class="row bg-inner text-center py-5 fs-5" style="border-radius: 10px;">
       <div class="nav nav-pills gap-3 p-2" role="tablist" id="dashboardTabs">
               <div class="col">
                 <button type="button" class="nav-link white w-100 text-nowrap text-dark bg-white active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending<?php echo $pending;?>" onclick="window.location.reload()">

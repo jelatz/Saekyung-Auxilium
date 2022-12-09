@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['username'] == 0 && $_SESSION['password'] == 0){
+if ($_SESSION['username'] == 0 && $_SESSION['password'] == 0) {
   header('Location:../index.php');
   exit();
 }
@@ -147,8 +147,8 @@ if (isset($_POST['search'])) {
       <!-- NAVIGATION TABS END -->
 
       <!-- NAVIGATION CONTENTS -->
-      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100%; overflow:initial;">
-      <h1 class="text-white mb-4">Welcome <strong>
+      <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
+        <h1 class="text-white mb-4">Welcome <strong>
             <?php
 
             $selectUser = mysqli_query($conn, "SELECT firstname,lastname FROM accounts WHERE userID = '$userID' limit 1");
@@ -175,7 +175,7 @@ if (isset($_POST['search'])) {
             <h5 class="text-dark ps-2">Date</h5>
           </div>
           <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
-            <div class="row text-start mb-3">
+            <div class="row text-start mb-3 gap-3">
               <label for="From" class="col-sm-1 col-form-label h6">From: </label>
               <div class="col-sm-3">
                 <input type="datetime-local" class="form-control" id="from" name="from">
@@ -184,8 +184,10 @@ if (isset($_POST['search'])) {
               <div class="col-sm-3">
                 <input type="datetime-local" class="form-control" id="from" name="to">
               </div>
-              <button type="submit" class="btn btn-secondary
-                 w-25 ms-5" name="view_report_sysadmin">View Report</button>
+              <div class="col-lg-2">
+                <button type="submit" class="btn btn-secondary
+                 w-100" name="view_report">View Report</button>
+              </div>
             </div>
           </form>
         </div>

@@ -48,7 +48,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
 
     <!-- RESIDENT LOGIN -->
 
-<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation" novalidate="">
+<form action="../BackEnd/database/Login.php" method="POST" id="login-resident" class="input_group login-resident needs-validation" novalidate="" autocomplete="off">
     
     <input type="text" name="username" class="input-field" placeholder=" Username" required="" value="<?php echo $username_cookie;?>">
     <div class="invalid-feedback">
@@ -65,7 +65,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
         <button class="btn submit-btn fw-bold fs-5 mt-4" type="submit" name="resLogin">Login</button>
 </form>
 <!-- ADMIN LOGIN -->
-<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation" method="POST" novalidate="">
+<form action="../BackEnd/database/Login.php" id="login-admin" class="input_group login-admin needs-validation" method="POST" novalidate="" autocomplete="off">
     <input type="text" class="input-field" name="username" placeholder=" Username" required="" value="<?php echo $admin_cookie;?>">
     <div class="invalid-feedback">
         Please enter username
@@ -102,7 +102,7 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
     }
 
     function residentlogin(){
-        x.style.left="1.9rem";
+        x.style.left="1.60rem";
         // a.style.left="5.125rem";
         y.style.left="28.125rem";
         z.style.left="0rem";
@@ -111,11 +111,11 @@ if(isset($_COOKIE['resuname']) && isset($_COOKIE['respass'])){
         function adminlogin(){
             x.style.left="-80rem";
             // a.style.left="-80rem";
-            y.style.left="3rem";
+            y.style.left="2.3rem";
             z.style.left="50%";
         }
         function residentlogin(){
-        x.style.left="3rem";
+        x.style.left="1.55rem";
         // a.style.left="3rem";
         y.style.left="40rem";
         z.style.left="0rem";

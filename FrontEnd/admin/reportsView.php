@@ -3,6 +3,7 @@ session_start();
 include '../../BackEnd/database/config.php';
 
 $searchResult = "";
+$result = "";
 if (isset($_POST['search'])) {
     try {
         $searchInput = ($_POST['searchInput']);
@@ -114,7 +115,7 @@ if (isset($_POST['search'])) {
                 </table>
             </div>
             <div class="row mt-2">
-                <div class="col-2">
+                <div class="col-sm-2">
                     <a href="dashboard.php" class="btn w-100 btn-outline-secondary text-white nav-buttons" style="background-color: #1F2022; border-radius:10px;">Back</a>
                 </div>
             </div>

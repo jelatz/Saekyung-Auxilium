@@ -130,7 +130,7 @@ if (isset($_GET['notifid'])) {
       ?>
       <div class="col-md-9 col-lg-10 bg-inner3 p-md-5" style="height: 100vh;">
         <h1 class="text-white mb-4">Service Requests</h1>
-        <div class="row bg-inner justify-content-center text-center p-3 fs-5" style="border-radius: 10px;" style="height: 100%;">
+        <div class="row bg-inner justify-content-center text-center p-1 p-md-3 fs-5" style="border-radius: 10px;" style="height: 100%;">
           <div class="nav nav-pills gap-3 p-2" role="tablist" id="dashboardTabs">
             <div class="col">
               <button type="button" class="nav-link white w-100 text-nowrap text-dark bg-white active" id="pendingTab" role="tab" data-bs-toggle="pill" data-bs-target="#pending<?php echo $pending; ?>" onclick="window.location.reload()">
@@ -187,8 +187,8 @@ if (isset($_GET['notifid'])) {
                         <td> <?php echo $serviceType; ?></td>
                         <td> <?php echo $concern; ?></td>
                         <td style="border-radius: 0 0px 10px 0">
-                          <button type="submit" class="btn btn-primary btn-sm text-white btn-block"name="accept_btn">Accept</button>
-                          <button type="submit" class="btn btn-danger btn-sm text-white btn-block"name="reject_btn">Reject</button>
+                          <button type="submit" class="btn btn-primary btn-sm text-white btn-block" name="accept_btn">Accept</button>
+                          <button type="submit" class="btn btn-danger btn-sm text-white btn-block" name="reject_btn">Reject</button>
                         </td>
                       </form>
                     </tr>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['username'] == 0 && $_SESSION['password'] == 0){
+if ($_SESSION['username'] == 0 && $_SESSION['password'] == 0) {
   header('Location:../index.php');
   exit();
 }
@@ -107,7 +107,7 @@ if (isset($_GET['notifid'])) {
             </li>
             <li class="nav-item logout">
               <a href="../../BackEnd/database/logout.php" class="ms-3 text-dark text-decoration-none logout" style="font-size:18px;">
-              <div class="row">
+                <div class="row">
                   <div class="col-4 pe-1 text-end">
                     <img src="../_assets/images/logout.png" alt="logout" width="33.33" class="ms-5 p-0">
                   </div>
@@ -142,20 +142,20 @@ if (isset($_GET['notifid'])) {
             $row = mysqli_fetch_array($selectUser);
             $firstname = strtoupper($row['firstname']);
             $lastname = strtoupper($row['lastname']);
-            if($row['firstname'] > 1 || $row['lastname'] > 1){
+            if ($row['firstname'] > 1 || $row['lastname'] > 1) {
               echo "$lastname $firstname";
             } else {
               echo "$userID";
             }
             ?>
-            </strong>
+          </strong>
         </h1>
         <div class="row bg-inner justify-content-center text-center p-3  fs-5" style="border-radius: 10px;" style="height: 100%;">
-          <div class="col-6 mx-auto">
+          <div class="col-md-8 mx-auto overflow-hidden">
             <?php
             $result = mysqli_query($conn, "SELECT *,services.serviceType,COUNT(statusID) as completed FROM servicerequest INNER JOIN services ON servicerequest.serviceID = services.serviceID WHERE statusID = 3 GROUP BY services.serviceType");
             ?>
-            <div id="piechart" class="mx-auto" style="width: 900px; height: 500px;"></div>
+            <div id="piechart" class="mx-auto" style="width: 100%; height:20rem;"></div>
           </div>
 
           <!-- VIEW REPORTS -->
@@ -163,17 +163,19 @@ if (isset($_GET['notifid'])) {
             <h5 class="text-dark ps-0">Date</h5>
           </div>
           <form action="../../BackEnd/database/viewreport.php" class="form-inline" method="POST">
-            <div class="row text-start mb-3">
+            <div class="row text-start mb-3 gap-3">
               <label for="From" class="col-sm-1 col-form-label h6">From: </label>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <input type="datetime-local" class="form-control" id="from" name="from">
               </div>
               <label for="To" class="col-sm-1 col-form-label h6">To: </label>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <input type="datetime-local" class="form-control" id="from" name="to">
               </div>
-              <button type="submit" class="btn btn-secondary
-                 w-25 ms-5" name="view_report">View Report</button>
+              <div class="col-lg-2">
+                <button type="submit" class="btn btn-secondary
+                 w-100" name="view_report">View Report</button>
+              </div>
             </div>
           </form>
         </div>

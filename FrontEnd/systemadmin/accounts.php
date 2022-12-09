@@ -227,13 +227,13 @@ if (isset($_POST['search'])) {
               ?>
                   <tr>
 
-                    <td><?php echo $row['userID']; ?></td>
+                    <td class="align-middle"><?php echo $row['userID']; ?></td>
                     <td style="width: 25vw;">
                       <div class="btn-group">
                         <form action="../../BackEnd/database/delete.php?accID=<?php echo $accountID; ?>" method="POST">
-                          <button type="button" class="btn btn-primary btn-sm mx-2" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
+                          <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $accountID; ?>"><i class="bi bi-pencil"></i>
                             Update</button>
-                          <button class="btn btn-danger btn-sm" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
+                          <button class="btn btn-danger btn-sm w-100" id="deleteBtn" name="deleteAccount"><i class="bi bi-trash"></i>
                             Delete</button>
                         </form>
                       </div>
